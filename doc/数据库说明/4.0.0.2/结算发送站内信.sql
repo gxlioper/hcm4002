@@ -1,0 +1,1 @@
+INSERT [dbo].[center_configuration] ([config_key], [config_value], [is_active], [common], [center_name]) VALUES (N'TEAMACC_SENDMESSAGE_USERIDS', N'', N'Y', N'结算发送站内信通知财务人员，接受消息者用户id用小写逗号隔开', N'体检中心')

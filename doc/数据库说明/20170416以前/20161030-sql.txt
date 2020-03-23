@@ -1,0 +1,42 @@
+alter table disease_suggestion_lib add default_value varchar(1) -- 是否默认值，Y/N标识
+
+  insert into center_configuration values('中国人民解放军第117医院健管理中心','IS_LIS_BANGDING','Y','Y','LIS是否绑管发申请,N报道时发,Y绑管时发')
+
+
+
+USE [PEIS]
+GO
+
+/****** Object:  Table [dbo].[his_charging_way_single]    Script Date: 10/30/2016 19:24:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[his_charging_way_single](  --HIS收费方式明细表
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[account_num] [varchar](20) NULL,   --收据号
+	[charging_way] [varchar](10) NULL,  --收费方式
+	[amount] [decimal](8, 2) NULL,      --收费方式金额
+	[creater] [int] NULL,
+	[create_time] [datetime] NULL,
+	[updater] [int] NULL,
+	[update_time] [datetime] NULL,
+ CONSTRAINT [PK_his_charging_way_single] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20141222" releaseVersion="7.1.1">
+<TableDataMap>
+<TableData name="ds1" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="dep_category"/>
+<O>
+<![CDATA[17]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="exam_num"/>
+<O>
+<![CDATA[1511050001]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="charging_id"/>
+<O>
+<![CDATA[8]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[peis]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[if(${dep_category}  = 17)
+
+select d.exam_info_id, d.exam_item_id, e.item_name, d.exam_result, e.item_unit, d.exam_date, d.exam_doctor,ei.exam_num,eri.charging_id
+from common_exam_detail d, examResult_chargingItem eri, examination_item e,exam_info ei
+where d.id=eri.exam_id and d.exam_item_id=e.id and eri.result_type='common' and eri.isActive='Y' and ei.id = d.exam_info_id
+and ei.exam_num ='${exam_num}'
+and eri.charging_id = ${charging_id}
+else if(${dep_category}  = 131)
+select d.exam_info_id, d.exam_item_id, e.item_name, d.exam_result, d.item_unit, d.ref_indicator, d.ref_value, d.exam_date, d.exam_doctor,eri.charging_id
+from exam_result_detail d, examResult_chargingItem eri, examination_item e,exam_info ei
+where d.id=eri.exam_id and d.exam_item_id=e.id and eri.result_type='exam' and eri.isActive='Y'
+and ei.id = d.exam_info_id 
+and ei.exam_num ='${exam_num}'
+and eri.charging_id = ${charging_id}
+else if(${dep_category}  = 21)
+select v.exam_info_id, p.chargingItem_name as item_name, v.exam_result, v.exam_desc,c.id as charging_id,v.exam_date,v.exam_doctor
+from view_exam_detail v, pacs_detail p,exam_info ei,charging_item c
+where v.pacs_id=p.summary_id and ei.id =v.exam_info_id and c.item_code = p.chargingItem_num
+and ei.exam_num    ='${exam_num}'
+and c.id = ${charging_id}
+
+
+]]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[723900,952500,1143000,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[7848600,7124700,6972300,4991100,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="1" s="0">
+<O>
+<![CDATA[项目名称]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="1" s="0">
+<O>
+<![CDATA[检查结果]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="1" s="0">
+<O>
+<![CDATA[检查时间]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="1" s="0">
+<O>
+<![CDATA[检查医生]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="item_name"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="1" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="exam_result"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="2" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="exam_date"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="3" r="2" s="1">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="exam_doctor"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting orientation="1">
+<Margin top="288000" left="144000" bottom="288000" right="144000"/>
+</PaperSetting>
+</ReportSettings>
+</ReportAttrSet>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="112"/>
+<Background name="ColorBackground" color="-1181953"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HBB"/>
+<PreviewType PreviewType="0"/>
+</WorkBook>

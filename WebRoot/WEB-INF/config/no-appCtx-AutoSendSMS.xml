@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="autoSendMSGMessage" class="com.hjw.webService.job.AutoSendMSGMessage" autowire="byName"/>
+  <bean name="quartzScheduler-lisTC" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+        <ref bean="simpleTrigger-lisTC"/>
+      </list>
+    </property>
+  </bean>
+  <bean id="simpleTrigger-lisTC" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+    <property name="jobDetail" ref="jobDetail-lisTC"/>
+    <property name="startDelay" value="10000"/>
+    <property name="repeatInterval" value="180000"/>
+  </bean>
+  <bean id="jobDetail-lisTC" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="autoSendMSGMessage"/>
+    <property name="targetMethod" value="getMessage"/>
+  </bean>  
+</beans>

@@ -1,0 +1,331 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="charge-json" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp</result>
+			
+		</global-results>
+		<!-- global-exception-mappings> <exception-mapping exception="java.lang.Exception" 
+			result="systemerror" /> <exception-mapping exception="javax.servlet.ServletException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NullPointerException" 
+			result="systemerror" /> <exception-mapping exception="java.sql.SQLException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.StringIndexOutOfBoundsException" 
+			result="systemerror" /> <exception-mapping exception="org.apache.jasper.JasperException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.IllegalStateException" 
+			result="systemerror" /> <exception-mapping exception="java.net.SocketException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NumberFormatException" 
+			result="systemerror" /> <exception-mapping exception="java.net.ProtocolException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.VerifyError" 
+			result="systemerror" /> </global-exception-mappings -->
+		<!-- *************************************************json应用************************************************* -->
+		<!--326 查询未收费项目列表 -->
+		<action name="getwitemListCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getwitemListCharge" />
+
+		<!--327 查询已收费项目列表 -->
+		<action name="getyitemListCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getyitemListCharge" />
+
+		<!--328 查询人员基本信息 -->
+		<action name="getCustomerInfoCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getCustomerInfoCharge" />
+
+		<!--329 收费保存信息 -->
+		<action name="saveCollectFeesCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="saveCollectFeesCharge" />
+
+		<!--331 根据体检信息ID查询绑定卡信息 -->
+		<action name="getCardListByexamIdCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getCardListByexamIdCharge" />
+
+		<!--332 根据卡号查询卡信息 -->
+		<action name="getCardInfoByCardNumCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getCardInfoByCardNumCharge" />
+
+		<!--333 获取收费记录总表数据 -->
+		<action name="getChargingSummaryListCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getChargingSummaryListCharge" />
+
+		<!--334 获取交易明细列表 -->
+		<action name="getChargingDetailListCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getChargingDetailListCharge" />
+
+		<!--335 获取收费方式明细列表 -->
+		<action name="getChargintWayListCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getChargintWayListCharge" />
+
+		<!--338 显示各个收费方式的缴费金额 -->
+		<action name="getChargingWayByExamNumCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getChargingWayByExamNumCharge" />
+
+		<!--339 退费保存信息 -->
+		<action name="save_tuifeiCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="save_tuifeiCharge" />
+		<!--获取最大发票号  355 -->
+		<action name="getMaxInvoiceNumCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getMaxInvoiceNumCharge" />
+		<!--1110 查询收费员列表-->
+		<action name="getCashierList" class="com.hjw.wst.action.UserInvoiceAction" method="getCashierList"/>
+		<!--根据退费项目信息获取已开发票信息 356 -->
+		<action name="getSingleInvoiceListCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getSingleInvoiceListCharge" />
+			
+		<!--获取需要打印发票的申请单列表 358  -->
+		<action name="getChargingSingleInvoickListCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getChargingSingleInvoickListCharge" />
+		
+		<!--补打发票保存信息 359  -->
+		<action name="saveSingleInviockBuCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="saveSingleInviockBuCharge" />
+			
+		<!--发送HIS缴费申请  360 -->
+		<action name="paymentApplicationCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="paymentApplicationCharge" />
+		
+		<!--查询已开发票项目列表  362 -->
+		<action name="getykfpItemListCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getykfpItemListCharge" />
+			
+		<!--查询已开收据列表 363 -->
+		<action name="getyksjItemListCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getyksjItemListCharge" />
+			
+		<!--撤销LIS和PACS申请 382-->
+		<action name="delLisAndPacsApplicationCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="delLisAndPacsApplicationCharge" />
+			
+		<!--撤销HIS申请  727-->
+		<action name="delHisApplicationCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="delHisApplicationCharge" />
+			
+		<!--保存用户发票号段信息 761-->
+		<action name="saveUserInvoiceCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="saveUserInvoiceCharge" />	
+			
+		<!--个人发票作废  763-->
+		<action name="invalidInvoiceGeCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="invalidInvoiceGeCharge" />
+		
+		<!--1198 根据体检号查询需要收费的信息-->
+		<action name="getMergeChargeByExamNumCharge" class="com.hjw.charge.action.CollectFeesAction" method="getMergeChargeByExamNumCharge"/>
+		
+		<!--1199 保存合并收费信息-->
+		<action name="saveMergeChargeInfoCharge" class="com.hjw.charge.action.CollectFeesAction" method="saveMergeChargeInfoCharge"/>
+		
+		<!-- 获取发票金额 -->
+		<action name="getamtForCHARGSSReqNumCharge" class="com.hjw.charge.action.CollectFeesAction" method="getamtForCHARGSSReqNumCharge"/>
+		
+		<!-- 通过发票号获取开票信息 -->
+		<action name="getamtForCISAccountnumCharge" class="com.hjw.charge.action.CollectFeesAction" method="getamtForCISAccountnumCharge"/>
+		
+		<!-- 更新发票信息 -->
+		<action name="setChargingInvoiceInfonumberCharge" class="com.hjw.charge.action.CollectFeesAction" method="setChargingInvoiceInfonumberCharge"/>
+		
+			<!-- 作废无效发票 928 -->
+		<action name="getWuxaiofapiaozuifeiCharge" class="com.hjw.charge.action.CollectFeesAction" method="getWuxaiofapiaozuifeiCharge" />
+		<!--获取订单收费项目列表  -->
+		<action name="getChargingSingleSettlementCharge" class="com.hjw.charge.action.CollectFeesAction" method="getChargingSingleSettlementCharge" />
+		
+			
+		<!-- 退费收费加日结数据 -->
+		<action name="saveDailyCharge" class="com.hjw.charge.action.CollectFeesAction" method="saveDailyCharge"/> 
+		
+		<!--获取市医保项目列表 -->
+        <action name="getCityInsuranceItemCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getCityInsuranceItemCharge"/>
+         
+         <!-- 根据收费项目获取已关联的市医保项目 -->
+        <action name="getClinicedItemCityCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getClinicedItemCityCharge"/>
+        
+         <!-- 保存市医保关联列表 -->
+        <action name="saveDictCityClinicItemPeisCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="saveDictCityClinicItemPeisCharge"/>
+         
+         <!--获取省医保项目列表 -->
+        <action name="getProvInsuranceItemCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getProvInsuranceItemCharge"/>
+         
+         <!-- 根据收费项目获取已关联的省医保项目 -->
+        <action name="getClinicedItemProvCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getClinicedItemProvCharge"/>
+        
+         <!-- 保存省医保关联列表 -->
+        <action name="saveDictProvClinicItemPeisCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="saveDictProvClinicItemPeisCharge"/>
+         
+		
+
+		
+		<!-- 获取收费项目列表（省医保） -->
+        <action name="getChargItemListForProvCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getChargItemListForProvCharge"/>
+         
+         <!-- 获取收费项目列表（市医保） -->
+        <action name="getChargItemListForCityCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getChargItemListForCityCharge"/>
+         
+		<!-- 获取所有科室列表 -->
+        <action name="getDepartmentListCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getDepartmentListCharge"/>
+        <!-- 市医保是否关联医保项目-->
+		<action name="signAssociatedCharge" class="com.hjw.charge.action.CollectFeesAction" method="signAssociatedCharge"/> 
+		<!-- 登记台查询人员界面 286 -->
+		<action name="getArchivesListCharge" class="com.hjw.charge.action.RegisterDeskAction"
+			method="getArchivesListCharge" />
+		<!-- 查询可以开处方的医生-->
+		<action name="getPrescriptionCharge" class="com.hjw.charge.action.CollectFeesAction" method="getPrescriptionCharge"/> 
+		<!-- 价表列表2531-->
+		<action name="queryMedicalPriceListCharge" class="com.hjw.charge.action.MedicalAction" method="queryMedicalPriceListCharge"/> 
+		<!-- 收费项目已选价表2532-->
+		<action name="getChargingItemMedicalPriceCharge" class="com.hjw.charge.action.MedicalAction" method="getChargingItemMedicalPriceCharge"/> 
+		<!-- 收费价表关系保存2533-->
+		<action name="saveChargingItemMedicalPriceCharge" class="com.hjw.charge.action.MedicalAction" method="saveChargingItemMedicalPriceCharge"/> 
+		<!-- 价表编辑保存2536-->
+		<action name="saveMedicalPriceCharge" class="com.hjw.charge.action.MedicalAction" method="saveMedicalPriceCharge"/> 
+		<!-- 价表删除2537-->
+		<action name="deleteMedicalPriceCharge" class="com.hjw.charge.action.MedicalAction" method="deleteMedicalPriceCharge"/> 
+		<!-- 价表删除2538-->
+		<action name="saveMedicalPriceMedicalItemCharge" class="com.hjw.charge.action.MedicalAction" method="saveMedicalPriceMedicalItemCharge"/> 
+		<!-- 省医保分页列表2540-->
+		<action name="queryDicProvInsuranceClinicItemCharge" class="com.hjw.charge.action.MedicalAction" method="queryDicProvInsuranceClinicItemCharge"/> 
+		<!-- 省医保列表2541-->
+		<action name="getDicProvInsuranceClinicItemListCharge" class="com.hjw.charge.action.MedicalAction" method="getDicProvInsuranceClinicItemListCharge"/> 
+		<!-- 删除收费失败后的-->
+		<action name="deleteChargeCharge" class="com.hjw.charge.action.CollectFeesAction" method="deleteChargeCharge"/> 
+		<!-- 收费成功入库失败，重新入库-->
+		<action name="putStorageCharge" class="com.hjw.charge.action.CollectFeesAction" method="putStorageCharge"/> 
+		<!-- 医保写日志 -->
+		<action name="insertInsuranceLogCharge" class="com.hjw.charge.action.CollectFeesAction" method="insertInsuranceLogCharge"/> 
+		<!-- 删除收费失败后的-->
+		<action name="deleteChargeCradCharge" class="com.hjw.charge.action.CardSaleAction" method="deleteChargeCradCharge"/> 
+		<!-- 收费成功入库失败，重新入库-->
+		<action name="deleteTuifeiCharge" class="com.hjw.charge.action.CollectFeesAction" method="deleteTuifeiCharge"/> 
+		<!-- 医保对照-->
+		<action name="insuranceComparisonCharge" class="com.hjw.charge.action.CollectFeesAction" method="insuranceComparisonCharge"/> 
+		<!-- 查询医保收费金额-->
+		<action name="getInsureAccountCharge" class="com.hjw.charge.action.CollectFeesAction" method="getInsureAccountCharge"/> 
+		<!-- 医保退费成功入库-->
+		<action name="putRefundCharge" class="com.hjw.charge.action.CollectFeesAction" method="putRefundCharge"/> 
+		<!--339 单项退费保存信息 -->
+		<action name="save_tuifeiDXCharge" class="com.hjw.charge.action.CollectFeesAction" method="save_tuifeiDXCharge" />
+		<!--读卡保存医保信息-->
+		<action name="save_insuranceCharge" class="com.hjw.charge.action.CollectFeesAction" method="save_insuranceCharge" />
+		<!--保存发票信息-->
+		<action name="billingCompanyInformationCharge" class="com.hjw.charge.action.CollectFeesAction" method="billingCompanyInformationCharge" />
+		<!--查询发票信息-->
+		<action name="getInformationCharge" class="com.hjw.charge.action.CollectFeesAction" method="getInformationCharge" />
+	<!--1112 查询收费员个人收费明细-->
+		<action name="getCashierDailyAcclistCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCashierDailyAcclistCharge"/>
+		
+		<!--1113 查询收费员当天使用的收费方式-->
+		<action name="getCashierChargingWayCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCashierChargingWayCharge"/>
+		
+		<!--1114 查询收费员当天开票信息-->
+		<action name="getCashierInvoiceListCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCashierInvoiceListCharge"/>
+		
+		<!--1115 收费员日结保存信息-->
+		<action name="saveCashierDailyaccCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="saveCashierDailyaccCharge"/>
+		
+		<!--1116 查询收费员团体未日结明细列表-->
+		<action name="getCashierDailyListTuCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCashierDailyListTuCharge"/>
+		
+		<!--1117 根据日结日期查询收费员日结信息-->
+		<action name="getCashierDailyAccCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCashierDailyAccCharge"/>
+		
+		<!--1118 根据日结号查询收费方式明细列表-->
+		<action name="getCashierDailyAccPaywayCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCashierDailyAccPaywayCharge"/>
+		
+		<!--1119 根据日结号查询发票信息列表-->
+		<action name="getCashierDailyAccInvoiceCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCashierDailyAccInvoiceCharge"/>
+		
+		<!--1120 根据日结号查询收费明细列表-->
+		<action name="getCashierDailyAccDetailCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCashierDailyAccDetailCharge"/>
+		
+		<!--2011 pos日结汇总-->
+		<action name="getPosDailySummaryCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getPosDailySummaryCharge"/>
+		
+		<!--2012 pos日结明细-->
+		<action name="getposDailyDetailListCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getposDailyDetailListCharge"/>
+		
+		<!--2013 保存pos日结-->
+		<action name="savePosDailyInfoCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="savePosDailyInfoCharge"/>
+		
+		<!--2014 已日结记录明细-->
+		<action name="getEndPosDailyDetailListCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getEndPosDailyDetailListCharge"/>
+		
+		<!--2015 已日结总记录-->
+		<action name="getendposdailySummaryCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getendposdailySummaryCharge"/>
+		
+		<!--2021 收费员查询市医保个人收费-->
+		<action name="getPersionCityReconciliationCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getPersionCityReconciliationCharge"/>
+		
+		<!--2022 收费员查询会员卡收费-->
+		<action name="getCardCityReconciliationCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCardCityReconciliationCharge"/>
+		
+		<!--2023 收费员查询市医保个人收费明细-->
+		<action name="getPersionCityReconciliationDetailListCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getPersionCityReconciliationDetailListCharge"/>
+		
+		
+		<!--2024 收费员查询市医保会员卡收费明细-->
+		<action name="getCardCityReconciliationDetailListCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCardCityReconciliationDetailListCharge"/>
+		
+		<!--2025 查询市医保收费总额-->
+		<action name="getCityReconciliationSummaryAmountCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCityReconciliationSummaryAmountCharge"/>
+	
+		<!--2026 医保对账申请--> 
+		<action name="getCityReconciliationQueryCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCityReconciliationQueryCharge"/>
+		
+		<!--2027 医保对账申请getCityReconciliationQueryDetailCharge明细-->
+		<action name="getCityReconciliationQueryDetailCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getCityReconciliationQueryDetailCharge"/>
+		
+		<!--2028 医保对账明细列表--> 
+		<action name="getInsureVerifyAccountDetailListCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getInsureVerifyAccountDetailListCharge"/>
+		
+		<!--2029 医保校验交易是否能冲正-->
+		<action name="checkCorrectTransactionCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="checkCorrectTransactionCharge"/>
+		
+		<!--2030 医保系统内对账-->
+		<action name="getInsureAccountListCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getInsureAccountListCharge"/>
+		
+		<!--2031 个人退费信息列表-->
+		<action name="getPersionRefundlistCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="getPersionRefundlistCharge"/>
+		<!--1122 查询收费员未财务日结信息列表-->
+		<action name="getCashierDailyAccAllCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getCashierDailyAccAllCharge"/>
+		
+		<!--1123 查询所有未财务日结的收费员日结总金额-->
+		<action name="getCashierDailyAccSumCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getCashierDailyAccSumCharge"/>
+		
+		<!--1124 保存财务部门日结信息-->
+		<action name="saveFinanceDepAccCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="saveFinanceDepAccCharge"/>
+		
+		<!--1125 查询财务部门已日结信息列表-->
+		<action name="getFinanceDepAccListCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getFinanceDepAccListCharge"/>
+		
+		<!--1126 根据财务部门日结号查询收费方式信息列表-->
+		<action name="getFinanceDepAccPaywayListCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getFinanceDepAccPaywayListCharge"/>
+		
+		<!--1127 根据财务部门日结号查询财务部门日结收费员日结信息列表-->
+		<action name="getFinanceVsCashierDailyAccListCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getFinanceVsCashierDailyAccListCharge"/>
+		
+		<!--1128 查询收费员日结发票信息列表-->
+		<action name="getFinanceVsCashierInvoiceListCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getFinanceVsCashierInvoiceListCharge"/>
+		
+		<!--1130 查询实时收费员个人收费明细数据-->
+		<action name="getChargingSummarySingleListCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getChargingSummarySingleListCharge"/>
+		
+		<!--1131 查询实时收费员团体收费明细数据-->
+		<action name="getChargingSummaryGroupListCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getChargingSummaryGroupListCharge"/>
+		
+		<!--1132 查询实时收费员发票信息列表-->
+		<action name="getChargingInvoiceListCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getChargingInvoiceListCharge"/>
+		
+		<!--1133 查询实时收费员收费金额汇总信息-->
+		<action name="getChargingSummarySumCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getChargingSummarySumCharge"/>
+		
+		<!--1139 获取时间段内财务日结汇总-->
+		<action name="getMonthlyStatementSumCharge" class="com.hjw.charge.action.FinanceDepAccAction" method="getMonthlyStatementSumCharge"/>
+		<!--上传明细-->
+		<action name="save_uploadDetailCharge" class="com.hjw.charge.action.CollectFeesAction" method="save_uploadDetailCharge" />
+	</package>
+</struts>

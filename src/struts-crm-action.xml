@@ -1,0 +1,320 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="crm-action" extends="struts-default">
+		<interceptors>
+			<interceptor name="upload"
+				class="org.apache.struts2.interceptor.FileUploadInterceptor" />
+			<interceptor-stack name="uploadStack">
+				<interceptor-ref name="upload" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp
+			</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp
+			</result>
+			<result name="commerror">/common/erroradmin.jsp</result>
+		</global-results>
+		
+		<!-- *************************************************struts应用 action 控制************************************************ -->
+		
+		<!-- crm200 签单计划页面 -->
+		<action name="getCrmSignBillPlanPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="getCrmSignBillPlanPage">
+			<result name="success">/crm/salesmanagement/sign_bill_plan.jsp</result>
+		</action>
+		<!-- crm202 申请新增签单计划页面 -->
+		<action name="getCrmSignBillPlanAddPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="getCrmSignBillPlanAddPage">
+			<result name="success">/crm/salesmanagement/sign_bill_plan_add.jsp</result>
+		</action>
+		<!-- crm204 获取联系人编辑页面 -->
+		<action name="getCompanyContactsEditPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="getCompanyContactsEditPage">
+			<result name="success">/crm/salesmanagement/company_contacts_edit.jsp</result>
+		</action>
+		<!-- crm205  获取单位信息搜索页面 -->
+		<action name="getSerchCompanyInfoPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="getSerchCompanyInfoPage">
+			<result name="success">/crm/salesmanagement/company_info.jsp</result>
+		</action>
+		<!-- crm208 签单计划相信信息查看页面 -->
+		<action name="getSignBillPlanLookPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="getSignBillPlanLookPage">
+			<result name="success">/crm/salesmanagement/sign_bill_plan_chakan.jsp</result>
+		</action>
+		
+		<!-- crm210 体检任务财务审核管理页面-->
+		<action name="crmBatchCheckManagerPageCw" class="com.hjw.crm.action.CrmBatchChechAction"
+			method="crmBatchCheckManagerPageCw">
+			<result name="success">/crm/salesmanagement/batchCheckManager.jsp</result>
+		</action>
+		
+		<!-- crm211 crm体检任务审核页面 -->
+		<action name="crmBatcheckeditPage" class="com.hjw.crm.action.CrmBatchChechAction"
+			method="crmBatcheckeditPage">
+			<result name="success">/crm/salesmanagement/batcheckedit.jsp</result>
+		</action>
+		
+		<!-- crm213体检任务医生审核管理页面-->
+		<action name="crmBatchCheckManagerPageYs" class="com.hjw.crm.action.CrmBatchChechAction"
+			method="crmBatchCheckManagerPageYs">
+			<result name="success">/crm/salesmanagement/batchCheckManager.jsp</result>
+		</action>
+		
+		<!-- crm214 体检任务上级部门审核管理页面-->
+		<action name="crmBatchCheckManagerPageSj" class="com.hjw.crm.action.CrmBatchChechAction"
+			method="crmBatchCheckManagerPageSj">
+			<result name="success">/crm/salesmanagement/batchCheckManager.jsp</result>
+		</action>
+		
+		<!-- crm121获取健康计划表和我的客户页面 -->
+		<action name="getCrmVisitPlanIndexPage" class="com.hjw.crm.action.CrmVisitPlanAction"
+			method="getCrmVisitPlanListPage">
+			<result name="success">/crm/crmvisitplan/crmvisitplanindex.jsp</result>
+		</action>
+		<!-- crm100健康计划表 -->
+		<action name="getCrmVisitPlanListPage" class="com.hjw.crm.action.CrmVisitPlanAction"
+			method="getCrmVisitPlanListPage">
+			<result name="success">/crm/crmvisitplan/crmvisitplanlist.jsp</result>
+		</action>
+		<action name="getCrmAllVisitPlanListPage" class="com.hjw.crm.action.CrmVisitPlanAction"
+			method="getCrmAllVisitPlanListPage">
+			<result name="success">/crm/crmvisitplan/crmvisitplanlist.jsp</result>
+		</action>
+		<!-- crm102获取添加健康计划页面 -->
+		<action name="addCrmVisitPlanPage" class="com.hjw.crm.action.CrmVisitPlanAction"
+			method="addCrmVisitPlanPage">
+			<result name="success">/crm/crmvisitplan/addcrmvisitplan.jsp</result>
+		</action>
+		<!-- crm103获取更新健康计划页面 -->
+		<action name="getUpdateCrmVisitPlanPage" class="com.hjw.crm.action.CrmVisitPlanAction"
+			method="getUpdateCrmVisitPlanPage">
+			<result name="success">/crm/crmvisitplan/addcrmvisitplan.jsp</result>
+		</action>
+		<!-- crm109分配私人医生 -->
+		<action name="getCrmMemberPrivateDoctorListPage" class="com.hjw.crm.action.CrmMemberPrivateDoctorAction"
+			method="getCrmMemberPrivateDoctorListPage">
+			<result name="success">/crm/crmmemberprivatedoctor/crmmemberprivatedoctorlist.jsp</result>
+		</action>
+		<!-- crm106分配私人医生页面 -->
+		<action name="getMergeCrmMemberPrivateDoctorPage" class="com.hjw.crm.action.CrmMemberPrivateDoctorAction"
+			method="getMergeCrmMemberPrivateDoctorPage">
+			<result name="success">/crm/crmmemberprivatedoctor/addcrmmemberprivatedoctor.jsp</result>
+		</action>
+		<!-- crm101医生回访记录表 -->
+		<action name="getCrmVisitRecordListPage" class="com.hjw.crm.action.CrmVisitRecordAction"
+			method="getCrmVisitRecordListPage">
+			<result name="success">/crm/crmvisitrecord/crmvisitrecordlist.jsp</result>
+		</action>
+		<!-- crm110获取添加回访记录页面 -->
+		<action name="addCrmVisitRecordPage" class="com.hjw.crm.action.CrmVisitRecordAction"
+			method="addCrmVisitRecordPage">
+			<result name="success">/crm/crmvisitrecord/addcrmvisitrecord.jsp</result>
+		</action>
+		<!-- crm114获取医生体检者 -->
+		<action name="getCrmDoctorMemberPage" class="com.hjw.crm.action.CrmMemberPrivateDoctorAction"
+			method="getCrmDoctorMemberPage">
+			<result name="success">/crm/crmmemberprivatedoctor/crmmemberiassign.jsp</result>
+		</action>
+		<!-- crm117从私人医生处建立健康计划 -->
+		<action name="getCrmVisitPlanDoctorPage" class="com.hjw.crm.action.CrmVisitPlanAction"
+			method="getCrmVisitPlanDoctorPage">
+			<result name="success">/crm/crmvisitplan/getCrmVisitPlanDoctorPage.jsp</result>
+			<result name="success_dbgj">/crm/crmvisitplan/getCrmVisitPlanDoctorPage_dbgj.jsp</result>
+			<result name="success_new">/crm/crmvisitplan/getCrmVisitPlanDoctorPage_new.jsp</result>
+		</action>
+		<!-- crm122获取销售管理表页面-->
+		<action name="getCrmSalesCostListPage" class="com.hjw.crm.action.CrmSalesCostAction"
+			method="getCrmSalesCostListPage">
+			<result name="success">/crm/crmsalescost/crmsalescostlist.jsp</result>
+		</action>
+		<!-- crm123获取销售管理更新页面-->
+		<action name="getUpdateCrmSalesCostPage" class="com.hjw.crm.action.CrmSalesCostAction"
+			method="getUpdateCrmSalesCostPage">
+			<result name="success">/crm/crmsalescost/addcrmsalescost.jsp</result>
+		</action>
+		<!-- crm124获取新增借款页面-->
+		<action name="addCrmSalesCostPage" class="com.hjw.crm.action.CrmSalesCostAction"
+			method="addJieCrmSalesCostPage">
+			<result name="success">/crm/crmsalescost/addcrmsalescost.jsp</result>
+		</action>
+		<!-- crm130获取签单跟踪列表页面 -->
+		<action name="getCrmSignTrackingListPage" class="com.hjw.crm.action.CrmSignTrackingAction"
+			method="getCrmSignTrackingListPage">
+			<result name="success">/crm/crmsigntracking/crmsigntrackinglist.jsp</result>
+		</action>
+		<!-- crm134新增签单跟踪页面 -->
+		<action name="addCrmSignTrackingPage" class="com.hjw.crm.action.CrmSignTrackingAction"
+			method="addCrmSignTrackingPage">
+			<result name="success">/crm/crmsigntracking/addcrmsigntracking.jsp</result>
+		</action>
+		<!-- crm135会员等级设置页面 -->
+		<action name="getHuiYuanDengjiSheZhi" class="com.hjw.crm.action.CrmMemberManagerAction"
+			method="getHuiYuanDengjiSheZhi">
+			<result name="success">/crm/crmmembermanager/editcrmmembermanager.jsp</result>
+		</action>
+		<!-- 300会员管理 -->
+		<action name="cardManage" class="com.hjw.crm.action.CrmCardUserManagerAction"
+			method="getCardUserManagerPage">
+			<result name="success">/crm/crmcardmanager/crmcardusermanager.jsp</result>
+		</action>
+		<!-- crm136会员导入名单 -->
+		<action name="getCrmMingDanDaoRuPage" class="com.hjw.crm.action.CrmCardUserManagerAction"
+			method="getCrmMingDanDaoRuPage">
+			<result name="success">/crm/crmcardmanager/crmmingdandaoru.jsp</result>
+		</action>
+		<!-- crm137获取更新临时会员的页面 -->
+		<action name="getUpdateTemporaryCustomerInfoPage" class="com.hjw.crm.action.TemporaryCustomerInfoAction"
+			method="getUpdateTemporaryCustomerInfoPage">
+			<result name="success">/crm/crmcardmanager/editcrmmingdandaoru.jsp</result>
+		</action>
+		<!-- crm138获取导入文件页面 -->
+		<action name="impMemberFile" class="com.hjw.crm.action.TemporaryCustomerInfoAction"
+			method="impMemberFile">
+			<result name="success">/crm/crmcardmanager/impmemberfile.jsp</result>
+		</action>
+		<!-- crm139获取签单计划修改撞单的页面 -->
+		<action name="getCrmSignBillPlanZhuangdanPage" class="com.hjw.crm.action.CrmSignBillPlanZhuangDanAction"
+			method="getCrmSignBillPlanZhuangdanPage">
+			<result name="success">/crm/salesmanagement/crmsignbillplanzhuangdan.jsp</result>
+		</action>
+		<!-- crm140获取crm体检任务管理页面 -->
+		<action name="getCrmBatchManagerPage" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="getCrmBatchManagerPage">
+			<result name="success">/crm/crmbatchmanager/crmbatchmanager.jsp</result>
+		</action>
+		<!-- crm160crm的体检任务页面显示 -->
+		<action name="crmbatchshow" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmbatchshow">
+			<result name="success">/crm/crmbatchmanager/crmbatchshow.jsp</result>
+		</action>
+		<!-- crm161crm的体检分组页面显示 -->
+		<action name="crmgroupmanager" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmgroupmanager">
+			<result name="success">/crm/crmbatchmanager/crmgroupmanager.jsp</result>
+		</action>
+		<!-- crm162crm人员计划显示 -->
+		<action name="crmbatchproshow" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmbatchproshow">
+			<result name="success">/crm/crmbatchmanager/crmbatchproshow.jsp</result>
+		</action>
+		<!-- crm163体检任务编辑页面 -->
+		<action name="crmbatchedit" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmbatchedit">
+			<result name="success">/crm/crmbatchmanager/crmbatchedit.jsp</result>
+		</action>
+		<!-- crm164体检任务查看 -->
+		<action name="crmbatchoneshow" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmbatchoneshow">
+			<result name="success">/crm/crmbatchmanager/crmbatchoneshow.jsp</result>
+		</action>
+		<!-- crm165分组编辑 -->
+		<action name="crmgroupedit" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmgroupedit">
+			<result name="success">/crm/crmbatchmanager/crmgroupedit.jsp</result>
+		</action>
+		<!-- crm166复制分组 -->
+			<action name="crmcopygroupmanager" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmcopygroupmanager">
+			<result name="success">/crm/crmbatchmanager/crmcopygroupmanager.jsp</result>
+		</action>
+		<!-- crm167体检人员计划编辑 -->
+		<action name="crmbatchproplanedit" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmbatchproplanedit">
+			<result name="success">/crm/crmbatchmanager/crmbatchproplanedit.jsp</result>
+		</action>
+		<!-- crm168分组查看 -->
+		<action name="crmgroupOneshow" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmgroupOneshow">
+			<result name="success">/crm/crmbatchmanager/crmgroupOneshow.jsp</result>
+		</action>
+		<!-- crm171crm的合同管理 -->
+		<action name="crmcontractManager" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmcontractManager">
+			<result name="success">/crm/crmbatchmanager/crmcontractManager.jsp</result>
+		</action>
+			<!-- crm172 crm单独合同显示界面 -->
+		<action name="crmcontractonecheckshow" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmcontractonecheckshow">
+			<result name="success">/crm/crmbatchmanager/crmcontractonecheckshow.jsp</result>
+		</action>
+			<!-- crm173合同审核界面  -->
+		<action name="crmcontractcheckedit" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmcontractcheckedit">
+			<result name="success">/crm/crmbatchmanager/crmcontractcheckedit.jsp</result>
+		</action>
+		<!-- crm176复制体检任务页面 -->
+		<action name="crmbatcheditpage" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="crmbatcheditpage">
+			<result name="success">/crm/crmbatchmanager/crmbatchcopypage.jsp</result>
+		</action>
+		<!-- crm177获取填写新的体检任务名称页面 -->
+		<action name="getSignPlanPage" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="getSignPlanPage">
+			<result name="success">/crm/crmbatchmanager/crmsigncopypage.jsp</result>
+		</action>
+		<!-- crm182签单计划修改负责人页面 -->
+		<action name="getCrmSignBillPlanEditCreaterPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="getCrmSignBillPlanEditCreaterPage">
+			<result name="success">/crm/salesmanagement/crmsignbilleditcreater.jsp</result>
+		</action>
+		<!-- crm185获取日志跟踪列表页面 -->
+		<action name="getBatchPlanLogListPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="getBatchPlanLogListPage">
+			<result name="success">/crm/salesmanagement/getbatchplanloglistpage.jsp</result>
+		</action>
+		<!-- crm186获取日志保存页面 -->
+		<action name="saveBatchPlanLogPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="saveBatchPlanLogPage">
+			<result name="success">/crm/salesmanagement/savebatchplanlog.jsp</result>
+		</action>
+		<!-- crm196获取健康回访管理页面 -->
+		 <action name="getNewVisitPlanPage" class="com.hjw.crm.action.CrmVisitPlanAction"
+			method="getNewVisitPlanPage">
+			<result name="success">/crm/crmvisitplan/newcrmvisitplan.jsp</result>
+		</action> 
+		<!-- crm197获取检查结果 -->
+		<action name="getNewVisitPlanPageResult" class="com.hjw.crm.action.CrmVisitPlanAction"
+			method="getNewVisitPlanPageResult">
+			<result name="success">/crm/crmvisitplan/newcrmvisitexamsummary.jsp</result>
+		</action>
+		<!-- crm301获取新回访跟踪记录 -->
+		<action name="getNewCrmVisitRecordListPage" class="com.hjw.crm.action.CrmVisitRecordAction"
+			method="getNewCrmVisitRecordListPage">
+			<result name="success">/crm/crmvisitrecord/newcrmvisitrecord.jsp</result>
+		</action>
+		<!-- crm302获取失访记录页面 -->
+		<action name="getCrmVisitLostListPage" class="com.hjw.crm.action.CrmVisitLostAction"
+			method="getCrmVisitLostListPage">
+			<result name="success">/crm/crmvisitlost/crmvisitlost.jsp</result>
+		</action>
+		<action name="countSignBillPlanPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="countSignBillPlanPage">
+			<result name="success">/crm/salesmanagement/countsignbillplanlist.jsp</result>
+		</action>
+		<action name="countSignBillPlanDetailPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="countSignBillPlanDetailPage">
+			<result name="success">/crm/salesmanagement/countsignbillplandetail.jsp</result>
+		</action>
+		<action name="tuSignBillPlanDetailPage" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="tuSignBillPlanDetailPage">
+			<result name="success">/crm/salesmanagement/tusignbillplandetail.jsp</result>
+		</action>
+		<!-- crm310 健康回访计划策略维护 -->
+		<action name="getCrmPlanTactics" class="com.hjw.crm.action.CrmVisitPlanAction" method="getCrmPlanTactics">
+			<result name="success">/crm/plantactics/plan_tactics_index.jsp</result>
+		</action>
+		<!-- crm 生日客户查询页面 -->
+		<action name="getShengrikehuPage" class="com.hjw.crm.action.CrmVisitPlanAction" method="getShengrikehuPage">
+			<result name="success">/crm/crmcustomerbirthday/customerbirthday.jsp</result>
+		</action>
+	</package>
+</struts>

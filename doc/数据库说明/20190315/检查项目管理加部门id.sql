@@ -1,0 +1,1 @@
+alter table examination_item add dep_id int  NOT NULL  default(0); --¹ØÁª¿ÆÊÒID

@@ -1,0 +1,4 @@
+
+
+ALTER TABLE disease_logic ADD age_max  VARCHAR(4)    --最大年龄
+ALTER TABLE disease_logic ADD age_min VARCHAR(4)     --最小年龄

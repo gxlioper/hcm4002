@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="trunkUrl" value="https://17b70920s4.51mypc.cn:10185/svn/hjwRepository/hjw_contract_manager4.0.0.2" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/hjw_server_bean_1.0">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="trunkUrl" value="https://17b70920s4.51mypc.cn:10185/svn/hjwRepository/hjw_server_bean_1.0" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/zhangzhou_yb">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="trunkUrl" value="https://17b70920s4.51mypc.cn:10185/svn/hjwRepository/zhangzhou_yb" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

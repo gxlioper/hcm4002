@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e8c2c002-7187-40ba-bbd7-53d1d4a2999f">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [id]
+      ,[group_id]
+      ,[customer_id]
+      ,[exam_num]
+      ,[status]
+      ,[register_date]
+      ,[join_date]
+      ,[final_date]
+      ,[final_doctor]
+      ,[exam_type]
+      ,[customer_type]
+      ,[is_sampled_directly]
+      ,[is_adjusted]
+      ,[center_num]
+      ,[getReportWay]
+      ,[reportAddress]
+      ,[chargingType]
+      ,[customerType]
+      ,[group_index]
+      ,[is_Active]
+      ,[creater]
+      ,[create_time]
+      ,[updater]
+      ,[update_time]
+      ,[is_guide_back]
+      ,[company_check_status]
+      ,[customer_type_id]
+      ,[is_marriage]
+      ,[age]
+      ,[address]
+      ,[email]
+      ,[phone]
+      ,[company]
+      ,[position]
+      ,[_level]
+      ,[picture_path]
+      ,[is_after_pay]
+      ,[past_medical_history]
+      ,[remarke]
+      ,[introducer]
+      ,[counter_check]
+      ,[guide_nurse]
+      ,[appointment]
+      ,[data_source]
+      ,[others]
+      ,[order_id]
+      ,[exam_times]
+      ,[company_id]
+      ,[batch_id]
+      ,[is_report_print]
+      ,[patient_id]
+      ,[exam_indicator]
+      ,[clinic_no]
+      ,[employeeID]
+      ,[mc_no]
+      ,[visit_date]
+      ,[visit_no]
+      ,[is_need_guide]
+      ,[is_need_barcode]
+      ,[freeze]
+      ,[is_report_tidy]
+      ,[report_tidy_user]
+      ,[report_tidy_time]
+      ,[rep_print_doctor]
+      ,[rep_print_time]
+      ,[budget_amount]
+      ,[apptype]
+      ,[zip]
+      ,[degreeOfedu]
+      ,[guid_printer]
+      ,[guid_print_time]
+      ,[opreport_print_time]
+      ,[opreport_print_status]
+      ,[opreport_print_doctor]
+      ,[report_type]
+      ,[zyb_set_source]
+      ,[comon_report_type]
+      ,[billdep]
+      ,[is_upload]
+      ,[is_report_upload]
+      ,[ziqu_report_time]
+      ,[wuxuzongjian]
+      ,[marriage_age]
+      ,[is_guide_date]
+      ,[is_guide_user]
+      ,[vipflag]
+      ,[isvisit]
+      ,[zyb_final_status]
+      ,[zyb_final_time]
+      ,[zyb_final_doctor]
+      ,[join_operator]
+      ,[old_exam_num]
+      ,[DJD_path]
+      ,[DJD_image_creater]
+      ,[report_Print_UserId]
+      ,[Report_Print_Date]
+      ,[card_num]
+  FROM [exam_info]]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="group_id" class="java.lang.Integer"/>
+	<field name="customer_id" class="java.lang.Integer"/>
+	<field name="exam_num" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="register_date" class="java.sql.Timestamp"/>
+	<field name="join_date" class="java.sql.Timestamp"/>
+	<field name="final_date" class="java.sql.Timestamp"/>
+	<field name="final_doctor" class="java.lang.String"/>
+	<field name="exam_type" class="java.lang.String"/>
+	<field name="customer_type" class="java.lang.String"/>
+	<field name="is_sampled_directly" class="java.lang.String"/>
+	<field name="is_adjusted" class="java.lang.String"/>
+	<field name="center_num" class="java.lang.String"/>
+	<field name="getReportWay" class="java.lang.String"/>
+	<field name="reportAddress" class="java.lang.String"/>
+	<field name="chargingType" class="java.lang.String"/>
+	<field name="customerType" class="java.lang.String"/>
+	<field name="group_index" class="java.lang.String"/>
+	<field name="is_Active" class="java.lang.String"/>
+	<field name="creater" class="java.lang.Integer"/>
+	<field name="create_time" class="java.sql.Timestamp"/>
+	<field name="updater" class="java.lang.Integer"/>
+	<field name="update_time" class="java.sql.Timestamp"/>
+	<field name="is_guide_back" class="java.lang.String"/>
+	<field name="company_check_status" class="java.lang.String"/>
+	<field name="customer_type_id" class="java.lang.Integer"/>
+	<field name="is_marriage" class="java.lang.String"/>
+	<field name="age" class="java.lang.Integer"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="company" class="java.lang.String"/>
+	<field name="position" class="java.lang.String"/>
+	<field name="_level" class="java.lang.String"/>
+	<field name="picture_path" class="java.lang.String"/>
+	<field name="is_after_pay" class="java.lang.String"/>
+	<field name="past_medical_history" class="java.lang.String"/>
+	<field name="remarke" class="java.lang.String"/>
+	<field name="introducer" class="java.lang.String"/>
+	<field name="counter_check" class="java.lang.String"/>
+	<field name="guide_nurse" class="java.lang.String"/>
+	<field name="appointment" class="java.lang.String"/>
+	<field name="data_source" class="java.lang.String"/>
+	<field name="others" class="java.lang.String"/>
+	<field name="order_id" class="java.lang.String"/>
+	<field name="exam_times" class="java.lang.String"/>
+	<field name="company_id" class="java.lang.Integer"/>
+	<field name="batch_id" class="java.lang.Integer"/>
+	<field name="is_report_print" class="java.lang.String"/>
+	<field name="patient_id" class="java.lang.String"/>
+	<field name="exam_indicator" class="java.lang.String"/>
+	<field name="clinic_no" class="java.lang.String"/>
+	<field name="employeeID" class="java.lang.String"/>
+	<field name="mc_no" class="java.lang.String"/>
+	<field name="visit_date" class="java.lang.String"/>
+	<field name="visit_no" class="java.lang.String"/>
+	<field name="is_need_guide" class="java.lang.String"/>
+	<field name="is_need_barcode" class="java.lang.String"/>
+	<field name="freeze" class="java.lang.Integer"/>
+	<field name="is_report_tidy" class="java.lang.String"/>
+	<field name="report_tidy_user" class="java.lang.String"/>
+	<field name="report_tidy_time" class="java.sql.Timestamp"/>
+	<field name="rep_print_doctor" class="java.lang.String"/>
+	<field name="rep_print_time" class="java.sql.Timestamp"/>
+	<field name="budget_amount" class="java.math.BigDecimal"/>
+	<field name="apptype" class="java.lang.String"/>
+	<field name="zip" class="java.lang.String"/>
+	<field name="degreeOfedu" class="java.lang.String"/>
+	<field name="guid_printer" class="java.lang.Integer"/>
+	<field name="guid_print_time" class="java.sql.Timestamp"/>
+	<field name="opreport_print_time" class="java.sql.Timestamp"/>
+	<field name="opreport_print_status" class="java.lang.String"/>
+	<field name="opreport_print_doctor" class="java.lang.String"/>
+	<field name="report_type" class="java.lang.Integer"/>
+	<field name="zyb_set_source" class="java.lang.Integer"/>
+	<field name="comon_report_type" class="java.lang.Integer"/>
+	<field name="billdep" class="java.lang.String"/>
+	<field name="is_upload" class="java.lang.Integer"/>
+	<field name="is_report_upload" class="java.lang.Integer"/>
+	<field name="ziqu_report_time" class="java.sql.Timestamp"/>
+	<field name="wuxuzongjian" class="java.lang.Integer"/>
+	<field name="marriage_age" class="java.lang.Integer"/>
+	<field name="is_guide_date" class="java.sql.Timestamp"/>
+	<field name="is_guide_user" class="java.lang.Integer"/>
+	<field name="vipflag" class="java.lang.String"/>
+	<field name="isvisit" class="java.lang.Integer"/>
+	<field name="zyb_final_status" class="java.lang.String"/>
+	<field name="zyb_final_time" class="java.sql.Timestamp"/>
+	<field name="zyb_final_doctor" class="java.lang.String"/>
+	<field name="join_operator" class="java.lang.Integer"/>
+	<field name="old_exam_num" class="java.lang.String"/>
+	<field name="DJD_path" class="java.lang.String"/>
+	<field name="DJD_image_creater" class="java.lang.Integer"/>
+	<field name="report_Print_UserId" class="java.lang.Integer"/>
+	<field name="Report_Print_Date" class="java.sql.Timestamp"/>
+	<field name="card_num" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement x="166" y="4" width="173" height="38" uuid="e22b7d01-98c8-4d86-b57b-1f025254ee40"/>
+				<textElement textAlignment="Center">
+					<font size="24" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[体检数据]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="28" y="3" width="57" height="20" forecolor="#000000" uuid="ccc29002-bdc3-41ef-83d8-f070b4da27e7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[体检中心：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="85" y="3" width="171" height="20" forecolor="#000000" uuid="84a860e8-1a61-484a-bb22-6273579aebfa"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[东北国际健康管理中心]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="403" y="3" width="37" height="20" forecolor="#000000" uuid="7363667c-ea5a-457b-840b-ace1e7e58d5b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[时间：]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="440" y="3" width="100" height="20" forecolor="#000000" uuid="a0234f5a-39d3-4570-a957-a35512c6e7f1"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[java.util.Calendar.getInstance().getTime()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="26" y="28" width="514" height="3" uuid="b1d179ef-42f8-48e1-b6c9-3054a217621d"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="94" y="10" width="32" height="21" forecolor="#000000" uuid="b0de0bb1-eaca-4f93-a60c-39f959d738db"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[年龄]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="25" y="10" width="69" height="21" forecolor="#000000" uuid="7b1708af-c998-4d6c-be4e-dfe630096eaa"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[体检编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="126" y="10" width="73" height="21" forecolor="#000000" uuid="eb2d2d66-733e-4b86-b1b7-83d7314fd189"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[电话]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="199" y="10" width="137" height="21" forecolor="#000000" uuid="6cd4a6ba-71e7-4bc8-8c6d-df79af547011"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[单位]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="336" y="10" width="204" height="21" forecolor="#000000" uuid="5f69e026-381b-47d4-9663-3c5bc856b38f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[地址]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="25" y="0" width="69" height="21" forecolor="#000000" uuid="ffd1d1d8-c810-45eb-911f-19712f4fe0fc"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exam_num}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="94" y="0" width="32" height="21" forecolor="#000000" uuid="0c3d3135-09a8-4028-a9cb-b610322be3be"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="126" y="0" width="73" height="21" forecolor="#000000" uuid="a8afe8f8-a6b7-4cc2-ae66-276512ca09d1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="199" y="0" width="137" height="21" forecolor="#000000" uuid="dba18fc4-6012-4384-9a90-3c05827f8ce4"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="336" y="0" width="204" height="21" forecolor="#000000" uuid="cce4591d-8d7c-4cfe-a138-a9bf6ce2b57c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="18" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="7" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="7" splitType="Stretch"/>
+	</summary>
+</jasperReport>

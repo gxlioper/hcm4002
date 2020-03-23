@@ -1,0 +1,55 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="jiankz-json" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp</result>
+			
+		</global-results>
+		<!-- global-exception-mappings> <exception-mapping exception="java.lang.Exception" 
+			result="systemerror" /> <exception-mapping exception="javax.servlet.ServletException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NullPointerException" 
+			result="systemerror" /> <exception-mapping exception="java.sql.SQLException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.StringIndexOutOfBoundsException" 
+			result="systemerror" /> <exception-mapping exception="org.apache.jasper.JasperException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.IllegalStateException" 
+			result="systemerror" /> <exception-mapping exception="java.net.SocketException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NumberFormatException" 
+			result="systemerror" /> <exception-mapping exception="java.net.ProtocolException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.VerifyError" 
+			result="systemerror" /> </global-exception-mappings -->
+		<!-- *************************************************json应用************************************************* -->
+		<!-- 874总检保存到健康证表中 -->
+		<action name="saveExamSummaryJianKangZheng" class="com.hjw.crm.action.JianKzAction" method="saveExamSummaryJianKangZheng" />
+		<!-- 875详细页面健康证上传 -->
+		<action name="jianKangZhuangChuanShu" class="com.hjw.crm.action.JianKzAction" method="jianKangZhuangChuanShu" />
+		<!-- 876获取健康证列表 -->
+		<action name="getJKZList" class="com.hjw.crm.action.JianKzAction" method="getJKZList" />
+		<!-- 878上传部分健康证 -->
+		<action name="shangChuanjkz" class="com.hjw.crm.action.JianKzAction" method="shangChuanjkz" />
+		<!-- 877上传全部健康证 -->
+		<action name="shangChuanAlljkz" class="com.hjw.crm.action.JianKzAction" method="shangChuanAlljkz" />
+		<!-- 879获取健康项目与系统项目对照列表 -->
+		<action name="getHuoVsHopList" class="com.hjw.crm.action.HuoVsHopAction" method="getHuoVsHopList" />
+		<!-- 880获取Lis检查项目 -->
+		<action name="getHuoLisProject" class="com.hjw.crm.action.HuoVsHopAction" method="getHuoLisProject" />
+		<!-- 881获取pacs检查项目 -->
+		<action name="getHuoPacsProject" class="com.hjw.crm.action.HuoVsHopAction" method="getHuoPacsProject" />
+		<!-- 882获取普通项目 -->
+		<action name="getHuoCommonProject" class="com.hjw.crm.action.HuoVsHopAction" method="getHuoCommonProject" />
+		<!-- 883保存对照项目 -->
+		<action name="saveHuoVsHos" class="com.hjw.crm.action.HuoVsHopAction" method="saveHuoVsHos" />
+		<!-- 884删除对照项目 -->
+		<action name="deleteHuoVsHop" class="com.hjw.crm.action.HuoVsHopAction" method="deleteHuoVsHop" />
+		<!-- 获取体检者本年度的健康证号 -->
+		<action name="getOldHealthNoOneYear" class="com.hjw.crm.action.JianKzAction" method="getOldHealthNoOneYear" />
+	</package>
+</struts>

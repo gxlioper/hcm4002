@@ -1,0 +1,1 @@
+INSERT [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common]) VALUES (N'XXXXXXXX', N'IS_DISEASE_KNOW_TYPE', N'2', N'Y', N'1表示疾病知识库上可以维护关系，2表示取消疾病知识库关系维护')

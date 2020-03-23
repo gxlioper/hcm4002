@@ -1,0 +1,60 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript">
+
+function menuAction(){
+	$("#menu").find("h3").each(function(i,k){
+		$(k).click(function(){
+			if($(this).next(".sub-menu").is(":hidden")){
+				$(".sub-menu").hide();
+				$(this).next(".sub-menu").slideDown();
+			}else{
+				$(this).next(".sub-menu").slideUp();
+			}
+		})
+	})
+	$(".toggle").hover(function(){
+		$(this).addClass("current").children(".children-menu").fadeIn();
+	},function(){
+		$(this).removeClass("current").children(".children-menu").hide();
+	})
+};
+
+$(function(){
+	$.post("menu.action","ok",  
+	        function (data) {
+	            if(data!="")
+	            {
+	          		document.getElementById("cardtree").innerHTML=data;
+	          		menuAction();
+	            }
+	         },"");
+
+})
+
+function addPanelmain(type) {
+	$.messager.confirm('提示信息','您将切换系统 请注意保存，是否继续切换？',function(r){
+		if(r){
+			 $.post("menu.action?message="+type+"","ok",  
+					 
+			        function (data) {
+			            if(data!="")
+			            {
+			          		document.getElementById("cardtree").innerHTML=data;
+			          		menuAction();
+			          		window.location.href='main.jsp';
+			            }
+			         },"");
+		}
+	})
+	
+}
+</script>
+﻿<div id="menu"  style="margin:0;padding:0;overflow:hidden">
+	<div class="box">
+		<div id="inc-menu" style="position:relative">
+		   <div id="cardtree"></div>		
+	    </div>
+	</div>
+	<div class="bottom transpt"></div>
+</div>

@@ -1,0 +1,34 @@
+/****** Object:  Table [dbo].[user_invoice]    Script Date: 03/03/2017 09:41:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[user_invoice]( -- 用户发票号段表
+	[id] [int] IDENTITY(1,1) NOT NULL,  -- id
+	[user_id] [int] NOT NULL,       --用户ID
+	[invoice_num_min] [varchar](50) NOT NULL, --最小发票号
+	[invoice_num_max] [varchar](50) NOT NULL, --最大发票号
+	[invoice_num_used] [varchar](50) NULL,    --上一次已使用发票号
+	[creater] [int] NULL,
+	[create_time] [datetime] NULL,
+	[updater] [int] NULL,
+	[update_time] [datetime] NULL,
+ CONSTRAINT [PK_user_invoice] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+alter table charging_invoice_single add exam_type varchar(10),--发票结算类型 个检结算，团检结算 G/T
+acc_nums varchar(100)--团体结算单 ID，多个以,号隔开

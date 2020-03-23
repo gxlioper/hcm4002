@@ -1,0 +1,113 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+<meta charset="utf-8">
+<!--支持 浏览器内核 webkit、ie-comp IE兼容、ie-stand IE标准 -->
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<!--开启IE兼容模式  -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<!--移动设备支持， width=device-width 自适应宽度,initial-scale=1.0 初始缩放比例为1:1,user-scalable 用户是否可以手动缩放-->
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+<link rel='stylesheet' type='text/css'
+	href='../../html5/css/bootstrap.min.css'>
+<link rel='stylesheet' type='text/css' href='../../html5/plus/table/bootstrap-table.min.css'>
+<link rel='stylesheet' type='text/css' href='../../html5/plus/datatime/bootstrap-datetimepicker.css'>
+     <script type="text/javascript" src="../../html5/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="../../html5/js/jquery.min.js"></script>
+
+<script type="text/javascript"
+	src="../js/bootstrap-table.js"></script>
+<script type="text/javascript" src="../../html5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootbox.js"></script>
+
+     <script type="text/javascript" src="../../html5/plus/datatime/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../../html5/plus/bootstrap-select.js"></script>
+<script type="text/javascript" src="projectChanges.js"></script>
+ <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.js"></script>   
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">   
+<style type="text/css">
+
+</style>
+
+
+</head>
+<body>
+<div id="header">
+
+<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" style="background-color: #359bcc" id="mainNav">
+    <div class="container">
+<!--       <a class="navbar-brand js-scroll-trigger" href="#page-top">火箭蛙  &nbsp; &nbsp; <span id="time" style="text-align:left;font-size:16px;"></span></a> -->
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div style="border:0px solid red;margin-top: 20px; float: left;margin-left: 0px;height: 50px;width: 200px;background-image: url(../img/logo.png);background-repeat:no-repeat;background-size:60%;">
+  		
+  	  </div>
+        <div style="width: 20%; float: right; margin-top: 3%;"><a class="nav-link js-scroll-trigger" style="color: #000;;" href="padLogin.action">退出</a></div>
+      </div>
+    </div>
+  </nav>
+<input type="hidden" id="user_uuid"/>  
+	
+</div>
+<strong>体检人员增项</strong>
+<div class="input-group col-md-3" style="float:left;margin-top: 10px;margin-left: 10px;width:100% ">
+				<div><font id="countss" style=" margin-top: 7px;float: left; ">原总额</font><input type="text" class="form-control" readonly value="0" style=" width: 20%;margin-left: 5px;" id="item_amount" name="exaitem_amountm_num"  /> <font id="countss" style=" margin-top: 7px;float: left; ">(元)&nbsp;&nbsp;&nbsp;</font></div>
+				<div><font id="countss" style=" margin-top: 7px;float: left; ">折扣率</font><input type="text" class="form-control" value="10" style=" width: 20%;margin-left: 5px;" id="discount" name="discount" /></div>
+				<div><font id="countss" style=" margin-top: 7px;float: left; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;折扣后总额</font><input type="text" class="form-control" value="0" style=" width: 20%;margin-left: 5px;" id="amount" name="amount"  /><font id="countss" style=" margin-top: 7px;float: left; ">(元)</font></div>
+				 <span class="input-group-btn">
+					<button class="btn btn-info btn-search"  style="margin-right: 10px" id="btn-search1" onclick="djtcustadd();">保存</button>
+					<button class="btn btn-info btn-search"  style="margin-right: 10px" id="btn-search1" onclick="javascript:window.close();">关闭</button>
+<!-- 					<button class="btn btn-info btn-search"  style="margin-right: 10px" id="btn-search1" onclick="getcopyitemg();">复制上次体检项目</button> -->
+<!-- 					<button class="btn btn-info btn-search" style="margin-right: 10px"  id="btn-search1" onclick="getcopyitemg2();">选择人复制项目</button> -->
+				</span>
+			</div>
+			
+
+		<div id="myTabContent" class="tab-content">
+		<div style="width:46%; float: left;margin-left: 10px; ">选择体检项目
+			<div class="tab-pane fade in active" style="margin-top: 10px;margin-left: 10px " id="tab2">
+				<div style="width:100%"><div style="width:24%;float:left"><font id="countss" style=" margin-top: 7px;float: left; ">项目</font><input type="text" class="form-control" style=" width: 79%;margin-left: 5px;" id="itemname" name="itemname"  /></div>
+				 <span class="input-group-btn" style="width:20%;float:left">
+					<button class="btn btn-info btn-search"  style="margin-right: 10px" id="btn-search1" onclick="djtsearch();">查询</button>
+				</span>
+				</div>
+				<table class="table table-striped table-hover" id="changitemlist"></table>
+			</div>
+			<div class="tab-pane fade in active" style="margin-top: 10px;margin-left: 10px " id="tab2">
+				已删除项目<table class="table table-striped table-hover" id="deleteItemList"></table>
+			</div>
+		</div>
+		<div style="width:46%; float: right; margin-right: 10px; ">
+			<div class="tab-pane fade in active" style="margin-top: 10px;margin-left: 10px " id="tab3">
+				<div class="tab-pane fade in active" style="margin-top: 10px;margin-left: 10px " id="tab2">
+				<div style="width:100%"><div style="width:24%;float:left"><font id="countss" style=" margin-top: 7px;float: left; ">套餐列表</font>
+ 					<select id="tclist"  name="tclist"  style=" width: 79%;margin-left: 5px;" onchange="gradeChange()" >
+                  		<option value=''>请选择</option>
+                    </select>
+<!-- 				<div id="com_name_list_div" style="display: none" -->
+<!-- 				onmouseover="select_com_list_mover()" -->
+<!-- 				onmouseout="select_com_list_amover()"></div> -->
+<!-- 				 <span class="input-group-btn" style="width:20%;float:left"> -->
+<!-- 					<button class="btn btn-info btn-search"  style="margin-right: 10px" id="btn-search1" onclick="djtsearch();">查询</button> -->
+<!-- 				</span> -->
+				</div>
+				<table class="table table-striped table-hover" id="changitemlist"></table>
+			</div>
+				选择套餐<table class="table table-striped table-hover" id="selectctlist"></table>
+			</div>
+			
+			<div class="tab-pane fade in active" style="margin-top: 10px;margin-left: 10px " id="tab3">
+				已选项目<table class="table table-striped table-hover" id="selectchangitemlist"></table>
+			</div>
+		</div>
+		</div>
+		<input type="hidden" id="custsex" value="${model.sex}"/>
+		<input type="hidden" id=exam_id value="${model.exam_id}"/>
+		<input type="hidden" id="isDefaultTen" value="${model.is_default_ten}">
+</body>
+</html>

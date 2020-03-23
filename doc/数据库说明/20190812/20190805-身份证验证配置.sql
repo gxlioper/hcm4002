@@ -1,0 +1,1 @@
+INSERT INTO [dbo].[center_configuration] ([config_key], [config_value], [is_active], [common], [center_name]) VALUES (N'IS_ID_CARD', N'Y', N'Y', N'身份证要验证, Y 身份证最后一位需要验证、N 身份证最后一位不需要验证', N'XXXXX');

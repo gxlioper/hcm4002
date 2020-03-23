@@ -1,0 +1,1023 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20141222" releaseVersion="7.1.1">
+<TableDataMap>
+<TableData name="examination_item" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[peis]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select id,item_name from examination_item where is_Active = 'Y' and item_category = '数字型'
+order by seq_code]]></Query>
+</TableData>
+<TableData name="exam_disease" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="item2"/>
+<O>
+<![CDATA[115]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="item1"/>
+<O>
+<![CDATA[118]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="endDate"/>
+<O>
+<![CDATA[2015-11-30]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="beginDate"/>
+<O>
+<![CDATA[2015-11-05]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="item4"/>
+<O>
+<![CDATA[118]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="item3"/>
+<O>
+<![CDATA[118]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="item6"/>
+<O>
+<![CDATA[118]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="jieguo2"/>
+<O>
+<![CDATA[63]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="jieguo1"/>
+<O>
+<![CDATA[5]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="item5"/>
+<O>
+<![CDATA[118]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="tijian6"/>
+<O>
+<![CDATA[>]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="tijian5"/>
+<O>
+<![CDATA[>]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="tijian2"/>
+<O>
+<![CDATA[>]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="jieguo4"/>
+<O>
+<![CDATA[5]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="tijian1"/>
+<O>
+<![CDATA[>]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="jieguo3"/>
+<O>
+<![CDATA[5]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="jieguo6"/>
+<O>
+<![CDATA[5]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="tijian4"/>
+<O>
+<![CDATA[>]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="jieguo5"/>
+<O>
+<![CDATA[5]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="tijian3"/>
+<O>
+<![CDATA[>]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[peis]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select e.exam_num, c.arch_num, c.user_name, c.sex, e.age,convert(varchar(50),e.join_date,23) as join_date
+${if(len(item1)==0, "", ",a1.item_name as item_name1,a1.exam_result as exam_result1")}
+${if(len(item2)==0, "", ",a2.item_name as item_name2,a2.exam_result as exam_result2")}
+${if(len(item3)==0, "", ",a3.item_name as item_name3,a3.exam_result as exam_result3")}
+${if(len(item4)==0, "", ",a4.item_name as item_name4,a4.exam_result as exam_result4")}
+${if(len(item5)==0, "", ",a5.item_name as item_name5,a5.exam_result as exam_result5")}
+${if(len(item6)==0, "", ",a6.item_name as item_name6,a6.exam_result as exam_result6")}
+from exam_info e, customer_info c
+${if(len(item1)==0, "",",(select hy.exam_item_id,hy.exam_info_id,hy.exam_result,em.item_name from exam_result_detail hy,examination_item em
+where em.id=hy.exam_item_id and convert(decimal(10,4),hy.exam_result) "+tijian1+jieguo1+" and hy.exam_item_id = "+item1+"
+union all 
+select yb.exam_item_id,yb.exam_info_id,yb.exam_result,em.item_name from  common_exam_detail yb,examination_item em
+where em.id=yb.exam_item_id and convert(decimal(10,4),yb.exam_result) "+tijian1+jieguo1+" and yb.exam_item_id = "+item1+"
+union all 
+select vi.exam_item_id,v.exam_info_id,vi.exam_result,em.item_name from view_exam_detail v,view_exam_item vi,examination_item em 
+where em.id=vi.exam_item_id and v.id = vi.view_exam_detail_id and convert(decimal(10,4),vi.exam_result) "+tijian1+jieguo1+" and vi.exam_item_id = "+item1+") as a1")}
+${if(len(item2)==0, "",",(select hy.exam_item_id,hy.exam_info_id,hy.exam_result,em.item_name from exam_result_detail hy,examination_item em
+where em.id=hy.exam_item_id and convert(decimal(10,4),hy.exam_result) "+tijian2+jieguo2+" and hy.exam_item_id = "+item2+"
+union all 
+select yb.exam_item_id,yb.exam_info_id,yb.exam_result,em.item_name from  common_exam_detail yb,examination_item em
+where em.id=yb.exam_item_id and convert(decimal(10,4),yb.exam_result) "+tijian2+jieguo2+" and yb.exam_item_id = "+item2+"
+union all 
+select vi.exam_item_id,v.exam_info_id,vi.exam_result,em.item_name from view_exam_detail v,view_exam_item vi,examination_item em 
+where em.id=vi.exam_item_id and v.id = vi.view_exam_detail_id and convert(decimal(10,4),vi.exam_result) "+tijian2+jieguo2+" and vi.exam_item_id = "+item2+") as a2")}
+${if(len(item3)==0, "",",(select hy.exam_item_id,hy.exam_info_id,hy.exam_result,em.item_name from exam_result_detail hy,examination_item em
+where em.id=hy.exam_item_id and convert(decimal(10,4),hy.exam_result) "+tijian3+jieguo3+" and hy.exam_item_id = "+item3+"
+union all 
+select yb.exam_item_id,yb.exam_info_id,yb.exam_result,em.item_name from  common_exam_detail yb,examination_item em
+where em.id=yb.exam_item_id and convert(decimal(10,4),yb.exam_result) "+tijian3+jieguo3+" and yb.exam_item_id = "+item3+"
+union all 
+select vi.exam_item_id,v.exam_info_id,vi.exam_result,em.item_name from view_exam_detail v,view_exam_item vi,examination_item em 
+where em.id=vi.exam_item_id and v.id = vi.view_exam_detail_id and convert(decimal(10,4),vi.exam_result) "+tijian3+jieguo3+" and vi.exam_item_id = "+item3+") as a3")}
+${if(len(item4)==0, "",",(select hy.exam_item_id,hy.exam_info_id,hy.exam_result,em.item_name from exam_result_detail hy,examination_item em
+where em.id=hy.exam_item_id and convert(decimal(10,4),hy.exam_result) "+tijian4+jieguo4+" and hy.exam_item_id = "+item4+"
+union all 
+select yb.exam_item_id,yb.exam_info_id,yb.exam_result,em.item_name from  common_exam_detail yb,examination_item em
+where em.id=yb.exam_item_id and convert(decimal(10,4),yb.exam_result) "+tijian4+jieguo4+" and yb.exam_item_id = "+item4+"
+union all 
+select vi.exam_item_id,v.exam_info_id,vi.exam_result,em.item_name from view_exam_detail v,view_exam_item vi,examination_item em 
+where em.id=vi.exam_item_id and v.id = vi.view_exam_detail_id and convert(decimal(10,4),vi.exam_result) "+tijian4+jieguo4+" and vi.exam_item_id = "+item4+") as a4")}
+${if(len(item5)==0, "",",(select hy.exam_item_id,hy.exam_info_id,hy.exam_result,em.item_name from exam_result_detail hy,examination_item em
+where em.id=hy.exam_item_id and convert(decimal(10,4),hy.exam_result) "+tijian5+jieguo5+" and hy.exam_item_id = "+item5+"
+union all 
+select yb.exam_item_id,yb.exam_info_id,yb.exam_result,em.item_name from  common_exam_detail yb,examination_item em
+where em.id=yb.exam_item_id and convert(decimal(10,4),yb.exam_result) "+tijian5+jieguo5+" and yb.exam_item_id = "+item5+"
+union all 
+select vi.exam_item_id,v.exam_info_id,vi.exam_result,em.item_name from view_exam_detail v,view_exam_item vi,examination_item em 
+where em.id=vi.exam_item_id and v.id = vi.view_exam_detail_id and convert(decimal(10,4),vi.exam_result) "+tijian5+jieguo5+" and vi.exam_item_id = "+item5+") as a5")}
+${if(len(item6)==0, "",",(select hy.exam_item_id,hy.exam_info_id,hy.exam_result,em.item_name from exam_result_detail hy,examination_item em
+where em.id=hy.exam_item_id and convert(decimal(10,4),hy.exam_result) "+tijian6+jieguo6+" and hy.exam_item_id = "+item6+"
+union all 
+select yb.exam_item_id,yb.exam_info_id,yb.exam_result,em.item_name from  common_exam_detail yb,examination_item em
+where em.id=yb.exam_item_id and convert(decimal(10,4),yb.exam_result) "+tijian6+jieguo6+" and yb.exam_item_id = "+item6+"
+union all 
+select vi.exam_item_id,v.exam_info_id,vi.exam_result,em.item_name from view_exam_detail v,view_exam_item vi,examination_item em 
+where em.id=vi.exam_item_id and v.id = vi.view_exam_detail_id and vi.exam_result "+tijian6+" '"+jieguo6+"' and vi.exam_item_id = "+item6+") as a6")}
+where e.customer_id=c.id
+${if(len(item1)==0, "", " and e.id = a1.exam_info_id ")}
+${if(len(item2)==0, "", " and e.id = a2.exam_info_id ")}
+${if(len(item3)==0, "", " and e.id = a3.exam_info_id ")}
+${if(len(item4)==0, "", " and e.id = a4.exam_info_id ")}
+${if(len(item5)==0, "", " and e.id = a5.exam_info_id ")}
+${if(len(item6)==0, "", " and e.id = a6.exam_info_id ")}
+
+${if(len(beginDate)==0, "", " and e.join_date>='"+beginDate + " 00:00:00'")}
+${if(len(endDate)==0, "", " and e.join_date<='"+endDate + " 23:59:59'")}
+and c.is_Active='Y' and e.is_Active='Y']]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR F="0" T="1"/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[1295400,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[3657600,3733800,3505200,1905000,2247900,4191000,3238500,3124200,3048000,3124200,2743200,2819400,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="12" s="0">
+<O>
+<![CDATA[检查结果统计明细]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="1" s="1">
+<O>
+<![CDATA[档案号]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="1" s="1">
+<O>
+<![CDATA[体检号]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="1" s="1">
+<O>
+<![CDATA[姓名]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="1" s="1">
+<O>
+<![CDATA[性别]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="1" s="1">
+<O>
+<![CDATA[年龄]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="1" s="1">
+<O>
+<![CDATA[体检日期]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="item_name1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="7" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="item_name2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="item_name3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="9" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="item_name4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="10" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="item_name5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="11" r="1" s="1">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="item_name6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="0" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="arch_num"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0" leftParentDefault="false"/>
+</C>
+<C c="1" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="exam_num"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="2" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="user_name"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="3" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="sex"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="4" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="age"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="5" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="join_date"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="6" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="exam_result1"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="7" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="exam_result2"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="exam_result3"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="9" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="exam_result4"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="10" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="exam_result5"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="11" r="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="exam_disease" columnName="exam_result6"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting orientation="1">
+<Margin top="979200" left="1440000" bottom="979200" right="1440000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<ParameterUI class="com.fr.form.main.parameter.FormParameterUI">
+<Layout class="com.fr.form.ui.container.WParameterLayout">
+<WidgetName name="para"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Margin top="1" left="1" bottom="1" right="1"/>
+<Border>
+<border style="0" color="-723724" type="0" borderStyle="0"/>
+<WidgetTitle>
+<O>
+<![CDATA[新建标题]]></O>
+<FRFont name="SimSun" style="0" size="72"/>
+<Position pos="0"/>
+</WidgetTitle>
+<Alpha alpha="1.0"/>
+</Border>
+<Background name="ColorBackground" color="-1118482"/>
+<LCAttr vgap="0" hgap="0" compInterval="0"/>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelbeginDate"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[检查日期:]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="9" y="11" width="64" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.DateEditor">
+<WidgetName name="beginDate"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<DateAttr/>
+<widgetValue>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=TODAY()]]></Attributes>
+</O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="73" y="11" width="106" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="Labeldisease_id"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[条件1：]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="9" y="40" width="64" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="LabelendDate"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[截止日期:]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="213" y="11" width="64" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.DateEditor">
+<WidgetName name="endDate"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<DateAttr/>
+<widgetValue>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=TODAY()]]></Attributes>
+</O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="277" y="11" width="105" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.parameter.FormSubmitButton">
+<WidgetName name="Search"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[查询]]></Text>
+<Hotkeys>
+<![CDATA[enter]]></Hotkeys>
+</InnerWidget>
+<BoundsAttr x="437" y="7" width="80" height="29"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="tijian1"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="&gt;" value="大于"/>
+<Dict key="&lt;" value="小于"/>
+<Dict key="=" value="等于"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="243" y="40" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="Labeldisease_id_c"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[条件2：]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="437" y="40" width="64" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="jieguo1"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="323" y="40" width="59" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="tijian2"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="&gt;" value="大于"/>
+<Dict key="&lt;" value="小于"/>
+<Dict key="=" value="等于"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="671" y="40" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="jieguo2"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="751" y="40" width="59" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="Labeldisease_id_c_c"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[条件3：]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="9" y="69" width="64" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="tijian3"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="&gt;" value="大于"/>
+<Dict key="&lt;" value="小于"/>
+<Dict key="=" value="等于"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="243" y="69" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="jieguo3"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="323" y="69" width="59" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="Labeldisease_id_c_c_c"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[条件4：]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="437" y="69" width="64" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="tijian4"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="&gt;" value="大于"/>
+<Dict key="&lt;" value="小于"/>
+<Dict key="=" value="等于"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="671" y="69" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="jieguo4"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="751" y="69" width="59" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="Labeldisease_id_c_c_c_c"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[条件5：]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="9" y="98" width="64" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="tijian5"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="&gt;" value="大于"/>
+<Dict key="&lt;" value="小于"/>
+<Dict key="=" value="等于"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="243" y="98" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="jieguo5"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="323" y="98" width="59" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="Labeldisease_id_c_c_c_c_c"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[条件6：]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="437" y="98" width="64" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="tijian6"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.CustomDictionary">
+<CustomDictAttr>
+<Dict key="&gt;" value="大于"/>
+<Dict key="&lt;" value="小于"/>
+<Dict key="=" value="等于"/>
+</CustomDictAttr>
+</Dictionary>
+<widgetValue>
+<O>
+<![CDATA[]]></O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="671" y="98" width="80" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="jieguo6"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="752" y="98" width="59" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="item1"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="id" viName="item_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[examination_item]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="73" y="40" width="170" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="item6"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="id" viName="item_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[examination_item]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="501" y="98" width="170" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="item4"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="id" viName="item_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[examination_item]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="501" y="69" width="170" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="item2"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="id" viName="item_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[examination_item]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="501" y="40" width="170" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="item3"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="id" viName="item_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[examination_item]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="73" y="69" width="170" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.ComboBox">
+<WidgetName name="item5"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Dictionary class="com.fr.data.impl.TableDataDictionary">
+<FormulaDictAttr kiName="id" viName="item_name"/>
+<TableDataDictAttr>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[examination_item]]></Name>
+</TableData>
+</TableDataDictAttr>
+</Dictionary>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="73" y="98" width="170" height="21"/>
+</Widget>
+<Sorted sorted="false"/>
+<Display display="true"/>
+<DelayDisplayContent delay="true"/>
+<Position position="0"/>
+<Design_Width design_width="960"/>
+<MobileWidgetList>
+<Widget widgetName="beginDate"/>
+<Widget widgetName="endDate"/>
+<Widget widgetName="item1"/>
+<Widget widgetName="tijian1"/>
+<Widget widgetName="jieguo1"/>
+<Widget widgetName="item2"/>
+<Widget widgetName="tijian2"/>
+<Widget widgetName="jieguo2"/>
+<Widget widgetName="item3"/>
+<Widget widgetName="tijian3"/>
+<Widget widgetName="jieguo3"/>
+<Widget widgetName="item4"/>
+<Widget widgetName="tijian4"/>
+<Widget widgetName="jieguo4"/>
+<Widget widgetName="item5"/>
+<Widget widgetName="tijian5"/>
+<Widget widgetName="jieguo5"/>
+<Widget widgetName="item6"/>
+<Widget widgetName="tijian6"/>
+<Widget widgetName="jieguo6"/>
+</MobileWidgetList>
+<WidgetNameTagMap>
+<NameTag name="item2" tag="条件2："/>
+<NameTag name="item1" tag="条件1："/>
+<NameTag name="endDate" tag="endDate:"/>
+<NameTag name="beginDate" tag="beginDate:"/>
+<NameTag name="item4" tag="条件4："/>
+<NameTag name="item3" tag="条件3："/>
+<NameTag name="item6" tag="条件6："/>
+<NameTag name="item5" tag="条件5："/>
+<NameTag name="tijian6" tag="条件6："/>
+<NameTag name="tijian5" tag="条件5："/>
+<NameTag name="tijian2" tag="条件2："/>
+<NameTag name="tijian1" tag="条件1："/>
+<NameTag name="tijian4" tag="条件4："/>
+<NameTag name="tijian3" tag="条件3："/>
+</WidgetNameTagMap>
+</Layout>
+<DesignAttr width="960" height="132"/>
+</ParameterUI>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="112"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="88"/>
+<Background name="ColorBackground" color="-1181953"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HBB"/>
+<PreviewType PreviewType="0"/>
+</WorkBook>

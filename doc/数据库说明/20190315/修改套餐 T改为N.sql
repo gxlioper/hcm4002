@@ -1,0 +1,1 @@
+update  exam_set set is_Active = 'N' where  is_Active = 'T'

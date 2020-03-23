@@ -1,0 +1,1 @@
+alter table exam_info add comon_report_type int --职业病打印普通报告调用模板类型（默认健康体检类型模板）

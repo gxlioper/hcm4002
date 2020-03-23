@@ -1,0 +1,98 @@
+﻿/* Button style of sys */
+.button, 
+.button span          {background-image:url(images/button.gif);background-repeat:no-repeat;background-position:0 -20px;border:0;height:24px;}
+.button               {cursor: pointer;display: inline-block;margin-right:15px;overflow: visible;padding:0;height:24px;}
+.button span          {display:inline-block;position: relative;right:-8px;padding:0 10px 0 0;background-position:right -54px;color:#414141;height:24px;line-height:24px;}
+
+.button:hover         {background-position:0 -88px;text-decoration:none;}
+.button:hover span    {background-position:right -122px;text-decoration:none;}
+.button:active        {background-position:0 -20px;text-decoration:none;}
+.button:active span   {background-position:right -54px;text-decoration:none;}
+
+.btn-reset            {background-position:0 -160px;}
+.btn-reset span       {background-position:right -192px;height:26px;padding:0 10px 0 0;position: relative;right:-10px;line-height:24px;line-height:25px\9;}
+.btn-reset:hover      {background-position:0 -224px;}
+.btn-reset:hover span {background-position:right -256px;}
+.btn-reset:active     {background-position:0 -288px;}
+.btn-reset:active span{background-position:right -320px;}
+.button .icon         {margin:3px 4px 0 0;float:left;}
+
+.btn-logoff           {background-position:0 -160px;height:27px;}
+.btn-logoff span      {background-position:right -192px;color:#fff;height:27px;line-height:27px;padding:0 20px 0 10px;}
+.btn-logoff:hover      {background-position:0 -284px;}
+.btn-logoff:hover span {background-position:right -316px;}
+.btn-logoff:active     {background-position:0 -160px;}
+.btn-logoff:active span{background-position:right -192px;}
+
+.btn-login            {background-image:none;background-color:#FE7C1B;color:#fff;width:256px;height:36px;font-size:16px;font-weight:bold;border:1px solid #BA5001}
+.btn-login:hover      {background-position:-106px -248px;}
+.btn-login:active     {background-position:0 -248px;}
+
+.btn-query            {background-position:0 -160px;height:27px;}
+.btn-query span       {background-position:right -192px;color:#fff;height:27px;line-height:27px;}
+.btn-query:hover      {background-position:0 -284px;}
+.btn-query:hover span {background-position:right -316px;}
+.btn-query:active     {background-position:0 -160px;}
+.btn-query:active span{background-position:right -192px;}
+.btn-readcard,
+.btn-readcard:hover,
+.btn-readcard:active  {background-position:0 -394px;width:89px;height:33px;}
+.btn-blace,
+.btn-blace:hover,
+.btn-blace:active     {background-color:#308425;border:0px solid #ededed;border-radius:3px;color:#fff;cursor:pointer;width:126px;height:44px;font-size:24px;font-family:'Microsoft Yahei';}
+.btn-number           {background-image:none;border:1px solid #ddd;color:#666 !important;width:82px;height:48px;line-height:48px;text-align:center;font-size:16px;position:relative;padding-left:10px;margin-right:5px;}
+.btn-qukuan,
+.btn-qukuan:hover,
+.btn-qukuan:active     {background-position:0 -437px;width:89px;height:33px;}
+.btn-number:hover     {border:2px solid #f60;width:80px;height:46px;line-height:46px;}
+.btn-number:link,
+.btn-number-active,
+.btn-number-active:hover    {background:url(images/change.png) right bottom no-repeat transparent;border:2px solid #f60;width:80px;height:46px;line-height:46px;}
+.btn-confirm,
+.btn-confirm:hover,
+.btn-confirm:active  {background-position:-129px -437px;width:89px;height:33px;}
+.btn-number input{position:absolute;top:17px;left:10px;}
+.btn-quxian      {background-color:#b57004;border:0px solid #ededed;border-radius:3px;color:#fff;cursor:pointer;width:126px;height:44px;font-size:24px;font-family:'Microsoft Yahei';}
+.btn-blue{background:#277f9d;}
+
+/* Checkbox */
+.checkbox,
+.changebox           {display: inline; font-size: 16px; line-height: 16px; cursor: pointer;}
+.checkbox            {position:relative;top:4px;right:2px;margin-left:2px;}
+.changebox           {visibility: hidden;}
+.checkbox .mark ,    
+.changebox .mark     {display: inline;}
+.checkbox img ,      
+.changebox img       {width: 16px; height: 16px;}
+.checkbox img,       
+.changebox img       {background: transparent url(images/button-1.gif) no-repeat;}
+.checkbox img        {background-position: -1px -91px;}
+.checkbox-hover img  {background-position: -28px -91px;}
+.checkbox-checked img{background-position: -1px -112px;}
+.checkbox-checked .checkbox-hover img {background-position: -28px -112px;}
+.checkbox-disabled img{background-position: -1px -132px;}
+.checkbox-checked .checkbox-disabled img{background-position: -1px -154px;}
+
+.changebox-checked{visibility: inherit ;}
+.changebox img{background-position: -18px -185px;}
+.changebox-hover img{background-position: -18px -185px;}
+.changebox-checked img{background-position: -1px -185px;}
+.changebox-checked .checkbox-hover img {background-position: -1px -185px;}
+.changebox-disabled img{background-position: -18px -185px;}
+.changebox-checked .checkbox-disabled img{background-position: -1px -185px;}
+
+/* Radio */
+.radio                            {display: inline;font-size: 16px;line-height: 16px;cursor: pointer;position:relative;bottom:-1px;margin-right:4px;}
+.radio .mark                      {display: inline;}                                  
+.radio img                        {width: 16px; height: 16px;}
+.radio img                        {background: transparent url(images/button-1.gif) no-repeat;}                                  
+.radio img                        {background-position: -1px -2px;}
+.radio-hover img                  {background-position: -28px -2px;}
+.radio-checked img                {background-position: -1px -22px;}
+.radio-checked .radio-hover img   {background-position: -28px -22px;}
+.radio-disabled img               {background-position: -1px -42px;}
+.radio-checked .radio-disabled img{background-position: -1px -67px;}
+
+.btn-additem{width:80px;}
+.btn-unitem.l-btn{border-color:#ddd;width:80px;}
+.btn-unitem .l-btn-text{color:#999;}

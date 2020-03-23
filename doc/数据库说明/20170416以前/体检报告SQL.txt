@@ -1,0 +1,32 @@
+create function fun_GetDisease_suggestion(
+/*********获取疾病建议**********/
+  @disease_id int,
+  @sex int,
+  @age int
+) returns varchar(1000)
+as
+begin
+  declare @suggesion varchar(1000)
+  
+  select @suggesion=disease_suggestion from disease_suggestion_lib 
+  where disease_id=@disease_id and sex in ('全部', @sex) and @age>=minAge and @age<maxAge
+  
+  return @suggesion
+end;
+
+go
+
+create function dbo.fun_GetItemNameBySummaryId(
+  /****根据PACS申请ID获取项目名称****/
+  @summary_id  int
+) returns varchar(200)
+as
+begin
+  declare @s varchar(200)
+  set @s=''
+  select @s=@s+item_name+', ' from charging_item where item_code in (select chargingItem_num from pacs_detail
+       where summary_id=@summary_id)
+  if LEN(@s)>1
+    set @s=SUBSTRING(@s,1,len(@s)-1)
+  return @s
+end

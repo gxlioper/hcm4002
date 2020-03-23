@@ -1,0 +1,1 @@
+INSERT [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common]) VALUES (N'XXXXX', N'DEP_ORDER_TYPE', N'1', N'Y', N'首页排序方法1 部门名称，2部门顺序号')

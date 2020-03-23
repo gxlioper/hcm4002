@@ -1,0 +1,12 @@
+insert into WEB_XTGNB values ('2301','getExamCriticalList.action','主检室跟科室显示危急值列表','2','','','2','1','1')
+insert into WEB_XTGNB values ('2302','showNewExamCritical.action','总检显示新增危急值','2','','2301','2','1','1')
+insert into WEB_XTGNB values ('2303','getCriticalClassD.action','获取危急值大类名称','2','','2301','2','1','1')
+insert into WEB_XTGNB values ('2304','getCriticalLevel.action','获取危急值等级','2','','2301','2','1','1')
+insert into WEB_XTGNB values ('2305','saveCriticalDetail.action','主检室及科室手动保存危急值','2','','2301','2','1','1')
+insert into WEB_XTGNB values ('2306','toSelectResult.action','跳转选择检查项目','2','','2301','2','1','1')
+insert into WEB_XTGNB values ('2307','delCriticalDetail.action','总检及科室手动删除危急值','2','','2301','2','1','1')
+insert into WEB_XTGNB values ('2308','getDisease.action','获取疾病','2','','2301','2','1','1')
+insert into WEB_XTGNB values ('2309','criticalhandle.action','危急值处理情况统计','1','','2301','2','1','1')
+insert into WEB_XTGNB values ('2310','getCriticalClass.action','获取危急值子类名称','2','','2301','2','1','1')
+insert into WEB_XTGNB values ('2311','criticalhandleShow.action','危急值处理情况统计查询','2','','2301','2','1','1')
+

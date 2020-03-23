@@ -1,0 +1,1 @@
+alter table report_pdf add apptype varchar(1) not null default(1)

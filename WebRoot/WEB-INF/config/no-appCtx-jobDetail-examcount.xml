@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="job-examcount" class="com.hjw.webService.job.AutoGetExamCountMessage" autowire="byName"/>
+  <bean name="quartzScheduler-examcount" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list><ref bean="cronTrigger-examcount"/></list>
+    </property>
+  </bean>
+  <bean id="cronTrigger-examcount" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> 
+	<property name="jobDetail" ref="jobDetail-examcount" /> 
+	<property name="cronExpression" value="0 30 23 * * ?" /> 
+	</bean>
+  <bean id="jobDetail-examcount" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="job-examcount"/>
+    <property name="targetMethod" value="getMessage"/>
+  </bean>  
+</beans>

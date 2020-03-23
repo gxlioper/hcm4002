@@ -1,0 +1,10 @@
+
+CREATE TABLE [dbo].[exam_user](
+	[id] [varchar](50) NOT NULL,
+	[user_id] [int] NOT NULL,
+	[exam_center_id] [int] NOT NULL,
+ CONSTRAINT [PK_exam_user] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]

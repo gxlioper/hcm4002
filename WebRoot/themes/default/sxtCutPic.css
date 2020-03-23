@@ -1,0 +1,60 @@
+/*--------------------------------------------------|
+| …„œÒÕ∑≈ƒ’’ jpgcam 1.0.8                               |
+|---------------------------------------------------|
+| yangm                                             |
+|--------------------------------------------------*/
+#title,#title_wj {
+	text-align: center;/* border-bottom:1px dashed #ccc; margin:0 30px 20px;*/
+	cursor: move;
+	height: 30px;
+	line-height: 30px;
+	margin-bottom: 15px;
+	background: #0b90da;
+	border-bottom: 1px solid #0b90da;
+}
+#title span,#title_wj span {
+	font-size: 14px;
+	font-weight: bold;
+	float:none;
+}
+#upload_poto_div{
+	width:600px;
+	left:50%;
+	margin-left:-300px;
+	top:100px;
+	z-index:-1;
+	display:block;
+	position:absolute;
+	background-color:#FFF;
+	border:1px solid #0b90da;
+	}
+#upload_poto_div a{
+	margin-right:20px;
+	color:#0b90da;
+	text-decoration:none;
+	float:left;
+	}
+#webcom{
+	width:200px;
+	overflow:inherit;
+	float:left;
+	margin-bottom:10px;
+	border:1px solid #0b90da;
+	margin-left:60px;
+	}
+
+#webcam_movie{
+	margin-left:-60px;
+	}
+
+#upload_photofile_div{
+	width:300px;
+	left:35%;
+	margin-left:-300px;
+	top:50px;
+	z-index:-1;
+	display:block;
+	position:absolute;
+	background-color:#FFF;
+	border:1px solid #0b90da;
+	}

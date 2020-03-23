@@ -1,0 +1,7 @@
+/* Header Add by 01/07/2011 */
+#header                    {height: 60px;color:#fff;}
+#logo                      {display:block;margin:0 20px 0 15px;}
+#header h1                 {font-size:30px;font-family:SimHei;padding:5px 0 0;}
+.calendar                  {float:right;margin:0 20px 0 0}
+.calendar .year            {font-size:22px;font-family:SimHei;padding:4px 0 2px;line-height:22px;}
+.calendar .week            {font-size:16px;font-family:"Microsoft YaHei";padding-top:0;}

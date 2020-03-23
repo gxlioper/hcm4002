@@ -1,0 +1,13 @@
+/* Header Style */
+#header     {background-color:#359bcc;z-index: 5;min-width:1024px;}
+#header .box{height:75px;margin:0 auto;position:relative;}
+.logo       {float:left;padding:12px 0 0 15px;}
+.system-title{float:left;color:#fff;font-size:18px;padding:27px 0 0 20px;}
+.toprow{position:absolute;right:0;top:15px;}
+.tools-ul>li{cursor:pointer;float:left;margin:0 10px;position:relative;height:60px;}
+.tools-ul>li>span{color:#fff;display:block;text-align:center;padding:2px 0;}
+.topmenubox{background:#fff;position:absolute;border:1px solid #ddd;width:130px;left:50%;top:60px;z-index:5;padding:2px;box-shadow:0 0 5px #ccc;margin:0 0 0 -60px;display:none;}
+.topmenubox a{color:#333;display:block;padding:8px 10px;border-radius:3px;}
+.topmenubox a:hover{background-color:#359BCC;color:#fff;text-decoration:none;}
+.top-arrow {position:absolute;width:0;height:0;overflow:hidden;left:50%;top:-10px;border-left: 10px solid transparent;border-right: 10px solid transparent;border-bottom: 10px solid #fff;margin-left:-10px;}
+.tools-ul li:hover .topmenubox{display:block;}

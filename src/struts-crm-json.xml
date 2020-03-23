@@ -1,0 +1,219 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="crm-json" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp</result>
+			
+		</global-results>
+		<!-- global-exception-mappings> <exception-mapping exception="java.lang.Exception" 
+			result="systemerror" /> <exception-mapping exception="javax.servlet.ServletException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NullPointerException" 
+			result="systemerror" /> <exception-mapping exception="java.sql.SQLException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.StringIndexOutOfBoundsException" 
+			result="systemerror" /> <exception-mapping exception="org.apache.jasper.JasperException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.IllegalStateException" 
+			result="systemerror" /> <exception-mapping exception="java.net.SocketException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NumberFormatException" 
+			result="systemerror" /> <exception-mapping exception="java.net.ProtocolException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.VerifyError" 
+			result="systemerror" /> </global-exception-mappings -->
+		<!-- *************************************************json应用************************************************* -->
+		<!-- crm201 获取签单计划列表 -->
+		<action name="getCrmSignBillPlanList" class="com.hjw.crm.action.CrmSignBillPlanAction" method="getCrmSignBillPlanList" />
+		<!-- crm203 获取单位联系人列表 -->
+		<action name="getCompanyContactsList" class="com.hjw.crm.action.CrmSignBillPlanAction" method="getCompanyContactsList" />
+		<!-- crm206 根据条件获取单位信息列表 -->
+		<action name="getSerchCompanyInfoList" class="com.hjw.crm.action.CrmSignBillPlanAction" method="getSerchCompanyInfoList" />
+		<!-- crm207新增保存签单计划 -->
+		<action name="saveSignBillPlan" class="com.hjw.crm.action.CrmSignBillPlanAction" method="saveSignBillPlan" />
+		<!-- crm209 通过名称检索签单计划信息 -->
+		<action name="getSignBillPlanByName" class="com.hjw.crm.action.CrmSignBillPlanAction" method="getSignBillPlanByName" />
+		<!-- crm212 保存批次任务审核信息 -->
+		<action name="saveCrmBatchCheck" class="com.hjw.crm.action.CrmBatchChechAction" method="saveCrmBatchCheck" />
+		<!-- crm215 查询需要审核的体检任务列表 -->
+		<action name="crmBatchCheckManageList" class="com.hjw.crm.action.CrmBatchChechAction" method="crmBatchCheckManageList" />
+		<!-- crm216 合同信息审核保存 -->
+		<action name="crmContractCheck" class="com.hjw.crm.action.CrmBatchChechAction" method="crmContractCheck" />
+		<!-- crm217 查询用户行政部门列表 -->
+		<action name="getCrmUserCenterList" class="com.hjw.crm.action.CrmSignBillPlanAction" method="getCrmUserCenterList" />
+		
+<!-- crm健康计划表查询 -->
+		<!-- crm104获取健康计划列表 -->
+		<action name="getCrmVisitPlanList" class="com.hjw.crm.action.CrmVisitPlanAction" method="getCrmVisitPlanList" />
+		<!-- crm105保存健康计划 -->
+		<action name="saveCrmVisitPlan" class="com.hjw.crm.action.CrmVisitPlanAction" method="saveCrmVisitPlan" />
+		<!-- 总检健康计划批量增加 （东北国际1次增加四个计划） -->
+		<action name="saveCrmVisitPlanList" class="com.hjw.crm.action.CrmVisitPlanAction" method="saveCrmVisitPlanList" />
+		<!-- crm106删除健康计划 -->
+		<action name="deleteCrmVisitPlan" class="com.hjw.crm.action.CrmVisitPlanAction" method="deleteCrmVisitPlan" />
+		<!-- crm107更新结束健康计划状态 -->
+		<action name="updateCrmVisitPlanEndStatus" class="com.hjw.crm.action.CrmVisitPlanAction" method="updateCrmVisitPlanEndStatus" />
+		<!-- crm108获取医生姓名 -->
+		<action name="getCrmVisitPlanPerson" class="com.hjw.crm.action.CrmVisitPlanAction" method="getCrmVisitPlanPerson" />
+		<!-- crm111获取回访记录 -->
+		<action name="getCrmVisitRecordList" class="com.hjw.crm.action.CrmVisitRecordAction" method="getCrmVisitRecordList" />
+		<!-- crm112添加回访记录 -->
+		<action name="saveCrmVisitRecord" class="com.hjw.crm.action.CrmVisitRecordAction" method="saveCrmVisitRecord" />
+		<!-- crm118获取需要分配私人医生的体检者 -->
+		<action name="getCrmMemberPrivateDoctorList" class="com.hjw.crm.action.CrmMemberPrivateDoctorAction" method="getCrmMemberPrivateDoctorList" />
+		<!-- crm119给体检者分配私人医生 -->
+		<action name="mergeCrmMemberPrivateDoctor" class="com.hjw.crm.action.CrmMemberPrivateDoctorAction" method="mergeCrmMemberPrivateDoctor" />
+		<!-- crm120获取私人医生的体检者 -->
+		<action name="getCrmDoctorMemberList" class="com.hjw.crm.action.CrmMemberPrivateDoctorAction" method="getCrmDoctorMemberList" />
+		<!-- crm125获取销售管理列表 -->
+		<action name="getCrmSalesCostList" class="com.hjw.crm.action.CrmSalesCostAction" method="getCrmSalesCostList" />
+		<!-- crm126删除销售管理 -->
+		<action name="deleteCrmSalesCost" class="com.hjw.crm.action.CrmSalesCostAction" method="deleteCrmSalesCost" />
+		<!-- crm127更新保存销售管理 -->
+		<action name="saveCrmSalesCost" class="com.hjw.crm.action.CrmSalesCostAction" method="saveCrmSalesCost" />
+		<!-- crm128获取体检任务 -->
+		<action name="getCrmSalesCostTr" class="com.hjw.crm.action.CrmSalesCostAction" method="getCrmSalesCostTr" />
+		<!-- crm129获取数据字典的报销费 -->
+		<action name="getCrmSalesCostBX" class="com.hjw.crm.action.CrmSalesCostAction" method="getCrmSalesCostBX" />
+		<!-- crm141获取签单跟踪列表 -->
+		<action name="getCrmSignTrackingList" class="com.hjw.crm.action.CrmSignTrackingAction" method="getCrmSignTrackingList" />
+		<!-- crm144获取签单跟踪时间 -->
+		<action name="getCrmSignTrackingTime" class="com.hjw.crm.action.CrmSignTrackingAction" method="getCrmSignTrackingTime" />
+		<!-- crm142保存签单跟踪 -->
+		<action name="saveCrmSignTracking" class="com.hjw.crm.action.CrmSignTrackingAction" method="saveCrmSignTracking" />
+		<!-- crm143更新crm会员 -->
+		<action name="updateCrmMemberManager" class="com.hjw.crm.action.CrmMemberManagerAction" method="updateCrmMemberManager" />
+		<!-- crm145获取会员等级 -->
+		<action name="getLevel" class="com.hjw.crm.action.CrmMemberManagerAction" method="getLevel" />
+		<!-- crm146积分清零 -->
+		<action name="updateJiFenLing" class="com.hjw.crm.action.CrmMemberManagerAction" method="updateJiFenLing" />
+		<!-- crm147获取临时表 -->
+		<action name="getTemporaryCustomerInfoList" class="com.hjw.crm.action.TemporaryCustomerInfoAction" method="getTemporaryCustomerInfoList" />
+		<!-- crm148删除临时表信息 -->
+		<action name="deleteTemporaryCustomerInfo" class="com.hjw.crm.action.TemporaryCustomerInfoAction" method="deleteTemporaryCustomerInfo" />
+		<!-- crm149更新临时表信息 -->
+		<action name="updateTemporaryCustomerInfo" class="com.hjw.crm.action.TemporaryCustomerInfoAction" method="updateTemporaryCustomerInfo" />
+		<!-- crm150导入部分临时表信息 -->
+		<action name="impuserToCustomerinfodo" class="com.hjw.crm.action.TemporaryCustomerInfoAction" method="impuserToCustomerinfodo" />
+		<!-- crm151全部导入临时表信息 -->
+		<action name="alluserToCustomerinfodo" class="com.hjw.crm.action.TemporaryCustomerInfoAction" method="alluserToCustomerinfodo" />
+		<!-- crm152获取签单计划撞单列表 -->
+		<action name="getSignBillPlanZhuangDanList" class="com.hjw.crm.action.CrmSignBillPlanZhuangDanAction" method="getSignBillPlanZhuangDanList" />
+		<!-- crm153更新签单计划撞单状态 -->
+		<action name="updateSignBillPlanZhuangDan" class="com.hjw.crm.action.CrmSignBillPlanZhuangDanAction" method="updateSignBillPlanZhuangDan" />
+		<!-- crm154获取全部健康计划 -->
+		<action name="getCrmAllVisitPlanList" class="com.hjw.crm.action.CrmVisitPlanAction" method="getCrmAllVisitPlanList" />
+		<!-- crm155获取全部签单计划撞单列表 -->
+		<action name="getAllSignBillPlanZhuangDanList" class="com.hjw.crm.action.CrmSignBillPlanZhuangDanAction" method="getAllSignBillPlanZhuangDanList" />
+		<!-- crm156更新健康计划跟踪状态 -->
+		<action name="updateSignBillPlanZhuangDanProcess" class="com.hjw.crm.action.CrmSignBillPlanZhuangDanAction" method="updateSignBillPlanZhuangDanProcess" />
+		<!-- crm157获取签单计划编码盒名称 -->
+		<action name="getCrmSignBill" class="com.hjw.crm.action.CrmSignBillPlanAction" method="getCrmSignBill" />
+		<!-- crm158	获取民族编码和名称 -->
+		<action name="getNation" class="com.hjw.crm.action.TemporaryCustomerInfoAction" method="getNation" />
+		<!-- crm159获取等级编码和名称 -->
+		<action name="getLevelName" class="com.hjw.crm.action.TemporaryCustomerInfoAction" method="getLevelName" />
+		<!-- crm169体检任务列表 -->
+		<action name="crmbatchlistshow" class="com.hjw.crm.action.CrmBatchManagerAction" method="crmbatchlistshow" />
+		<!-- crm170体检任务编辑 -->
+		<action name="crmbatcheditdo" class="com.hjw.crm.action.CrmBatchManagerAction" method="crmbatcheditdo" />
+		<!-- crm174获取体检任务列表 -->
+		<action name="crmBatch" class="com.hjw.crm.action.CrmBatchManagerAction" method="crmBatch" />
+		<!-- crm175合同管理列表 -->
+		<action name="crmcontractlistshow" class="com.hjw.crm.action.CrmBatchManagerAction" method="crmcontractlistshow" />
+		<!-- crm178获取签单计划与体检任务树状 -->
+		<action name="getSignBillPlan" class="com.hjw.crm.action.CrmBatchManagerAction" method="getSignBillPlan" />
+		<!-- crm179复制体检任务 -->
+		<action name="copyCrmBatch" class="com.hjw.crm.action.CrmBatchManagerAction" method="copyCrmBatch" />
+		<!-- crm180提交审核 -->
+		<action name="tijiaoBatch" class="com.hjw.crm.action.CrmBatchManagerAction" method="tijiaoBatch" />
+		<!-- crm181取消审核 -->
+		<action name="quxiaoBatch" class="com.hjw.crm.action.CrmBatchManagerAction" method="quxiaoBatch" />
+		<!-- crm183更新体检任务负责人 -->
+		<action name="editCrmSignBillPlanEditCreater" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="editCrmSignBillPlanEditCreater"/>
+		<!-- crm187套餐列表 -->
+		<action name="crmsatlistshow" class="com.hjw.wst.action.BatchAction"
+			method="crmsatlistshow" />
+			<!--  crm184断体检任务是否已经提交审核   -->
+			<action name="checkBatchStatus" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="checkBatchStatus"/>
+			<!-- crm188通过sign_num获取体检任务 -->
+			<action name="getBatchBySignNum" class="com.hjw.crm.action.CrmBatchManagerAction"
+			method="getBatchBySignNum"/>
+			<!-- crm189crm获取分组列表 -->
+			<action name="crmgrouplistshow" class="com.hjw.wst.action.BatchAction"
+			method="grouplistshow" />
+			<!-- crm190获取单位信息在撞单页面 -->
+			<action name="getCompanyInfoFromZhuangdan" class="com.hjw.crm.action.CrmSignBillPlanZhuangDanAction" method="getCompanyInfoFromZhuangdan" />
+			<!-- crm191获取签单计划在撞单页面 -->
+			<action name="getCrmSignBillPlanFromZhuangdan" class="com.hjw.crm.action.CrmSignBillPlanZhuangDanAction" method="getCrmSignBillPlanFromZhuangdan" />
+			<!-- crm192修改保护截止日期 -->
+			<action name="updateAbortDate" class="com.hjw.crm.action.CrmSignBillPlanZhuangDanAction" method="updateAbortDate" />
+			<!-- crm193获取日志跟踪列表 -->
+			<action name="getBatchPlanLogDTOList" class="com.hjw.crm.action.CrmSignBillPlanAction" method="getBatchPlanLogDTOList" />
+			<!-- crm194保存日志 -->
+			<action name="saveBatchPlanLog" class="com.hjw.crm.action.CrmSignBillPlanAction" method="saveBatchPlanLog" />
+			<!-- crm195删除签单计划 -->
+			<action name="deleteSignBillPlan" class="com.hjw.crm.action.CrmSignBillPlanAction"
+			method="deleteSignBillPlan"/>
+			<!-- crm198通过体检号获取exam_info的id -->
+			<action name="getIdByExamInfoExamNum" class="com.hjw.crm.action.CrmVisitPlanAction" method="getIdByExamInfoExamNum" />
+			<!-- crm199通过档案号获取examinfo -->
+			<action name="getExamInfoByArchNum" class="com.hjw.crm.action.CrmVisitPlanAction" method="getExamInfoByArchNum" />
+			<!-- crm300通过档案号和体检日期获取examinfo -->
+			<action name="getExamInfoByArchNumAndJoinDate" class="com.hjw.crm.action.CrmVisitPlanAction" method="getExamInfoByArchNumAndJoinDate" />
+			<!-- crm303获取各种数量 -->
+			<action name="getNewCrmCount" class="com.hjw.crm.action.CrmVisitPlanAction" method="getNewCrmCount" />
+			<!-- crm304获取失访记录列表 -->
+			<action name="getCrmVisitLostList" class="com.hjw.crm.action.CrmVisitLostAction" method="getCrmVisitLostList" />
+			<!-- crm305保存失访记录 -->
+			<action name="saveCrmVisitLost" class="com.hjw.crm.action.CrmVisitLostAction" method="saveCrmVisitLost" />
+			<action name="countSignBillPLanList" class="com.hjw.crm.action.CrmSignBillPlanAction" method="countSignBillPLanList" />
+			<action name="countSignBillPLanDetailList" class="com.hjw.crm.action.CrmSignBillPlanAction" method="countSignBillPLanDetailList" />
+			<action name="tuSignBillPLanList" class="com.hjw.crm.action.CrmSignBillPlanAction" method="tuSignBillPLanList" />
+			<!-- crm311 保存策略信息 -->
+			<action name="savePlanTactics" class="com.hjw.crm.action.CrmVisitLostAction" method="savePlanTactics" />
+			<!-- 获取策略编码 -->
+			<action name="getTacticsNum" class="com.hjw.crm.action.CrmVisitLostAction" method="getTacticsNum"></action>
+			<!-- crm313 查询策略列表 -->
+			<action name="getPlantacTicsList" class="com.hjw.crm.action.CrmVisitLostAction" method="getPlantacTicsList"></action>
+			<!-- crm314 保存策略明细信息 -->  
+			<action name="savePlanTacticsDetail" class="com.hjw.crm.action.CrmVisitLostAction" method="savePlanTacticsDetail"></action>
+			<!-- crm315 策略明细信息列表 -->  
+			<action name="getPlantacTicsDetailList" class="com.hjw.crm.action.CrmVisitLostAction" method="getPlantacTicsDetailList"></action>
+			
+			<!-- crm316 策略明细信息删除 -->  
+			<action name="delPlanTacticsDetail" class="com.hjw.crm.action.CrmVisitLostAction" method="delPlanTacticsDetail"></action>
+			
+			<!-- crm317 策略信息删除 -->  
+			<action name="delPlanTactics" class="com.hjw.crm.action.CrmVisitLostAction" method="delPlanTactics"></action>
+			
+			<!-- crm318 查询存在的策略状态 -->  
+			<action name="getCrmVisitPlanTacticsType" class="com.hjw.crm.action.CrmVisitLostAction" method="getCrmVisitPlanTacticsType"></action>
+			
+			<!-- crm319 策略状态查询所有的策略 -->  
+			<action name="getTacticsNoticesList" class="com.hjw.crm.action.CrmVisitLostAction" method="getTacticsNoticesList"></action>
+			
+			<!-- crm320 查询策略 -->  
+			<action name="getPlanTacticsByNum" class="com.hjw.crm.action.CrmVisitLostAction" method="getPlanTacticsByNum"></action>
+			
+			<!-- crm321 添加健康计划 -->  
+			<action name="addCrmVisitPlanList" class="com.hjw.crm.action.CrmVisitLostAction" method="addCrmVisitPlanList"></action>
+			
+			<!-- crm322 撤销个人单次健康计划 -->  
+			<action name="delVisitRecordById" class="com.hjw.crm.action.CrmVisitLostAction" method="delVisitRecordById"></action>
+			
+			<!-- crm323查询所有回访医生 -->  
+			<action name="getVisitDoctorList" class="com.hjw.crm.action.CrmVisitLostAction" method="getVisitDoctorList"></action>
+			
+			
+			<!-- crm 查询生日客户 -->  
+			<action name="getShengrikehuList" class="com.hjw.crm.action.CrmVisitPlanAction" method="getShengrikehuList"></action>
+			              
+	</package>
+</struts>

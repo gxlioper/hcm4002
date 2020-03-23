@@ -1,0 +1,77 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>个检收费项目</title>
+<meta charset="utf-8">
+<!--支持 浏览器内核 webkit、ie-comp IE兼容、ie-stand IE标准 -->
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<!--开启IE兼容模式  -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<!--移动设备支持， width=device-width 自适应宽度,initial-scale=1.0 初始缩放比例为1:1,user-scalable 用户是否可以手动缩放-->
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+<link rel='stylesheet' type='text/css'
+	href='../../html5/css/bootstrap.min.css'>
+<link rel='stylesheet' type='text/css' href='../../html5/plus/table/bootstrap-table.min.css'>
+<link rel='stylesheet' type='text/css' href='../../html5/plus/datatime/bootstrap-datetimepicker.css'>
+     <script type="text/javascript" src="../../html5/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="../../html5/js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-table.js"></script>
+<script type="text/javascript" src="../../html5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootbox.js"></script>
+
+     <script type="text/javascript" src="../../html5/plus/datatime/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../../html5/plus/bootstrap-select.js"></script>
+<script type="text/javascript" src="medical.js"></script>
+<style type="text/css">
+.btn-info {
+    background-color: #359bcc!important;
+    }
+</style>
+
+
+</head>
+<body>
+<div id="header">
+
+<!-- Navigation -->
+ <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" style="background-color: #359bcc" id="mainNav">
+    <div class="container">
+<!--       <a class="navbar-brand js-scroll-trigger" href="#page-top">火箭蛙  &nbsp; &nbsp; <span id="time" style="text-align:left;font-size:16px;"></span></a> -->
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div style="border:0px solid red;margin-top: 20px; float: left;margin-left: 0px;height: 50px;width: 200px;background-image: url(../img/logo.png);background-repeat:no-repeat;background-size:60%;">
+  		
+  	  </div>
+        <div style="width: 20%; float: right; margin-top: 3%;"><a class="nav-link js-scroll-trigger" style="color: #000;;" href="padLogin.action">退出</a></div>
+      </div>
+    </div>
+  </nav>
+<input type="hidden" id="user_uuid"/>  
+	
+</div>
+
+
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade in active" style="margin-top: 10px;margin-left: 10px " id="tab2">
+				体检套餐<table class="table table-striped table-hover" id="medicalPackage"></table>
+			</div>
+			<div class="tab-pane fade in active" style="margin-top: 10px;margin-left: 10px " id="tab3">
+			<div style="margin-top: 10px;float:right;width:15% ">
+			  <button type="button"  style="width:46%;background-color: #359bcc;" class="btn btn-default" id="personal" onclick="djtaddcusItem()">加项</button>
+			  <button type="button" style="width:46%;background-color: #359bcc; " class="btn btn-default" id="group" onclick="djtdelcusItem()">减项</button>
+			</div>
+				收费项目
+				&nbsp;&nbsp;&nbsp;&nbsp;收费项目数：<font id="countss" style="font-weight:bold;font-style:italic;">0</font>项
+			&nbsp;&nbsp;应缴金额：<font id="yjje" style="font-weight:bold;font-style:italic;">0</font>元
+			&nbsp;&nbsp;已缴金额：<font id="sjje" style="color:blue;font-weight:bold;font-style:italic;">0</font>元
+			&nbsp;&nbsp;未缴金额：<font id="wjje" style="color:red;font-weight:bold;font-style:italic;">0</font>元
+			<table class="table table-striped table-hover" id="medicalPackage1"></table>
+			</div>
+
+		</div>
+		
+</body>
+</html>

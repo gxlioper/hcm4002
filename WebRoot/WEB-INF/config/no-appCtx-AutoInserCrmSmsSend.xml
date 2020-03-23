@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="autoInsertCrmSmsSendMessage" class="com.hjw.webService.job.AutoInsertCrmSmsSendMessage" autowire="byName"/>
+   <bean name="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+        <ref bean="cronTrigger"/>
+      </list>
+    </property>
+  </bean>
+  
+   <bean id="smsSendCode" class="com.hjw.DTO.SmsSendCode">
+
+		<property name="sendTypeList">
+			<value>BG</value>
+		</property>
+</bean>
+  
+  <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> 
+	<property name="jobDetail" ref="autoGetHisData-jobDetail" /> 
+	<property name="cronExpression" value="0 38 11 * * ?" /> 
+	</bean>
+  <bean id="autoGetHisData-jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="autoInsertCrmSmsSendMessage"/>
+    <property name="targetMethod" value="getMessage"/>
+  </bean>  
+</beans>

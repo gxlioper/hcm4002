@@ -1,0 +1,17 @@
+﻿select{padding:2px;}
+.textinput{border:1px solid #B5B8C8;border-radius:3px;padding:3px;height:18px;line-height:18px;}
+.textinput:focus{background-color:#fff;box-shadow:0 0 3px 0 #95B8E7;}
+:root .textinput{padding:3px 2px 4px;}
+.textinput.username{background-image:url("images/login/inpu-tipst.png");background-position:0 -10px;}
+.textinput.password{background-image:url("images/login/inpu-tipst.png");background-position:0 -70px;background-color:#f7ffff;height:28px;width:160px;padding-left:30px;}
+.textinput.password:focus{background-position:-1px -71px;border:2px solid #FE7C1B;height:26px;width:158px;}
+.textinput.hasinput{background-image:none;}
+.checkbox{position:relative;top:2px;}
+label{cursor:pointer;}
+.blaceinput{background-color:#fffef8;height:30px;border-width:2px;font-size:24px;}
+span.textinput{background-color: #fff;padding: 0 !important;display: inline-block;white-space: nowrap;vertical-align: middle;overflow: hidden;position: relative;height:26px;}
+span.textinput>.text{border-radius: 5px ;resize: none;outline-style: none;vertical-align: top;border: 0;height:26px;line-height:26px;padding:0 4px;}
+.text-icon{position: absolute;top: 0;right:0;}
+.text-icon-query{right:20px;top:1px}
+.text-icon-save{right:0;top:5px}
+.fileinput{height:30px;}

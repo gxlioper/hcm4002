@@ -1,0 +1,1 @@
+alter table exam_set add physical_class varchar(1) default NULL   体检类型（1.普通体检2.职业病体检。空值为公用体检套餐）

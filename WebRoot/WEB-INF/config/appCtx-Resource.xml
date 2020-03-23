@@ -1,0 +1,373 @@
+﻿<?xml version="1.0"?>
+ <beans xmlns="http://www.springframework.org/schema/beans"    
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:aop="http://www.springframework.org/schema/aop"   
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:jee="http://www.springframework.org/schema/jee"  
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xsi:schemaLocation="    
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd  
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"> 
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+
+	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+	<!-- (in this case, JDBC-related settings for the dataSource definition below) -->
+	<bean id="propertyConfigurer" 
+	    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/config/pro.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+
+	<!-- Local DataSource that works in any environment -->
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass"><value>${jdbc.driverClassName}</value></property>
+		<property name="jdbcUrl"><value>${jdbc.url}</value></property>
+		<property name="user"><value>${jdbc.username}</value></property>
+		<property name="password"><value>${jdbc.password}</value></property>
+		<property name="acquireIncrement"><value>${jdbc.acquireIncrement}</value></property>
+		<property name="initialPoolSize"><value>${jdbc.initialPoolSize}</value></property>
+		<property name="maxIdleTime"><value>${jdbc.maxIdleTime}</value></property>
+		<property name="maxPoolSize"><value>${jdbc.maxPoolSize}</value></property>
+		<property name="minPoolSize"><value>${jdbc.minPoolSize}</value></property>
+		<property name="acquireRetryDelay"><value>${jdbc.acquireRetryDelay}</value></property>
+		<property name="acquireRetryAttempts"><value>${jdbc.acquireRetryAttempts}</value></property>
+		<property name="breakAfterAcquireFailure"><value>${jdbc.breakAfterAcquireFailure}</value></property>
+		<property name="testConnectionOnCheckin"><value>${jdbc.testConnectionOnCheckin}</value></property>
+		<property name="idleConnectionTestPeriod"><value>${jdbc.idleConnectionTestPeriod}</value></property>
+		<property name="automaticTestTable"><value>Testtable</value></property>
+		<property name="unreturnedConnectionTimeout"><value>${jdbc.unreturnedConnectionTimeout}</value></property>
+		<property name="maxIdleTimeExcessConnections"><value>${jdbc.maxIdleTimeExcessConnections}</value></property>
+		<property name="maxConnectionAge"><value>${jdbc.maxConnectionAge}</value></property>
+	</bean>
+	
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource"><ref bean="dataSource" /></property>  
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath:/com/hjw/wst/domain/</value>
+			</list>
+		</property>
+		<property name="annotatedClasses">
+	     <list>
+	       <value>com.hjw.wst.domain.WebUserInfo</value>
+	       <value>com.hjw.wst.domain.WebRole</value>
+	       <value>com.hjw.wst.domain.WebRoleMenu</value>
+	       <value>com.hjw.wst.domain.WebUserjsb</value>  
+	       <value>com.hjw.wst.domain.WebXtgnb</value>
+	       <value>com.hjw.wst.domain.WebXtgncd</value>
+	       <value>com.hjw.wst.domain.WebConfig</value>
+	       <value>com.hjw.wst.domain.DepUser</value>
+	       <value>com.hjw.wst.domain.CustomerMemberInfo</value>
+	       <value>com.hjw.wst.domain.CustomerInfo</value>
+	       <value>com.hjw.wst.domain.CardInfo</value>
+	       <value>com.hjw.wst.domain.CardDeal</value>
+	       <value>com.hjw.wst.domain.CloseCard</value>
+	       <value>com.hjw.wst.domain.ChargingSummarySingle</value>
+	       <value>com.hjw.wst.domain.ChargingDetailSingle</value>
+	       <value>com.hjw.wst.domain.ChargingWaySingle</value>
+	       <value>com.hjw.wst.domain.ChargingInvoiceSingle</value>
+	       <value>com.hjw.wst.domain.HisChargingWaySingle</value>
+	       <value>com.hjw.wst.domain.ViewCommonWords</value>
+	       <value>com.hjw.wst.domain.ExamSummary</value>
+	       <value>com.hjw.wst.domain.ExaminfoDisease</value>
+	       <value>com.hjw.wst.domain.ViewExamDetail</value>
+	       <value>com.hjw.wst.domain.ViewExamImage</value>
+	       <value>com.hjw.wst.domain.ViewExamItem</value>
+	       <value>com.hjw.wst.domain.ExamResultDetail</value>
+	       <value>com.hjw.wst.domain.CustomerVipPrompt</value>
+	       <value>com.hjw.wst.domain.ExamSummaryGuidanceLib</value>
+	       <value>com.hjw.wst.domain.NullifyInvoice</value>
+	       <value>com.hjw.wst.domain.CashierDailyAcc</value>
+	       <value>com.hjw.wst.domain.CashierDailyAccInvoice</value>
+	       <value>com.hjw.wst.domain.CashierDailyAccList</value>
+	       <value>com.hjw.wst.domain.CashierDailyAccPayway</value>
+	       <value>com.hjw.wst.domain.FinanceDepAcc</value>
+	       <value>com.hjw.wst.domain.FinanceDepAccPayway</value>
+	       <value>com.hjw.wst.domain.FinanceVsCashierDailyAcc</value>
+	       <value>com.hjw.wst.domain.SensitiveWordsLib</value>
+	       <value>com.hjw.wst.domain.UserInvoice</value>
+	       <value>com.hjw.wst.domain.DiseaseLogicSingle</value>
+	       <value>com.hjw.wst.domain.DiseaseLogicSingleItem</value>
+	       <value>com.hjw.wst.domain.DiseaseLogicSingleItemCondition</value>
+	       <value>com.hjw.wst.domain.DiseaseLogicComposite</value>
+	       <value>com.hjw.wst.domain.DiseaseLogicCompositeItem</value>
+	       <value>com.hjw.wst.domain.DiseaseLogicCompositeItemCondition</value>
+	       <value>com.hjw.wst.domain.CardSaleSummary</value>
+	       <value>com.hjw.wst.domain.CardSaleDetail</value>
+	       <value>com.hjw.wst.domain.CardSaleWay</value>
+	       <value>com.hjw.wst.domain.DataMigrationExam</value>
+	       <value>com.hjw.wst.domain.DataMigrationCompany</value>
+	       <value>com.hjw.wst.domain.CompanyInfo</value>
+	       <value>com.hjw.wst.domain.CompanyDepartment</value>
+	       <value>com.hjw.wst.domain.Batch</value>
+	       <value>com.hjw.wst.domain.DataDictionary</value>
+	       <value>com.hjw.wst.domain.GroupInfo</value>	       
+	       <value>com.hjw.wst.domain.ChargingItem</value>
+	       <value>com.hjw.wst.domain.ExamSet</value>
+	       <value>com.hjw.wst.domain.GroupChargingItem</value>
+	       <value>com.hjw.wst.domain.GroupSet</value>
+	       <value>com.hjw.wst.domain.SetChargingItem</value>
+	       <value>com.hjw.wst.domain.BatchProPlan</value>
+	       <value>com.hjw.wst.domain.Contract</value>
+	       <value>com.hjw.wst.domain.ImpCustomerInfo</value>
+	       <value>com.hjw.wst.domain.ExaminfoChargingItem</value>
+	       <value>com.hjw.wst.domain.ExamInfo</value>
+	       <value>com.hjw.wst.domain.ExaminfoSet</value>
+	       <value>com.hjw.wst.domain.ReportReceive</value>
+	       <value>com.hjw.wst.domain.SampleExamDetail</value>
+	       <value>com.hjw.wst.domain.ExamResultChargingItem</value>
+	       <value>com.hjw.wst.domain.PacsSummary</value>
+	       <value>com.hjw.wst.domain.Pacsdetail</value>
+	       <value>com.hjw.wst.domain.DepartmentDep</value>
+	       <value>com.hjw.wst.domain.Scheduling</value>
+	       <value>com.hjw.wst.domain.SampleReportDemo</value>
+	       <value>com.hjw.wst.domain.CustomerCompany</value>
+	       <value>com.hjw.wst.domain.SampleDemo</value>
+	       <value>com.hjw.wst.domain.Examinatioin_center</value>
+	       <value>com.hjw.wst.domain.ExaminationItem</value>
+	       <value>com.hjw.wst.domain.ExamItemRefandDang</value>
+	       <value>com.hjw.wst.domain.ChargingItemExamItem</value>
+	       <value>com.hjw.wst.domain.DataDictionary</value>
+	       <value>com.hjw.wst.domain.Customer_Type</value>
+	       <value>com.hjw.wst.domain.HisDictDept</value>
+	       <value>com.hjw.wst.domain.DiseaseKnowloedge</value>
+	       <value>com.hjw.wst.domain.ExamInfoRecyclingGuid</value>
+	       <value>com.hjw.wst.domain.DiseaseSuggestion</value>
+	       <value>com.hjw.wst.domain.ItemResultLib</value>
+	       <value>com.hjw.wst.domain.ExpertSuggestionLib</value>
+	       <value>com.hjw.wst.domain.ExamFlow</value>
+	       <value>com.hjw.wst.domain.CommonExamDetail</value>
+	       <value>com.hjw.wst.domain.ReportMenu</value>	       
+	       <value>com.hjw.wst.domain.WebRoleReport</value>
+	       <value>com.hjw.wst.domain.ExamdepResult</value>
+	       <value>com.hjw.wst.domain.Critical</value>
+	       <value>com.hjw.wst.domain.ExamCriticalLog</value>
+	       <value>com.hjw.wst.domain.DiseaseLogic</value>
+	       <value>com.hjw.wst.domain.SystemInforms</value>
+	       <value>com.hjw.wst.domain.DiseaseLogicExamItem</value>
+	       <value>com.hjw.wst.domain.TeamAccount</value>
+	       <value>com.hjw.wst.domain.TeamAccountExamList</value>
+	       <value>com.hjw.wst.domain.TeamAccountItemList</value>
+	       <value>com.hjw.wst.domain.TeamInvoiceAccount</value>
+	       <value>com.hjw.wst.domain.TeamAccountAdditional</value>
+	       <value>com.hjw.wst.domain.SystemInforms_user</value>
+	       <value>com.hjw.wst.domain.DepLogicExamItem</value>
+	       <value>com.hjw.wst.domain.DepLogic</value>
+	       <value>com.hjw.wst.domain.WebResrelAtionship</value>
+	       <value>com.hjw.wst.domain.SysSurveyQuestion</value>
+	       <value>com.hjw.wst.domain.SysQuestionOptions</value>
+	       <value>com.hjw.wst.domain.SysQuestionItems</value>
+	       <value>com.hjw.wst.domain.SysLog</value>
+	       <value>com.hjw.wst.domain.NoteData</value>
+	       <value>com.hjw.wst.domain.sysSurvey</value>
+	       <value>com.hjw.wst.domain.sysSurveyQuestionRelation</value>
+	       <value>com.hjw.wst.domain.LimitChargingItem</value>
+	       <value>com.hjw.wst.domain.ExamInfoSign</value>
+	       <value>com.hjw.wst.domain.DiseaseMerge</value>
+	       <value>com.hjw.wst.domain.TeamAccountTrjn</value>
+	       <value>com.hjw.wst.domain.DiseaseDep</value>
+	       <value>com.hjw.wst.domain.GroupScheduling</value>
+	       <value>com.hjw.wst.domain.WebSynchro</value>
+	       <value>com.hjw.wst.domain.DepUserPrint</value>
+           <value>com.hjw.wst.domain.ExamSetType</value>
+           <value>com.hjw.wst.domain.CustomerVisitCard</value>
+           <value>com.hjw.wst.domain.ChargingSummaryGroup</value>
+	       <value>com.hjw.wst.domain.ChargingWayGroup</value>
+	       <value>com.hjw.wst.domain.NullifyInvoice</value>
+	       <value>com.hjw.wst.domain.SampleDemoChargingItem</value>
+	       <value>com.hjw.wst.domain.ExamPrintTmp</value>
+	       <value>com.hjw.wst.domain.Introducer</value>
+	       <value>com.hjw.wst.domain.ChargingItemSchedule</value>
+	       <value>com.hjw.wst.domain.ExamFlowConfig</value>
+	       <value>com.hjw.wst.domain.ExamFlowLog</value>
+	       <value>com.hjw.wst.domain.ExamSummaryReject</value>
+	       <value>com.hjw.wst.domain.HealthRiskExaminfo</value>
+	       <value>com.hjw.wst.domain.HealthRiskExaminfoItem</value>
+	       <value>com.hjw.wst.domain.ExamSummaryCancel</value>
+           <value>com.hjw.wst.domain.ExamSummaryLog</value>
+           <value>com.hjw.wst.domain.ExaminfoDiseaseLog</value>
+           <value>com.hjw.wst.domain.CommonExamDetailLog</value>
+           <value>com.hjw.wst.domain.ExamdepResultLog</value>
+           <value>com.hjw.wst.domain.BatchFlowLog</value>
+           <value>com.hjw.wst.domain.CompanyAccount</value>
+           <value>com.hjw.wst.domain.CompanyAccountDetail</value>
+           <value>com.hjw.wst.domain.ExamSuggestionLog</value>
+          <value>com.hjw.wst.domain.CrmSmsBaseTemplate</value>
+	       <value>com.hjw.wst.domain.CrmSmsSend</value>
+	       <value>com.hjw.wst.domain.CardExamSet</value>
+	       <value>com.hjw.wst.domain.CardExamSetItem</value>
+	       <value>com.hjw.wst.domain.FinalRejection</value>
+		   <value>com.hjw.wst.domain.ExaminfoDiseaseSingle</value>
+		   <value>com.hjw.wst.domain.ChargingItemVScenter</value>
+		   <value>com.hjw.wst.domain.CompanyInfoVsCenter</value>
+	       <value>com.hjw.wst.domain.ExamCriticalClass</value>
+           <value>com.hjw.wst.domain.ExamCriticalLogic</value>
+           <value>com.hjw.wst.domain.ExamCriticalLogicItem</value>
+           <value>com.hjw.wst.domain.ExamCriticalLogicItemCondition</value>
+			 <value>com.hjw.wst.domain.ExamSummaryReview</value>
+			 <value>com.hjw.wst.domain.ExamSummaryReviewItem</value>
+			 <value>com.hjw.wst.domain.ReportPdf</value>
+	       <!-- zyb -->
+	       <value>com.hjw.zyb.domain.ZybAreaCode</value>
+	       <value>com.hjw.zyb.domain.ZybAskDiagnosisSample</value>
+	       <value>com.hjw.zyb.domain.ZybInquisitionResult</value>
+	       <value>com.hjw.zyb.domain.ZybEconomicClass</value>
+	       <value>com.hjw.zyb.domain.ZybEconomicIndustry</value>
+	       <value>com.hjw.zyb.domain.ZybTypeOfWork</value>
+	       <value>com.hjw.zyb.domain.ZybOccuphyexaClass</value>
+	       <value>com.hjw.zyb.domain.ZybOccuhazardClass</value>
+	       <value>com.hjw.zyb.domain.ZybOccuhazardfactors</value>
+	       <value>com.hjw.zyb.domain.ZybOccuphyexaClass</value>
+	       <value>com.hjw.zyb.domain.ZybPhyexaclass</value>
+	       <value>com.hjw.zyb.domain.ZybOccuhazardClass</value>
+	       <value>com.hjw.zyb.domain.ZybOccuhazardfactors</value>
+	       <value>com.hjw.zyb.domain.ZybOccuindustry</value>
+	       <value>com.hjw.zyb.domain.ZybOccutypeofwork</value>
+	       <value>com.hjw.zyb.domain.ZybEconomicIndustry</value>
+	       <value>com.hjw.zyb.domain.ZybCareerInquisitionItem</value>
+	       <value>com.hjw.zyb.domain.ZybCheckcriterion</value>
+	       <value>com.hjw.zyb.domain.Zyboccudisease</value>
+	       <value>com.hjw.zyb.domain.Zyboccudiseaseclass</value>
+	       <value>com.hjw.zyb.domain.Zyboccucontraindication</value> 
+	       <value>com.hjw.zyb.domain.ZybOccuhazardrelatorsinfo</value>
+	       <value>com.hjw.zyb.domain.ZybSourcecareerclass</value>
+	       <value>com.hjw.zyb.domain.Zybdiseaseclassresult</value>
+	       <value>com.hjw.zyb.domain.ZybRecheckItem</value>
+	       <value>com.hjw.zyb.domain.ZybrecheckExclDisease</value>
+	       <value>com.hjw.zyb.domain.ZybDustitemoption</value>
+	       <value>com.hjw.zyb.domain.ZybOccuHis</value>
+	       <value>com.hjw.zyb.domain.ExamInfoExt</value>
+	       <value>com.hjw.zyb.domain.ExamExtTypeofocc</value>
+	       <value>com.hjw.zyb.domain.ZybExaminationresult</value>
+	       <value>com.hjw.zyb.domain.ZybProposetemplate</value>
+	       <value>com.hjw.zyb.domain.ZybExamOccuhazardfactors</value>
+	       <value>com.hjw.zyb.domain.ZyboccuhazardfactorsOccucontraindication</value>
+	       <value>com.hjw.zyb.domain.ZyboccuhazardfactorsCheckcriterion</value>
+	       <value>com.hjw.zyb.domain.ZybDiseaseHistory</value>
+	       <value>com.hjw.zyb.domain.ZybOcctemplate</value>
+	       <value>com.hjw.zyb.domain.ZyboccuhazardfactorsOccudisease</value>
+	       <value>com.hjw.zyb.domain.ZybExamSummaryResult</value>
+	       <value>com.hjw.zyb.domain.ZybExamSummaryResultOccid</value>
+	       <value>com.hjw.zyb.domain.Impoccuhis</value>
+	       <value>com.hjw.zyb.domain.SetOccuhazardfactors</value>
+	       <!-- crm -->
+	       <value>com.hjw.crm.domain.CrmVisitLost</value>
+	       <value>com.hjw.crm.domain.CrmVisitPlan</value>
+	       <value>com.hjw.crm.domain.CrmVisitRecord</value>
+	       <value>com.hjw.crm.domain.CrmMemberPrivateDoctor</value>
+	       <value>com.hjw.crm.domain.CrmSignBillPlan</value>
+	       <value>com.hjw.crm.domain.CrmCompanyContacts</value> 
+	       <value>com.hjw.crm.domain.CrmSalesCost</value>
+	       <value>com.hjw.crm.domain.CrmSignTracking</value>
+	       <value>com.hjw.crm.domain.TemporaryCustomerInfo</value>
+	       <value>com.hjw.crm.domain.CrmBatchCheck</value>
+	       <value>com.hjw.wst.domain.Exam_user</value>
+	       <value>com.hjw.crm.domain.BatchPlanLog</value>
+	       <value>com.hjw.crm.domain.ExamJkzFlag</value>
+	       <value>com.hjw.crm.domain.HuoVsHop</value>
+	       <value>com.hjw.wst.domain.ScaleDictQuestion</value>
+	       <value>com.hjw.wst.domain.ScaleDictOption</value>
+	       <value>com.hjw.wst.domain.ScaleQuestionOption</value>
+	       <value>com.hjw.wst.domain.ScaleDictAppraise</value>
+	       <value>com.hjw.wst.domain.QuestDictListExt</value>
+	       <value>com.hjw.wst.domain.ScaleResultList</value>
+	       <value>com.hjw.crm.domain.CrmPlanTactics</value>
+           <value>com.hjw.crm.domain.CrmPlanTacticsDetail</value>
+	       <!-- tCC -->
+	       <value>com.hjw.wst.domain.QuestExamList</value>
+	       <value>com.hjw.wst.domain.QuestExamRecord</value>
+	       <value>com.hjw.wst.domain.QuestDictItem</value>
+	       <value>com.hjw.wst.domain.QuestDictTitle</value>
+	         <!-- charge -->
+	       <value>com.hjw.charge.domain.CardDealCharge</value>
+	  	   <value>com.hjw.charge.domain.CashierDailyAccCharge</value>
+	       <value>com.hjw.charge.domain.ChargingSummarySingleCharge</value>
+	       <value>com.hjw.charge.domain.ChargingDetailSingleCharge</value>
+	       <value>com.hjw.charge.domain.ChargingWaySingleCharge</value>
+	       <value>com.hjw.charge.domain.ChargingInvoiceSingleCharge</value>
+		   <value>com.hjw.charge.domain.ChargingInvoiceRelationCharge</value>
+		   <value>com.hjw.charge.domain.InsuranceFeeDetailCharge</value>
+	       <value>com.hjw.charge.domain.InsurancePayerInfoCharge</value>
+	       <value>com.hjw.charge.domain.InvoiceInformationCharge</value>
+		   <value>com.hjw.charge.domain.MedicalPriceListCharge</value>
+	       <value>com.hjw.charge.domain.MedicalPriceMedicalItemCharge</value>
+		   <value>com.hjw.charge.domain.NullifyInvoiceCharge</value>
+		   <value>com.hjw.charge.domain.PosDailySummaryCharge</value>
+		   <value>com.hjw.charge.domain.UserInvoiceCharge</value>  
+		   <value>com.hjw.charge.domain.PosDetailCharge</value>
+		   <value>com.hjw.charge.domain.IdentityAuthenticationCharge</value>
+		   <value>com.hjw.charge.domain.InsureAccountCharge</value>
+	         
+	     </list>
+	   </property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.jdbc.use_streams_for_binary">true</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
+                <prop key="hibernate.connection.autocommit">true</prop>
+                <!--
+                default:    默认方式  
+                on_close:    session关闭时释放连接。
+                after_transcation:  事务处理结束后，以事务为单位进行连接的释放
+                after_statement:  每次执行后就释放当前连接。 -->
+				<!-- prop key="hibernate.connection.release_mode">after_transcation</prop>
+				<prop key="hibernate.current_session_context_class">jta</prop-->
+				<prop key="jdbc.fetch_size">50</prop>
+				<prop key="jdbc.batch_size">30</prop>
+			</props>
+		</property>
+	</bean>
+
+<!-- 配置事务管理 -->
+    <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+     
+    <!-- 配置注解实现管理事务（cglib：proxy-target-class="true"） -->
+    <tx:annotation-driven transaction-manager="txManager"/>
+     
+    <!-- 开启AOP监听     -->   
+    <aop:aspectj-autoproxy expose-proxy="true"/>
+    <bean id="slowServiceInterceptor" class="com.hjw.filter.SlowServiceInterceptor"/>
+     
+    <!-- hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到 -->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+           <tx:method name="insert*" propagation="REQUIRED" />  
+            <tx:method name="update*" propagation="REQUIRED" />  
+            <tx:method name="edit*" propagation="REQUIRED" />  
+            <tx:method name="save*" propagation="REQUIRED" />  
+            <tx:method name="add*" propagation="REQUIRED" />  
+            <tx:method name="new*" propagation="REQUIRED" />  
+            <tx:method name="set*" propagation="REQUIRED" />  
+            <tx:method name="remove*" propagation="REQUIRED" />  
+            <tx:method name="delete*" propagation="REQUIRED" />  
+            <tx:method name="change*" propagation="REQUIRED" />  
+            <tx:method name="get*" propagation="REQUIRED" read-only="false" />  
+            <tx:method name="find*" propagation="REQUIRED"  read-only="true"/>  
+            <tx:method name="load*" propagation="REQUIRED" read-only="true"/>  
+            <tx:method name="list*" propagation="REQUIRED" read-only="true"/>  
+            <tx:method name="chk*" propagation="REQUIRED" read-only="true"/>  
+            <tx:method name="*" propagation="REQUIRED"/>  
+        </tx:attributes>
+    </tx:advice>
+     
+    <aop:config expose-proxy="true">
+        <aop:pointcut id="txPointcut" expression="(execution(* com.hjw.wst.service..*.*(..))) or (execution(* com.hjw.zyb.service..*.*(..))) or (execution(* com.hjw.charge.service..*.*(..))) or (execution(* com.hjw.zyb.service..*.*(..))) or (execution(* com.hjw.crm.service..*.*(..)))or (execution(* com.hjw.echartsSearch.service..*.*(..)))or (execution(* com.hjw.mongo.service..*.*(..)))" />  
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+    </aop:config> 
+     
+</beans>

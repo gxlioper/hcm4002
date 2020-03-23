@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="job-getHis" class="com.hjw.webService.job.AutoGetHisResMessage" autowire="byName"/>
+  <bean name="quartzScheduler-getHis" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+        <ref bean="simpleTrigger-getHis"/>
+      </list>
+    </property>
+  </bean>
+  <bean id="simpleTrigger-getHis" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+    <property name="jobDetail" ref="jobDetail-getHis"/>
+    <property name="startDelay" value="1000"/>
+    <property name="repeatInterval" value="60000"/>
+  </bean>
+  <bean id="jobDetail-getHis" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="job-getHis"/>
+    <property name="targetMethod" value="getMessage"/>
+  </bean>  
+</beans>

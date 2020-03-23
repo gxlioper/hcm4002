@@ -1,0 +1,1 @@
+alter table zyb_ask_diagnosis_sample  ADD sex char(1) not null default(0)   --问诊项目模板 （0.全部1.男 2.女）

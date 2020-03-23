@@ -1,0 +1,23 @@
+@import url("reset.css");
+@import url("form.css");
+@import url("icon.css");
+@import url("button.css");
+@import url("header.css");
+@import url("style.css");
+
+#loginbox    {position:relative;height:532px;margin:0 auto;}
+.loginForm   {width:452px;position:absolute;left:50%;top:50%;margin:-200px 0 0 -198px;}
+.field-format{background-position:-64px -832px;width:396px;height:77px;margin-left:4px;}
+.field-format dt{width:58px;padding:12px 0 0 20px;}
+.field-format .textinput{background:none;border:0;color:#999;font-size:18px;padding:8px 10px 0;height:60px;width:290px;line-height:50px\9}
+.field-format .typecodeinput{width:156px;}
+.logintype   {padding:0 0 20px 0;}
+.logintype dd label{color:#fff;cursor:pointer;float:left;font-size:18px;padding:4px 48px 0 18px;}
+.action-dl   {padding-top:15px;}
+.action-dl dd{padding-right:10px;}
+
+.loginerror            {display:none;position:absolute;height:80px;left:58px;top:0;}
+.loginerror s          {background-position:-283px -128px;position:absolute;height:112px;width:76px;left:0;top:0;}
+.loginerror div        {background-position:0 -179px;margin:0 36px 0 76px;height:112px;padding:42px 0 0 0;position:relative;z-index:2;}
+.loginerror div span   {bottom: 32px;color: #7F5401;font-size: 14px;left: 35px;right: 35px;text-align: center;text-shadow: 0 1px 1px white;top: 32px;z-index: 2;display:block;margin-left:-40px;}
+.loginerror i          {background-position:-414px -128px;position:absolute;height:112px;width:36px;right:0;top:0;}

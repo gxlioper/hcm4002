@@ -1,0 +1,1 @@
+alter table common_exam_detail add exam_result_back varchar(500) --检查结果明细表增加结果备份字段，

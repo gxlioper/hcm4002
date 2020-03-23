@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="hisApplyBackDbgj" class="com.hjw.wst.HisApplyBackDbgj" autowire="byName"/>
+  <bean name="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+        <ref bean="simpleTrigger"/>
+      </list>
+    </property>
+  </bean>
+  <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+    <property name="jobDetail" ref="jobDetail"/>
+    <property name="startDelay" value="1000"/>
+    <property name="repeatInterval" value="60000"/>
+  </bean>
+  <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="hisApplyBackDbgj"/>
+    <property name="targetMethod" value="readerWriteHisApply"/>
+  </bean>  
+</beans>

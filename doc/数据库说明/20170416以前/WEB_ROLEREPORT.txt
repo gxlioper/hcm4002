@@ -1,0 +1,23 @@
+CREATE TABLE [dbo].[WEB_ROLEREPORT](
+	[ID] [varchar](50) NOT NULL,
+	[ROLEMENU_ID] [int] NOT NULL,
+	[REMARK] [varchar](200) NULL,
+	[ROLE_ID] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_WEB_ROLEREPORT] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+ 
+  
+INSERT [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE]) VALUES (N'446', N'cptmanagerList.action', N'报表菜单列表', N'2', NULL, N'9', N'2', N'1')
+INSERT [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE]) VALUES (N'447', N'reportmanageradd.action', N'新增报表', N'2', NULL, N'9', N'1', N'1')
+INSERT [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE]) VALUES (N'448', N'reportmanageradddo.action', N'执行报表新增', N'2', NULL, N'9', N'2', N'1')
+INSERT [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE]) VALUES (N'449', N'reportimportdo.action', N'报表模板上传', N'2', NULL, N'9', N'2', N'1')
+INSERT [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE]) VALUES (N'450', N'reportmanageredit.action', N'修改报表模板', N'2', NULL, N'9', N'1', N'1')
+INSERT [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE]) VALUES (N'451', N'reportmanagerdel.action', N'删除报表模板', N'2', NULL, N'9', N'2', N'1')
+INSERT [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE]) VALUES (N'452', N'reportshow.action', N' 显示所有报表', N'2', NULL, N'15', N'2', N'1')
+INSERT [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE]) VALUES (N'453', N'menuReport.action', N'显示所有报表', N'2', NULL, N'15', N'2', N'1')
+INSERT [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE]) VALUES (N'9', N'cptmanager.action', N'报表模板管理', N'1', NULL, N'9', N'1', N'1')

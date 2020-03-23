@@ -1,0 +1,3556 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="json" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp
+			</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp
+			</result>
+		</global-results>
+		<!-- global-exception-mappings> <exception-mapping exception="java.lang.Exception" 
+			result="systemerror" /> <exception-mapping exception="javax.servlet.ServletException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NullPointerException" 
+			result="systemerror" /> <exception-mapping exception="java.sql.SQLException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.StringIndexOutOfBoundsException" 
+			result="systemerror" /> <exception-mapping exception="org.apache.jasper.JasperException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.IllegalStateException" 
+			result="systemerror" /> <exception-mapping exception="java.net.SocketException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NumberFormatException" 
+			result="systemerror" /> <exception-mapping exception="java.net.ProtocolException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.VerifyError" 
+			result="systemerror" /> </global-exception-mappings -->
+		<!-- *************************************************json应用************************************************* -->
+		<!-- 将列表数据存储在session中 -->
+		<action name="saveDatagridData" class="com.hjw.wst.ExcelExportAction" method="saveDatagridData"/>
+		
+		<!-- 获取管理员的功能 -->
+		<action name="sysmanager" class="com.hjw.wst.action.AccountAction"
+			method="sysmanager" />
+
+		<!-- 获取所有用户 -->
+		<action name="usermainshow" class="com.hjw.wst.action.UserManagerAction"
+			method="usermainshow" />
+
+		<!--获取用户头文件 -->
+		<action name="usermainheader" class="com.hjw.wst.action.UserManagerAction"
+			method="usermainheader" />
+
+		<!-- 验证登录名称是否存在 -->
+		<action name="checkUsername" class="com.hjw.wst.action.UserManagerAction"
+			method="checkUsername">
+		</action>
+
+		<!-- 执行编辑用户 -->
+		<action name="usereditdo" class="com.hjw.wst.action.UserManagerAction"
+			method="usereditdo">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">3</param>
+			</interceptor-ref>
+		</action>
+		<!-- 保存修改密码622 -->
+		 <action name="usereditpwd" class="com.hjw.wst.action.UserManagerAction"
+			method="usereditpwd">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">3</param>
+			</interceptor-ref>
+		</action>
+		<!-- 执行编辑员工编号 -->
+		<action name="usereditdo_w" class="com.hjw.wst.action.UserManagerAction"
+			method="usereditdo_w">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">3</param>
+			</interceptor-ref>
+		</action>
+		<!-- 通过用户名查询科室和体检中心信息 -->
+		<action name="getCenterAndDepList" class="com.hjw.wst.action.AccountAction"
+			method="getCenterAndDepList" />
+
+		<!-- 检索名称 -->
+		<action name="autoGetUsername" class="com.hjw.wst.action.AccountAction"
+			method="autoGetUsername" />
+
+		<!-- 获取用户名，科室名，用户拥有科室信息 -->
+		<action name="getUserAndUserDep" class="com.hjw.wst.action.AccountAction"
+			method="getUserAndUserDep" />
+			
+		<!--获取系统通知内容-->
+		<action name="getUserSystemInfromsList" class="com.hjw.wst.action.AccountAction"
+			method="getUserSystemInfromsList" />
+			
+			
+		 <!-- 站内信更新 -->
+        <action name="updateUserSystemInfroms" class="com.hjw.wst.action.AccountAction" method="updateUserSystemInfroms" />
+			
+		<!-- 切换科室 -->
+		<action name="changeDepartMent" class="com.hjw.wst.action.AccountAction"
+			method="changeDepartMent" />
+
+		<!-- 查询本科室当天体检人数 -->
+		<action name="getCheckedCustomerCount" class="com.hjw.wst.action.AccountAction"
+			method="getCheckedCustomerCount" />
+
+		<!-- 验证session是否相同 -->
+		<action name="verifyUser" class="com.hjw.wst.action.AccountAction"
+			method="verifyUser" />
+
+		<action name="updatePasswddo" class="com.hjw.wst.action.UserManagerAction"
+			method="updatePasswddo">
+		</action>
+
+		<action name="updatePersondo" class="com.hjw.wst.action.UserManagerAction"
+			method="updatePersondo">
+		</action>
+
+		<action name="getroleAll" class="com.hjw.wst.action.RoleAction"
+			method="getroleAll" />
+
+		<!-- 保存用户角色 -->
+		<action name="userrolesave" class="com.hjw.wst.action.RoleAction"
+			method="userrolesave" />
+
+		<!--17 用户科室授权 -->
+		<action name="getAllDepAndDepUser" class="com.hjw.wst.action.UserManagerAction"
+			method="getAllDepAndDepUser" />
+
+		<!--得到部门信息 -->
+		<action name="getAlldept" class="com.hjw.wst.action.JobAction"
+			method="getAlldept" />
+
+		<!--得到部门信息 -->
+		<action name="getDept" class="com.hjw.wst.action.JobAction"
+			method="getDept" />
+
+
+		<!--持卡人默认菜单 -->
+		<action name="cardmenu" class="com.hjw.wst.action.TreeAction"
+			method="cardmenu" />
+		<!--瘦身版菜单 -->
+		<action name="menu" class="com.hjw.wst.action.TreeAction"
+			method="menu" />
+		<!--显示菜单树 -->
+		<action name="treeShow" class="com.hjw.wst.action.TreeAction"
+			method="treeShow" />
+
+		<!-- 得到一个功能菜单 -->
+		<action name="getGnMenuOne" class="com.hjw.wst.action.TreeAction"
+			method="getGnMenuOne" />
+		<!-- 得到功能列表 -->
+		<action name="getGnList" class="com.hjw.wst.action.TreeAction"
+			method="getGnList" />
+
+		<!-- 增加菜单 -->
+		<action name="addmenu" class="com.hjw.wst.action.TreeAction"
+			method="addmenu">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">1</param>
+			</interceptor-ref>
+		</action>
+		<!-- 修改菜单 -->
+		<action name="editmenu" class="com.hjw.wst.action.TreeAction"
+			method="editmenu">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">3</param>
+			</interceptor-ref>
+		</action>
+
+		<!-- 得到一个功能 -->
+		<action name="getMenuzbOne" class="com.hjw.wst.action.TreeAction"
+			method="getMenuzbOne" />
+
+		<!-- 通过id得到一个功能 -->
+		<action name="getMenuzbByid" class="com.hjw.wst.action.TreeAction"
+			method="getMenuzbByid" />
+
+		<!-- 删除菜单 -->
+		<action name="delmenu" class="com.hjw.wst.action.TreeAction"
+			method="delmenu">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">2</param>
+			</interceptor-ref>
+		</action>
+
+		<!-- 显示所有角色 -->
+		<action name="rolegnshow" class="com.hjw.wst.action.TreeAction"
+			method="rolegnshow" />
+		<!-- 显示一个角色功能 -->
+		<action name="rolegnshowone" class="com.hjw.wst.action.TreeAction"
+			method="rolegnshowone" />
+
+		<!-- 保存用户商户 -->
+		<action name="usermercsave" class="com.hjw.wst.action.RoleAction"
+			method="usermercsave" />
+
+		<!--登陆地址 -->
+		<action name="homeloginurl" class="com.hjw.wst.action.AccountAction"
+			method="homeloginurl" />
+
+
+		<!-- 获取所有角色 -->
+		<action name="rolemainshow" class="com.hjw.wst.action.RoleAction"
+			method="rolemainshow" />
+		<!--获取角色头文件 -->
+		<action name="rolemainheader" class="com.hjw.wst.action.RoleAction"
+			method="rolemainheader" />
+
+
+
+		<!-- 执行编辑角色 52-->
+		<action name="roleeditdo" class="com.hjw.wst.action.RoleAction"
+			method="roleeditdo">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">3</param>
+			</interceptor-ref>
+		</action>
+
+
+        <action name="hjdbcdesc" class="com.hjw.wst.action.AccountAction" method="getSyssystem" />
+
+		<!-- 保存角色功能 -->
+		<action name="rolegnsave" class="com.hjw.wst.action.RoleAction"
+			method="rolegnsave" />
+
+
+		<action name="getRuleAll" class="com.hjw.wst.action.RoleAction"
+			method="getRuleAll" />
+
+		<!-- 保存岗位角色 -->
+		<action name="jobrolesave" class="com.hjw.wst.action.RoleAction"
+			method="jobrolesave" />
+
+		<!--获取功能菜单，不做权限限制 -->
+		<action name="getmenu" class="com.hjw.wst.action.TreeAction"
+			method="getmenu" />
+
+		<!--单位部门菜单树 -->
+		<action name="treecomdeptShow" class="com.hjw.wst.action.TreeAction"
+			method="treecomdeptShow" />
+
+		<!-- 查询价表诊疗项目是否有同步 -->
+		<action name="itempricetotal" class="com.hjw.wst.action.CommonAction"
+			method="itempricetotal" />
+			
+		<!-- 价表项目查询-->
+		<action name="pricetotal" class="com.hjw.wst.action.CommonAction"
+			method="pricetotal" />
+			
+		<!-- 诊疗项目查询 -->
+		<action name="itemtotal" class="com.hjw.wst.action.CommonAction"
+			method="itemtotal" />
+		
+		<!-- 获取数据字典 “第一行加无”-->
+		<action name="getDatadisKongGe" class="com.hjw.wst.action.CommonAction"
+			method="getDatadisKongGe" />
+
+		<!-- 单位信息维护 495-->
+		<action name="editcompany" class="com.hjw.wst.action.CommonAction"
+			method="editcompany" />
+			
+		<!-- 检测单位编号是否重复 433 -->
+		<action name="checkcomnum" class="com.hjw.wst.action.CommonAction"
+			method="checkcomnum" />
+
+		<!-- 部门显示 -->
+		<action name="dwshowall" class="com.hjw.wst.action.CommonAction"
+			method="dwshowall" />
+
+		<!-- 保存部门 496-->
+		<action name="danweieditdo" class="com.hjw.wst.action.CommonAction"
+			method="danweieditdo" />
+
+		<!-- 删除单位部门 -->
+		<action name="deldanwei" class="com.hjw.wst.action.CommonAction"
+			method="deldanwei" />
+
+		<!-- 显示不带部门的所有单位 -->
+		<action name="companychangshow" class="com.hjw.wst.action.TreeAction"
+			method="companychangshow" />
+
+		<!-- 执行部门移动 494-->
+		<action name="companychangedo" class="com.hjw.wst.action.CommonAction"
+			method="companychangedo" />
+
+		<!-- webConfig相关 -->
+		<action name="webConfigtoChangeType" class="com.hjw.wst.action.WebConfigAction"
+			method="toChangeType">
+			<result name="toChangeType">/webconfig/editconfig.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">3</param>
+			</interceptor-ref>
+		</action>
+		<!-- webConfig相关 -->
+		<action name="webConfigupdateConfig" class="com.hjw.wst.action.WebConfigAction"
+			method="updateConfig">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">3</param>
+			</interceptor-ref>
+		</action>
+
+		<!-- 301 显示会员列表 -->
+		<action name="cardMemberList" class="com.hjw.wst.action.CardManageAction"
+			method="cardMemberList" />
+
+		<!-- 303 验证身份证号 -->
+		<action name="checkCardMemberIdNum" class="com.hjw.wst.action.CardManageAction"
+			method="checkCardMemberIdNum" />
+
+		<!-- 304 新增，修改会员信息 -->
+		<action name="saveCardMember" class="com.hjw.wst.action.CardManageAction"
+			method="saveCardMember" />
+
+		<!-- 307 根据会员ID查询卡信息 -->
+		<action name="getCardInfoByMerId" class="com.hjw.wst.action.CardManageAction"
+			method="getCardInfoByMerId" />
+
+		<!-- 309 验证卡号 -->
+		<action name="checkCardNum" class="com.hjw.wst.action.CardInfoAction"
+			method="checkCardNum" />
+
+		<!-- 310 新增，修改卡信息 -->
+		<action name="saveCardInfo" class="com.hjw.wst.action.CardInfoAction"
+			method="saveCardInfo" />
+
+		<!-- 311 解除绑定 -->
+		<action name="removeBinding" class="com.hjw.wst.action.CardInfoAction"
+			method="removeBinding" />
+
+		<!-- 313 查询卡信息列表 -->
+		<action name="getCardInfoList" class="com.hjw.wst.action.CardInfoAction"
+			method="getCardInfoList" />
+
+		<!--315 挂失、锁定、作废、恢复卡信息 -->
+		<action name="cardInfoUpdate" class="com.hjw.wst.action.CardInfoAction"
+			method="cardInfoUpdate" />
+
+		<!--317 延期保存 -->
+		<action name="cardInfoEdityanqi" class="com.hjw.wst.action.CardInfoAction"
+			method="cardInfoEdityanqi" />
+
+		<!--319 根据卡号查询信息 -->
+		<action name="getCardInfoByNum" class="com.hjw.wst.action.CardInfoAction"
+			method="getCardInfoByNum" />
+
+		<!--320 保存充值信息 -->
+		<action name="saveCardPerpaid" class="com.hjw.wst.action.CardInfoAction"
+			method="saveCardPerpaid" />
+
+		<!--322 批量制卡保存卡信息 -->
+		<action name="saveCardBatch" class="com.hjw.wst.action.CardInfoAction"
+			method="saveCardBatch" />
+		
+		<!--323 保存发卡信息 -->
+		<action name="saveHairCardInfo" class="com.hjw.wst.action.CardInfoAction" method="saveHairCardInfo"/>
+		
+		<!--325 撤销发卡信息 -->
+		<action name="delHairCardInfo" class="com.hjw.wst.action.CardInfoAction" method="delHairCardInfo"/>
+		
+		<!-- 1717根据规则生成新卡号 -->
+		<action name="getAddPrefixCardNum" class="com.hjw.wst.action.CardInfoAction" method="getAddPrefixCardNum"/>
+		
+		<!--324 查询交易记录列表 -->
+		<action name="getCardDealList" class="com.hjw.wst.action.CardDealAction"
+			method="getCardDealList" />
+
+		<!--326 查询未收费项目列表 -->
+		<action name="getwitemList" class="com.hjw.wst.action.CollectFeesAction"
+			method="getwitemList" />
+
+		<!--327 查询已收费项目列表 -->
+		<action name="getyitemList" class="com.hjw.wst.action.CollectFeesAction"
+			method="getyitemList" />
+
+		<!--328 查询人员基本信息 -->
+		<action name="getCustomerInfo" class="com.hjw.wst.action.CollectFeesAction"
+			method="getCustomerInfo" />
+
+		<!--329 收费保存信息 -->
+		<action name="saveCollectFees" class="com.hjw.wst.action.CollectFeesAction"
+			method="saveCollectFees" />
+
+		<!--331 根据体检信息ID查询绑定卡信息 -->
+		<action name="getCardListByexamId" class="com.hjw.wst.action.CollectFeesAction"
+			method="getCardListByexamId" />
+
+		<!--332 根据卡号查询卡信息 -->
+		<action name="getCardInfoByCardNum" class="com.hjw.wst.action.CollectFeesAction"
+			method="getCardInfoByCardNum" />
+
+		<!--333 获取收费记录总表数据 -->
+		<action name="getChargingSummaryList" class="com.hjw.wst.action.CollectFeesAction"
+			method="getChargingSummaryList" />
+
+		<!--334 获取交易明细列表 -->
+		<action name="getChargingDetailList" class="com.hjw.wst.action.CollectFeesAction"
+			method="getChargingDetailList" />
+
+		<!--335 获取收费方式明细列表 -->
+		<action name="getChargintWayList" class="com.hjw.wst.action.CollectFeesAction"
+			method="getChargintWayList" />
+
+		<!--338 显示各个收费方式的缴费金额 -->
+		<action name="getChargingWayByExamNum" class="com.hjw.wst.action.CollectFeesAction"
+			method="getChargingWayByExamNum" />
+
+		<!--339 退费保存信息 -->
+		<action name="save_tuifei" class="com.hjw.wst.action.CollectFeesAction"
+			method="save_tuifei" />
+
+		<!--343 验证物理卡号是否存在 -->
+		<action name="getCardInfoByPhyNum" class="com.hjw.wst.action.CardInfoAction"
+			method="getCardInfoByPhyNum" />
+
+		<!--多条件查询体检人员信息 347 -->
+		<action name="getReportExamInfoList" class="com.hjw.wst.action.ReportManagerAction"
+			method="getReportExamInfoList" />
+
+		<!--确认报告已打印 348 -->
+		<action name="confirmReportPrint" class="com.hjw.wst.action.ReportManagerAction"
+			method="confirmReportPrint" />
+
+		<!--保存报告发送方式 350 -->
+		<action name="saveManagerReportReceive" class="com.hjw.wst.action.ReportManagerAction"
+			method="saveManagerReportReceive" />
+
+		<!--取消报告邮寄或自取 354 -->
+		<action name="cancelReportMail" class="com.hjw.wst.action.ReportManagerAction"
+			method="cancelReportMail" />
+			
+		<!--获取最大发票号  355 -->
+		<action name="getMaxInvoiceNum" class="com.hjw.wst.action.CollectFeesAction"
+			method="getMaxInvoiceNum" />
+			
+		<!--根据退费项目信息获取已开发票信息 356 -->
+		<action name="getSingleInvoiceList" class="com.hjw.wst.action.CollectFeesAction"
+			method="getSingleInvoiceList" />
+			
+		<!--获取需要打印发票的申请单列表 358  -->
+		<action name="getChargingSingleInvoickList" class="com.hjw.wst.action.CollectFeesAction"
+			method="getChargingSingleInvoickList" />
+		
+		<!--补打发票保存信息 359  -->
+		<action name="saveSingleInviockBu" class="com.hjw.wst.action.CollectFeesAction"
+			method="saveSingleInviockBu" />
+			
+		<!--发送HIS缴费申请  360 -->
+		<action name="paymentApplication" class="com.hjw.wst.action.CollectFeesAction"
+			method="paymentApplication" />
+		
+		<!--查询已开发票项目列表  362 -->
+		<action name="getykfpItemList" class="com.hjw.wst.action.CollectFeesAction"
+			method="getykfpItemList" />
+			
+		<!--查询已开收据列表 363 -->
+		<action name="getyksjItemList" class="com.hjw.wst.action.CollectFeesAction"
+			method="getyksjItemList" />
+			
+		<!--获取采样项目列表 365 -->
+		<action name="getsamplingItemList" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="getsamplingItemList" />
+		
+		<!--验证条码号是否存在 366 -->
+		<action name="yanzhengBarcode" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="yanzhengBarcode" />
+			
+		<!--采样(绑定预印条码) 367 -->
+		<action name="samplingSamplExamDetail" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="samplingSamplExamDetail" />
+
+		<!--取消采样  368 -->
+		<action name="canlSamplExamDetail" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="canlSamplExamDetail" />
+			
+		<!--根据条件查询体检人员信息列表 370 -->
+		<action name="getExamRosterList" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getExamRosterList" />
+			
+		<!--获取体检人的体检科室与项目 372-->
+		<action name="getDepAndItemTree" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getDepAndItemTree" />
+			
+		<!--获取普通科室检查项目的检查结果 373-->
+		<action name="getPtResultList" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getPtResultList" />
+		
+		<!--获取检验科检查项目的检查结果 374-->
+		<action name="getHyResultList" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getHyResultList" />
+		
+		<!--获取影像科室检查项目的检查结果 375-->
+		<action name="getYxResultList" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getYxResultList" />
+			
+		<!--获取科室项目检查医生和科室结论  376-->
+		<action name="getExamDoctorAndDepResult" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getExamDoctorAndDepResult" />
+			
+		<!--获取总检结论 377-->
+		<action name="getFinalSummaryResult" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getFinalSummaryResult" />
+			
+		<!--获取总检疾病与建议 378-->
+		<action name="getExamDiseaseResult" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getExamDiseaseResult" />
+			
+		<!--获取影像科室图片路径 380-->
+		<action name="getViewExamImagePath" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getViewExamImagePath" />
+		
+		<!--核收与取消核收操作保存 381-->
+		<action name="acceptanceCheckExamInfo" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="acceptanceCheckExamInfo" />
+			
+		<!--核收界面报告预览意见 2100-->
+		<action name="examSuggestionInfo" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="examSuggestionInfo" />
+			
+		<!--核收界面报告预览意见保存 2101-->
+		<action name="saveExamSuggestionInfo" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="saveExamSuggestionInfo" />
+		
+		<!--核收界面报告预览意见查询 2102-->
+		<action name="getExamSuggestionList" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getExamSuggestionList" />
+		
+		<!--核收界面报告预览意见删除 2104-->
+		<action name="delExamSuggestion" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="delExamSuggestion" />
+			
+		<!--核收界面报告预览意见驳回判断是否总检 2108-->
+		<action name="validateZJ" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="validateZJ" />
+		
+		<!--撤销LIS和PACS申请 382-->
+		<action name="delLisAndPacsApplication" class="com.hjw.wst.action.CollectFeesAction"
+			method="delLisAndPacsApplication" />
+		
+		<!--获取常用词列表 384-->
+		<action name="getViewCommonWordsList" class="com.hjw.wst.action.ViewCommonWordsAction"
+			method="getViewCommonWordsList" />
+			
+		<!--新增修改保存影像科室常用词 385-->
+		<action name="saveViewCommonWords" class="com.hjw.wst.action.ViewCommonWordsAction"
+			method="saveViewCommonWords" />
+		
+		<!--根据样本名称加载样本列表   386-->
+		<action name="getViewCommonSampleList" class="com.hjw.wst.action.ViewCommonWordsAction"
+			method="getViewCommonSampleList" />
+			
+		<!--删除常用词信息 388-->
+		<action name="delViewCommonWords" class="com.hjw.wst.action.ViewCommonWordsAction"
+			method="delViewCommonWords" />
+			
+		<!--Lis补发申请 389 -->
+		<action name="sendLisApplication" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="sendLisApplication" />
+			
+		<!--查询各科室检查结果 391 -->
+		<action name="getAcceptanceItemResult" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getAcceptanceItemResult" />
+			
+		<!--获取普通科室检查结果 393 -->
+		<action name="getPtDepResultList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getPtDepResultList" />
+			
+		<!--获取检验科室检查结果 394 -->
+		<action name="getHyDepResultList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getHyDepResultList" />
+			
+		<!--获取影像科室检查结果 395-->
+		<action name="getYxDepResultList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getYxDepResultList" />
+		
+			
+		<!--获取与汇总体检人员的阳性发现信息列表  396-->
+		<action name="getExamDiseaseList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getExamDiseaseList" />
+			
+		<!--获取单项与汇总体检人员的阳性发现信息列表   -->
+		<action name="getExamDiseaseListNew" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getExamDiseaseListNew" />
+			
+		<!--获取总检结论 与总检状态  397-->
+		<action name="getFinalExamResult" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getFinalExamResult" />
+		
+		<!--根据条件 查询 阳性发现列表    398-->
+		<action name="serchDiseaseList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="serchDiseaseList" />
+		
+		<!--根据阳性发现ID查询健康建议 399-->
+		<action name="serchDiseaseSuggestionList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="serchDiseaseSuggestionList" />
+		<!--获取体检报告图片地址400-->
+		<action name="gettjbgList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="gettjbgList" />
+		<!--保存总检信息 702-->
+		<action name="saveExamSummary" class="com.hjw.wst.action.ExamSummaryAction"
+			method="saveExamSummary" />
+			
+		<!--取消总检 703-->
+		<action name="cancelExamSummary" class="com.hjw.wst.action.ExamSummaryAction"
+			method="cancelExamSummary" />
+			
+		<!--审核与取消审核  704-->
+		<action name="approveExamSummary" class="com.hjw.wst.action.ExamSummaryAction"
+			method="approveExamSummary" />
+			
+		<!--总检室首页查询人员列表 706-->
+		<action name="getExamSummaryIndexList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getExamSummaryIndexList" />
+			
+		<!--查询是否存在未检项目 707-->
+		<action name="getNotExamCharingItemList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getNotExamCharingItemList" />
+			
+		<!--获取往年历史结果 708-->
+		<action name="getResultsHistoryList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getResultsHistoryList" />
+			
+		<!--获取往年普通科项目检查结果 709-->
+		<action name="getPtItemResultsHistory" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getPtItemResultsHistory" />
+		
+		<!--获取往年检验科项目检查结果 710-->
+		<action name="getHyItemResultsHistory" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getHyItemResultsHistory" />
+		
+		<!--获取往年影像科项目检查结果 711-->
+		<action name="getYxItemResultsHistory" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getYxItemResultsHistory" />
+			
+		<!--获取总检医生的被驳回列表-->
+		<action name="getExamSummaryRejectList" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="getExamSummaryRejectList"/>
+			
+		<!-- 获取总检、审核、复审医生列表 -->
+		<action name="getFinalDoctorList" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="getFinalDoctorList"/>
+			
+		<!-- 已总检获取的体检人信息列表-->
+		<action name="getFinalExamInfoList" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="getFinalExamInfoList"/>
+		
+		<!-- 查询总检医生已总检人员列表-->
+		<action name="getHasFinalExamInfoList" class="com.hjw.wst.action.ExamSummaryAction" 
+		    method="getHasFinalExamInfoList"/>
+		    
+		 <!-- 查询可以下总检并且未总检人数 -->
+		<action name="getNotFinalCount" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="getNotFinalCount"/>
+			
+		<!--1192保存总检驳回信息-->
+		<action name="saveExamSummaryRehectInfo" class="com.hjw.wst.action.ExamSummaryAction" method="saveExamSummaryRehectInfo"/>
+			
+		<!-- 总检获取体检人信息-->
+		<action name="canFinalExamInfo" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="canFinalExamInfo"/>
+			
+		<!--1159 根据体检号或档案号获取总检信息-->
+		<action name="canFinalExamInfoByExamNum" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="canFinalExamInfoByExamNum"/>
+		
+			<!-- 档案绑定人员 -->
+		<action name="bindPersonUpdate" class="com.hjw.wst.action.CustomInfoManageAction" method="bindPersonUpdate"/>
+		<!--1146 审核室获取体检人信息-->
+		<action name="getExaminedExamInfo" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="canExaminedExamInfo"/>
+		
+		<!--1149 已获取审核的体检人信息列表-->
+		<action name="getExaminedExamInfoList" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="getExaminedExamInfoList"/>
+		
+		<!--1155 用体检号或档案号获取审核的体检人信息-->
+		<action name="canExaminedExamInfoByExamNum" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="canExaminedExamInfoByExamNum"/>
+		
+		<!--1148 查询已审核人员列表-->
+		<action name="getExamSummaryApproveList" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="getExamSummaryApproveList"/>
+			
+		<!--1150查询已终审列表-->
+		<action name="getExamSummaryCensoringList" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="getExamSummaryCensoringList"/>
+			
+		<!--1192 查询未终审列表 -->
+		<action name="getExamSummaryCensoringWList" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="getExamSummaryCensoringWList"/>
+			
+		<!--1151终审与取消终审保存-->
+		<action name="censoringExamSummary" class="com.hjw.wst.action.ExamSummaryAction" method="censoringExamSummary"/>
+		
+		<!--1147查询体检人是否可以审核或终审-->
+		<action name="getExamSummaryApproveOrCensoring" class="com.hjw.wst.action.ExamSummaryAction" method="getExamSummaryApproveOrCensoring"/>	
+		
+		<!--1193 保存需要复审的体检人员 -->
+		<action name="isCensoringExamSummary" class="com.hjw.wst.action.ExamSummaryAction" 
+			method="isCensoringExamSummary"/>
+			
+		<!--1700总检一键取消恢复 -->
+		<action name="saveExamSummaryCancel" class="com.hjw.wst.action.ExamSummaryAction" method="saveExamSummaryCancel"/>
+		
+		<!--总检一复合逻辑生成 -->
+		<action name="getExamCompositeDiseaseList" class="com.hjw.wst.action.ExamSummaryAction" method="getExamCompositeDiseaseList"/>
+		
+		<!--查询本科需要检查的项目与检查结果 714-->
+		<action name="getViewExamDetail" class="com.hjw.wst.action.ViewExamAction"
+			method="getViewExamDetail" />
+			
+		<!--查询影像科室 人员列表 716-->
+		<action name="getViewExamIndexList" class="com.hjw.wst.action.ViewExamAction"
+			method="getViewExamIndexList" />
+			
+		<!--保存影像科室检查结果 717-->
+		<action name="saveViewExamDetail" class="com.hjw.wst.action.ViewExamAction"
+			method="saveViewExamDetail" />
+			
+		<!--根据样本ID查询影像科室常用词  718-->
+		<action name="getViewExamWords" class="com.hjw.wst.action.ViewExamAction"
+			method="getViewExamWords" />
+			
+		<!--查询体检人员在该科室下是否有体检项目 1583-->
+		<action name="queryDeptCharingItemMsg" class="com.hjw.wst.action.ViewExamAction" method="queryDeptCharingItemMsg" />
+			
+		<!--根据条码号反查人员信息  720-->
+		<action name="getExamInfoByBarCode" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="getExamInfoByBarCode" />
+			
+		<!--检验科室首页查询人员信息列表 722-->
+		<action name="getExamResultDetailList" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getExamResultDetailList" />
+		
+		<!--查询检验科收费项目也样本 列表 724-->
+		<action name="getExamResultCharingItem" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getExamResultCharingItem" />
+			
+		<!--查询检验科收费项目中的检查项目与检查结果 725-->
+		<action name="getExamResultExaminitionItem" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getExamResultExaminitionItem" />
+		
+		<!--保存检验结果 726-->
+		<action name="saveExamResultDetail" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="saveExamResultDetail" />
+			
+		<!--撤销HIS申请  727-->
+		<action name="delHisApplication" class="com.hjw.wst.action.CollectFeesAction"
+			method="delHisApplication" />
+			
+		<!--早餐科室搜索人员信息 729-->
+		<action name="getBreakFastIndexList" class="com.hjw.wst.action.BreakfastAction"
+			method="getBreakFastIndexList" />
+		
+		<!--按体检号查询已检项目信息  731-->
+		<action name="getRemoveResultItemList" class="com.hjw.wst.action.RemoveResultAction"
+			method="getRemoveResultItemList" />
+		
+		<!--按项目清除结果信息 732-->
+		<action name="saveRemoveResult" class="com.hjw.wst.action.RemoveResultAction"
+			method="saveRemoveResult" />
+			
+		<!--普通科室项目匹配科室逻辑  733-->
+		<action name="getMateDepLogic" class="com.hjw.wst.action.DepInspectAction"
+			method="getMateDepLogic" />
+			
+		<!--查询科室检查医生 734-->
+		<action name="getDepuser" class="com.hjw.wst.action.DepInspectAction"
+			method="getDepuser" />
+			
+		<!--获取上一次细项检查结果 735-->
+		<action name="getOldCommonDetailResult" class="com.hjw.wst.action.DepInspectAction"
+			method="getOldCommonDetailResult" />
+			
+		<!--删除卡信息  736-->
+		<action name="deleteCardInfo" class="com.hjw.wst.action.CardInfoAction"
+			method="deleteCardInfo" />
+			
+		<!--查询删除的卡信息列表 737-->
+		<action name="getDeleteCardList" class="com.hjw.wst.action.CardInfoAction"
+			method="getDeleteCardList" />
+			
+		<!--根据条件查询系统日志信息 741-->
+		<action name="getSyslogList" class="com.hjw.wst.action.SyslogAction"
+			method="getSyslogList" />
+			
+		<!--获取操作人员列表  742-->
+		<action name="getSysLogUserList" class="com.hjw.wst.action.SyslogAction"
+			method="getSysLogUserList" />
+			
+		<!--获取操作功能列表 743-->
+		<action name="getSysLogXtgnList" class="com.hjw.wst.action.SyslogAction"
+			method="getSysLogXtgnList" />
+			
+		<!--查询系统日志备份文件列表 745-->
+		<action name="getSyslogFileList" class="com.hjw.wst.action.SyslogAction"
+			method="getSyslogFileList" />
+			
+		<!--通过条件备份生成日志文件 746-->
+		<action name="backupSyslog" class="com.hjw.wst.action.SyslogAction"
+			method="backupSyslog" />
+		
+		<!--删除系统日志备份文件 748-->
+		<action name="deleteSyslogFile" class="com.hjw.wst.action.SyslogAction"
+			method="deleteSyslogFile" />
+		
+		<!--1703  审计查询体检信息列表-->
+		<action name="getExamInfoAuditListLog" class="com.hjw.wst.action.SyslogAction" method="getExamInfoAuditListLog"/>
+		
+		<!--1705 审计查看科室检查次数日志树-->
+		<action name="getExamDepResultCountLog" class="com.hjw.wst.action.SyslogAction" method="getExamDepResultCountLog"/>
+		
+		<!--1706 审计查询科室检查历次结果日志列表-->
+		<action name="getCommonExamDetailListLog" class="com.hjw.wst.action.SyslogAction" method="getCommonExamDetailListLog"/>
+		
+		<!--1708 审计查询总检审核复审次数日志树-->
+		<action name="getExamSummaryCountLog" class="com.hjw.wst.action.SyslogAction" method="getExamSummaryCountLog"/>
+		
+		<!--1709 审计查询总检审核复审阳性发现日志列表-->
+		<action name="getExamExamDiseaseListLog" class="com.hjw.wst.action.SyslogAction" method="getExamExamDiseaseListLog"/>
+			
+		<!--根据条件查询体检信息列表 750-->
+		<action name="getDirectorExamInfoList" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDirectorExamInfoList" />
+			
+		<!--根据体检ID查询体检项目 751-->
+		<action name="getDirectorItemStatus" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDirectorItemStatus" />
+			
+		<!--查询体检套餐列表  754-->
+		<action name="getDirectorExamSetList" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDirectorExamSetList" />
+			
+		<!--查询科室列表 755-->
+		<action name="getDirectorDepList" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDirectorDepList" />
+		
+		<!--查询收费项目列表   756-->
+		<action name="getDirectorItemList" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDirectorItemList" />
+			
+		<!--根据条件查询体检项目信息  757-->
+		<action name="getDirectorExamItemList" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDirectorExamItemList" />
+			
+		<!--查询每日体检者列表 759-->
+		<action name="getDilyExamInfoList" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDilyExamInfoList" />
+			
+			<!--根据体检ID查询打印流水 1364-->
+		<action name="printflowlist" class="com.hjw.wst.action.DirectorDecisionAction" method="printflowlist" />
+		
+			<!-- 短信模板列表 1401-->
+		<action name="queryCrmSmsBaseTemplate" class="com.hjw.wst.action.CrmSmsBaseTemplateAction" method="queryCrmSmsBaseTemplate"/>
+		<!-- 删除短信模板 1402-->
+		<action name="deleteCrmSmsBaseTemplate" class="com.hjw.wst.action.CrmSmsBaseTemplateAction" method="deleteCrmSmsBaseTemplate"/>
+		<!-- 保存短信模板 1403-->
+		<action name="saveCrmSmsBaseTemplate" class="com.hjw.wst.action.CrmSmsBaseTemplateAction" method="saveCrmSmsBaseTemplate"/>
+		<!-- 短信记录列表 1407-->
+		<action name="queryCrmSmsSendList" class="com.hjw.wst.action.CrmSmsBaseTemplateAction" method="queryCrmSmsSendList"/>
+		<!-- 获取人员列表 1409-->
+		<action name="getUser" class="com.hjw.wst.action.CrmSmsBaseTemplateAction" method="getUser"/>
+		<!-- 发送短信 1410-->
+		<action name="saveCrmSmsSend" class="com.hjw.wst.action.CrmSmsBaseTemplateAction" method="saveCrmSmsSend"/>
+		
+		<!-- 手工发送短信 -->
+		<action name="handsmssend" class="com.hjw.wst.action.CrmSmsBaseTemplateAction" method="handsmssend"/>
+		<!-- 手工发送短信 -->
+		<action name="saveCrmSmsSendCHONGFA" class="com.hjw.wst.action.CrmSmsBaseTemplateAction" method="saveCrmSmsSendCHONGFA"/>
+		
+		
+		
+		<!--1175 根据条件查询体检信息列表-->
+		<action name="getExamComprehenList" class="com.hjw.wst.action.DirectorDecisionAction" method="getExamComprehenList"/>
+		
+		 <!--1176 查看pacs检查结果信息-->
+		<action name="getPacsExamResultList" class="com.hjw.wst.action.DirectorDecisionAction" method="getPacsExamResultList"/> 
+		 <!--1177查看lis检查结果信息-->
+		<action name="getLisItemList" class="com.hjw.wst.action.DirectorDecisionAction" method="getLisItemList"/> 
+			
+		<!--保存用户发票号段信息 761-->
+		<action name="saveUserInvoice" class="com.hjw.wst.action.CollectFeesAction"
+			method="saveUserInvoice" />
+			
+		<!--查询可以总检的人员列表 762-->
+		<action name="getMayExamSummaryList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getMayExamSummaryList" />
+			
+		<!--个人发票作废  763-->
+		<action name="invalidInvoiceGe" class="com.hjw.wst.action.CollectFeesAction"
+			method="invalidInvoiceGe" />
+			
+		<!--更新导检单打印状态 764-->
+		<action name="updateGuidePrintStatus" class="com.hjw.wst.action.CustomerInfoAction"
+			method="updateGuidePrintStatus" />
+		
+		<!--更新条码打印状态 765-->
+		<action name="updateBarcodePrintStatus" class="com.hjw.wst.action.CustomerInfoAction"
+			method="updateBarcodePrintStatus" />
+			
+		<!--个人撤销收费 766-->
+		<action name="chexiaoshoufei" class="com.hjw.wst.action.CollectFeesAction"
+			method="chexiaoshoufei" />
+			
+		<!--打印单个条码,显示需要打印的项目  767-->
+		<action name="getAllPrintItemByExamids" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getAllPrintItemByExamids" />
+			
+		<!--根据体检信息ID查询本科室的收费项目 769-->
+		<action name="getInfoItemByIdAndStatus" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getInfoItemByIdAndStatus" />
+			
+		<!-- 获取部门树状结构772 -->
+		<action name="getDeptList" class="com.hjw.wst.action.Examinatioin_centerAction" method="getDeptList" />
+		
+		<!-- 获取体检部门树状列表773 -->
+		<action name="getExaminatioin_center" class="com.hjw.wst.action.Examinatioin_centerAction" method="getExaminatioin_center" />
+		
+		<!-- 获取体检部门树状列表774 -->
+		<action name="getExaminatioin_centerList" class="com.hjw.wst.action.Examinatioin_centerAction" method="getExaminatioin_centerList" />
+		
+		<!-- 保存体检部门775 -->
+		<action name="saveExamDept" class="com.hjw.wst.action.Examinatioin_centerAction" method="saveExamDept" />
+		
+		<!-- 分配用户到体检部门776 -->
+		<action name="saveUserExamDept" class="com.hjw.wst.action.UserManagerAction" method="saveUserExamDept"/>
+		
+		<!-- 获取VIP体检者提示信息 777 -->
+		<action name="getCustomerVipPrompt" class="com.hjw.wst.action.DepInspectAction" method="getCustomerVipPrompt"/>
+		
+		<!-- 根据建议名称获取专科建议内容778  -->
+		<action name="getDepSuggestionList" class="com.hjw.wst.action.DepInspectAction" method="getDepSuggestionList"/>
+		
+		<!-- 780 获取体检综述（健康指导建议）信息列表-->
+		<action name="getExamSummaryGuidanceLibList" class="com.hjw.wst.action.ExamSummaryGuidanceLibAction" method="getExamSummaryGuidanceLibList"/>
+		
+		<!-- 782保存体检综述（健康指导建议）信息-->
+		<action name="saveExamSummaryGuidanceLib" class="com.hjw.wst.action.ExamSummaryGuidanceLibAction" method="saveExamSummaryGuidanceLib"/>
+		
+		<!-- 783 删除体检综述（健康指导建议）信息-->
+		<action name="delExamSummaryGuidanceLib" class="com.hjw.wst.action.ExamSummaryGuidanceLibAction" method="delExamSummaryGuidanceLib"/>
+		
+		<!-- 786 读取LIS检验结果-->
+		<action name="getExamResultDetailReader" class="com.hjw.wst.action.ExamResultDetailAction" method="getExamResultDetailReader"/>
+		
+		<!-- 788 获取敏感词列表信息-->
+		<action name="getSensitiveWordsLibList" class="com.hjw.wst.action.SensitiveWordsLibAction" method="getSensitiveWordsLibList"/>
+		
+		<!-- 790 保存敏感词信息-->
+		<action name="editSensitiveWordsLib" class="com.hjw.wst.action.SensitiveWordsLibAction" method="editSensitiveWordsLib"/>
+		
+		<!-- 791 删除敏感词信息-->
+		<action name="delSensitiveWordsLib" class="com.hjw.wst.action.SensitiveWordsLibAction" method="delSensitiveWordsLib"/>
+		
+		<!-- 792 校验性别敏感词-->
+		<action name="checkSensitiveWordsSex" class="com.hjw.wst.action.SensitiveWordsLibAction" method="checkSensitiveWordsSex"/>
+		
+		<!-- 793 校验特殊词敏感词-->
+		<action name="checkSensitiveWord" class="com.hjw.wst.action.SensitiveWordsLibAction" method="checkSensitiveWord"/>
+		
+		<!--1193 普通科室根据体检号查询是否存在项目，或者未检查-->
+		<action name="checkDepExaminfoItem" class="com.hjw.wst.action.DepInspectAction" method="checkDepExaminfoItem"/>
+		
+		<!-- 按条件查询团体结算信息 795-->
+		<action name="getTeamSettlementStatisticsList" class="com.hjw.wst.action.DirectorDecisionAction" method="getTeamSettlementStatisticsList"/>
+		
+		<!-- 按批次ID查询该批次下的体检者信息 796-->
+		<action name="getTeamSettlementExamList" class="com.hjw.wst.action.DirectorDecisionAction" method="getTeamSettlementExamList"/>
+		
+		<!-- 强制合并样本 797-->
+		<action name="mergeSampleExamDetail" class="com.hjw.wst.action.SamplingDepartmentAction" method="mergeSampleExamDetail"/>
+		
+		<!-- 验证获取用户的打印资源 798-->
+		<action name="verifyUserPrintBarcode" class="com.hjw.wst.action.SamplingDepartmentAction" method="verifyUserPrintBarcode"/>	
+		
+		<!-- 根据结算单号查询附加费用明细 1100-->
+		<action name="getteamaccountaddlist" class="com.hjw.wst.action.StatementsAction" method="getteamaccountaddlist"/>
+			
+		<!--修改保存团体附加费用 1102-->
+		<action name="saveteamaccountadd" class="com.hjw.wst.action.StatementsAction" method="saveteamaccountadd"/>
+		
+		<!--1104 获取发票号段列表-->
+		<action name="getUserInvoiceList" class="com.hjw.wst.action.UserInvoiceAction" method="getUserInvoiceList"/>
+		
+		<!--1106 保存发票号段信息-->
+		<action name="saveUserInvoiceInfo" class="com.hjw.wst.action.UserInvoiceAction" method="saveUserInvoiceInfo"/>
+		
+		<!--1107 保存发票类型的启用-->
+		<action name="saveUserInvoiceClass" class="com.hjw.wst.action.UserInvoiceAction" method="saveUserInvoiceClass"/>
+		
+		<!--1108 保存设置发票号段共用或发票号段按人使用-->
+		<action name="saveUserInvoiceUseAll" class="com.hjw.wst.action.UserInvoiceAction" method="saveUserInvoiceUseAll"/>
+		
+		<!--1109  通过用户id和发票类型查询已维护发票号段信息-->
+		<action name="getUserInvoiceByUserIdAndClass" class="com.hjw.wst.action.UserInvoiceAction" method="getUserInvoiceByUserIdAndClass"/>
+		
+		<!--1110 查询收费员列表-->
+		<action name="getCashierList" class="com.hjw.wst.action.UserInvoiceAction" method="getCashierList"/>
+		
+		<!--1112 查询收费员个人收费明细-->
+		<action name="getCashierDailyAcclist" class="com.hjw.wst.action.CashierDailyAccAction" method="getCashierDailyAcclist"/>
+		
+		<!--1113 查询收费员当天使用的收费方式-->
+		<action name="getCashierChargingWay" class="com.hjw.wst.action.CashierDailyAccAction" method="getCashierChargingWay"/>
+		
+		<!--1114 查询收费员当天开票信息-->
+		<action name="getCashierInvoiceList" class="com.hjw.wst.action.CashierDailyAccAction" method="getCashierInvoiceList"/>
+		
+		<!--1115 收费员日结保存信息-->
+		<action name="saveCashierDailyacc" class="com.hjw.wst.action.CashierDailyAccAction" method="saveCashierDailyacc"/>
+		
+		<!--1116 查询收费员团体未日结明细列表-->
+		<action name="getCashierDailyListTu" class="com.hjw.wst.action.CashierDailyAccAction" method="getCashierDailyListTu"/>
+		
+		<!--1117 根据日结日期查询收费员日结信息-->
+		<action name="getCashierDailyAcc" class="com.hjw.wst.action.CashierDailyAccAction" method="getCashierDailyAcc"/>
+		
+		<!--1118 根据日结号查询收费方式明细列表-->
+		<action name="getCashierDailyAccPayway" class="com.hjw.wst.action.CashierDailyAccAction" method="getCashierDailyAccPayway"/>
+		
+		<!--1119 根据日结号查询发票信息列表-->
+		<action name="getCashierDailyAccInvoice" class="com.hjw.wst.action.CashierDailyAccAction" method="getCashierDailyAccInvoice"/>
+		
+		<!--1120 根据日结号查询收费明细列表-->
+		<action name="getCashierDailyAccDetail" class="com.hjw.wst.action.CashierDailyAccAction" method="getCashierDailyAccDetail"/>
+		
+		<!--1122 查询收费员未财务日结信息列表-->
+		<action name="getCashierDailyAccAll" class="com.hjw.wst.action.FinanceDepAccAction" method="getCashierDailyAccAll"/>
+		
+		<!--1123 查询所有未财务日结的收费员日结总金额-->
+		<action name="getCashierDailyAccSum" class="com.hjw.wst.action.FinanceDepAccAction" method="getCashierDailyAccSum"/>
+		
+		<!--1124 保存财务部门日结信息-->
+		<action name="saveFinanceDepAcc" class="com.hjw.wst.action.FinanceDepAccAction" method="saveFinanceDepAcc"/>
+		
+		<!--1125 查询财务部门已日结信息列表-->
+		<action name="getFinanceDepAccList" class="com.hjw.wst.action.FinanceDepAccAction" method="getFinanceDepAccList"/>
+		
+		<!--1126 根据财务部门日结号查询收费方式信息列表-->
+		<action name="getFinanceDepAccPaywayList" class="com.hjw.wst.action.FinanceDepAccAction" method="getFinanceDepAccPaywayList"/>
+		
+		<!--1127 根据财务部门日结号查询财务部门日结收费员日结信息列表-->
+		<action name="getFinanceVsCashierDailyAccList" class="com.hjw.wst.action.FinanceDepAccAction" method="getFinanceVsCashierDailyAccList"/>
+		
+		<!--1128 查询收费员日结发票信息列表-->
+		<action name="getFinanceVsCashierInvoiceList" class="com.hjw.wst.action.FinanceDepAccAction" method="getFinanceVsCashierInvoiceList"/>
+		
+		<!--1130 查询实时收费员个人收费明细数据-->
+		<action name="getChargingSummarySingleList" class="com.hjw.wst.action.FinanceDepAccAction" method="getChargingSummarySingleList"/>
+		
+		<!--1131 查询实时收费员团体收费明细数据-->
+		<action name="getChargingSummaryGroupList" class="com.hjw.wst.action.FinanceDepAccAction" method="getChargingSummaryGroupList"/>
+		
+		<!--1132 查询实时收费员发票信息列表-->
+		<action name="getChargingInvoiceList" class="com.hjw.wst.action.FinanceDepAccAction" method="getChargingInvoiceList"/>
+		
+		<!--1133 查询实时收费员收费金额汇总信息-->
+		<action name="getChargingSummarySum" class="com.hjw.wst.action.FinanceDepAccAction" method="getChargingSummarySum"/>
+		
+		<!--1134 拆分样本功能-->
+		<action name="splitUpSampleExamDetail" class="com.hjw.wst.action.SamplingDepartmentAction" method="splitUpSampleExamDetail"/>
+		
+		<!--1136获取所选团体人员检验科项目列表(并集)-->
+		<action name="getTeamSampleListItem" class="com.hjw.wst.action.SamplingDepartmentAction" method="getTeamSampleListItem"/>
+		
+		<!--1137保存团体人员管理批量合并样本数据-->
+		<action name="saveTeamSampleListItem" class="com.hjw.wst.action.SamplingDepartmentAction" method="saveTeamSampleListItem"/>
+		
+		<!--1139 获取时间段内财务日结汇总-->
+		<action name="getMonthlyStatementSum" class="com.hjw.wst.action.FinanceDepAccAction" method="getMonthlyStatementSum"/>
+		
+		<!--1141 获取本科室需采用和打印条码的项目-->
+		<action name="getDepPrintSanpleItem" class="com.hjw.wst.action.SamplingDepartmentAction" method="getDepPrintSanpleItem"/>
+		
+		<!--1142 科室采样保存-->
+		<action name="saveDepSampleItem" class="com.hjw.wst.action.SamplingDepartmentAction" method="saveDepSampleItem"/>
+		
+		<!--保存总检阳性发现列表-->
+		<action name="saveExamDiseaseList" class="com.hjw.wst.action.ExamSummaryAction" method="saveExamDiseaseList"/>
+		
+		<!--1173 审核保存、终审保存阳性发现列表-->
+		<action name="saveExamInfoDiseaseList" class="com.hjw.wst.action.ExamSummaryAction" method="saveExamInfoDiseaseList"/>
+		
+		<!--查询问诊症状和既往史列表-->
+		<action name="getSymptomsAndHistoryList" class="com.hjw.wst.action.ExamSummaryAction" method="getSymptomsAndHistoryList"/>
+		
+		<!--1189 保存设定报告等级-->
+		<action name="saveExamSummaryReportClass" class="com.hjw.wst.action.ExamSummaryAction" method="saveExamSummaryReportClass"/>
+		
+		<!--1190 获取报告等级-->
+		<action name="getExamSummaryReportClass" class="com.hjw.wst.action.ExamSummaryAction" method="getExamSummaryReportClass"/>
+		
+		<!--保存选择报告类型-->
+		<action name="saveExamInfoReportType" class="com.hjw.wst.action.ExamInfoAction" method="saveExamInfoReportType"/>
+		
+
+		<!--1198 根据体检号查询需要收费的信息-->
+		<action name="getMergeChargeByExamNum" class="com.hjw.wst.action.CollectFeesAction" method="getMergeChargeByExamNum"/>
+		
+		<!--1199 保存合并收费信息-->
+		<action name="saveMergeChargeInfo" class="com.hjw.wst.action.CollectFeesAction" method="saveMergeChargeInfo"/>
+		<!-- 获取HIS收费信息结果 -->
+		<action name="getHisFeesResult" class="com.hjw.wst.action.RegisterDeskAction" method="getHisFeesResult"/>
+		
+		<!-- HIS数据字典同步 -->
+		<action name="hisDataSynchronizing" class="com.hjw.wst.action.ChargingItemAction" method="hisDataSynchronizing"/>
+		
+		<!-- 报告邮寄/自取修改备注 -->
+		<action name="updateReportRemarke" class="com.hjw.wst.action.ReportManagerAction" method="updateReportRemarke"/>
+		
+		<!-- 1730 单项疾病逻辑列表 -->
+		<action name="getDiseaseLogicSingleList" class="com.hjw.wst.action.NewDiseaseLogicAction" method="getDiseaseLogicSingleList"/>
+		
+		<!-- 1732 保存单项阳性逻辑信息-->
+		<action name="saveDiseaseLogicSingle" class="com.hjw.wst.action.NewDiseaseLogicAction" method="saveDiseaseLogicSingle"/>
+		
+		<!-- 1733 根据ID查询单项阳性逻辑信息-->
+		<action name="getDiseaseLogicSingleById" class="com.hjw.wst.action.NewDiseaseLogicAction" method="getDiseaseLogicSingleById"/>
+		
+		<!-- 1734 单项阳性逻辑启用或停用-->
+		<action name="diseaseLogicSingleStartOrEnd" class="com.hjw.wst.action.NewDiseaseLogicAction" method="diseaseLogicSingleStartOrEnd"/>
+		
+		<!-- 1735  单项阳性逻辑批量删除-->
+		<action name="delDiseaseLogicSingle" class="com.hjw.wst.action.NewDiseaseLogicAction" method="delDiseaseLogicSingle"/>
+		
+		<!-- 1737 获取复合逻辑信息列表-->
+		<action name="getDiseaseLogicCompositeList" class="com.hjw.wst.action.NewDiseaseLogicAction" method="getDiseaseLogicCompositeList"/>
+		
+		<!-- 1739 保存复合疾病逻辑信息-->
+		<action name="saveDiseaseLogicComposite" class="com.hjw.wst.action.NewDiseaseLogicAction" method="saveDiseaseLogicComposite"/>
+		<!-- 1740 查询单个复合疾病逻辑信息-->
+		<action name="getDiseaseLogicCompositeById" class="com.hjw.wst.action.NewDiseaseLogicAction" method="getDiseaseLogicCompositeById"/>
+		<!-- 1741 复合疾病逻辑启用和停用-->
+		<action name="diseaseLogicCompositeStartOrEnd" class="com.hjw.wst.action.NewDiseaseLogicAction" method="diseaseLogicCompositeStartOrEnd"/>
+		<!-- 1742 批量删除复合疾病逻辑信息-->
+		<action name="delDiseaseLogicComposite" class="com.hjw.wst.action.NewDiseaseLogicAction" method="delDiseaseLogicComposite"/>
+		<!-- 1745获取科室类型为普通科室或影像科室的科室列表-->
+		<action name="getDiseaseLogicSingleDepList" class="com.hjw.wst.action.NewDiseaseLogicAction" method="getDiseaseLogicSingleDepList"/>
+		
+		<!-- 自助机自助缴费服务-->
+		<action name="selfServiceMachineFees" class="com.hjw.wst.action.SelfServiceMachineAction" method="selfServiceMachineFees"/>
+		
+		<!--1747根据条件查询未销售卡列表-->
+		<action name="getNotSaleCardInfoList" class="com.hjw.wst.action.CardSaleAction" method="getNotSaleCardInfoList"/>
+		
+		<!--1748保存售卡或预售卡信息-->
+		<action name="saveCardSaleInfo" class="com.hjw.wst.action.CardSaleAction" method="saveCardSaleInfo"/>
+		
+		<!-- 保存预售卡信息 -->
+		<action name="saveAdvCardSaleInfo" class="com.hjw.wst.action.CardSaleAction" method="saveAdvCardSaleInfo"/>
+		
+		<!--1749预售信息确认售卡-->
+		<action name="saveAdvanceCardSale" class="com.hjw.wst.action.CardSaleAction" method="saveAdvanceCardSale"/>
+		
+		<!--1750获取已售卡或预售卡信息列表-->
+		<action name="getCardSaleList" class="com.hjw.wst.action.CardSaleAction" method="getCardSaleList"/>
+		
+		<!--1751 根据售卡流水号查询卡明细列表-->
+		<action name="getCardSaleDetailList" class="com.hjw.wst.action.CardSaleAction" method="getCardSaleDetailList"/>
+		
+		<!--1752售卡信息补开发票-->
+		<action name="saveCardSaleInvoice" class="com.hjw.wst.action.CardSaleAction" method="saveCardSaleInvoice"/>
+		
+		<!--1753售卡信息作废发票-->
+		<action name="invalidCardSaleInvoice" class="com.hjw.wst.action.CardSaleAction" method="invalidCardSaleInvoice"/>
+		
+		
+		<!--1754报告取消发送审核-->
+		<action name="flowexambackchk" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexambackchk"/>
+		
+		<!--1755获取已驳回总检列表-->
+		<action name="getAlreadyRejectList" class="com.hjw.wst.action.ExamSummaryAction" method="getAlreadyRejectList"/>
+		
+		<!--1756预览组工作量查询-->
+		<action name="getFlowExamPreviewCount" class="com.hjw.wst.action.ExamflowManagerAction" method="getFlowExamPreviewCount"/>
+		
+		<!--1758查询未获取人员列表-->
+		<action name="getExamSummaryDistributionList" class="com.hjw.wst.action.ExamSummaryAction" method="getExamSummaryDistributionList"/>
+		
+		<!--1759保存主动分配信息-->
+		<action name="saveExamSummaryDistribution" class="com.hjw.wst.action.ExamSummaryAction" method="saveExamSummaryDistribution"/>
+		
+		<!--1760按主检医生保存主动分配信息-->
+		<action name="saveExamSummaryDistributionByDoctor" class="com.hjw.wst.action.ExamSummaryAction" method="saveExamSummaryDistributionByDoctor"/>
+		
+		<!--一键上传全部记录 -->
+		<action name="uploadFlowAll" class="com.hjw.wst.action.ExamflowManagerAction" method="uploadFlowAll"/>
+		
+		<!--1761 修改团体个人体检类型-->
+		<action name="changeExaminfoExamType" class="com.hjw.wst.action.RegisterDeskAction" method="changeExaminfoExamType" />
+		
+		<!--1763 获取体检车检查数据信息-->
+		<action name="getDataMigrationList" class="com.hjw.wst.action.DataMigrationAction" method="getDataMigrationList" />
+		
+		<!--1764直连方式数据导入导出-->
+		<action name="importDataMigrationDirectlyConnected" class="com.hjw.wst.action.DataMigrationAction" method="importDataMigrationDirectlyConnected" />
+		
+		<!--1766 获取数据库/ftp 配置信息-->
+		<action name="getDataBaseConfigList" class="com.hjw.wst.action.DataMigrationAction" method="getDataBaseConfigList" />
+		
+		<!--1768 保存数据库/ftp配置信息-->
+		<action name="saveDataBaseConfig" class="com.hjw.wst.action.DataMigrationAction" method="saveDataBaseConfig" />
+		
+		<!--1769 导出数据到数据库文件-->
+		<action name="exportDataMigrationDb" class="com.hjw.wst.action.DataMigrationAction" method="exportDataMigrationDb" />
+		
+		<!--1770 导入上传数据库文件-->
+		<action name="importDataMigrationDb" class="com.hjw.wst.action.DataMigrationAction" method="importDataMigrationDb" />
+		
+		<!--1755 根据查询条件查询科研数据-->
+		<action name="getResearchDataList" class="com.hjw.wst.action.DataAnalysisAction" method="getResearchDataList"/>
+		
+		<!--1756 查询收费项目列表-->
+		<action name="getChargingItemListByq" class="com.hjw.wst.action.DataAnalysisAction" method="getChargingItemListByq"/>
+		
+		<!--1757 查询检查项目列表-->
+		<action name="getExaminationItemListByq" class="com.hjw.wst.action.DataAnalysisAction" method="getExaminationItemListByq"/>
+		
+		<!-- 217 显示方案列表 -->
+		<action name="batchlistshow" class="com.hjw.wst.action.BatchAction"
+			method="batchlistshow" />
+
+		<!-- 219 编辑方案 -->
+		<action name="batcheditdo" class="com.hjw.wst.action.BatchAction"
+			method="batcheditdo" />
+
+		<!-- 220 设置方案是否有效 -->
+		<action name="batchdelete" class="com.hjw.wst.action.BatchAction"
+			method="batchdelete" />
+
+		<!-- 222 显示分组 -->
+		<action name="grouplistshow" class="com.hjw.wst.action.BatchAction"
+			method="grouplistshow" />
+
+		<!-- 225 分组信息保存 -->
+		<action name="groupeditdo" class="com.hjw.wst.action.BatchAction"
+			method="groupeditdo" />
+
+		<!-- 226 分组信息激活和锁定 -->
+		<action name="groupdelete" class="com.hjw.wst.action.BatchAction"
+			method="groupdelete" />
+
+		<!-- 228 显示分组对应套餐 -->
+		<action name="groupsetlistshow" class="com.hjw.wst.action.BatchAction"
+			method="groupsetlistshow" />
+
+		<!-- 229 显示分组对应体检项目 -->
+		<action name="groupchargitemlistshow" class="com.hjw.wst.action.BatchAction"
+			method="groupchargitemlistshow" />
+
+      <!-- 249 姓名定位人员列表显示 -->
+       <action name="impuserusernamedwshow" class="com.hjw.wst.action.CustomerInfoAction" method="impuserusernamedwshow"/>
+       
+       <!-- 250 姓名定位人员保存 -->
+       <action name="impuserusernamedwdo" class="com.hjw.wst.action.CustomerInfoAction" method="impuserusernamedwdo"/>
+       
+       
+       <!-- 252 执行部分导入正式库 -->
+       <action name="impuserToExaminfodo" class="com.hjw.wst.action.CustomerInfoAction" method="impuserToExaminfodo" />
+       
+       <!-- 251 执行批量导入正式库 -->
+       <action name="impuserAllToExaminfodo" class="com.hjw.wst.action.CustomerInfoAction" method="impuserAllToExaminfodo" />
+       
+       <!-- 254 单位获取分组带空行的-->
+        <action name="getCompanForBatch2" class="com.hjw.wst.action.BatchAction" method="getCompanForBatch2"/>
+      
+      
+      <!-- 255 单位获取部门带空行的-->
+        <action name="getCompanForDept" class="com.hjw.wst.action.CustomerInfoAction" method="getCompanForDept"/>
+		<!-- 230 显示所有有效套餐 -->
+		<action name="satlistshow" class="com.hjw.wst.action.BatchAction"
+			method="satlistshow" />
+
+		<!-- 231 id对应的套餐 -->
+		<action name="getExamOneShow" class="com.hjw.wst.action.BatchAction"
+			method="getExamOneShow" />
+			
+		<!-- 修改分组状态 -->
+		<action name="updateGroupStatusById" class="com.hjw.wst.action.BatchAction"
+			method="updateGroupStatusById" />
+             
+     <!-- 260 批量删除用户-->
+       <action name="deluserrow" class="com.hjw.wst.action.CustomerInfoAction" method="deluserrow"/>
+    
+            <!-- 执行新增体检人员信息 262 -->
+       <action name="addcustomerdo" class="com.hjw.wst.action.CustomerInfoAction" method="addcustomerdo"/>
+              
+       <!-- 执行新增体检人员信息 411 -->
+       <action name="editcustomerdo" class="com.hjw.wst.action.CustomerInfoAction" method="editcustomerdo"/>
+         <!-- 执行批量申请 264 -->
+       <action name="doSendApplyChargeItem" class="com.hjw.wst.action.CustomerInfoAction" method="doSendApplyChargeItem"/>
+       
+       
+        <!-- 执行批量签到 265 -->
+       <action name="batchSigndo" class="com.hjw.wst.action.CustomerInfoAction" method="batchSigndo"/>
+      
+      <!-- 翰思获取导检单打印 不在权限控制 -->
+       <action name="getDjDpdf" class="com.hjw.wst.action.CustomerInfoAction" method="getDjDpdf"/>
+       
+       <!-- 保存体检时间 269 -->
+       <action name="setcusttimedo" class="com.hjw.wst.action.CustomerInfoAction" method="setcusttimedo"/>       
+       
+       <!-- 删除体检时间 270 -->
+       <action name="delcusttimedo" class="com.hjw.wst.action.CustomerInfoAction" method="delcusttimedo"/>
+       
+       <!-- 统计体检人员时间设置情况 271 -->
+       <action name="countExamInfotime" class="com.hjw.wst.action.CustomerInfoAction" method="countExamInfotime"/>
+      
+      <!-- 执行合同审核 274 -->
+       <action name="contractcheckeditdo" class="com.hjw.wst.action.BatchAction" method="contractcheckeditdo"/>
+
+		<!-- 232 获取收费项目 -->
+		<action name="changitemlist" class="com.hjw.wst.action.BatchAction"
+			method="changitemlist" />
+
+		<!-- 233 通过套餐获取收费项目 -->
+		<action name="setforchangitemlist" class="com.hjw.wst.action.BatchAction"
+			method="setforchangitemlist" />
+
+		<!-- 235 获取人员计划信息 -->
+		<action name="getbatchproList" class="com.hjw.wst.action.BatchAction"
+			method="getbatchproList" />
+
+		<!-- 237保存人员分组 -->
+		<action name="batchproplaneditdo" class="com.hjw.wst.action.BatchAction"
+			method="batchproplaneditdo" />
+
+		<!-- 238 方案单独查询和审核 -->
+		<action name="batchCheckManager" class="com.hjw.wst.action.BatchAction"
+			method="batchCheckManager" />
+			
+		<!-- 239 获取批次信息 -->
+		<action name="getBatchById" class="com.hjw.wst.action.BatchAction"
+			method="getBatchById" />
+
+		<!-- 240 执行方案审核 -->
+		<action name="batcheckeditdo" class="com.hjw.wst.action.BatchAction"
+			method="batcheckeditdo" />
+
+		<!-- 241 显示合同列表 -->
+		<action name="contractlistshow" class="com.hjw.wst.action.BatchAction"
+			method="contractlistshow" />
+
+
+		<!-- 243 显示导入的数据 -->
+		<action name="impusershowlist" class="com.hjw.wst.action.CustomerInfoAction"
+			method="impusershowlist" />
+
+		<!-- 244 通过单位获取所有批次 -->
+		<action name="getCompanForBatch" class="com.hjw.wst.action.BatchAction"
+			method="getCompanForBatch" />
+          
+      <!-- 人员套餐信息 296 -->
+      <action name="exam_tclistshow" class="com.hjw.wst.action.RegisterDeskAction" method="exam_tclistshow"/>
+		<!-- 244 通过单位获取所有批次 -->
+		<action name="getCompanForBatch" class="com.hjw.wst.action.BatchAction"
+			method="getCompanForBatch" />
+
+		<!-- 246 修改导入的数据 -->
+		<action name="saveCustomerTmplist" class="com.hjw.wst.action.CustomerInfoAction"
+			method="saveCustomerTmplist" />
+
+
+		<!-- 247 修改导入的数据 -->
+		<action name="delCustomerTmplist" class="com.hjw.wst.action.CustomerInfoAction"
+			method="delCustomerTmplist" />
+
+		<!-- 249 姓名定位人员列表显示 -->
+		<action name="impuserusernamedwshow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="impuserusernamedwshow" />
+
+		<!-- 250 姓名定位人员保存 -->
+		<action name="impuserusernamedwdo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="impuserusernamedwdo" />
+
+
+		<!-- 252 执行部分导入正式库 -->
+		<action name="impuserToExaminfodo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="impuserToExaminfodo" />
+
+		<!-- 254 单位获取分组带空行的 -->
+		<action name="getCompanForBatch2" class="com.hjw.wst.action.BatchAction"
+			method="getCompanForBatch2" />
+
+
+		<!-- 255 单位获取部门带空行的 -->
+		<action name="getCompanForDept" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getCompanForDept" />
+
+		<!-- 256批次得到分组带空行 -->
+		<action name="getBatchForGroup" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getBatchForGroup" />
+
+
+		<!-- 257 人员综合信息显示 -->
+		<action name="getExamInfoUserList" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getExamInfoUserList" />
+
+		<!-- 258 执行自动分组 -->
+		<action name="doAllUserGroupuser" class="com.hjw.wst.action.CustomerInfoAction"
+			method="doAllUserGroupuser" />
+
+		<!-- 259 强制分组 -->
+		<action name="doUserGroupuser" class="com.hjw.wst.action.CustomerInfoAction"
+			method="doUserGroupuser" />
+
+		<!-- 260 批量删除用户 -->
+		<action name="deluserrow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="deluserrow" />
+
+		<!-- 执行新增体检人员信息 262 -->
+		<action name="addcustomerdo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="addcustomerdo" />
+
+		<!-- 执行批量申请 264 -->
+		<action name="doSendApplyChargeItem" class="com.hjw.wst.action.CustomerInfoAction"
+			method="doSendApplyChargeItem" />
+
+
+		<!-- 执行批量签到 265 -->
+		<action name="batchSigndo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="batchSigndo" />
+
+		<!-- 翰思获取导检单打印 不在权限控制 -->
+		<action name="getDjDpdf" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getDjDpdf" />
+
+		<!-- 保存体检时间 269 -->
+		<action name="setcusttimedo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="setcusttimedo" />
+
+		<!-- 删除体检时间 270 -->
+		<action name="delcusttimedo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="delcusttimedo" />
+
+		<!-- 统计体检人员时间设置情况 271 -->
+		<action name="countExamInfotime" class="com.hjw.wst.action.CustomerInfoAction"
+			method="countExamInfotime" />
+
+		<!-- 执行合同审核 274 -->
+		<action name="contractcheckeditdo" class="com.hjw.wst.action.BatchAction"
+			method="contractcheckeditdo" />
+
+		<!-- 判断缴费项目是否冲突 275 -->
+		<action name="checkitemflag" class="com.hjw.wst.action.BatchAction"
+			method="checkitemflag" />
+
+		<!-- 执行人员加项目 277 -->
+		<action name="customeritemadddo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="customeritemadddo" />
+
+		<!--获取体检人员体检项目 279 -->
+		<action name="custchangitemlist" class="com.hjw.wst.action.CustomerInfoAction"
+			method="custchangitemlist" />
+
+		<!--获取体检人员体检项目 281 -->
+		<action name="custchangitemdellist" class="com.hjw.wst.action.CustomerInfoAction"
+			method="custchangitemdellist" />
+
+		<!--执行减项操作 282 -->
+		<action name="deletechargitemOnedo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="deletechargitemOnedo" />
+
+		<!--获取卡片密钥340 -->
+		<action name="getCardKey" class="com.hjw.wst.action.CardAction"
+			method="getCardKey" />
+
+
+		<!-- 获取16进制的1扇区1块内容 341 -->
+		<action name="getCardNOHex" class="com.hjw.wst.action.CardAction"
+			method="getCardNOHex" />
+
+		<!-- 获取卡片会员卡号 342 -->
+		<action name="getCardNOForConn" class="com.hjw.wst.action.CardAction"
+			method="getCardNOForConn" />
+
+		<action name="hjwonelogin" class="com.hjw.wst.action.AccountAction"
+			method="hjwonelogin" />
+
+		<!--科室下拉列表 103 -->
+		<action name="departscheduling" class="com.hjw.wst.action.SchedulingAction"
+			method="departscheduling" />
+		<!--排班管理列表 102 -->
+		<action name="schedulinglist" class="com.hjw.wst.action.SchedulingAction"
+			method="schedulinglist" />
+		<!--排班详情查看  -->
+		<action name="scheduledetailsList" class="com.hjw.wst.action.SchedulingAction"
+			method="scheduledetailsList" />
+		<!--排班详情查看-首页  -->
+		<action name="paibanList" class="com.hjw.wst.action.SchedulingAction"
+			method="paibanList" />
+		<!--报告样本列表151 -->
+		<action name="SampleReportlist" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="shouSampleReport" />
+
+		<!-- 报告样本删除152 -->
+		<action name="SampleReportDelet" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="SampleReportDelet" />
+
+		<!--新增报告样本zr验证编号是否存在154 -->
+		<action name="getSampleReportDemoBynum" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="getSampleReportDemoBynum" />
+
+		<!--新增报告样本zr验证样本名称是否存在 155 -->
+		<action name="getSampleReportDemoByname" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="getSampleReportDemoByname" />
+
+		<!--新增报告样本 &&修改报告样本156 -->
+		<action name="addSampleReportDemo" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="addSampleReportDemo" />
+
+		<!--批量删除报告样本159 -->
+		<action name="deleteSampleReportDemo" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="deleteSampleReportDemo" />
+
+		<!--检验样本列表161 -->
+		<action name="querySampleDemo" class="com.hjw.wst.action.SampleDemoAction"
+			method="querySampleDemo" />
+		
+		<!--检验样本 停用/启用  1574 -->
+		<action name="updateYanSampleStopOrStart" class="com.hjw.wst.action.SampleDemoAction" 
+			method="updateYanSampleStopOrStart" />	
+
+		<!--删除检验样本162 -->
+		<action name="deleteSampleDemo" class="com.hjw.wst.action.SampleDemoAction"
+			method="deleteSampleDemo" />
+
+		<!--验证检验样本编号唯一164 -->
+		<action name="getSampleDemoBynum" class="com.hjw.wst.action.SampleDemoAction"
+			method="getSampleDemoBynum" />
+
+		<!--添加检验样本165 -->
+		<action name="addSampleDemoMethod" class="com.hjw.wst.action.SampleDemoAction"
+			method="addSampleDemoMethod" />
+			
+		<!-- 保存项目类别  1581 -->
+		<action name="saveDemoTypePage" class="com.hjw.wst.action.SampleDemoAction" 
+			method="saveDemoTypePage" />
+
+		<!-- 用户模糊查询 104 -->
+		<action name="getUserInfoLike" class="com.hjw.wst.action.SchedulingAction"
+			method="getUserInfoLike" />
+		<!--科室管理 101 -->
+		<action name="departmentList" class="com.hjw.wst.action.DepartmentAction"
+			method="departmentList" />
+		<!--科室查询全部  148-->
+		<action name="departmentAll" class="com.hjw.wst.action.DepartmentAction"
+			method="departmentAll" />
+		<!-- 科室保存 109 -->
+		<action name="baocunDepartment" class="com.hjw.wst.action.DepartmentAction"
+			method="baocunDepartment" />
+		<!-- 删除科室106 -->
+		<action name="deletedep" class="com.hjw.wst.action.DepartmentAction"
+			method="deletedep" />
+		<!--体检中心查询全部 -->
+		<action name="queryAllExam" class="com.hjw.wst.action.Examinatioin_centerAction"
+			method="queryAllExam" />
+		<!--体检管理列表115 -->
+		<action name="ExaminatioinList" class="com.hjw.wst.action.Examinatioin_centerAction"
+			method="ExaminatioinList" />
+		<!--删除体检中心信息116 -->
+		<action name="deleteExamnatioin" class="com.hjw.wst.action.Examinatioin_centerAction"
+			method="deleteExamnatioin" />
+		<!--保存体检中心信息118 -->
+		<action name="saveExam" class="com.hjw.wst.action.Examinatioin_centerAction"
+			method="saveExam" />
+		<!-- 验证体检中心编码是否存在118 -->
+		<action name="isUniqueExam" class="com.hjw.wst.action.Examinatioin_centerAction"
+			method="isUniqueExam"></action>
+		<!-- 验证员工编码是否存在 -->
+		<action name="isUniqueUser" class="com.hjw.wst.action.UserManagerAction"
+			method="isUniqueUser"></action>
+		<!-- 验证科室编码是否存在 -->
+		<action name="isUnique" class="com.hjw.wst.action.DepartmentAction"
+			method="isUnique"></action>
+		<!-- 保存排班日期111 -->
+		<action name="saveScheduling" class="com.hjw.wst.action.SchedulingAction"
+			method="saveScheduling" />
+
+		<!-- 登记台查询人员界面 286 -->
+		<action name="getDjtExamInfoUserList" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getDjtExamInfoUserList" />
+		<!-- ipad登记台查询人员界面 287 -->			
+		<action name="getIpadExamInfoUserList"  class="com.hjw.ipad.action.RegisterIpadAction"
+			method="getIpadExamInfoUserList" />
+			
+		<!-- 登记台查询人员界面查询所有 845 -->
+		<action name="getDjtExamInfoUserListall" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getDjtExamInfoUserListall" />			
+		
+		<!-- 登记台判断身份证号 455 -->
+		<action name="djtexamInfoforIdNum" class="com.hjw.wst.action.RegisterDeskAction"
+			method="djtexamInfoforIdNum" />
+
+		<!-- 定位显示人员列表 290 -->
+		<action name="findcustOneDingweishow" class="com.hjw.wst.action.RegisterDeskAction"
+			method="findcustOneDingweishow" />
+
+		<!-- 按照查询条件统计人员数 291 -->
+		<action name="countcustomer" class="com.hjw.wst.action.RegisterDeskAction"
+			method="countcustomer" />
+			
+       <!-- 按照查询条件统计人员数 497 -->
+		<action name="countcustomerForidnum" class="com.hjw.wst.action.RegisterDeskAction"
+			method="countcustomerForidnum" />
+		<!-- 登记台显示人员信息 292 -->
+		<action name="getDjtExamOneShow" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getDjtExamOneShow" />
+			
+		<!-- 登记台显示人员信息 498 -->
+		<action name="getDjtExamOneShowidnum" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getDjtExamOneShowidnum" />
+
+		<!-- 登记台显示人员信息 293 -->
+		<action name="djteditcustomerdo" class="com.hjw.wst.action.RegisterDeskAction"
+			method="djteditcustomerdo" />
+
+		<!-- 登记台获取 人员收费项目列表 294 -->
+		<action name="djtcustchangitemlist" class="com.hjw.wst.action.RegisterDeskAction"
+			method="djtcustchangitemlist" />
+
+      <!-- 登记台保存体检项目 297 -->
+      <action name="djtGcustSaveItemSet" class="com.hjw.wst.action.RegisterDeskAction"
+       method="djtGcustSaveItemSet" />
+       
+       <!-- 登记台保存会员卡套餐和体检项目  -->
+      <action name="djtGcustSaveCardSet" class="com.hjw.wst.action.RegisterDeskAction"
+       method="djtGcustSaveCardSet" />
+
+      <!-- 登记台设置折扣保存2109 -->
+      <action name="djtGcustSaveDiscount" class="com.hjw.wst.action.RegisterDeskAction" method="djtGcustSaveDiscount"/>
+      
+      <!-- 团体登记台设置折扣保存2111 -->
+      <action name="djtTTcustSaveDiscount" class="com.hjw.wst.action.RegisterDeskAction" method="djtTTcustSaveDiscount"/>
+
+      <!-- 登记台减项 298 -->
+      <action name="djtcustomeritemdelshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtcustomeritemdelshow"/>
+      
+      <!-- 登记台删除套餐信息 299 -->
+      <action name="djtcustomersetdelshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtcustomersetdelshow"/>
+       
+       <!-- 登记台取消报到 400 -->
+      <action name="djtdelregisterdo" class="com.hjw.wst.action.RegisterDeskAction" method="djtdelregisterdo"/>
+
+        <!-- 登记台预约改期  401 -->
+      <action name="editregisterdatedo" class="com.hjw.wst.action.RegisterDeskAction" method="editregisterdatedo"/>
+       
+        <!-- 登记台预约改期  403 -->
+      <action name="djtcheckexamInfoStatus" class="com.hjw.wst.action.RegisterDeskAction" method="djtcheckexamInfoStatus"/>
+
+      <!-- 登记台报到  404 -->
+      <action name="djtexamInfoStatusdo" class="com.hjw.wst.action.RegisterDeskAction" method="djtexamInfoStatusdo"/>
+      
+        <!--摄像头保存电子导检单 425 -->
+        <action name="saveDJDimage" class="com.hjw.wst.action.RegisterDeskAction" method="saveDJDimage"/>
+        
+         <!--导检单图片 426 -->
+        <action name="getDJDPhoto" class="com.hjw.wst.action.RegisterDeskAction" method="getDJDPhoto"/>
+         
+         <!--校验用户 2107 -->
+        <action name="getUserByUserName" class="com.hjw.wst.action.RegisterDeskAction" method="getUserByUserName"/>
+        
+         <!--保存导检单图片 -->
+        <action name="addDJDimage" class="com.hjw.wst.action.ExamInfoAction" method="addDJDimage"/>
+        
+  <action name="registerDesk" class="com.hjw.wst.action.RegisterDeskAction" method="djtcheckexamInfoStatus"/>
+		<!-- 247 修改导入的数据 -->
+		<action name="delCustomerTmplist" class="com.hjw.wst.action.CustomerInfoAction"
+			method="delCustomerTmplist" />
+
+		<!-- 249 姓名定位人员列表显示 -->
+		<action name="impuserusernamedwshow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="impuserusernamedwshow" />
+
+		<!-- 250 姓名定位人员保存 -->
+		<action name="impuserusernamedwdo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="impuserusernamedwdo" />
+
+
+		<!-- 252 执行部分导入正式库 -->
+		<action name="impuserToExaminfodo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="impuserToExaminfodo" />
+
+		<!-- 254 单位获取分组带空行的 -->
+		<action name="getCompanForBatch2" class="com.hjw.wst.action.BatchAction"
+			method="getCompanForBatch2" />
+
+
+		<!-- 255 单位获取部门带空行的 -->
+		<action name="getCompanForDept" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getCompanForDept" />
+
+		<!-- 256批次得到分组带空行 -->
+		<action name="getBatchForGroup" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getBatchForGroup" />
+
+
+		<!-- 257 人员综合信息显示 -->
+		<action name="getExamInfoUserList" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getExamInfoUserList" />
+
+		<!-- 258 执行自动分组 -->
+		<action name="doAllUserGroupuser" class="com.hjw.wst.action.CustomerInfoAction"
+			method="doAllUserGroupuser" />
+
+		<!-- 259 强制分组 -->
+		<action name="doUserGroupuser" class="com.hjw.wst.action.CustomerInfoAction"
+			method="doUserGroupuser" />
+
+		<!-- 260 批量删除用户 -->
+		<action name="deluserrow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="deluserrow" />
+
+		<!-- 执行新增体检人员信息 262 -->
+		<action name="addcustomerdo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="addcustomerdo" />
+
+		<!-- 执行批量申请 264 -->
+		<action name="doSendApplyChargeItem" class="com.hjw.wst.action.CustomerInfoAction"
+			method="doSendApplyChargeItem" />
+
+
+		<!-- 执行批量签到 265 -->
+		<action name="batchSigndo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="batchSigndo" />
+
+		<!-- 翰思获取导检单打印 不在权限控制 -->
+		<action name="getDjDpdf" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getDjDpdf" />
+
+		<!-- 保存体检时间 269 -->
+		<action name="setcusttimedo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="setcusttimedo" />
+
+		<!-- 删除体检时间 270 -->
+		<action name="delcusttimedo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="delcusttimedo" />
+
+		<!-- 统计体检人员时间设置情况 271 -->
+		<action name="countExamInfotime" class="com.hjw.wst.action.CustomerInfoAction"
+			method="countExamInfotime" />
+
+		<!-- 执行合同审核 274 -->
+		<action name="contractcheckeditdo" class="com.hjw.wst.action.BatchAction"
+			method="contractcheckeditdo" />
+
+		<!-- 判断缴费项目是否冲突 275 -->
+		<action name="checkitemflag" class="com.hjw.wst.action.BatchAction"
+			method="checkitemflag" />
+
+		<!-- 执行人员加项目 277 -->
+		<action name="customeritemadddo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="customeritemadddo" />
+
+		<!--获取体检人员体检项目 279 -->
+		<action name="custchangitemlist" class="com.hjw.wst.action.CustomerInfoAction"
+			method="custchangitemlist" />
+
+		<!--获取体检人员体检项目 281 -->
+		<action name="custchangitemdellist" class="com.hjw.wst.action.CustomerInfoAction"
+			method="custchangitemdellist" />
+
+		<!--执行减项操作 282 -->
+		<action name="deletechargitemOnedo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="deletechargitemOnedo" />
+
+		<!--获取卡片密钥340 -->
+		<action name="getCardKey" class="com.hjw.wst.action.CardAction"
+			method="getCardKey" />
+
+
+		<!-- 获取16进制的1扇区1块内容 341 -->
+		<action name="getCardNOHex" class="com.hjw.wst.action.CardAction"
+			method="getCardNOHex" />
+
+		<!-- 获取卡片会员卡号 342 -->
+		<action name="getCardNOForConn" class="com.hjw.wst.action.CardAction"
+			method="getCardNOForConn" />
+
+		<action name="hjwonelogin" class="com.hjw.wst.action.AccountAction"
+			method="hjwonelogin" />
+
+		<!--科室下拉列表 103 -->
+		<action name="departscheduling" class="com.hjw.wst.action.SchedulingAction"
+			method="departscheduling" />
+		<!--排班管理列表 102 -->
+		<action name="schedulinglist" class="com.hjw.wst.action.SchedulingAction"
+			method="schedulinglist" />
+
+
+		<!--报告样本列表151 -->
+		<action name="SampleReportlist" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="shouSampleReport" />
+
+		<!-- 报告样本删除152 -->
+		<action name="SampleReportDelet" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="SampleReportDelet" />
+			
+		<!-- 报告样本 停用/启用 1573 -->
+		<action name="updateSampleStopOrStart" class="com.hjw.wst.action.SampleReportDemoAction" method="updateSampleStopOrStart" />
+
+		<!--新增报告样本zr验证编号是否存在154 -->
+		<action name="getSampleReportDemoBynum" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="getSampleReportDemoBynum" />
+
+		<!--新增报告样本zr验证样本名称是否存在 155 -->
+		<action name="getSampleReportDemoByname" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="getSampleReportDemoByname" />
+
+		<!--新增报告样本 &&修改报告样本156 -->
+		<action name="addSampleReportDemo" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="addSampleReportDemo" />
+
+		<!--批量删除报告样本159 -->
+		<action name="deleteSampleReportDemo" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="deleteSampleReportDemo" />
+
+		<!--检验样本列表161 -->
+		<action name="querySampleDemo" class="com.hjw.wst.action.SampleDemoAction"
+			method="querySampleDemo" />
+
+		<!--删除检验样本162 -->
+		<action name="deleteSampleDemo" class="com.hjw.wst.action.SampleDemoAction"
+			method="deleteSampleDemo" />
+
+		<!--验证检验样本编号唯一164 -->
+		<action name="getSampleDemoBynum" class="com.hjw.wst.action.SampleDemoAction"
+			method="getSampleDemoBynum" />
+
+		<!--添加检验样本165 -->
+		<action name="addSampleDemoMethod" class="com.hjw.wst.action.SampleDemoAction"
+			method="addSampleDemoMethod" />
+
+		<!-- 用户模糊查询 104 -->
+		<action name="getUserInfoLike" class="com.hjw.wst.action.SchedulingAction"
+			method="getUserInfoLike" />
+		<!--科室管理 101 -->
+		<action name="departmentList" class="com.hjw.wst.action.DepartmentAction"
+			method="departmentList" />
+		<!-- 科室保存 109 -->
+		<action name="baocunDepartment" class="com.hjw.wst.action.DepartmentAction"
+			method="baocunDepartment" />
+		<!-- 删除科室106 -->
+		<action name="deletedep" class="com.hjw.wst.action.DepartmentAction"
+			method="deletedep" />
+		<!-- 设置科室利润 -->	
+		<action name="updatedepRate" class="com.hjw.wst.action.DepartmentAction"
+			method="updatedepRate" />
+		<!-- 科室部门 停用/启用 1572 -->
+		<action name="updateDepartStopOrStart" class="com.hjw.wst.action.DepartmentAction" 
+			method="updateDepartStopOrStart" />	
+		<!--科室类型列表108 -->
+		<action name="getDatadis" class="com.hjw.wst.action.CommonAction"
+			method="getDatadis" />
+		<!-- 验证科室编码是否存在 -->
+		<action name="isUnique" class="com.hjw.wst.action.DepartmentAction"
+			method="isUnique"></action>
+		<!-- 保存排班日期111 -->
+		<action name="saveScheduling" class="com.hjw.wst.action.SchedulingAction"
+			method="saveScheduling" />
+
+		<!--获取排班日期638 -->
+		<action name="getDate" class="com.hjw.wst.action.SchedulingAction"
+			method="getDate" />
+
+		<!--数据字典show 121 -->
+		<action name="datadictionaryList" class="com.hjw.wst.action.DataDictionaryAction"
+			method="datadictionaryList" />  
+		
+		
+			
+		<!--数据类型show 122-->
+		<action name="queryAllDaDt" class="com.hjw.wst.action.DataDictionaryAction"
+			method="queryAllDaDt" />
+		
+		<!--获取数据类型编码-->
+		<action name="getDataCode" class="com.hjw.wst.action.DataDictionaryAction"
+			method="getDataCode" />
+		
+		<!-- 删除数据125 -->
+		<action name="deleteDaDt" class="com.hjw.wst.action.DataDictionaryAction"
+			method="deleteDaDt" />
+		<!-- 数据保存 126 -->
+		<action name="saveDaDt" class="com.hjw.wst.action.DataDictionaryAction"
+			method="saveDaDt" />
+		<!--人员类型show 128 -->
+		<action name="customertypeList" class="com.hjw.wst.action.Customer_TypeAction"
+			method="customertypeList" />
+		<!--删除人员类型 130 -->
+		<action name="deleteCustomer" class="com.hjw.wst.action.Customer_TypeAction"
+			method="deleteCustomer" />
+		<!--保存人员类型 132 -->
+		<action name="saveCustomer" class="com.hjw.wst.action.Customer_TypeAction"
+			method="saveCustomer" />
+		
+		<!-- 查询提交任务 283 -->
+		<action name="getComByBatchList" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getComByBatchList" />
+			<!-- 查询提交任务 283 -->
+		<action name="getComByBatchIpadList" class="com.hjw.ipad.action.CustomerInfoIpadAction"
+			method="getComByBatchIpadList" />
+
+		<!-- 根据单位id获取所有的子单位 284 -->
+		<action name="getCompersonByIdList" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getCompersonByIdList" />
+		<!-- 通过体检计划获取计划内部门 285 -->
+		<action name="getbatchcompanyshow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getbatchcompanyshow" />
+
+
+		<!-- 删除检查项目169 -->
+		<action name="deleteExaminationItem" class="com.hjw.wst.action.ExaminationItemAction"
+			method="deleteExaminationItem" />
+			
+		<!-- 检查项目添加171 -->
+		<action name="addExaminationItem" class="com.hjw.wst.action.ExaminationItemAction"
+			method="addExaminationItem" />
+			
+		<!-- 检查项目名称改拼音172 -->
+		<action name="pinying" class="com.hjw.wst.action.ExaminationItemAction"
+			method="pinying" />
+			
+		<!--关联检验编码验证173 -->
+		<action name="getexamnum" class="com.hjw.wst.action.ExaminationItemAction"
+			method="getexamnum" />
+
+		<!--关联影像编码验证174 -->
+		<action name="getviewnum" class="com.hjw.wst.action.ExaminationItemAction"
+			method="getviewnum" />
+			
+		<!--检查项目修改176 -->
+		<action name="updateExaminationItem" class="com.hjw.wst.action.ExaminationItemAction"
+			method="updateExaminationItem" />
+			
+		<!--检查项目是否已收费177 -->
+		<action name="getItemId" class="com.hjw.wst.action.ExaminationItemAction"
+			method="getItemId" />
+			
+		<!-- 带数据库配置检查项目细项 -->	
+		<action name="queryExaminationItemByConfig" class="com.hjw.wst.action.ExaminationItemAction"
+			method="queryExaminationItemByConfig">
+		</action>
+		
+		<!-- 新增页面的检查细项管理 -->
+		<action name="queryExamItemByOwnDept" class="com.hjw.wst.action.ExaminationItemAction"
+			method="queryExamItemByOwnDept">
+		</action>
+			
+		<!-- 检查项目停用/启用 1571 -->
+		<action name="updateExaminationStopOrStart" class="com.hjw.wst.action.ExaminationItemAction" 
+			method="updateExaminationStopOrStart" />
+			
+		<!-- 登记台保存体检项目 297 -->
+		<action name="djtGcustSaveItemSet" class="com.hjw.wst.action.RegisterDeskAction"
+			method="djtGcustSaveItemSet" />
+			
+		<!--收费项目列表 179 -->
+		<action name="queryChargingItem" class="com.hjw.wst.action.ChargingItemAction"
+			method="queryChargingItem" />
+			
+		<!--收费获取所有科室 180-->
+		<action name="getDepartment_dep" class="com.hjw.wst.action.ChargingItemAction"
+			method="getDepartment_dep" />
+			
+		<!--获取执行科室 181-->
+		<action name="getHisDictDept" class="com.hjw.wst.action.ChargingItemAction"
+			method="getHisDictDept" />
+			
+		<!--删除收费项目182 -->
+		<action name="updateChargingItemDel" class="com.hjw.wst.action.ChargingItemAction"
+			method="updateChargingItemDel" />
+			
+		<!--验证收费项目是否已收费182 -->
+		<action name="getChargingIteId" class="com.hjw.wst.action.ChargingItemAction"
+			method="getChargingIteId" />
+			
+		<!--已选择检查项目183 -->
+		<action name="choiceChargingIte" class="com.hjw.wst.action.ChargingItemAction"
+			method="choiceChargingIte" />
+			
+		<!--获取所有检验样本185 -->
+		<action name="getItemSampleDemo" class="com.hjw.wst.action.ChargingItemAction"
+			method="getItemSampleDemo" />
+			
+		<!--获取所有报告样本186 -->
+		<action name="getItemSampleReportDemo" class="com.hjw.wst.action.ChargingItemAction"
+			method="getItemSampleReportDemo" />
+			
+		<!--添加收费项目187 -->
+		<action name="addChargingItem" class="com.hjw.wst.action.ChargingItemAction"
+			method="addChargingItem" />
+			
+		<!--科室和科室类型联动 -->
+		<action name="lianDong" class="com.hjw.wst.action.ChargingItemAction"
+			method="lianDong" />
+		
+		<!--收费项目  his编码，影像编码，检验编码，唯一验证 -->
+		<action name="getBMYZ" class="com.hjw.wst.action.ChargingItemAction"
+			method="getBMYZ" />
+			
+		<action name="centerBMYZ" class="com.hjw.wst.action.ChargingItemAction"
+		method="centerBMYZ" />
+		<!--根据收费编码获取已选择检查项目189 -->
+		<action name="getChargingItemExamItem" class="com.hjw.wst.action.ChargingItemAction"
+			method="getChargingItemExamItem" />
+			
+		<!-- 收费项目 停用/启用 1570 -->
+		<action name="updateChargingItemStopOrStart" class="com.hjw.wst.action.ChargingItemAction" 
+			method="updateChargingItemStopOrStart" />
+		
+		<!--项目排期保存948 -->
+		<action name="saveItemschdeul" class="com.hjw.wst.action.ChargingItemAction"
+			method="saveItemschdeul"/>
+			
+			<!-- 收费项目验证名称是否重复 --> 
+		<action name="getItemNameCheck" class="com.hjw.wst.action.ChargingItemAction"
+			method="getItemNameCheck"/>
+
+        <!-- 登记台个人list条码显示 406 -->
+		<action name="djtGlextitemlshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtGlextitemlshow" />
+  
+        <!-- 登记台个人list条码显示 407 -->
+        <action name="djtGpacsitemlshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtGpacsitemlshow" />
+        
+        <!-- 登记台删除采样  408 -->
+        <action name="djtGdellissamp" class="com.hjw.wst.action.RegisterDeskAction" method="djtGdellissamp" />
+        
+         <!-- 登记台获取lis所有项目  409 -->
+        <action name="djtGgetlisitemcode" class="com.hjw.wst.action.RegisterDeskAction" method="djtGgetlisitemcode" />
+ 		
+ 		 <!--未检项目列表134-->
+        <action name="getWjxmExamList" class="com.hjw.wst.action.ExamInfoAction" method="getWjxmExamList" />
+	   <!--弃项列表135-->
+	    <action name="getHfqxExamList" class="com.hjw.wst.action.ExamInfoAction" method="getHfqxExamList" />
+		<!--放弃632-->
+	    <action name="deleteExam" class="com.hjw.wst.action.ExamInfoAction" method="deleteExam" />
+	
+        <!-- 登记台收费项目统计  412 -->
+        <action name="djtGItemCount" class="com.hjw.wst.action.RegisterDeskAction" method="djtGItemCount" />
+
+         <!-- 登记台团体增加人员  414 -->
+        <action name="djteditTcustomerdo" class="com.hjw.wst.action.RegisterDeskAction" method="djteditTcustomerdo" />
+
+        <!-- 登记台团体加项保存  416 -->
+        <action name="djtTTcustSaveItemSet" class="com.hjw.wst.action.RegisterDeskAction" method="djtTTcustSaveItemSet" />
+
+        <!-- 登记台团体加项保存  418 -->
+        <action name="djtTGcustSaveItemSet" class="com.hjw.wst.action.RegisterDeskAction" method="djtTGcustSaveItemSet" />
+
+        <!-- 登记台团体换项  420 -->
+        <action name="djtTTcustchangitemlist" class="com.hjw.wst.action.RegisterDeskAction" method="djtTTcustchangitemlist" />
+
+        <!-- 登记台团体执行换项  421 -->
+        <action name="djtTTcustchangSaveItemSet" class="com.hjw.wst.action.RegisterDeskAction" method="djtTTcustchangSaveItemSet" />
+        
+        <!--体检套餐列表191 -->
+        <action name="queryExamSet" class="com.hjw.wst.action.ExamSetAction" method="queryExamSet"/>
+       
+        <!--删除体检套餐192 -->
+        <action name="deletexamSet" class="com.hjw.wst.action.ExamSetAction" method="deletexamSet"/>
+        
+        <!--读取身份证保存图片 422 -->
+        <action name="djtuploadPicexamInfo" class="com.hjw.wst.action.RegisterDeskAction" method="djtuploadPicexamInfo"/>
+
+        <!--显示图片 423 -->
+        <action name="getdjtexamPhoto" class="com.hjw.wst.action.RegisterDeskAction" method="getdjtexamPhoto"/>
+        
+         <!--摄像头剪切保存图片和上传图片 424 -->
+        <action name="djtcutsavePicture" class="com.hjw.wst.action.RegisterDeskAction" method="djtcutsavePicture"/>
+        
+        <!--体检套餐添加193 -->
+        <action name="addExamSetFunc" class="com.hjw.wst.action.ExamSetAction" method="addExamSetFunc"/>  <!--体检套餐添加193 -->
+        <!--zyb自选套餐保存危害因素和套餐-->
+		<action name="zybaddExamSetFunc" class="com.hjw.wst.action.ExamSetAction" method="zybaddExamSetFunc"/>
+        
+        <!--体检套餐获取已选择项目196 -->
+        <action name="getsetChargingItem" class="com.hjw.wst.action.ExamSetAction" method="getsetChargingItem"/>
+       
+        <!--体检套餐修改197 -->
+        <action name="updateEaxmSet" class="com.hjw.wst.action.ExamSetAction" method="updateEaxmSet"/>
+       
+        <!--体检套餐启用停用1014 -->
+        <action name="getstartorblock" class="com.hjw.wst.action.ExamSetAction" method="getstartorblock"/>
+       
+        <!--恢复导检单134 -->
+        <action name="updateExam" class="com.hjw.wst.action.ExamInfoAction" method="updateExam"/>
+
+        <!--身份证查询多条体检信息报到列表 426 -->
+        <action name="djtexambaodaolistshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtexambaodaolistshow"/>
+        
+        <!--获取人员的分组信息 428 -->
+        <action name="getdjtTgroupInfoDo" class="com.hjw.wst.action.RegisterDeskAction" method="getdjtTgroupInfoDo"/>
+          
+         <!--疾病知识库列表135 -->
+        <action name="diseaseList" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="diseaseList"/>
+               
+        <!--回收引导单198 -->
+        <action name="receiveExamInfo" class="com.hjw.wst.action.ExamInfoAction" method="receiveExamInfo"/>
+                
+        <!--批量放弃导引单199 -->
+        <action name="updateBatchDeletExamInfo" class="com.hjw.wst.action.ExamInfoAction" method="updateBatchDeletExamInfo"/>
+       
+		<!--批量放弃导引单500 -->
+        <action name="plhf" class="com.hjw.wst.action.ExamInfoAction" method="plhf"/>
+		
+		<!--导引单批量延期501 -->
+        <action name="updateyanqi" class="com.hjw.wst.action.ExamInfoAction" method="updateyanqi"/>
+        
+		<!--保存疾病知识138 -->
+        <action name="saveDiseaseKLg" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="saveDiseaseKLg"/>
+        <!--批量删除疾病知识140 -->
+        <action name="deleteDklodeg" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="deleteDklodeg"/>
+        <!--疾病详情查看 139-->
+        <action name="lookDKLdgelib" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="lookDKLdgelib"/>
+         <!--疾病建议表列表 141-->
+        <action name="getsuggestionList" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="getsuggestionList"/>
+         <!--建议表删除 143-->
+        <action name="deleteSuggestion" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="deleteSuggestion"/>
+         <!--建议表保存 144-->
+        <action name="saveSuggestion" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="saveSuggestion"/>
+         <!--健康建议启停-->
+        <action name="diseaseSuggestionOffOn" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="diseaseSuggestionOffOn"/>
+         <!--疾病信息启停功能-->
+        <action name="diseaseLibOffOn" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="diseaseLibOffOn"/>
+                
+		<!--登记台重新发送申请 429 -->
+        <action name="djtreApplydo" class="com.hjw.wst.action.RegisterDeskAction" method="djtreApplydo"/>
+
+      <!--登记台重新发送申请 431 -->
+        <action name="djtrehisdo" class="com.hjw.wst.action.RegisterDeskAction" method="djtrehisdo"/>
+      
+      
+		<!--人员列表 504 -->
+        <action name="getexamInfo" class="com.hjw.wst.action.ExamInfoAction" method="getexamInfo"/>
+      
+		<!--删除/恢复人员 505 -->
+        <action name="updateExamInfo" class="com.hjw.wst.action.ExamInfoAction" method="updateExamInfo"/>
+      
+       <!--删除人员之前验证 --> 
+        <action name="delExamInfoCheck" class="com.hjw.wst.action.ExamInfoAction" method="delExamInfoCheck"/>
+        
+		<!--项目结果知识库列表 507 -->
+        <action name="queryItemResultLib" class="com.hjw.wst.action.ItemResultLibAction" method="queryItemResultLib"/>
+        
+        
+		<!--检查项目下拉框 508 -->
+        <action name="getExaminationItem" class="com.hjw.wst.action.ItemResultLibAction" method="getExaminationItem"/>
+        
+		<!--项目结果知识添加 510 -->
+        <action name="addItemResultLibMethod" class="com.hjw.wst.action.ItemResultLibAction" method="addItemResultLibMethod"/>
+        
+		<!--删除项目结果 512 -->
+        <action name="delItemResultLib" class="com.hjw.wst.action.ItemResultLibAction" method="delItemResultLib"/>
+        
+        
+		<!--科室下拉框和检查项目联动513 -->
+        <action name="depItemResultLib" class="com.hjw.wst.action.ItemResultLibAction" method="depItemResultLib"/>
+        
+        <!--登记台重新发送申请 430 -->
+        <action name="djtGcustomerguahao" class="com.hjw.wst.action.RegisterDeskAction" method="djtGcustomerguahao"/>
+
+        <!--登记台重新发送申请 432 -->
+        <action name="djtjzkinfodo" class="com.hjw.wst.action.RegisterDeskAction" method="djtjzkinfodo"/>
+        
+        <!--获取科室信息640 -->
+        <action name="huoqudepname" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="huoqudepname"/>
+       
+        <!--专家建议知识库列表 515 -->
+        <action name="getExpertSuggestionLib" class="com.hjw.wst.action.ExpertSuggestionLibAction" method="getExpertSuggestionLib"/>
+      
+        <!--删除专家建议 516 -->
+        <action name="deletExpertSuggestionLib" class="com.hjw.wst.action.ExpertSuggestionLibAction" method="deletExpertSuggestionLib"/>
+      
+      
+      
+      
+        <!--添加专家建议 518 -->
+        <action name="addExpertSuggestionLib" class="com.hjw.wst.action.ExpertSuggestionLibAction" method="addExpertSuggestionLib"/>
+        
+        <!--HIS项目521 -->
+        <action name="getHisClinicItemVPricelist" class="com.hjw.wst.action.ChargingItemAction" method="getHisClinicItemVPricelist"/>
+         
+        <!--获取his价表 -->
+        <action name="getHisPricelist" class="com.hjw.wst.action.ChargingItemAction" method="getHisPricelist"/>
+         
+         <!--更新收费项目his价表 -->
+        <action name="getPriceChingItem" class="com.hjw.wst.action.ChargingItemAction" method="getPriceChingItem"/> 
+        <!--获取his价表 522 -->
+        <action name="getHisPreci" class="com.hjw.wst.action.ChargingItemAction" method="getHisPreci"/>
+        
+        <!--HIS项目对应价表总价计算 523 -->
+        <action name="getPriceZJ" class="com.hjw.wst.action.ChargingItemAction" method="getPriceZJ"/>
+        
+        <!-- 收费项目新增科室 联动 524-->
+        <action name="getKSLD" class="com.hjw.wst.action.ChargingItemAction" method="getKSLD"/>
+        
+        <!--获取his,pacs,lis发送申请状态525 -->
+        <action name="getCenterConfiguration" class="com.hjw.wst.action.ChargingItemAction" method="getCenterConfiguration"/>
+        <!--查询所有角色-->
+        <action name="queryAllWebRole" class="com.hjw.wst.action.RoleAction" method="queryAllWebRole"/>
+       
+       <!--体检编号获取信息  437 -->
+       <action name="getexaminfoForNum" class="com.hjw.wst.action.ExamflowManagerAction" method="getexaminfoForNum"/>
+        
+        <!--档案对比查询档案526 -->
+        <action name="queryEaxmInfo" class="com.hjw.wst.action.FilecontrastAction" method="queryEaxmInfo"/>
+        
+        <!--档案对比查询档案527 -->
+        <action name="jkdadb" class="com.hjw.wst.action.FilecontrastAction" method="jkdadb"/>
+        
+        <!--导检单分发  438 -->
+       <action name="examflowinsave" class="com.hjw.wst.action.ExamflowManagerAction" method="examflowinsave"/>
+
+        <!--导检单接受  439 -->
+       <action name="examflowoutsave" class="com.hjw.wst.action.ExamflowManagerAction" method="examflowoutsave"/>
+ 
+        <!--440 导检单查询    -->
+       <action name="examflowListshow" class="com.hjw.wst.action.ExamflowManagerAction" method="examflowListshow"/>
+       
+       <!-- 流程-导检单核收-获取体检项目信息 441-->
+		<action name="flowEndRecoveryexam" class="com.hjw.wst.action.ExamflowManagerAction" method="flowEndRecoveryexam" />
+		
+		<!--导引单批量延期442 -->
+        <action name="flowupdateyanqi" class="com.hjw.wst.action.ExamflowManagerAction" method="flowupdateyanqi"/>
+        
+        <!--流程-导检单核收 弃检/延期 恢复443 -->
+        <action name="flowupdateExam" class="com.hjw.wst.action.ExamflowManagerAction" method="flowupdateExam"/>
+       
+       <!--流程-导检单核收-放弃444-->
+	    <action name="flowdeleteExam" class="com.hjw.wst.action.ExamflowManagerAction" method="flowdeleteExam" />
+	    
+	   <!--获取每个科室对应的医生人员 -->
+		<action name="getZDSDoctors" class="com.hjw.wst.action.ExamflowManagerAction" method="getZDSDoctors"/> 
+		
+		<!--给文本域发送消息  回收导检单提醒 -->
+		<action name="zlxmessagesave" class="com.hjw.wst.action.ExamflowManagerAction" method="zlxmessagesave"/>
+		
+		<!--导检单核收  无需总检    -->
+        <action name="guidewuxuzongjian" class="com.hjw.wst.action.ExamflowManagerAction" method="guidewuxuzongjian" />
+        <!--导检单核收  需要总检    -->
+        <action name="guidexuyaozongjian" class="com.hjw.wst.action.ExamflowManagerAction" method="guidexuyaozongjian" />
+	    <!--更新取体检报告方式  -->
+		<action name="upd_getReportWay" class="com.hjw.wst.action.ExamflowManagerAction" method="upd_getReportWay" />
+		 <!--更新报告邮寄地址  -->
+		<action name="upd_reportAddress" class="com.hjw.wst.action.ExamflowManagerAction" method="upd_reportAddress" />
+		 <!--更新报告邮箱地址  -->
+		<action name="upd_emailAddress" class="com.hjw.wst.action.ExamflowManagerAction" method="upd_emailAddress" />
+	     <!--上传信息1216 -->
+        <action name="flowexamloglist" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexamloglist"/> 
+        <!--流程-导检单核收-导检单核收 1202-->
+        <action name="flowh0ExamInfo" class="com.hjw.wst.action.ExamflowManagerAction" method="flowh0ExamInfo"/>
+         <!--流程-导检单核收 撤销导引单1205 -->
+	    <action name="flowrevocationDYD" class="com.hjw.wst.action.ExamflowManagerAction" method="flowrevocationDYD" />
+	     <!-- 获取lis状态 -->
+        <action name="getlisStatusres" class="com.hjw.wst.action.ExamflowManagerAction" method="getlisStatusres"/>
+	     <!--查询上传信息 -->
+        <action name="flowexampList" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexampList"/>
+         <!--导检单回收上传信息 -->
+        <action name="flowexamh1insert" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexamh1insert"/>
+          <!--导检单回收取消上传信息 -->
+        <action name="flowexamh1delete" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexamh1delete"/>   
+        <!-- 整单室 取消接受导检单1217 -->
+         <action name="flowexampLists" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexampLists"/>
+         <!-- 整单室 接受导检单1212 -->
+         <action name="flows0ExamInfo" class="com.hjw.wst.action.ExamflowManagerAction" method="flows0ExamInfo"/>
+         <!--流程-整单接收 导引单查询未检项目1206 -->
+	    <action name="getWJitemList" class="com.hjw.wst.action.ExamflowManagerAction" method="getWJitemList" />
+         <!-- 整单室 取消接受导检单1213 -->
+        <action name="flows0ExamInfoun" class="com.hjw.wst.action.ExamflowManagerAction" method="flows0ExamInfoun"/>
+         <!-- 整单室上传省略报告室流程1234 -->
+        <action name="uploadFlow" class="com.hjw.wst.action.ExamflowManagerAction" method="uploadFlow"/> 
+         <!--整单室取消上传信息1218 -->
+        <action name="examUploadFlowDel" class="com.hjw.wst.action.ExamflowManagerAction" method="examUploadFlowDel"/> 
+         <!-- 获取lis pacs结果 -->
+        <action name="getlispacsres" class="com.hjw.wst.action.ExamflowManagerAction" method="getlispacsres"/>  
+         <!--整单室  报告上传  可上传  -->
+        <action name="flowexampuploadingLists" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexampuploadingLists"/>
+         <!--整单室 批量上传信息1214 -->
+        <action name="flowexams1insert" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexams1insert"/>   
+          <!--整单室 批量取消上传信息1215 -->
+        <action name="flowexams1delete" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexams1delete"/>   
+         
+         <!--整单室  报告接收  可上传  -->
+        <action name="jieshoukeshangchuan" class="com.hjw.wst.action.ExamflowManagerAction" method="jieshoukeshangchuan"/>
+		 <!--整单室  报告接收  取消上传  -->     
+        <action name="quxiaoshangchuan" class="com.hjw.wst.action.ExamflowManagerAction" method="quxiaoshangchuan"/>
+           
+         <!-- 流程-总检室 获取待接受导检单列表1336 -->
+        <action name="getPre_receive_zongjian" class="com.hjw.wst.action.ExamflowManagerAction" method="getPre_receive_zongjian"/>   
+         <!-- 流程-总检室 获取待接受导检单详细信息1337 -->
+        <action name="getPre_receive_details_zongjian" class="com.hjw.wst.action.ExamflowManagerAction" method="getPre_receive_details_zongjian"/>  
+         <!-- 流程-总检室 导检单批量核收1338 -->
+        <action name="flowz0ExamInfo_batch" class="com.hjw.wst.action.ExamflowManagerAction" method="flowz0ExamInfo_batch"/>
+        <!-- 流程-总检查询页面1231 -->
+        <action name="flowexameListz" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexameListz"/>  
+         <!-- 流程 终检室-接收导检单1232 -->
+        <action name="flowzExamInfo" class="com.hjw.wst.action.ExamflowManagerAction" method="flowzExamInfo"/> 
+          <!-- 流程-取消接收导检单1233 -->
+        <action name="flowzExamInfoun" class="com.hjw.wst.action.ExamflowManagerAction" method="flowzExamInfoun"/>
+         <!-- 报告批量发送审核1327 -->
+        <action name="flowexamsendchk" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexamsendchk"/>  
+        
+         <!-- 打印室接收导检单 -->
+        <action name="getHealthExamInfo" class="com.hjw.wst.action.ExamflowManagerAction" method="getHealthExamInfo"/> 
+         <!-- 打印室-接收导检单1219 -->
+         <action name="flowp0ExamInfo" class="com.hjw.wst.action.ExamflowManagerAction" method="flowp0ExamInfo"/>
+         <!-- 打印室-检查导检单是否已打印1360 -->
+         <action name="check_print" class="com.hjw.wst.action.ExamflowManagerAction" method="check_print"/>
+          <!-- 打印室-取消接收导检单1220 -->
+         <action name="flowp0ExamInfoun" class="com.hjw.wst.action.ExamflowManagerAction" method="flowp0ExamInfoun"/>
+          <!-- 打印室 取消接受导检单列表1221 -->
+         <action name="flowexampListp" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexampListp"/>  
+          <!--打印室上传信息1222 -->
+        <action name="flowexamp1insert" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexamp1insert"/>   
+         <!--打印室 取消上传信息1223 -->
+        <action name="flowexamp1delete" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexamp1delete"/>  
+        
+        <!-- 发送室 获取待接受导检单列表1319 -->
+         <action name="getPre_receive" class="com.hjw.wst.action.ExamflowManagerAction" method="getPre_receive"/>
+		<!-- 发送室 获取待接受导检单详细信息1320 -->
+         <action name="getPre_receive_details" class="com.hjw.wst.action.ExamflowManagerAction" method="getPre_receive_details"/>
+		<!-- 发送室 导检单批量核收1321 -->
+         <action name="flowe0ExamInfo_batch" class="com.hjw.wst.action.ExamflowManagerAction" method="flowe0ExamInfo_batch"/> 
+         <!-- 发送室-接收导检单1225 -->
+         <action name="flowe0ExamInfo" class="com.hjw.wst.action.ExamflowManagerAction" method="flowe0ExamInfo"/>
+         <!-- 发送室-取消接收导检单1226 -->
+         <action name="flowe0ExamInfoun" class="com.hjw.wst.action.ExamflowManagerAction" method="flowe0ExamInfoun"/>
+          <!-- 发送室 报告确认领取列表1227 -->
+         <action name="flowexameListe" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexameListe"/>
+          <!-- 发送室 全流程查询列表1362 -->
+         <action name="flowexameListe_allflow" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexameListe_allflow"/>
+         <!--批量检查是否有做CT/MR 1357 -->
+		<action name="checkCTMR" class="com.hjw.wst.action.ExamflowManagerAction" method="checkCTMR" />
+		<!--保存收发室说明 1355 -->
+		<action name="saveEdesc" class="com.hjw.wst.action.ExamflowManagerAction" method="saveEdesc" />
+		
+		<!--1726生成健康风险评估报告 -->
+		<action name="createHealthRiskAssessmentReport" class="com.hjw.wst.action.HealthRiskAssessmentAction" method="createHealthRiskAssessmentReport"/>
+		
+		<!--1727 获取已生成健康风险评估疾病列表 -->
+		<action name="getHealthRiskAssessmentReport" class="com.hjw.wst.action.HealthRiskAssessmentAction" method="getHealthRiskAssessmentReport"/>
+		
+		<!--1728 采样室打条码自动采样 -->
+		<action name="autoUpdateSamplExamDetail" class="com.hjw.wst.action.SamplingDepartmentAction" method="autoUpdateSamplExamDetail"/>
+		        
+        <!-- 指引单转移1323 -->
+         <action name="flowexamtransfer" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexamtransfer"/>
+        <!--流程管理获取用户 -->
+		<action name="getflowUser" class="com.hjw.wst.action.ExamflowManagerAction" method="getflowUser"  />
+	    <!--流程备注列表1442 -->
+		<action name="queryFlowRemak" class="com.hjw.wst.action.FlowRemakAction" method="queryFlowRemak"  />
+		<!--体检号获取人员信息1443 -->
+		<action name="getNumExamInfo" class="com.hjw.wst.action.FlowRemakAction" method="getNumExamInfo"  />
+		<!--保存流程备注1444 -->
+		<action name="saveFlowRemak" class="com.hjw.wst.action.FlowRemakAction" method="saveFlowRemak"  />
+       <!--科室检查列表601  -->
+       <action name="getDepExamInfoUserLis" class="com.hjw.wst.action.DepInspectAction" method="getDepExamInfoUserLis"/>
+      
+      <!--科室检查检查项目527  -->
+      <action name="getDepInspectExamIntion" class="com.hjw.wst.action.DepInspectAction" method="getDepInspectExamIntion"/>
+      <!--科室检查检查项目-电测听527  -->
+      <action name="getDepInspectExamIntion_BSR" class="com.hjw.wst.action.DepInspectAction" method="getDepInspectExamIntion_BSR"/>
+      
+      <!--科室检查检查项目获取常用词528  -->
+      <action name="getItemResultLibcyc" class="com.hjw.wst.action.DepInspectAction" method="getItemResultLibcyc"/>
+ 
+<!--       <action name="getDepInspectExamIntion" class="com.hjw.wst.action.DepInspectAction" method="getDepInspectExamIntion"/>
+ --> 
+      <!--获取所有项目常用词530  -->
+      <action name="getItemeditLibS" class="com.hjw.wst.action.DepInspectAction" method="getItemeditLibS"/>
+      
+      <!--项目结果与参考值值比较531  -->
+      <action name="getItemintionReference" class="com.hjw.wst.action.DepInspectAction" method="getItemintionReference"/>
+      
+      <!--保存普通科室结论532  -->
+      <action name="addexamDepResult" class="com.hjw.wst.action.DepInspectAction" method="addexamDepResult"/>
+ 
+      <!--科室检查清除结果533  -->
+      <action name="deleteResult" class="com.hjw.wst.action.DepInspectAction" method="deleteResult"/>
+      
+      <!--判断是否总检，是否同一个人535  -->
+      <action name="getExamDepStatus" class="com.hjw.wst.action.DepInspectAction" method="getExamDepStatus"/>
+ 
+      <!--获取体检状态536  -->
+      <action name="getStatus" class="com.hjw.wst.action.DepInspectAction" method="getStatus"/>
+ 
+      <!-- 个人统计导检单 436 -->
+      <action name="examflowListtotal" class="com.hjw.wst.action.ExamflowManagerAction" method="examflowListtotal"/>
+
+	  <!-- 个人合计导检单2 441 -->
+      <action name="examflowListtotalall" class="com.hjw.wst.action.ExamflowManagerAction" method="examflowListtotalall"/>
+        
+      <!-- 导检单多人按天统计 444 -->
+      <action name="examflowListtotalcountall" class="com.hjw.wst.action.ExamflowManagerAction" method="examflowListtotalcountall"/>
+      
+      <!-- 导检单多人合计统计 445 -->
+      <action name="examflowListtotalallall" class="com.hjw.wst.action.ExamflowManagerAction" method="examflowListtotalallall"/>
+      <!--个人体检结果查询 603-->
+      <action name="getExamSumarry" class="com.hjw.wst.action.DepInspectAction" method="getExamSumarry"/>
+       <!--个人体检结果危急值查询 604-->
+      <action name="getWeijizhi" class="com.hjw.wst.action.DepInspectAction" method="getWeijizhi"/>
+	  <!--个人体检结果异常值查询 605-->
+      <action name="getyichang" class="com.hjw.wst.action.DepInspectAction" method="getyichang"/>
+	   <!--个人体检结果异常值查询 606-->
+      <action name="getaLL" class="com.hjw.wst.action.DepInspectAction" method="getaLL"/>
+	  
+	  <!--个人体检历史对比-->
+      <action name="getHistoryResult" class="com.hjw.wst.action.DepInspectAction" method="getHistoryResult"/>
+      <!-- 报表菜单列表 446 -->
+      <action name="cptmanagerList" class="com.hjw.wst.action.CptmanagerAction" method="cptmanagerList"/>
+      
+      <!-- 执行报表新增 448 -->
+      <action name="reportmanageradddo" class="com.hjw.wst.action.CptmanagerAction" method="reportmanageradddo"/>
+      
+      <!-- 报表模板上传 449 -->
+      <action name="reportimportdo" class="com.hjw.wst.action.CptmanagerAction" method="reportimportdo"/>
+
+      <!-- 删除报表模板 451 -->
+      <action name="reportmanagerdel" class="com.hjw.wst.action.CptmanagerAction" method="reportmanagerdel"/>
+
+      <!-- 显示所有报表 452 -->
+	  <action name="reportshow" class="com.hjw.wst.action.TreeAction" method="reportshow" />
+	  
+	  <!-- 显示所有报表 453 -->
+	  <action name="menuReport" class="com.hjw.wst.action.TreeAction" method="menuReport" />
+	  <!-- 档案列表608 -->
+	  <action name="customeListshow" class="com.hjw.wst.action.CustomInfoManageAction" method="customeListshow" />
+	  <!-- 保存档案611 -->
+	  <action name="saveCustom" class="com.hjw.wst.action.CustomInfoManageAction" method="saveCustom" />
+	  <!-- 早餐list 614 -->
+	  <action name="breakfastList" class="com.hjw.wst.action.BreakfastAction" method="breakfastList" />
+	  <!-- 早餐科室 615 -->
+	  <action name="updaterBreakStatus" class="com.hjw.wst.action.BreakfastAction" method="updaterBreakStatus" />	
+	  <!-- 危急值list 617 -->
+	  <action name="criticalList" class="com.hjw.wst.action.CriticalAction" method="criticalList" />
+	  <!-- 危急值保存处理内容 619 -->
+	  <action name="saveCritical" class="com.hjw.wst.action.CriticalAction" method="saveCritical" />
+	   <!-- 手动添加危急值 620 -->
+	  <action name="addCritical" class="com.hjw.wst.action.CriticalAction" method="addCritical" />
+	   <!-- 撤销手动添加的危急值 621 -->
+	  <action name="delCritical" class="com.hjw.wst.action.CriticalAction" method="delCritical" />
+	   <!--查询危急值处理记录  -->
+	  <action name="criticalLogList" class="com.hjw.wst.action.CriticalAction" method="criticalLogList" />
+	  
+	   <!--东北国际收到添加危机值内容 2001  -->
+	  <action name="addCriticalDBGJ" class="com.hjw.wst.action.CriticalAction" method="addCriticalDBGJ" />
+	  
+	    <!--东北国际获取历史危急值信息2002  -->
+	  <action name="getCriticalListByExamNum" class="com.hjw.wst.action.CriticalAction" method="getCriticalListByExamNum" />
+	  
+	    <!--东北国际获取历史已处理危急值信息2003  -->
+	  <action name="getCriticalHandleListByExamNum" class="com.hjw.wst.action.CriticalAction" method="getCriticalHandleListByExamNum" />
+	  
+	   <!--获取历史危急值信息列表2006  -->
+	  <action name="getCriticalList" class="com.hjw.wst.action.CriticalAction" method="getCriticalList" />
+	  
+	  <!--删除危急值信息2007  -->
+	   <action name="delCriticalById" class="com.hjw.wst.action.CriticalAction" method="delCriticalById" />
+	  
+	  <!-- 站内信删除 633 -->
+	  <action name="deleteInforms" class="com.hjw.wst.action.SystemInformsAction" method="deleteInforms" />
+	 <!-- 备忘录保存 635 -->
+	  <action name="saveNotes" class="com.hjw.wst.action.SchedulingAction" method="saveNotes" />
+	  <!--一周备忘录加载 636 -->
+	  <action name="yizhoubeiwang" class="com.hjw.wst.action.SchedulingAction" method="yizhoubeiwang" />
+	  <!-- 疾病逻辑列表537 -->
+	  <action name="getDiseaseLogic" class="com.hjw.wst.action.DiseaseLogicAction" method="getDiseaseLogic" />
+	
+	  <!-- 疾病逻辑列表1347（包含已停用的） -->
+	  <action name="getDiseaseLogic_all" class="com.hjw.wst.action.DiseaseLogicAction" method="getDiseaseLogic_all" />
+	
+	  <!-- 删除疾病逻辑538 -->
+	  <action name="deletDiseaseLogic" class="com.hjw.wst.action.DiseaseLogicAction" method="deletDiseaseLogic" />
+	
+	  <!-- 获取所有收费项目539 -->
+	  <action name="getDiseaseChargingItem" class="com.hjw.wst.action.DiseaseLogicAction" method="getDiseaseChargingItem" />
+	
+	  <!-- 获取所有检查项目540 -->
+	  <action name="getDiseaseExaminationItem" class="com.hjw.wst.action.DiseaseLogicAction" method="getDiseaseExaminationItem" />
+	  <!-- 获取所有疾病541 -->
+	  <action name="getDiseaseKnowloedge" class="com.hjw.wst.action.DiseaseLogicAction" method="getDiseaseKnowloedge" />
+	  <!-- 新增疾病逻辑542 -->
+	  <action name="addDiseaseKnowloedge" class="com.hjw.wst.action.DiseaseLogicAction" method="addDiseaseKnowloedge" />
+	  <!-- 疾病逻辑修改获取检查项目544 -->
+	  <action name="getDiseaseKnowloedge1" class="com.hjw.wst.action.DiseaseLogicAction" method="getDiseaseKnowloedge1" />
+	  
+	  <!-- 科室收费项目细项修改 1543 -->
+		<action name="getExamItemAddSave" class="com.hjw.wst.action.DiseaseLogicAction" method="getExamItemAddSave" />
+	  
+	  <!-- 显示所有报表 454 -->
+	<action name="djdexamflowshowsearchall" class="com.hjw.wst.action.ExamflowManagerAction" method="djdexamflowshowsearchall" />
+	<!-- 保存站内通知 625 -->
+	 <action name="saveSystemInforms" class="com.hjw.wst.action.SystemInformsAction" method="saveSystemInforms" />
+	<!-- 站内通知 list 626 -->
+	<action name="systemInformsList" class="com.hjw.wst.action.SystemInformsAction" method="systemInformsList" />
+	<!-- 启停修改 list 627 -->
+	<action name="up_off_on" class="com.hjw.wst.action.SystemInformsAction" method="up_off_on" />
+	<!-- 授权list 630 -->
+	<action name="userListSystemInforms" class="com.hjw.wst.action.SystemInformsAction" method="userListSystemInforms" />
+	<!-- 授权保存 631 -->
+	<action name="saveEmpowerSysInf" class="com.hjw.wst.action.SystemInformsAction" method="saveEmpowerSysInf" />
+	<!-- role list 632 -->
+	<action name="roleList" class="com.hjw.wst.action.SystemInformsAction" method="roleList" />
+	  <!-- 团体结算主表显示 456 -->
+	  <action name="getTeamAccountForBatch" class="com.hjw.wst.action.StatementsAction" method="getTeamAccountForBatch" />
+	  <!-- 团体结算细项列表 458 -->
+	  <action name="teamAccountExamListShow" class="com.hjw.wst.action.StatementsAction" method="teamAccountExamListShow" />
+	  	  
+	  <!-- 团体结算获取分组信息 461 -->
+	  <action name="termgrouplistshow" class="com.hjw.wst.action.StatementsAction" method="termgrouplistshow" />
+	  
+	  <!-- 团体结算获取套餐信息 462 -->
+	  <action name="termSetlistshow" class="com.hjw.wst.action.StatementsAction" method="termSetlistshow" />
+	   <!-- 团体结算获取体检人员信息 463 -->
+	  <action name="termExamInfoUserList" class="com.hjw.wst.action.StatementsAction" method="termExamInfoUserList" />
+	  <!-- 团体结算插入明细 464 -->
+	  <action name="setTeamAccountList" class="com.hjw.wst.action.StatementsAction" method="setTeamAccountList" /> 
+	  <!-- 团体结算统计 467 -->
+	  <action name="teamItemCount" class="com.hjw.wst.action.StatementsAction" method="teamItemCount" /> 
+	  <!-- 团体结算统计入账 468 -->
+	  <action name="setTeamAccountcountdo" class="com.hjw.wst.action.StatementsAction" method="setTeamAccountcountdo" /> 
+	
+	
+	
+	  <!--科室逻辑列表 547 -->
+	  <action name="getDepLogic" class="com.hjw.wst.action.DepLogicAction" method="getDepLogic" />
+	 
+	  <!--删除科室逻辑 548 -->
+	  <action name="deleteDepLogic" class="com.hjw.wst.action.DepLogicAction" method="deleteDepLogic" />
+	  
+	  <!--科室逻辑获取所有检查项目 551 -->
+	  <action name="getDepLogicExamItem" class="com.hjw.wst.action.DepLogicAction" method="getDepLogicExamItem" />
+	  
+	  <!--添加科室逻辑 552 -->
+	  <action name="addDepLogic" class="com.hjw.wst.action.DepLogicAction" method="addDepLogic" />
+	  
+	  <!--修改科室逻辑页面获取检查项目细项 553 -->
+	  <action name="getDepLogicExamItemShow" class="com.hjw.wst.action.DepLogicAction" method="getDepLogicExamItemShow" />
+
+	  <!-- 删除结算单 469  -->
+	  <action name="delTeamAccountForAccNumdo" class="com.hjw.wst.action.StatementsAction" method="delTeamAccountForAccNumdo" />
+	  
+	  <!-- 团体结算增加结算页面 470  -->
+	  <action name="termaccountadd" class="com.hjw.wst.action.StatementsAction" method="termaccountadd" />
+	  
+	   <!-- 团体结算增删除结算人员 471  -->
+	  <action name="teamdelexamnumdo" class="com.hjw.wst.action.StatementsAction" method="teamdelexamnumdo" />
+	   <!--团体结算人员结算细项明细 473  -->
+	  <action name="getExaminfoChargingItemforExamNum" class="com.hjw.wst.action.StatementsAction" method="getExaminfoChargingItemforExamNum" />
+	  <!--团体结算人员结算细项明细统计 474   -->
+	  <action name="teamexamItemCount" class="com.hjw.wst.action.StatementsAction" method="teamexamItemCount" />
+	  <!--团体结算减免按照项目减免统计 476   -->
+	  <action name="gettermatotleClistGrid" class="com.hjw.wst.action.StatementsAction" method="gettermatotleClistGrid" />
+	  <!--团体结算减免按照人员减免统计 477   -->
+	  <action name="gettermatotleElistGrid" class="com.hjw.wst.action.StatementsAction" method="gettermatotleElistGrid" />
+	  <!--团体结算减免执行 478   -->
+	  <action name="termdecamtCEdo" class="com.hjw.wst.action.StatementsAction" method="termdecamtCEdo" />
+  
+	  <!--修改科室逻辑页面获取检查项目细项 554 -->
+	  <action name="getDepLogixDepartmentDep" class="com.hjw.wst.action.DepLogicAction" method="getDepLogixDepartmentDep" />
+	  
+	  
+	  <!--修改科室逻辑页面获取检查项目细项 554 -->
+	  <action name="getWebResourceTable" class="com.hjw.wst.action.webResourceAction" method="getWebResourceTable" />
+	  
+	  <!--获取资源表列表556 -->
+		<action name="getWebResourceTable" class="com.hjw.wst.action.webResourceAction" method="getWebResourceTable"/>
+	  
+	  <!--获取资源表列表557 -->
+		<action name="addWebResource" class="com.hjw.wst.action.webResourceAction" method="addWebResource"/>
+		
+	  <!--团体结算结算单审核状态修改 479 -->
+	  <action name="checkTeamAccountForAccNumdo" class="com.hjw.wst.action.StatementsAction" method="checkTeamAccountForAccNumdo" />
+	  <!--团体结算结算单结算状态修改 480 -->
+	  <action name="overTeamAccountForAccNumdo" class="com.hjw.wst.action.StatementsAction" method="overTeamAccountForAccNumdo" />
+	  <!--获取支付方式列表 483 -->
+	  <action name="teamAccountExamwayListShow" class="com.hjw.wst.action.StatementsAction" method="teamAccountExamwayListShow" />
+      <!--获取支付方式列表 483 -->
+	  <action name="teamaccountwayadddo" class="com.hjw.wst.action.StatementsAction" method="teamaccountwayadddo" />
+	   <!--团体结算支付方式删除 486 -->
+	  <action name="teamaccountwaydel" class="com.hjw.wst.action.StatementsAction" method="teamaccountwaydel" />
+
+      <!--团体结算保存发票 487 -->
+	  <action name="updateteamaccountdo" class="com.hjw.wst.action.StatementsAction" method="updateteamaccountdo" />
+
+      <!--撤销导引单558 -->
+	  <action name="revocationDYD" class="com.hjw.wst.action.ExamInfoAction" method="revocationDYD" />
+
+      <!--资源管理下拉框561-->
+	  <action name="WebResourcePagecombox" class="com.hjw.wst.action.webResourceAction" method="WebResourcePagecombox" />
+	  
+      <!--删除资源管理562-->
+	  <action name="deleteWebResource" class="com.hjw.wst.action.webResourceAction" method="deleteWebResource" />
+	  
+      <!--获取资源描述563-->
+	  <action name="getWebResourceDTO" class="com.hjw.wst.action.webResourceAction" method="getWebResourceDTO" />
+	  
+	  
+      <!--新增验证资源是否重复563-->
+	  <action name="webResourcePD" class="com.hjw.wst.action.webResourceAction" method="webResourcePD" />
+	  
+	  <!--未检查人员列表490 -->
+	  <action name="nottermaEList" class="com.hjw.wst.action.StatementsAction" method="nottermaEList" />
+	  
+	   <!--未检查项目列表491 -->
+	  <action name="nottermaCList" class="com.hjw.wst.action.StatementsAction" method="nottermaCList" />
+	  
+	   <!--团体结算封装操作 492 -->
+	  <action name="overTeamAccountForbatch" class="com.hjw.wst.action.StatementsAction" method="overTeamAccountForbatch" />
+	  
+	   <!--团体结算解除封装操作 493 -->
+	  <action name="unoverTeamAccountForbatch" class="com.hjw.wst.action.StatementsAction" method="unoverTeamAccountForbatch" />
+		
+	   <!--问卷管理列表566 -->
+	  <action name="getSysSurveyList" class="com.hjw.wst.action.SysSurveyAction" method="getSysSurveyList" />
+		
+	   <!--问卷收费项目列表569 -->
+	  <action name="getSysSurveyChargItem" class="com.hjw.wst.action.SysSurveyAction" method="getSysSurveyChargItem" />
+		
+	   <!--问卷问题保存572 -->
+	  <action name="addSysSurvey" class="com.hjw.wst.action.SysSurveyAction" method="addSysSurvey" />
+		
+	   <!--问题选项获取数据573 -->
+	  <action name="getSysQuestionOptions" class="com.hjw.wst.action.SysSurveyAction" method="getSysQuestionOptions" />
+		
+	   <!--问题获取项目数据574 -->
+	  <action name="getSysQuestionItemsDTOList" class="com.hjw.wst.action.SysSurveyAction" method="getSysQuestionItemsDTOList" />
+		
+	   <!--问题删除575-->
+	  <action name="deleteSysSurvey" class="com.hjw.wst.action.SysSurveyAction" method="deleteSysSurvey" />
+		
+		
+	   <!--问卷问题显示579-->
+	  <action name="getQuestionnaireSurveyPageYMShou" class="com.hjw.wst.action.SysSurveyAction" method="getQuestionnaireSurveyPageYMShou" />
+		
+		
+	   <!--问卷调查验证体检号是否有效577-->
+	  <action name="getQuestionnaireSurveyPageShow" class="com.hjw.wst.action.SysSurveyAction" method="getQuestionnaireSurveyPageShow" />
+		
+		
+	   <!--提交问卷580-->
+	  <action name="saveQuestionnaireSurvey"  class="com.hjw.wst.action.SysSurveyAction"  method="saveQuestionnaireSurvey" />
+		
+		<!--改变样本状态 不受权限控制 -->
+	  <action name="updateSampleExamEetail" class="com.hjw.wst.action.RegisterDeskAction" method="updateSampleExamEetail" />
+	  
+	  <!--改变样本状态 -登记台打印样本 不受权限控制 -->
+	  <action name="updateSampleExamEetaillis" class="com.hjw.wst.action.RegisterDeskAction" method="updateSampleExamEetaillis" />
+	  
+	  <!--获取个人报告领取方式数据824 -->
+	  <action name="getReportReceive" class="com.hjw.wst.action.RegisterDeskAction" method="getReportReceive" />
+	  
+	  <!--保存个人报告领取方式825 -->
+	  <action name="saveReportReceive" class="com.hjw.wst.action.RegisterDeskAction" method="saveReportReceive" />
+	  
+	  <!-- 执行就诊卡或者身份证（医保挂号） 补充挂号  801-->
+	  <action name="djtjzkinfodoreg" class="com.hjw.wst.action.RegisterDeskAction" method="djtjzkinfodoreg" />
+	  
+	  <!--团体发票保存信息 803  -->
+		<action name="saveSingleInviockTT" class="com.hjw.wst.action.CollectFeesAction"
+			method="saveSingleInviockTT" />
+			
+		  <!--团体发票更新信息 812  -->
+		<action name="updateSingleInviockTT" class="com.hjw.wst.action.CollectFeesAction"
+			method="updateSingleInviockTT" />
+		
+		<!--团体发票作废操作 804  -->
+		<action name="delSingleInviockTT" class="com.hjw.wst.action.CollectFeesAction"
+			method="delSingleInviockTT" />
+		
+		<!--团体特殊人员结算 806  -->	
+		<action name="setTeamAccounttsList" class="com.hjw.wst.action.StatementsAction"  method="setTeamAccounttsList" />
+			
+		<!--团体登记发票结算-结帐 807  -->	
+		<action name="termaccountinvoidadd" class="com.hjw.wst.action.StatementsAction"  method="termaccountinvoidadd" />
+	     
+	    <!--批次获取发票信息 808  -->	
+		<action name="getTeamAccountinvoidForBatch" class="com.hjw.wst.action.StatementsAction"  method="getTeamAccountinvoidForBatch" />
+
+		<!--选择结算单 810 -->	
+		<action name="statementjsdlistshow" class="com.hjw.wst.action.StatementsAction"  method="statementjsdlistshow" />
+		
+		<!--团体结算发票管理结算单 811 -->
+		<action name="getTeamAccountForBatchfplist" class="com.hjw.wst.action.StatementsAction"  method="getTeamAccountForBatchfplist" />
+		
+		<!--验证团体结算收费方式 -->
+		<action name="checkTteamAccountExamway" class="com.hjw.wst.action.StatementsAction"  method="checkTteamAccountExamway" />
+		
+		 <!-- 团体结算修改说明 815  -->
+	  <action name="updateTeamAccountForIddo" class="com.hjw.wst.action.StatementsAction" method="updateTeamAccountForIddo" />
+	  
+	   <!-- 团体结算获取体检人员信息 特殊 816 -->
+	  <action name="termExamInfoUserListts" class="com.hjw.wst.action.StatementsAction" method="termExamInfoUserListts" />
+
+	   <!-- 818 执行分组复制-->
+	  <action name="copygroupdo" class="com.hjw.wst.action.BatchAction" method="copygroupdo" />
+	  
+		<!-- 819 执行分组复制-->
+		<action name="groupcopydo" class="com.hjw.wst.action.BatchAction" method="groupcopydo" />
+		
+		<!-- 820 粘贴套餐和项目-->
+		<action name="grouppostdo" class="com.hjw.wst.action.BatchAction" method="grouppostdo" />
+		
+		<!--团体发票记录删除操作 821  -->
+		<action name="delrecordSingleInviockTT" class="com.hjw.wst.action.CollectFeesAction" method="delrecordSingleInviockTT" />
+		
+		<!--992 体检划价 -->
+		<action name="savePricing" class="com.hjw.wst.action.CollectFeesAction" method="savePricing"/>
+		
+		<!--993 取消划价 -->
+		<action name="cancel_pricing" class="com.hjw.wst.action.CollectFeesAction" method="cancel_pricing"/>
+		
+		<!-- 994 划价后收费 -->
+		<action name="savePricingCollectFees" class="com.hjw.wst.action.CollectFeesAction" method="savePricingCollectFees"/>  
+		
+		<!-- 995 划价查询项目列表 -->
+		<action name="getPricingWitemList" class="com.hjw.wst.action.CollectFeesAction" method="getPricingWitemList"/>  
+		
+		<!-- 996 划价退费 -->
+		<action name="savePricingRefund" class="com.hjw.wst.action.CollectFeesAction" method="savePricingRefund"/>
+		
+		<!-- 998 划价按照项目发送缴费申请 -->
+		<action name="pricingPaymentApplication" class="com.hjw.wst.action.CollectFeesAction" method="pricingPaymentApplication"/>   
+		
+		<!-- 997 划价退费 按照项目查询收费方式 -->
+		<action name="getChargingWayByItemIds" class="com.hjw.wst.action.CollectFeesAction" method="getChargingWayByItemIds"/>  
+		
+		<!-- 999  按照单位获取商户信息 -->
+		<action name="getMerchantInfoByCom_id" class="com.hjw.wst.action.CollectFeesAction" method="getMerchantInfoByCom_id"/>  
+		
+		<!-- 1000  按照单位获取商户信息 -->
+		<action name="saveMerchantInfo" class="com.hjw.wst.action.CollectFeesAction" method="saveMerchantInfo"/>
+		
+		<!-- 1001  商户充值 -->  
+		<action name="saveRecharge" class="com.hjw.wst.action.CollectFeesAction" method="saveRecharge"/>  
+		
+		<!-- 1002  商户流水 -->  
+		<action name="getTransactionFlowList" class="com.hjw.wst.action.CollectFeesAction" method="getTransactionFlowList"/>  
+		
+		<!-- 1003  商户流水开发票 -->  
+		<action name="saveInvoiceInfo" class="com.hjw.wst.action.CollectFeesAction" method="saveInvoiceInfo"/>  
+		
+		<!-- 1004  商户发票信息 -->  
+		<action name="getInvoiceInfoList" class="com.hjw.wst.action.CollectFeesAction" method="getInvoiceInfoList"/>  
+		
+		<!-- 1005  商户作废发票信息 -->  
+		<action name="deleteInvoiceInfo" class="com.hjw.wst.action.CollectFeesAction" method="deleteInvoiceInfo"/> 
+		
+		<!-- 100  商户冻结/解冻 -->  
+		<action name="editCompanyAccount" class="com.hjw.wst.action.CollectFeesAction" method="editCompanyAccount"/>
+		
+		<!--用户签名保存 823  -->
+		<action name="managersignupdate" class="com.hjw.wst.action.UserManagerAction" method="managersignupdate" />
+
+		<!--获取用户签名图片 824  -->
+		<action name="getuserPhoto" class="com.hjw.wst.action.UserManagerAction" method="getuserPhoto" />
+		
+		<!--上传用户签名图片 825  -->
+		<action name="saveUserSign" class="com.hjw.wst.action.UserManagerAction" method="saveUserSign" />
+		
+		<!--体检用户签名保存 826  -->
+		<action name="examsignupdate" class="com.hjw.wst.action.RegisterDeskAction" method="examsignupdate" />
+
+		<!--获取体检用户签名图片 827  -->
+		<action name="getexamPhotosgin" class="com.hjw.wst.action.RegisterDeskAction" method="getexamPhotosgin" />
+
+		<!--团体日结获取体检信息 831  -->
+		<action name="gettrjnExamInfoUserList" class="com.hjw.wst.action.StatementsAction" method="gettrjnExamInfoUserList" />
+		
+		<!--团体执行日结 832  -->
+		<action name="termtrjndo" class="com.hjw.wst.action.StatementsAction" method="termtrjndo" />
+
+		<!--团体结算取消日结 835  -->
+		<action name="termtrjndeldo" class="com.hjw.wst.action.StatementsAction" method="termtrjndeldo" />
+
+        <!--团体日结查询 834  -->
+		<action name="gettrjnExamInfoUsershow" class="com.hjw.wst.action.StatementsAction" method="gettrjnExamInfoUsershow" />
+		
+		 <!-- 合并疾病列表587-->
+		<action name="querytMergePage" class="com.hjw.wst.action.DiseaseMergeAction" method="querytMergePage"/>
+		
+		
+		 <!-- 删除合并疾病588-->
+		<action name="deleteMerge" class="com.hjw.wst.action.DiseaseMergeAction" method="deleteMerge"/>		
+		
+		
+		 <!-- 获取疾病下拉框591-->
+		<action name="getPageDklodegcombobox" class="com.hjw.wst.action.DiseaseMergeAction" method="getPageDklodegcombobox"/>
+		
+		
+		 <!-- 保存合并疾病592-->
+		<action name="savediseaseMerge" class="com.hjw.wst.action.DiseaseMergeAction" method="savediseaseMerge"/>
+		
+		
+		 <!--合并疾病修改时获取疾病593-->
+		<action name="updateDiseaseKnowloedgeDTOList" class="com.hjw.wst.action.DiseaseMergeAction" method="updateDiseaseKnowloedgeDTOList"/>
+		
+		
+		<!--团体日结获取体检信息 831  -->
+		<action name="gettrjnExamInfoUserList" class="com.hjw.wst.action.StatementsAction" method="gettrjnExamInfoUserList" />
+		
+		<!--团体执行日结 832  -->
+		<action name="termtrjndo" class="com.hjw.wst.action.StatementsAction" method="termtrjndo" />
+
+		<!--团体结算取消日结 835  -->
+		<action name="termtrjndeldo" class="com.hjw.wst.action.StatementsAction" method="termtrjndeldo" />
+
+        <!--团体日结查询 834  -->
+		<action name="gettrjnExamInfoUsershow" class="com.hjw.wst.action.StatementsAction" method="gettrjnExamInfoUsershow" />
+		
+		 <!--同步档案 836 -->
+        <action name="djtGcustomertbbah" class="com.hjw.wst.action.RegisterDeskAction" method="djtGcustomertbbah"/>
+		
+		<!--多体征采集仪查询信息接口 -->
+        <action name="getTExamInfoForNum" class="com.hjw.wst.action.ThirdPRRAction" method="getTExamInfoForNum"/>
+        
+        <!--多体征采集仪信息入库接口 -->
+        <action name="setMultiSignIn" class="com.hjw.wst.action.ThirdPRRAction" method="setMultiSignIn"/>
+        
+        <!--获取所有科室 595 -->
+        <action name="getDepartmentDepList" class="com.hjw.wst.action.DiseaseLogicAction" method="getDepartmentDepList"/>
+        
+        <!--根据科室过滤疾病 596-->
+        <action name="getDepDiseaseKnowloedge" class="com.hjw.wst.action.DiseaseLogicAction" method="getDepDiseaseKnowloedge"/>	
+        <action name="setMultiSignIn" class="com.hjw.wst.action.ThirdPRRAction" method="setMultiSignIn"/>	
+        
+         <!--冻结页面查询体检信息 840-->
+        <action name="getfreezeExamInfoUserList" class="com.hjw.wst.action.CustomerInfoAction" method="getfreezeExamInfoUserList"/>
+        
+        <!--执行冻结操作 841-->
+        <action name="examinfofreezedo" class="com.hjw.wst.action.CustomerInfoAction" method="examinfofreezedo"/>
+
+        <!--执行解冻操作界面 842-->
+        <action name="getfreezeExamInfoshow" class="com.hjw.wst.action.CustomerInfoAction" method="getfreezeExamInfoshow"/>
+        
+        <!--执行解冻操作 843-->
+        <action name="examinfounfreezedo" class="com.hjw.wst.action.CustomerInfoAction" method="examinfounfreezedo"/>
+  		
+  		 <!--获取人员项目600-->
+		<action name="getExamInfoItemList" class="com.hjw.wst.action.UpdateExamstatusNAction" method="getExamInfoItemList"/>
+
+  		 <!--修改项目状态为未检901-->
+		<action name="updateStatusN" class="com.hjw.wst.action.UpdateExamstatusNAction" method="updateStatusN"/>
+			 
+		 <!--团体结算保存所有满足条件的信息 844-->
+		<action name="setTeamAccountListall" class="com.hjw.wst.action.StatementsAction" method="setTeamAccountListall"/>
+		
+		  <!-- 871 单位批量设置行业类型  -->
+		<action name="doAllUserhangye" class="com.hjw.wst.action.CustomerInfoAction" method="doAllUserhangye" />
+
+		 <!--获取排期数据903-->
+		<action name="getSchedulePageList" class="com.hjw.wst.action.GroupSchedulingAction" method="getSchedulePageList"/>
+			 
+		 <!--新增排期906-->
+		<action name="saveSchedulePage" class="com.hjw.wst.action.GroupSchedulingAction" method="saveSchedulePage"/>
+			 
+		 <!--删除排期905-->
+		<action name="deleteSchedulePage" class="com.hjw.wst.action.GroupSchedulingAction" method="deleteSchedulePage"/>
+			 
+		 <!--修改排期904-->
+		<action name="updateSchedulePage" class="com.hjw.wst.action.GroupSchedulingAction" method="updateSchedulePage"/>
+			
+       <!--911 lis  检验项目列表  -->
+		<action name="getThridLisClassList" class="com.hjw.wst.action.ChargingItemAction"
+			method="getThridLisClassList" />
+		
+       <!--912 lis  检验项目细项列表  -->
+		<action name="getThridLisItemList" class="com.hjw.wst.action.ChargingItemAction"
+			method="getThridLisItemList" />
+			
+		 <!--  根据科室查询所有的收费项目  -->
+		<action name="getChargingItemListByDepId" class="com.hjw.wst.action.ChargingItemAction"
+			method="getChargingItemListByDepId" />
+			
+		   <!--914 lis  检验项目细项列表  -->
+		<action name="getExamintionThridLisItemList" class="com.hjw.wst.action.ExaminationItemAction"
+			method="getExamintionThridLisItemList" />
+			
+			<!-- 查询人员 1005 -->
+		<action name="getbunkExamInfoUserList" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getbunkExamInfoUserList" />
+		
+		<!--保存床位 1006 -->
+		<action name="savebunk" class="com.hjw.wst.action.RegisterDeskAction"
+			method="savebunk" />
+			
+		<!--get要合并档案信息 1008 -->
+		<action name="getselectedarch" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getselectedarch" />
+		
+		<!--手动合并档案信息 1009 -->
+		<action name="updateArchCombine" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="updateArchCombine" />
+		
+		<!--自动合并档案信息 1010 -->
+		<action name="autocombinearch" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="autocombinearch" />
+		
+		<!--获取版本信息 1011 -->
+		<action name="getVersion" class="com.hjw.wst.action.AccountAction" method="getVersion" />	
+		
+		<!--获取版本信息 1012 -->
+		<action name="getVersionInfos" class="com.hjw.wst.action.AccountAction"
+			method="getVersionInfos" />	
+			
+			
+		   <!--915 lis  检验项目细项列表带分页  -->
+		<action name="getExamintionThridLisItemTable" class="com.hjw.wst.action.ExaminationItemAction"
+			method="getExamintionThridLisItemTable" />
+			
+				
+       <!--916 评测卡上传体检信息 -->
+		<action name="getExaminfoSet" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getExaminfoSet" />
+       <!--917 浙二加项判断病人id是否写入  -->
+		<action name="getPatientId" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getPatientId" />
+	    <!--918 收费项目同步his价格  -->
+		<action name="updateHIsPriceSynchro" class="com.hjw.wst.action.ChargingItemAction"
+			method="updateHIsPriceSynchro" />
+			
+		<!--1016 科室打印 -->
+		<action name="getdep_user_print" class="com.hjw.wst.action.UserManagerAction"
+			method="getdep_user_print" />
+		
+		<!--1017科室打印 -->
+		<action name="printdepsave" class="com.hjw.wst.action.RoleAction"
+			method="printdepsave" />
+					
+		<!--1019 科室条码打印查询 -->
+		<action name="getPrintListShow" class="com.hjw.wst.action.UserManagerAction"
+			method="getPrintListShow" />
+
+		<!--所有影像科室检查结果 1021-->
+		<action name="getAllViewExamList" class="com.hjw.wst.action.ViewExamAction"
+			method="getAllViewExamList" />
+
+			<!--  获取检查医生审核医生920-->
+		<action name="getDoctor" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getDoctor"/>
+		<!--  终检室批量审核921-->
+		<action name="getBatchAudit" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getBatchAudit"/>
+		
+		<!--  终检室批量审核-->
+		<action name="getBatchRetrial" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getBatchRetrial"/>
+		
+		<!--影像科室项目查询 1023-->
+		<action name="getViewExamCharingItem" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getViewExamCharingItem" />
+		
+		<!--影像科室检查结果 1024-->
+		<action name="getViewExamResult" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getViewExamResult" />
+			
+		<!--get阳性标记list 1025-->
+		<action name="getPositiveFindList" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getPositiveFindList" />
+		
+		<!--影像科室检查结果阳性标记保存 1026-->
+		<action name="savePositivefind" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="savePositivefind" />
+				    <!-- 卡信息管理修改 927 -->
+		<action name="updateCard" class="com.hjw.wst.action.CardInfoAction"
+			method="updateCard"/>
+			<!-- 查询预约信息 888 -->
+		<action name="yuyueShowListdo" class="com.hjw.wst.action.RegisterDeskAction"
+			method="yuyueShowListdo" />	
+			
+			<!-- 执行微信同步操作 889 -->
+		<action name="setweixinadddo" class="com.hjw.wst.action.ExamSetAction" method="setweixinadddo" />
+		
+		<!-- 作废无效发票 928 -->
+		<action name="getWuxaiofapiaozuifei" class="com.hjw.wst.action.CollectFeesAction" method="getWuxaiofapiaozuifei" />
+		<!-- 登记台加项复制套餐项目 936 -->
+		<action name="getcopaitem" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getcopaitem" />
+			
+			
+		<!--套餐类别列表938 -->
+		<action name="getqueryExamSetTypeList" class="com.hjw.wst.action.ExamSetTypeAction"
+			method="getqueryExamSetTypeList" />
+		<!-- -新增类别939-->
+		<action name="saveExamSetType" class="com.hjw.wst.action.ExamSetTypeAction"
+			method="saveExamSetType" />
+		<!--  -删除类别941-->
+		<action name="deleteExamSetTypeList" class="com.hjw.wst.action.ExamSetTypeAction"
+			method="deleteExamSetTypeList" />
+		<!--  套餐获取类别下拉框943-->
+		<action name="getExamSet_typeList" class="com.hjw.wst.action.ExamSetTypeAction"
+			method="getExamSet_typeList" />
+			
+			<!--团体结帐生成结帐记录 890-->
+		<action name="termaccountgroupadd" class="com.hjw.wst.action.StatementsAction"
+			method="termaccountgroupadd" />			
+			
+		<!--删除团体结帐的结帐单 891-->
+		<action name="delaccountGroupTT" class="com.hjw.wst.action.StatementsAction" method="delaccountGroupTT" />			
+			
+		<!--团体结帐确认付款 892-->
+		<action name="qrfkaccountGroupTT" class="com.hjw.wst.action.StatementsAction" method="qrfkaccountGroupTT" />			
+			
+			<!--团体结帐付款方式维护 893-->
+		<action name="teamwayList" class="com.hjw.wst.action.StatementsAction" method="teamwayList" />
+		
+		<!--团体划账获取商户余额已开发票金额-->
+		<action name="getCompanyAccountAmountByComId" class="com.hjw.wst.action.StatementsAction" method="getCompanyAccountAmountByComId" />
+		
+		<!--保存团体划账信息-->  
+		<action name="saveDrawAccounts" class="com.hjw.wst.action.StatementsAction" method="saveDrawAccounts" />
+			
+			<!-- 就诊卡列表931 -->
+		<action name="getjiuzhenkaList" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getjiuzhenkaList"/>
+		<!-- 就诊卡删除932 -->
+		<action name="deletejiuzhenka" class="com.hjw.wst.action.RegisterDeskAction"
+			method="deletejiuzhenka"/>
+		<!-- 就诊卡添加933 -->
+		<action name="savejiuzhenka" class="com.hjw.wst.action.RegisterDeskAction"
+			method="savejiuzhenka"/>
+		<!-- 验证就诊卡唯一935 -->
+		<action name="getvalidatevilit" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getvalidatevilit"/>
+			
+		<action name="getCompanForDept2" class="com.hjw.wst.action.CustomerInfoAction" method="getCompanForDept2"/>
+    
+    <!-- 人员导入界面导出人员到excel -->
+		<action name="saveimpData" class="com.hjw.wst.action.CustomerInfoAction" method="saveimpData" />
+		<!-- 删除当前任务批次下的错误记录 -->
+		<action name="deleteimpuserToExaminfodo" class="com.hjw.wst.action.CustomerInfoAction" method="deleteimpuserToExaminfodo" />
+	
+				<!--样本项目维护数据953-->
+		<action name="getSampleDemoChargingItemList" class="com.hjw.wst.action.SampleDemoAction"
+			method="getSampleDemoChargingItemList"/>
+			<!--删除关系954-->
+		<action name="deleteSampleDemoChargingItem" class="com.hjw.wst.action.SampleDemoAction"
+			method="deleteSampleDemoChargingItem"/>
+			<!--添加关系955-->
+		<action name="saveSampleDemoChargingItemPage" class="com.hjw.wst.action.SampleDemoAction"
+			method="saveSampleDemoChargingItemPage"/>
+			<!--获取收费项目列表956-->
+		<action name="getjianyanChagingitem" class="com.hjw.wst.action.SampleDemoAction"  method="getjianyanChagingitem"/>
+			<!--根据收费项目获取样本关系958-->
+		<action name="getSampleDemoListShow" class="com.hjw.wst.action.SampleDemoAction"  method="getSampleDemoListShow"/>
+			<!--获取可以打印的科室959-->
+		<action name="getDepartmentDepBarCode" class="com.hjw.wst.action.SampleDemoAction"  method="getDepartmentDepBarCode"/>
+			<!--获取项目带项目数据960-->
+		<action name="getItemSampleDemoDai" class="com.hjw.wst.action.CustomerInfoAction"  method="getItemSampleDemo"/>
+		
+		<!-- 按照体检编号发送his申请 -->
+		<action name="allApplyApp" class="com.hjw.wst.action.RegisterDeskAction" method="allApplyApp" />
+		
+		<!-- 报告解读综合查询 1235-->
+         <action name="flowexamListm" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexamListm"/> 
+         
+         <!-- 报告解读获取内容 1236-->
+         <action name="flowmmessageshow" class="com.hjw.wst.action.ExamflowManagerAction" method="flowmmessageshow"/> 
+         
+          <!-- 报告解读保存内容 1237-->
+         <action name="flowmmessageUpdate" class="com.hjw.wst.action.ExamflowManagerAction" method="flowmmessageUpdate"/>
+			
+		<!-- 黄岗就诊卡获取人员信息 -->
+		<action name="getJiuzhenkaInfo" class="com.hjw.wst.action.CustomerInfoAction" method="getJiuzhenkaInfo" />
+		<!-- 根据档案号查询档案信息 -->
+		<action name="getCustomerinfoByArchNum" class="com.hjw.wst.action.CustomerInfoAction" method="getCustomerinfoByArchNum" />
+		
+		<!-- 启用停用数据字典1304 -->
+		<action name="update_dictionary_off_on" class="com.hjw.wst.action.DataDictionaryAction" method="update_dictionary_off_on"/>
+		<!-- 数据字典数据类型验证-1305-->	
+		<action name="data_type_validate" class="com.hjw.wst.action.DataDictionaryAction" method="data_type_validate" />		
+        <!-- 数据字典数据编码验证-1306-->	
+		<action name="data_code_validate" class="com.hjw.wst.action.DataDictionaryAction" method="data_code_validate" />
+        <!-- 数据字典数据名称验证-1307-->	
+		<action name="data_name_validate" class="com.hjw.wst.action.DataDictionaryAction" method="data_name_validate" />
+        
+        <!-- 团体获取缴费结果 -->
+        <action name="getHisTermFeesResult"  class="com.hjw.wst.action.StatementsAction"  method="getHisTermFeesResult" />
+        
+      <!-- 团体报告获取体检人员信息 1239 -->
+	  <action name="termReportUserList" class="com.hjw.wst.action.ReportManagerAction" method="termReportUserList" />
+	  
+	  <!--1153 保存预览打印临时数据-->
+		<action name="saveExamPrintTmp" class="com.hjw.wst.action.ExamPrintTmpAction" method="saveExamPrintTmp"/>
+		
+		<!--通过单位批次获取职业体检类型   -->
+		<action name="termGetzocforcomBatch" class="com.hjw.wst.action.ReportManagerAction"
+			method="termGetzocforcomBatch" />
+			
+			<!-- 通过单位批次获取职业危害因素类型 -->
+		<action name="termGetzofforcomBatch" class="com.hjw.wst.action.ReportManagerAction"
+			method="termGetzofforcomBatch" />
+			
+			 <!-- 团体报告获取体检人员信息职业病  -->
+	  <action name="termReportUserZybList" class="com.hjw.wst.action.ReportManagerAction" method="termReportUserZybList" />
+	
+		<!-- 保存量表问卷结果-1342-->
+		<action name="saveScaleResult" class="com.hjw.wst.action.ScaleAction" method="saveScaleResult" />
+        <!-- 获取问卷显示一级菜单-1344-->
+		<action name="getFirstMenu_questshow" class="com.hjw.wst.action.ScaleAction" method="getFirstMenu_questshow" />
+		
+		<!-- 禁用疾病逻辑-1345-->
+		<action name="update_diseaseLogic_off" class="com.hjw.wst.action.DiseaseLogicAction" method="update_diseaseLogic_off"/>
+		<!-- 启用疾病逻辑-1346-->
+		<action name="update_diseaseLogic_on" class="com.hjw.wst.action.DiseaseLogicAction" method="update_diseaseLogic_on"/>
+		<!-- 获取所有介绍人 1359 -->
+		<action name="queryIntroducerList" class="com.hjw.wst.action.CommonAction" method="queryIntroducerList" />
+		
+		<!--科室树 1435 -->
+		<action name="depTree" class="com.hjw.wst.action.CustomerInfoAction" method="depTree"  />
+		<!--登记台获取项目 1436 -->
+		<action name="getDJTItem" class="com.hjw.wst.action.CustomerInfoAction" method="getDJTItem"  />
+		<!-- 套餐id获取收费项目1437 -->
+		<action name="getSetidChagingitem" class="com.hjw.wst.action.CustomerInfoAction" method="getSetidChagingitem"  />
+		<!--收费项目带出耗材项目1438 -->
+		<action name="getChargingItemConsumables" class="com.hjw.wst.action.CustomerInfoAction" method="getChargingItemConsumables"  />
+		<!--获取人员选择的收费项目1439 -->
+		<action name="getExaminfoChargingItemadd" class="com.hjw.wst.action.CustomerInfoAction" method="getExaminfoChargingItemadd"  />
+		<!--登记台项目id获取项目1440 -->
+		<action name="getDJTfindChargingItem" class="com.hjw.wst.action.CustomerInfoAction" method="getDJTfindChargingItem"  />
+		
+		<!-- 脑健康体检查询title信息 1504-->
+		<action name="queryBrainTitle" class="com.hjw.wst.action.QuestDictAction" method="queryBrainTitle" />
+		
+		<!-- 脑健康项目Project信息 1505-->
+		<action name="queryProjectTwoGrid" class="com.hjw.wst.action.QuestDictAction" method="queryProjectTwoGrid" />
+		
+		<!-- 脑健康体检查询module信息 1506-->
+		<action name="queryModuleList" class="com.hjw.wst.action.QuestDictAction" method="queryModuleList" />
+		
+		<!-- 脑健康体检查询style信息 1507-->
+		<action name="queryStyleList" class="com.hjw.wst.action.QuestDictAction" method="queryStyleList" />
+		
+		<!-- 脑健康体检查询title 修改/新增 信息 1508-->
+		<action name="brainTitleAdd" class="com.hjw.wst.action.QuestDictAction" method="brainTitleAdd" />
+		
+		<!-- 脑健康标题删除 1509-->
+		<action name="deleteBrainTitle" class="com.hjw.wst.action.QuestDictAction" method="deleteBrainTitle" />
+		
+		<!-- 脑健康子项目分页查询 1510-->
+		<action name="getQuestionGrid" class="com.hjw.wst.action.QuestDictAction" method="getQuestionGrid" />
+		
+		<!-- 脑健康项目删除 1511-->
+		<action name="deleProjectQuest" class="com.hjw.wst.action.QuestDictAction" method="deleProjectQuest" />
+		
+		<!-- 脑健康项目修改/新增 1512-->
+		<action name="brainQuestionAdd" class="com.hjw.wst.action.QuestDictAction" method="brainQuestionAdd" />
+		
+        <!-- 对批次进行锁定 1267-->
+		<action name="doaccountbatchto" class="com.hjw.wst.action.BatchAction" method="doaccountbatchto"/>
+		
+		 <!-- 对批次解除锁定 1268-->
+		<action name="doaccountbatchtoren" class="com.hjw.wst.action.BatchAction" method="doaccountbatchtoren"/>
+      
+        <!-- 对批次进行结帐 1800-->
+		<action name="dooverbatchto" class="com.hjw.wst.action.BatchAction" method="dooverbatchto"/>
+		
+		 <!-- 对批次解除结帐 1801-->
+		<action name="dooverbatchtoren" class="com.hjw.wst.action.BatchAction" method="dooverbatchtoren"/>
+		
+		 <!-- 对批次进行审核 1269-->
+		<action name="docheckbatchto" class="com.hjw.wst.action.BatchAction" method="docheckbatchto"/>
+		
+		 <!-- 对批次取消审核 1270-->
+		<action name="docheckbatchtoren" class="com.hjw.wst.action.BatchAction" method="docheckbatchtoren"/>
+		<action name="getMeunListFirst" class="com.hjw.wst.action.QuestExamAction" method="getMeunListFirst" />
+	
+		<!-- 脑健康展示问题信息1515-->
+		<action name="getQuestionList" class="com.hjw.wst.action.QuestExamAction" method="getQuestionList" />
+	
+		<!-- 脑健康部分问题所有信息1516-->
+		<action name="getQuestAllList" class="com.hjw.wst.action.QuestExamAction" method="getQuestAllList" />
+	
+		<!-- 脑健康部分问题所有信息1517-->
+		<action name="clickSaveData" class="com.hjw.wst.action.QuestExamAction" method="clickSaveData" />
+	
+		<!-- 脑健康保存record表信息  1518-->
+		<action name="saveRecordMsg" class="com.hjw.wst.action.QuestExamAction" method="saveRecordMsg" />
+		
+		<!-- 脑健康查询record表信息中信息  1519-->
+		<action name="queryMegFromRecord" class="com.hjw.wst.action.QuestExamAction" method="queryMegFromRecord" />
+		
+		<!-- 脑健康查询record_list表中答案信息  1520-->
+		<action name="QueryResultMsg" class="com.hjw.wst.action.QuestExamAction" method="QueryResultMsg" />
+		
+		<!-- 脑健康修改record表记录  1521-->
+		<action name="saveEndRecord" class="com.hjw.wst.action.QuestExamAction" method="saveEndRecord" />
+		
+		<!-- 获取脑健康部分问题所有信息及问题回答状态1522-->
+		<action name="getQuestAllList_status" class="com.hjw.wst.action.QuestExamAction" method="getQuestAllList_status" />
+		
+		<!-- 获取脑健康查询是否付费1523-->
+		<action name="queryIsPayCharing" class="com.hjw.wst.action.QuestExamAction" method="queryIsPayCharing" />
+	
+		<!-- 后台管理查询下拉问卷类型1524-->
+		<action name="querySelectType" class="com.hjw.wst.action.QuestDictAction" method="querySelectType" />
+		
+		<!-- 前台展示初始化默认值1525-->
+		<action name="insertIsdefaultAnswer" class="com.hjw.wst.action.QuestExamAction" method="insertIsdefaultAnswer" />
+		
+		<!-- 前台展示加载title信息1526-->
+		<action name="queryTitleCont" class="com.hjw.wst.action.QuestExamAction" method="queryTitleCont" />
+		
+		<!-- 前台展示定位问题 信息1527-->
+		<action name="queryQuestNameFixed" class="com.hjw.wst.action.QuestExamAction" method="queryQuestNameFixed" />
+		
+		<!-- 前台模糊查询症状 信息1528-->
+		<action name="queryLikeTitleName" class="com.hjw.wst.action.QuestExamAction" method="queryLikeTitleName" />
+		
+		<!-- 前台添加症状信息1529-->
+		<action name="addZhengZhuangById" class="com.hjw.wst.action.QuestExamAction" method="addZhengZhuangById" />
+		
+		<!-- 内外科判断为放射/非放射 1530-->
+		<action name="queryIsTiJianType" class="com.hjw.wst.action.DepInspectAction" method="queryIsTiJianType" />
+		
+		<!-- 前台症状的增加/删除  1531-->
+		<action name="addZhengZhaungUpdate" class="com.hjw.wst.action.QuestExamAction" method="addZhengZhaungUpdate" />
+		
+		<!-- 前台查询内外科是否已经答题  1532-->
+		<action name="queryIsNeiWaiAns" class="com.hjw.wst.action.QuestExamAction" method="queryIsNeiWaiAns" />
+		
+		<!-- 前台查询症状新  1533-->
+		<action name="resultWenZhengMsg" class="com.hjw.wst.action.QuestExamAction" method="resultWenZhengMsg" />
+		
+		<!-- 查询所有报告类型  1537-->
+		<action name="queryCommonReportTypeList" class="com.hjw.wst.action.ReportManagerAction" method="queryCommonReportTypeList" />
+		
+		<!-- 修改报告类型  1538-->
+		<action name="updateReportTypeEdit" class="com.hjw.wst.action.ReportManagerAction" method="updateReportTypeEdit" />
+		
+		<!-- 同步数据接口 1539-->
+        <action name="isSynchroExamInfo" class="com.hjw.wst.action.CustomerInfoAction" method="isSynchroExamInfo" />
+        
+        <!-- 未检查项目对应人员列表1280  -->
+		<action name="nottermaCExamInfoList" class="com.hjw.wst.action.StatementsAction" method="nottermaCExamInfoList"/>
+
+		<!-- 未检查人员对应项目列表1281 -->
+		<action name="nottermaEChargItemList" class="com.hjw.wst.action.StatementsAction" method="nottermaEChargItemList"/>
+	
+		<!-- 人员异动新增项目 1546-->
+		<action name="getExamInfoYditemAddList" class="com.hjw.wst.action.CustomerInfoAction" method="getExamInfoYditemAddList" />	
+		
+		<!-- 登记台获取 人员收费项目列表 1547-->
+		<action name="ydcustdelchangitemlist" class="com.hjw.wst.action.CustomerInfoAction" method="ydcustdelchangitemlist" />	
+		
+		<!--  异动体检人员显示 1548-->
+		<action name="getExamInfoYdUserList" class="com.hjw.wst.action.CustomerInfoAction" method="getExamInfoYdUserList" />
+	
+		<!-- 异动体检人删除项目 1549-->
+		<action name="getExamInfoYditemdelList" class="com.hjw.wst.action.CustomerInfoAction" method="getExamInfoYditemdelList" />
+	
+		<!-- 批次信息1550 -->
+		<action name="getBatchForGroupTwo" class="com.hjw.wst.action.CustomerInfoAction" method="getBatchForGroupTwo" />
+	
+		<!-- 保存排序 1553-->
+		<action name="saveGroupOrder" class="com.hjw.wst.action.BatchAction" method="saveGroupOrder" />
+		
+		<!-- 是否上传报告 1554-->
+		<action name="reportUploadExamInfo" class="com.hjw.wst.action.CustomerInfoAction" method="reportUploadExamInfo" />
+		
+	
+		<!-- 查询系统到期时间  -->
+	  	<action name="queryNotices" class="com.hjw.wst.action.Examinatioin_centerAction" method="queryNotices" />
+	
+		<!--查询该人员是否已经冻结  -->
+	    <action name="djdBuZuoGetList" class="com.hjw.wst.action.RegisterDeskAction" method="djdBuZuoGetList" />
+	  
+	  	<!--登记台 补做登记 1583 -->
+		<action name="djtExaminfoBuzuo" class="com.hjw.wst.action.RegisterDeskAction" method="djtExaminfoBuzuo"/>
+		
+		<!--1152 退费申请-->
+		<action name="cancelFeesApplication" class="com.hjw.wst.action.RegisterDeskAction" method="cancelFeesApplication"/>
+	  
+		<!-- 多部门查询 -->
+		<action name="getExamInfoUserListDeptAll" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getExamInfoUserListDeptAll" />		
+			
+		<!--查询替检者信息  -->
+	 	<action name="queryReplaceUser" class="com.hjw.wst.action.RegisterDeskAction" method="queryReplaceUser" />
+	 	
+	 	<!--保存替检者信息  -->
+	 	<action name="saveReplaceUserData" class="com.hjw.wst.action.RegisterDeskAction" method="saveReplaceUserData" />
+		
+		<!-- 查询已检、未检、弃检、延期人数  -->
+	  	<action name="queryCountTypeUser" class="com.hjw.wst.action.DepInspectAction" method="queryCountTypeUser" />
+
+		<!-- 异动体检人员对应1555-->
+		<action name="ydcustchangitemlist" class="com.hjw.wst.action.RegisterDeskAction" method="ydcustchangitemlist" />
+		
+		<!-- 登记台获取 人员收费项目列表1556-->
+		<action name="ydcustaddchangitemlist" class="com.hjw.wst.action.RegisterDeskAction" method="ydcustaddchangitemlist" />
+	
+		<!-- 第三方日志信息主表查询 1561-->
+		<action name="queryThirdInterfaceLog" class="com.hjw.wst.action.ThridInterfaceLogAction" method="queryThirdInterfaceLog" />
+	
+		<!-- 第三方日志信息明细表查询 1562-->
+		<action name="getLogDetailDrid" class="com.hjw.wst.action.ThridInterfaceLogAction" method="getLogDetailDrid" />
+		
+		<!-- 第三方导出主表 日志信息 1564-->
+		<action name="expTxtContentFile" class="com.hjw.wst.action.ThridInterfaceLogAction" method="expTxtContentFile" />
+		
+		<!-- 第三方导出明细表 日志信息 1566-->
+		<action name="expTxtDetailContentFile" class="com.hjw.wst.action.ThridInterfaceLogAction" method="expTxtDetailContentFile" />
+	
+		<!-- 第三方批量删除日志详情 1567-->
+		<action name="deleteDetailLogMsg" class="com.hjw.wst.action.ThridInterfaceLogAction" method="deleteDetailLogMsg" />
+		
+		<!-- 第三方批量删除主表日志和附表日志 1568-->
+		<action name="deleteLogMaterAndDetail" class="com.hjw.wst.action.ThridInterfaceLogAction" method="deleteLogMaterAndDetail" />
+		
+		<!-- 第三方c查看明细表 1569-->
+		<action name="queryViewDetailListLog" class="com.hjw.wst.action.ThridInterfaceLogAction" method="queryViewDetailListLog" />
+		
+		<!-- 复制批次-选择源批次1242-->
+		<action name="docoptbatchfrom" class="com.hjw.wst.action.BatchAction" method="docoptbatchfrom"/>
+		
+		<!-- 复制批次-复制到目标单位下面1243-->
+		<action name="docoptbatchto" class="com.hjw.wst.action.BatchAction" method="docoptbatchto"/>
+		
+		
+		<!--系统配置show 1653 -->	
+		<action name="centerConfigList" class="com.hjw.wst.action.DataDictionaryAction"
+		method="centerConfigList" /> 
+		 
+		<!--新增系统配置 1654 -->
+		<action name="savacenterconfig" class="com.hjw.wst.action.DataDictionaryAction"
+		method="savacenterconfig" />
+		
+		<!--修改系统配置 1655 -->
+		<action name="updateCenterConfigEdit" class="com.hjw.wst.action.DataDictionaryAction"
+		method="updateCenterConfigEdit" />
+		
+				
+		<!--1197查询未处理的危机值信息 -->
+		<action name="getCriticalNotice" class="com.hjw.wst.action.CriticalAction" method="getCriticalNotice"/>
+		<!--  调用问卷接口获取报告评测PDF922-->
+		<action name="getYxCardPdf" class="com.hjw.wst.action.YxCardPdfAction"
+			method="getYxCardPdf"/>
+		<!--  调用问卷接口获取报告评测PDF923-->
+		<action name="getDepShwoPinCeBaoGaoButtion" class="com.hjw.wst.action.YxCardPdfAction"
+			method="getDepShwoPinCeBaoGaoButtion"/>
+		<!--  删除PDF临时文件PDF924-->
+		<action name="getDeleteYxCardPdf" class="com.hjw.wst.action.YxCardPdfAction"
+			method="getDeleteYxCardPdf"/>
+						
+		<!-- 流程-总检主页面 1940 -->
+		<action name="flowexameListz_dbgj" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexameListz_dbgj" />
+		
+		<!-- 流程-总检主页面获取主检查医生 1941 -->
+		<action name="getFlowExamDoc" class="com.hjw.wst.action.ExamflowManagerAction" method="getFlowExamDoc" />
+		
+		<!-- 流程-总检主页面获取主检查体检信息 1942 -->
+		<action name="flowexameListzjbg" class="com.hjw.wst.action.ExamflowManagerAction" method="flowexameListzjbg" />
+		
+		<!--流程核收与取消核收操作保存 1944-->
+		<action name="flowacceptanceCheckExamInfo" class="com.hjw.wst.action.ExamflowManagerAction" method="flowacceptanceCheckExamInfo" />
+		
+		<!--获取卡对应套餐信息  1945-->
+		<action name="getCardExamSet" class="com.hjw.wst.action.RegisterDeskAction" method="getCardExamSet" />
+		<!--获取卡对应套餐项目信息  1946-->
+		<action name="getCardExamCharing" class="com.hjw.wst.action.RegisterDeskAction" method="getCardExamCharing" />
+		
+		<!--驳回管理列表分页 2113-->
+		<action name="finalRejectionList" class="com.hjw.wst.action.FinalRejectionAction" method="finalRejectionList" />
+		
+		<!--驳回管理保存修改 2116-->
+		<action name="saveRejection" class="com.hjw.wst.action.FinalRejectionAction" method="saveRejection" />
+		
+		<!--驳回管理保存删除 2117-->
+		<action name="deletereject" class="com.hjw.wst.action.FinalRejectionAction" method="deletereject" />
+		
+		<!-- 主检室查询驳回意见 2118 --> 
+		<action name="getRejectionlistshow" class="com.hjw.wst.action.ExamSummaryAction" method="getRejectionlistshow" />
+		
+		<!-- 批量修改卡对应套餐-项目信息 2119 --> 
+		<action name="updCardExamSetItem" class="com.hjw.wst.action.CardInfoAction" method="updCardExamSetItem" />
+		
+		<!-- 获取单位列表 -->
+		<action name="getCompanyList" class="com.hjw.wst.action.CardSaleAction" method="getCompanyList" />
+		<!-- 根据售卡流水绑定单位 -->
+		<action name="bindCompany" class="com.hjw.wst.action.CardSaleAction" method="bindCompany" />
+		<!-- 根据售卡流水绑定单位 校验是否重复绑定 -->
+		<action name="isCheckBindCompany" class="com.hjw.wst.action.CardSaleAction" method="isCheckBindCompany" />
+		<!--根据售卡流水号查询卡明细列表-->
+		<action name="getCardSaleDetailList2" class="com.hjw.wst.action.CardSaleAction" method="getCardSaleDetailList2"/>
+
+	
+		<!-- 按照卡号查询信息   -->
+        <action name="djtchenkcardnum" class="com.hjw.wst.action.CardInfoAction" method="djtchenkcardnum" />
+			<!--329 结算添加订单 -->
+		<action name="settlement" class="com.hjw.wst.action.CollectFeesAction" method="settlement" />
+		<!--获取订单收费项目列表  -->
+		<action name="getChargingSingleSettlement" class="com.hjw.wst.action.CollectFeesAction" method="getChargingSingleSettlement" />
+	 
+	    <action name="canlSampleLisPacsStatus" class="com.hjw.wst.action.SamplingDepartmentAction" method="canlSampleLisPacsStatus" />
+	
+	    <!--用户摄像头剪切保存图片和上传图片 2300 -->
+        <action name="userCutSavePicture" class="com.hjw.wst.action.UserManagerAction" method="userCutSavePicture"/>
+        
+        	<!-- 团体加项复制人员信息  -->
+		<action name="getDjtExamInfoUserListCopyItem" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getDjtExamInfoUserListCopyItem" />	
+        		 <!--用户摄像头剪切保存图片和上传图片 2300 -->
+        <action name="userCutSavePicture" class="com.hjw.wst.action.UserManagerAction" method="userCutSavePicture"/>
+        
+        <!--主检室跟科室显示危急值列表 2301 -->
+        <action name="getExamCriticalList" class="com.hjw.wst.action.ExamSummaryAction" method="getExamCriticalList"/>
+        <!--获取危急值大类信息2303 -->
+        <action name="getCriticalClassD" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="getCriticalClassD"/>
+        <!--获取危急值子类信息2303 -->
+        <action name="getCriticalClass" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="getCriticalClass"/>
+        <!--获取疾病信息2308 -->
+        <action name="getDisease" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="getDisease"/>
+        <!--获取危急值等级信息2304 -->
+        <action name="getCriticalLevel" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="getCriticalLevel"/>
+        <!--危急值保存 2305 -->
+	    <action name="saveCriticalDetail" class="com.hjw.wst.action.CriticalAction" method="saveCriticalDetail" />
+	    <!--危急值删除 2307 -->
+		<action name="delCriticalDetail" class="com.hjw.wst.action.CriticalAction" method="delCriticalDetail" />
+		<!--危急值处理情况统计查询2311 -->
+	  <action name="criticalhandleShow" class="com.hjw.wst.action.CriticalAction" method="criticalhandleShow" />
+
+        <!-- 疾病逻辑-危急值类别维护-新增-2045 -->
+        <action name="saveCriticalClass" class="com.hjw.wst.action.ExamCriticalClassAction" method="saveCriticalClass"/>
+          <!-- 疾病逻辑-危急值类别维护-修改-2041 -->
+        <action name="updateCriticalClass" class="com.hjw.wst.action.ExamCriticalClassAction" method="updateCriticalClass"/>
+          <!-- 疾病逻辑-危急值类别维护-删除-2042 -->
+        <action name="removeCriticalClass" class="com.hjw.wst.action.ExamCriticalClassAction" method="removeCriticalClass"/>
+          <!-- 疾病逻辑-危急值类别维护-分页查询-2043 -->
+        <action name="queryCriticalClass" class="com.hjw.wst.action.ExamCriticalClassAction" method="queryCriticalClass"/>
+          <!-- 疾病逻辑-危急值类别维护-list查询-2044 -->
+        <action name="criticalClasslist" class="com.hjw.wst.action.ExamCriticalClassAction" method="criticalClasslist"/>
+        <!--危急值逻辑保存-保存-2050  -->
+        <action name="saveExamCriticalLogic" class="com.hjw.wst.action.ExamCriticalClassAction" method="saveExamCriticalLogic"/>
+         <!--类别危急值逻辑-2051  -->
+        <action name="queryExamCriticalLogic" class="com.hjw.wst.action.ExamCriticalClassAction" method="queryExamCriticalLogic"/>
+         <!--类别危急值逻辑删除-2052  -->
+		<action name="removeExamCriticalLogic" class="com.hjw.wst.action.ExamCriticalClassAction" method="removeExamCriticalLogic"/>
+		<!-- 类别危急值维护启用停用2053 -->
+		<action name="updateExamCriticalLogicIsAcive" class="com.hjw.wst.action.ExamCriticalClassAction" method="updateExamCriticalLogicIsAcive"/>
+		<!-- 类别危急值维护获取条件条件值2054  -->
+		<action name="getExamCriticalLogicItemList" class="com.hjw.wst.action.ExamCriticalClassAction" method="getExamCriticalLogicItemList"/>
+		<!-- 查询疾病  -->
+     	<action name="crmSmsDiseaseList" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="crmSmsDiseaseList"/>
+		<!-- 2230 销毁 -->
+		<action name="destruction" class="com.hjw.wst.action.RegisterDeskAction" method="destruction"/>
+     		<!--加套餐选择套餐1289 -->
+        <action name="querySelectExamSettree" class="com.hjw.wst.action.ExamSetAction" method="querySelectExamSettree"/>
+        <!--1155 获取需打申请单的项目列表-->
+		<action name="getPacsItemApplicationList" class="com.hjw.wst.action.RegisterDeskAction" method="getPacsItemApplicationList"/>
+		  <!-- 2231 获取全部批次 -->
+		<action name="getBatch" class="com.hjw.wst.action.CrmSmsBaseTemplateAction" method="getBatch"/>
+
+		
+		<!-- 通过体检中心编号和登录人员id获取所有体检中心部门 -->
+		<action name="getCenterUserOfDepList" class="com.hjw.wst.action.AccountAction" method="getCenterUserOfDepList"/>
+		
+		<!--部门设置体检中心-获取体检中心 1948-父功能101-->
+		<action name="getdetptocenter" class="com.hjw.wst.action.DepartmentAction" method="getdetptocenter"/>
+				
+		<!--部门设置体检中心-保存体检中心 1949-父功能101-->
+		<action name="detptocentersave" class="com.hjw.wst.action.DepartmentAction" method="detptocentersave"/>
+
+		<!-- 多体检中心-选择收费项目到本体检中心2503 -->
+		<action name="centerSeleteItem" class="com.hjw.wst.action.ChargingItemAction" method="centerSeleteItem"/>
+		<!-- 多体检中心-收费项目列表2504 -->
+		<action name="centerQueryChargingItem" class="com.hjw.wst.action.ChargingItemAction" method="centerQueryChargingItem"/>
+		<!-- 多体检中心-科室列表2505 -->
+		<action name="getCenterDepartmentList" class="com.hjw.wst.action.ChargingItemAction" method="getCenterDepartmentList"/>
+		<!-- 多体检中心-修改项目信息2508 -->
+		<action name="updateChargingItemCenter" class="com.hjw.wst.action.ChargingItemAction" method="updateChargingItemCenter"/>
+		<!-- 多体检中心-删除项目2509 -->
+		<action name="deleteChargingItemCenter" class="com.hjw.wst.action.ChargingItemAction" method="deleteChargingItemCenter"/>
+   
+        <!-- 通过体检中心获取子系统    -->
+        <action name="getCenterUserOfSystem" class="com.hjw.wst.action.AccountAction" method="getCenterUserOfSystem"/> 
+         <!-- 通过体检中心列表    -->
+        <action name="getCenterOfSystem" class="com.hjw.wst.action.AccountAction" method="getCenterOfSystem"/>
+        
+        <!-- 获取体检中心和部门树形结构 -->
+        <action name="centerAndDeptshow" class="com.hjw.wst.action.TreeAction" method="centerAndDeptshow"/>
+        
+		<action name="detptoBachcentersave" class="com.hjw.wst.action.DepartmentAction" method="detptoBachcentersave"/>
+
+        <action name="getid" class="com.hjw.wst.action.TreeAction" method="getcomid"/>
+        
+        <!-- 获取单位列表 -->
+        <action name="getCompanyInfoList" class="com.hjw.wst.action.CommonAction" method="getCompanyInfoList"/> 
+         <!-- 提取单位 -->
+        <action name="extractCompanInfo" class="com.hjw.wst.action.CommonAction" method="extractCompanInfo"/>
+        
+        <!-- 团体登记台个人项目转团体项目 1283 -->
+		<action name="djtTpanelG2TItem" class="com.hjw.wst.action.RegisterDeskAction" method="djtTpanelG2TItem"/>
+		
+		<!-- 团体登记台团体项目转个人项目 1282 -->
+		<action name="djtTpanelT2GItem" class="com.hjw.wst.action.RegisterDeskAction" method="djtTpanelT2GItem"/>
+		
+		<!-- 登记台团体项目转个人1264-->
+		<action name="setDjtItemTtoG" class="com.hjw.wst.action.RegisterDeskAction" method="setDjtItemTtoG" />
+		<!-- 登记台个人项目转团体1265-->
+		<action name="setDjtItemGtoT" class="com.hjw.wst.action.RegisterDeskAction" method="setDjtItemGtoT" />
+		<!--当前体检中心批量设置科室2512-->
+		<action name="batchCenterDep" class="com.hjw.wst.action.DepartmentAction" method="batchCenterDep" />
+		<!--多体检中心删除科室2513-->
+		<action name="deleteCenterDep" class="com.hjw.wst.action.DepartmentAction" method="deleteCenterDep" />
+		<!--多体检中心修改科室2515 -->
+		<action name="updateCenterDep" class="com.hjw.wst.action.DepartmentAction" method="updateCenterDep" />
+		<!--多体检中心科室设置利润率2516 -->
+		<action name="centerupdatedepRate" class="com.hjw.wst.action.DepartmentAction" method="centerupdatedepRate" />
+
+		<!--1161 复查设定信息保存-->
+		<action name="saveExamSummaryReview" class="com.hjw.wst.action.ExamSummaryReviewAction" method="saveExamSummaryReview"/>
+
+		<!--1163 查询总检设定复查列表-->
+		<action name="getExamSummaryReviewList" class="com.hjw.wst.action.ExamSummaryReviewAction" method="getExamSummaryReviewList"/>
+
+		<!--1164 总检设定的复查信息通知或作废-->
+		<action name="updateExamSummaryReview" class="com.hjw.wst.action.ExamSummaryReviewAction" method="updateExamSummaryReview"/>
+
+		<!--1165 日期加上天数获得新的日期-->
+		<action name="getdateAddDay" class="com.hjw.wst.action.ExamSummaryReviewAction" method="getdateAddDay"/>
+
+		<!--1701获取已设定的复查项目列表-->
+		<action name="getExamSummaryReviewItemList" class="com.hjw.wst.action.ExamSummaryReviewAction" method="getExamSummaryReviewItemList"/>
+
+		<!--按照医生和体检号获取科室和收费项目 树-->
+		<action name="getDepartmentDepListByExamnum" class="com.hjw.wst.action.DepartmentAction" method="getDepartmentDepListByExamnum"/>
+		<!--获取科室-->
+		<action name="getDepartmentResultById" class="com.hjw.wst.action.DepartmentAction" method="getDepartmentResultById"/>
+        <!-- 登记台获取体检人数2570 -->
+        <action name="getNumberOfpeople" class="com.hjw.wst.action.RegisterDeskAction"
+                method="getNumberOfpeople" />
+        <!-- 226 分组信息对应任务信息 -->
+		<action name="getBathByGroupid" class="com.hjw.wst.action.BatchAction"
+			method="getBathByGroupid" />
+		<action name="getReportWarningList" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getReportWarningList" />
+		<action name="updateInvoice" class="com.hjw.wst.action.UserInvoiceAction"
+			method="updateInvoice" />
+
+        <!-- 对批次解除封帐 1583-->
+        <action name="queryGroupInfoAmount" class="com.hjw.wst.action.BatchAction" method="queryGroupInfoAmount"/>
+
+    </package>
+</struts>

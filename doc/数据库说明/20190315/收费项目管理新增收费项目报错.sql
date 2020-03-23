@@ -1,0 +1,7 @@
+INSERT INTO [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common]) VALUES (N'体检中心', N'IS_ALL_DEPT_ITEM', N'Y', N'Y', N'细项是否为 全科室下Y  该科室下N');
+
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1540', N'getDepItemDetail.action', N'收费项目操作台', N'1', null, N'1540', N'2', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1541', N'getDepItemCharging.action', N'科室收费项目关联', N'2', null, N'1540', N'2', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1542', N'getDepItemChargingDetail.action', N'科室收费项目细项', N'2', null, N'1540', N'2', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1543', N'getExamItemAddSave.action', N'科室收费项目细项修改', N'2', null, N'1540', N'1', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1544', N'viewExaminationItem.action', N'科室收费项目细项查看', N'2', null, N'1540', N'2', N'1', N'1');

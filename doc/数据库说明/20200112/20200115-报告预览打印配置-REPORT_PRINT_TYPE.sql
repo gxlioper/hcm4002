@@ -1,0 +1,2 @@
+INSERT [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common], [center_type], [center_num]) VALUES (N'多体检中心版本', N'REPORT_PRINT_TYPE', N'5', N'Y', N'报告预览打印配置', NULL, '000')
+INSERT [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common], [center_type], [center_num]) VALUES (N'多体检中心版本', N'ZYB_REPORT_PRINT_TYPE', N'5', N'Y', N'职业病报告预览打印配置', NULL, '000')

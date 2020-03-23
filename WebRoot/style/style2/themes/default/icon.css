@@ -1,0 +1,40 @@
+﻿/* Icon style of sys */
+.icon             {background-image: url(images/icon.png);background-repeat:no-repeat;width:16px;height:16px;vertical-align:middle;margin-right:4px;}
+.ico-96           {width:96px;height:96px;}
+.ico-32           {width:32px;height:32px;}
+.ico-48           {width:48px;height:48px;}
+.ico-64           {width:64px;height:64px;}
+.ico-cardquery    {background-position:-64px -448px;}
+.ico-merchantquery{background-position:-160px -448px;}
+.ico-masterquery  {background-position:-256px -448px;}
+.ico-business     {background-position:-352px -448px;}
+.ico-news         {background-position:-448px -448px;}
+.ico-about        {background-position:-544px -448px;}
+.ico-inputuser    {background-position:-64px -400px;}
+.ico-inputpwd     {background-position:-104px -400px;}
+.ico-inputcode    {background-position:-144px -400px;}
+.ico-home         {background-position:-640px -192px;}
+.ico-back         {background-position:-680px -192px;}
+.ico-go           {background-position:-720px -192px;}
+.ico-refresh      {background-position:-640px -232px;}
+.ico-logout       {background-position:-680px -232px;}
+.ico-help         {background-position:-720px -232px;}
+
+.ico-calendar     {background-position:-8px -544px;}
+.ico-home         {background-position:-72px -544px;}
+.ico-back         {background-position:-136px -544px;}
+.ico-help         {background-position:-200px -544px;}
+.ico-nextpage     {background-position:-328px -544px;}
+.ico-prevpage     {background-position:-264px -544px;}
+
+.ico-n-1          {background-position:-640px -468px;}
+.ico-n-2          {background-position:-680px -468px;}
+.ico-n-3          {background-position:-720px -468px;}
+.ico-n-4          {background-position:-640px -508px;}
+.ico-n-5          {background-position:-640px -588px;width:44px;}
+.ico-n-6          {background-position:-680px -508px;}
+.ico-n-7         {background-position:-704px -588px;width:48px;}
+.ico-n-8          {background-position:-720px -508px;}
+.ico-n-9          {background-position:-640px -548px;}
+.ico-n-10          {background-position:-680px -548px;}
+.ico-mail         {background-position:-232px -160px;}

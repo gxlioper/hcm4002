@@ -1,0 +1,197 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="charge-action" extends="struts-default">
+		<interceptors>
+			<interceptor name="upload"
+				class="org.apache.struts2.interceptor.FileUploadInterceptor" />
+			<interceptor-stack name="uploadStack">
+				<interceptor-ref name="upload" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp
+			</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp
+			</result>
+			<result name="commerror">/common/erroradmin.jsp</result>
+		</global-results>
+		<!-- 收费页面 325 -->
+		<action name="getCollectFeesCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getCollectFeesCharge">
+			<result name="success">/charge/collectFees.jsp</result>
+			<result name="success_pos">/charge/collectFeesPos.jsp</result>
+		</action>
+		
+			<!-- 收费会员卡显示页面 330 -->
+		<action name="showCardInfoCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="showCardInfoCharge">
+			<result name="success">/charge/cardinfo.jsp</result>
+		</action>
+
+		<!-- 336 显示收费明细页面 -->
+		<action name="showDetailCollectFeesCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="showDetailCollectFeesCharge">
+			<result name="success">/charge/chargingDetail.jsp</result>
+		</action>
+
+		<!-- 337 显示退费页面 -->
+		<action name="showCollectFeesRefuncdCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="showCollectFeesRefuncdCharge">
+			<result name="success">/charge/refund.jsp</result>
+		</action>
+		<!-- 弹出补打发票页面  357 -->
+		<action name="chargingSingleInvoickShowCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="chargingSingleInvoickShowCharge">
+			<result name="success">/charge/singleInvoickShow.jsp</result>
+			<result name="success2">/charge/singleInvoickShow2.jsp</result>
+		</action>
+		
+		<!-- 退费页面弹出补打发票页面  357 -->
+		<action name="rechargingSingleInvoickShowCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="rechargingSingleInvoickShowCharge">
+			<result name="success">/charge/resingleInvoickShow.jsp</result>
+			<result name="success2">/charge/resingleInvoickShow2.jsp</result>
+		</action>
+		
+		<!--  退费页面 361 -->
+		<action name="refundFeesCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="refundFeesCharge">
+			<result name="success">/charge/refundFees.jsp
+			</result>
+		</action>
+		
+		<!--  划价页面 991 -->
+		<action name="getPricingCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getPricingCharge">
+			<result name="success">/charge/pricing.jsp
+			</result>
+		</action>
+		
+		<!--  团体预付费页面 998 -->
+		<action name="getTeamPrepaymentCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getTeamPrepaymentCharge">
+			<result name="success">/charge/teamPrepayment.jsp
+			</result>
+		</action>
+			<!-- 健康卡收费页面 739-->
+		<action name="getHealthCardChargePageCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getHealthCardChargePageCharge">
+			<result name="success">/charge/health_card_charge.jsp
+			</result>
+		</action>
+		<!-- 用户发票号段功能页面 760-->
+		<action name="getUserInvoicePageCharge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getUserInvoicePageCharge">
+			<result name="success">/charge/userinvoice.jsp
+			</result>
+		</action>
+		<!-- 1197 合并收费功能页（浙医2）-->
+		<action name="getMergeChargeZy2Charge" class="com.hjw.charge.action.CollectFeesAction"
+			method="getMergeChargeZy2Charge">
+			<result name="success">/charge/getmergechargezy2.jsp
+			</result>
+		</action>
+		<!-- 弹出重打发票页面  -->
+		  <action name="repeatInvoiceCharge" class="com.hjw.charge.action.CollectFeesAction" method="repeatInvoiceCharge">
+		   <result name="success">/charge/repeatInvoice.jsp</result>
+		    <result name="success1">/charge/repeatInvoice1.jsp</result>
+		  </action>
+		  <!-- 弹出补打发票页面  357 -->
+		<action name="settlementShowCharge" class="com.hjw.charge.action.CollectFeesAction" method="settlementShowCharge">
+			<result name="success">/charge/settlementShow.jsp </result>
+		</action>
+			<!-- 弹出确认收费页面   -->
+		<action name="chargeConfirmationCharge" class="com.hjw.charge.action.CollectFeesAction" method="chargeConfirmationCharge">
+			<result name="success">/charge/chargeConfirmation.jsp </result>
+		</action>
+		
+		
+		
+		
+		
+			
+		<!-- pos财务日结主功能页 2010 -->
+		<action name="posDailyPageCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="posDailyPageCharge">
+			<result name="success">/charge/posdaily.jsp</result>
+		</action>
+		
+		<!-- po收费异常处理 2015 -->
+		<action name="posExceptionPageCharge" class="com.hjw.charge.action.CashierDailyAccAction" method="posExceptionPageCharge">
+			<result name="success">/charge/posExceptionPage.jsp</result>
+		</action>
+		
+		<!--关联市医保项目弹窗 -->
+		<action name="getItemClinicCityPageCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getItemClinicCityPageCharge">
+			<result name="success">/charge/itemClinicCity.jsp</result>
+		</action>
+		
+		<!--关联省医保项目弹窗 -->
+		<action name="getItemClinicProvPageCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getItemClinicProvPageCharge">
+			<result name="success">/charge/itemClinicProv.jsp</result>
+		</action>
+		
+		<!-- 医保项目维护功能页2120 -->
+		<action name="getitemBindInsurancePageCharge" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getitemBindInsurancePageCharge">
+			<result name="success">/charge/item_bind_insurance.jsp</result>
+		</action>
+		<!-- 医保关系维护功能页2534 -->
+		<action name="getmedicalCharge" class="com.hjw.charge.action.MedicalAction" method="getmedicalCharge">
+			<result name="success">/charge/medical.jsp</result>
+		</action>
+		<!-- 价表修改&保存页面2535 -->
+		<action name="updatemedicalPageCharge" class="com.hjw.charge.action.MedicalAction" method="updatemedicalPageCharge">
+			<result name="success">/charge/medical_update.jsp</result>
+		</action>
+		<!-- 价表与省医保关系维护页面2539 -->
+		<action name="getItemClinicCityPageShengCharge" class="com.hjw.charge.action.MedicalAction" method="getItemClinicCityPageShengCharge">
+			<result name="success">/charge/itemClinicCity_sheng.jsp</result>
+		</action>
+		
+		<!-- 1111 收费员日结功能页面-->
+		<action name="getCashierDailyPageCharge" class="com.hjw.charge.action.CashierDailyAccAction"
+			method="getCashierDailyPageCharge">
+			<result name="success">/charge/cashierdailyacc.jsp</result>
+		</action>	
+			<!-- 2020 市医保对账功能页面-->
+		<action name="cityReconciliationPageCharge" class="com.hjw.charge.action.CashierDailyAccAction"
+			method="cityReconciliationPageCharge">
+			<result name="success">/charge/citydailreconciliation.jsp
+			</result>
+		</action>
+		<!-- 1129 收费信息记录实时查询页面-->
+		<action name="getCharingSummaryPageCharge" class="com.hjw.charge.action.FinanceDepAccAction"
+			method="getCharingSummaryPageCharge">
+			<result name="success">/charge/charingsummarypage.jsp
+			</result>
+		</action>
+		
+		<!-- 1121 财务部门日结功能页-->
+		<action name="getFinanceDepAccPageCharge" class="com.hjw.charge.action.FinanceDepAccAction"
+			method="getFinanceDepAccPageCharge">
+			<result name="success">/charge/financefepacc.jsp
+			</result>
+		</action>
+			<!-- 1138 财务月结页面-->
+		<action name="getMonthlyStatementPageCharge" class="com.hjw.charge.action.FinanceDepAccAction"
+			method="getMonthlyStatementPageCharge">
+			<result name="success">/charge/monthlystatement.jsp
+			</result>
+		</action>
+		<!--关联市医保项目弹窗 -->
+		<action name="getHealthCareManual" class="com.hjw.charge.action.ItemBindInsuranceAction" method="getItemClinicCityPageCharge">
+			<result name="success">/charge/healthCareManual.jsp</result>
+		</action>
+		<!-- 1103 发票号段维护页面-->
+		<action name="getUserInvoiceManagePage" class="com.hjw.wst.action.UserInvoiceAction"
+			method="getUserInvoiceManagePage">
+			<result name="success">/registerManager/userInvoiceManagePage.jsp</result>
+		</action>
+	</package>
+</struts>

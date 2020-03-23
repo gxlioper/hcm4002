@@ -1,0 +1,1 @@
+INSERT [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common]) VALUES (N'xxxxxx', N'IS_CUSTOM_IDENTIFICATION', N'5,6', N'Y', N'定义哪些人员类别的体检者需要在页面有加重标识提醒')

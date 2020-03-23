@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="383" pageHeight="567" columnWidth="383" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b28689a2-296c-4b3f-8bf3-fd278a96d16d">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="dbarcode" class="com.hjw.ireport.DTO.Djdbardode">
+		<fieldDescription><![CDATA[dbarcode]]></fieldDescription>
+	</field>
+	<field name="djdbean1" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean1]]></fieldDescription>
+	</field>
+	<field name="djdbean10" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean10]]></fieldDescription>
+	</field>
+	<field name="djdbean11" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean11]]></fieldDescription>
+	</field>
+	<field name="djdbean12" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean12]]></fieldDescription>
+	</field>
+	<field name="djdbean13" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean13]]></fieldDescription>
+	</field>
+	<field name="djdbean14" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean14]]></fieldDescription>
+	</field>
+	<field name="djdbean15" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean15]]></fieldDescription>
+	</field>
+	<field name="djdbean16" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean16]]></fieldDescription>
+	</field>
+	<field name="djdbean17" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean17]]></fieldDescription>
+	</field>
+	<field name="djdbean18" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean18]]></fieldDescription>
+	</field>
+	<field name="djdbean2" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean2]]></fieldDescription>
+	</field>
+	<field name="djdbean3" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean3]]></fieldDescription>
+	</field>
+	<field name="djdbean4" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean4]]></fieldDescription>
+	</field>
+	<field name="djdbean5" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean5]]></fieldDescription>
+	</field>
+	<field name="djdbean6" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean6]]></fieldDescription>
+	</field>
+	<field name="djdbean7" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean7]]></fieldDescription>
+	</field>
+	<field name="djdbean8" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean8]]></fieldDescription>
+	</field>
+	<field name="djdbean9" class="com.hjw.ireport.DTO.Djdbean">
+		<fieldDescription><![CDATA[djdbean9]]></fieldDescription>
+	</field>
+	<field name="dqrcode" class="com.hjw.ireport.DTO.Djdqrcode">
+		<fieldDescription><![CDATA[dqrcode]]></fieldDescription>
+	</field>
+	<field name="duser" class="com.hjw.ireport.DTO.Djduser">
+		<fieldDescription><![CDATA[duser]]></fieldDescription>
+	</field>
+	<field name="notices" class="java.lang.String">
+		<fieldDescription><![CDATA[notices]]></fieldDescription>
+	</field>
+	<field name="notices1" class="java.lang.String">
+		<fieldDescription><![CDATA[notices1]]></fieldDescription>
+	</field>
+	<background>
+		<band height="567" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="383" height="567" uuid="2bcc2db5-782d-4ca4-a524-297920f6da8e"/>
+				<imageExpression><![CDATA["D:\\eclipse\\workspace\\ireportProject\\djd1.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="1"/>
+	</columnHeader>
+	<detail>
+		<band height="566" splitType="Stretch">
+			<textField>
+				<reportElement x="144" y="48" width="28" height="20" uuid="e157462b-7061-4740-bc19-66991991a32c"/>
+				<textElement>
+					<font fontName="华文宋体" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duser}.getSex()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="74" width="35" height="20" uuid="af5017e9-424b-41fb-8638-8bcc72b986a1"/>
+				<textElement>
+					<font fontName="华文宋体" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duser}.getAge()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="64" width="99" height="20" uuid="2e8aa5bc-59f4-4ac6-8f70-d3d4ed17ea29"/>
+				<textElement>
+					<font fontName="宋体" size="12" isBold="true" pdfFontName="MSung-Light" pdfEncoding="UniCNS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duser}.getDatas()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="44" width="99" height="20" uuid="3dcf6199-0493-444f-b61b-18871406f894"/>
+				<textElement>
+					<font fontName="宋体" size="12" isBold="true" pdfFontName="MSung-Light" pdfEncoding="UniCNS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duser}.getYears()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="79" width="99" height="20" uuid="11cfe198-618c-41ba-9ccd-5a41449eebb0"/>
+				<textElement>
+					<font fontName="宋体" size="12" isBold="true" pdfFontName="MSung-Light" pdfEncoding="UniCNS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duser}.getXq()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="302" y="78" width="82" height="20" uuid="1f90122f-9a06-4544-a1f8-3687fde0df41"/>
+				<textElement>
+					<font fontName="宋体" size="12" isBold="true" pdfFontName="MSung-Light" pdfEncoding="UniCNS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duser}.getTimes()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="101" width="290" height="20" uuid="af793749-8594-4b4c-a0d9-f09fcee9e28f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="华文仿宋" size="12" isBold="true" pdfFontName="MSung-Light" pdfEncoding="UniCNS-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duser}.getDempname()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="144" y="24" width="68" height="16" uuid="11273941-63fd-4399-acf6-c21da4b89ee7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="华文宋体" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duser}.getName()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="122" width="100" height="18" uuid="1c4d244d-707b-4715-a51c-a447aa2cc22e"/>
+				<textElement>
+					<font fontName="华文仿宋" isBold="true" pdfFontName="MSung-Light" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{notices}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="32" y="519" width="187" height="33" uuid="d06d56b0-4f39-43df-a154-d42bd2e47eb9"/>
+				<textElement>
+					<font fontName="华文宋体" size="13" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{notices1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="5" y="193" width="67" height="12" uuid="807bd0cc-f0e0-4b78-86d3-a455cc2bcd8e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="新宋体" size="9" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dqrcode}.getNoteices()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="5" y="205" width="67" height="12" uuid="89fdcce1-2b8a-4e47-9649-56d590e2050d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="新宋体" size="9" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dqrcode}.getNotices1()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="231" width="62" height="50" uuid="e4d50cae-5ae2-4b56-9d18-0d6261c555e6"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean4}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="164" width="60" height="41" uuid="171f3fd2-7627-4dba-a312-5b5b326cb7ce"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean2}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="132" width="67" height="47" uuid="8e309b7c-70cd-44f6-a0f9-e9757fcd345a"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean2}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="267" y="164" width="53" height="41" uuid="41e5df7e-cdcf-4372-8f0e-acb6cbd030b8"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean3}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="132" width="67" height="47" uuid="5b7b52b7-b049-4e7b-a465-1ce4bc3bbced"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean3}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="132" width="66" height="52" uuid="b9b3d73b-67c9-4135-a611-82e4a266d1c9"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean1}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="212" width="67" height="47" uuid="d6f7391e-a737-4b4b-b362-47c11a82cb01"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean4}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="164" width="65" height="41" uuid="5810eaa9-fcb9-412c-b868-ecfaf027d14c"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean1}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="231" width="52" height="50" uuid="469b74eb-6d6c-4b83-926c-1f2a31e6dc1a"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean5}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="177" y="213" width="67" height="47" uuid="f64aecfd-50a6-4a2c-99d4-a9eade2ab844"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean5}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="231" width="55" height="51" uuid="14f58e57-fe87-44aa-9f11-f02da8731bc2"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean6}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="213" width="67" height="47" uuid="22070c25-dae7-4272-b931-36a893241fa9"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean6}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="231" width="55" height="52" uuid="8589e0da-7414-44e2-b877-a0d8d1778b47"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean7}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="212" width="67" height="47" uuid="849f4034-46d6-4f25-b9d8-633eacdb65e9"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean7}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="311" width="62" height="50" uuid="c04087db-d4e2-4b17-8f67-76f1c9352b98"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean8}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="83" y="291" width="66" height="52" uuid="ab98727f-008d-4b96-a223-50f189d36d1f"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean8}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="311" width="52" height="50" uuid="fa48d906-55a6-4c8a-af77-09abab377352"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean9}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="291" width="59" height="52" uuid="990dffe6-f7fa-4b8a-86c9-4aa08e3950e1"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean9}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="310" width="55" height="51" uuid="9eeebde6-81f6-4b0e-b349-3bcd2980ce3f"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean10}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="291" width="59" height="52" uuid="1724b751-d55d-4ac2-999c-783944875ed5"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean10}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="309" width="55" height="52" uuid="212fba40-965b-4786-b708-a9528343ede0"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean11}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="286" width="63" height="52" uuid="1010de45-1de9-4a60-9c85-97781f17f938"/>
+				<textElement textAlignment="Center">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean11}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="388" width="62" height="50" uuid="4bdb9ebd-6682-4ac8-8251-6259ef6654e9"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean12}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="105" y="357" width="66" height="52" uuid="74a50a90-d3ca-4d17-bc0c-76fcb69b753c"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean12}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="388" width="52" height="50" uuid="9f7d14d5-da16-40cb-bff7-6c00ec0a72a6"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean13}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="357" width="59" height="52" uuid="c70bf048-5267-4b7e-b1df-951fed65f1d8"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean13}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="387" width="55" height="51" uuid="45a142aa-47ea-47fd-a117-9b326a96dcab"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean14}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="267" y="357" width="59" height="52" uuid="37319942-1643-4274-9410-42472fab214b"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean14}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="386" width="55" height="52" uuid="49933c22-3d4a-4341-9c72-db51d054a881"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean15}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="357" width="67" height="52" uuid="c6802ade-c2ca-4966-ad38-b44068227bab"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean15}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="28" y="463" width="62" height="50" uuid="67313d9b-56b7-4662-8598-569d62bd533c"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean16}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="79" y="438" width="66" height="52" uuid="1c858c36-6227-4675-a8e7-afebc93d06c2"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean16}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="463" width="52" height="50" uuid="91613b80-ab7a-4289-ab81-27eb924d87e1"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean17}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="439" width="59" height="52" uuid="f7e9260d-c78b-40ef-bdb1-ac0091119fc3"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean17}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="462" width="55" height="51" uuid="a6135327-8a04-4b34-b856-0232da901193"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean18}.getRoomname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="252" y="440" width="59" height="52" uuid="a97e4220-401b-4c0d-b6b7-3370c9a79c07"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="华文宋体" size="11" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-V" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{djdbean18}.getDeptname()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="8" y="143" width="56" height="50" uuid="c5184633-8708-48f9-b5cd-a2a65c76e05a"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(new com.google.zxing.qrcode.QRCodeWriter().encode($F{dqrcode}.getUrl(), com.google.zxing.BarcodeFormat.QR_CODE, 100, 100))]]></imageExpression>
+			</image>
+			<image hAlign="Center">
+				<reportElement x="245" y="513" width="115" height="27" uuid="9a8ad6bf-eee3-4fec-8fa2-9e97382eb89f"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(new com.google.zxing.oned.Code128Writer().encode($F{dbarcode}.getExtamid(), com.google.zxing.BarcodeFormat.CODE_128, 100, 30,null))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="253" y="542" width="100" height="24" uuid="f0dbf67d-9773-49ea-bbe2-56ef1e8148df"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dbarcode}.getExtamid()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

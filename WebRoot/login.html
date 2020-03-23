@@ -1,0 +1,420 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>登录</title>
+<link href="themes/default/login.css" type="text/css" rel="stylesheet" />
+<link href="themes/default/jquery-ui.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script src="scripts/jquery-ui.js" type="text/javascript"></script>
+<script type="text/javascript">
+         //平台、设备和操作系统 
+         var system = { 
+             win: false, 
+             mac: false, 
+             xll: false, 
+             ipad:false 
+        }; 
+         //检测平台 
+         var p = navigator.platform; 
+         system.win = p.indexOf("Win") == 0; 
+         system.mac = p.indexOf("Mac") == 0; 
+         system.x11 = (p == "X11") || (p.indexOf("Linux") == 0); 
+         system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false; 
+         //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面 
+         if (system.win || system.mac || system.xll||system.ipad) { 
+         } else { 
+        	 window.location.href="/padLogin";//客户端登陆跳转页面
+         } 
+$(function(){	
+	window.onload=function(){
+		getcentershow();
+		
+		//chk_image();
+		$("#btn-login").click(function(){
+			$(".repeat").text("");
+			var yhm=$("#username").val();
+			var pwd=$("#userpwd").val();
+			//var rand=$("#randcode").val();
+
+			if(yhm==''){
+				$("#errorDiv").show();
+				$(".repeat").text('用户名称不能为空');
+				//chk_image();
+				return;
+			}
+			if(pwd==''){
+				$("#errorDiv").show();
+				$(".repeat").text('登录密码不能为空');
+				//chk_image();
+				return;
+			}
+			
+			if($("#center_id").val()==null){
+				$("#errorDiv").show();
+				$(".repeat").text('体检中心不能为空');
+				//chk_image();
+				return;
+			}
+			
+			if($("#sys").val()==null){
+				$("#errorDiv").show();
+				$(".repeat").text('子系统不能为空');
+				//chk_image();
+				return;
+			}
+			
+			if($("#dep").val()==null){
+				$("#errorDiv").show();
+				$(".repeat").text('部门不能为空');
+				//chk_image();
+				return;
+			}
+			
+			/* if(rand==''){
+				$("#errorDiv").show();
+				$(".repeat").text('验证码不能为空');
+				//chk_image();
+				return;
+			} */
+			var username="";
+			if($("#username").val().indexOf("(")>-1){
+				username=$("#username").val().substring(0,$("#username").val().indexOf("("));
+			}else{
+				username = $("#username").val();
+			}			  
+	     	var pwd = $("#userpwd").val();
+	     	var randcode = 123456;
+	     	var usertype = $("#usertype").val();//1超级管理员 2普通用户
+	      	//var logintype = 1;//1 体检系统  2职业病系统 3crm
+	      	var logintype= $("#sys").val();
+	      	var center_id = $("#center_id").val();
+			var dep_id = $("#dep").val();
+	      	$("#errorDiv").hide();
+			$.post("login.action?username="+username+"&userpwd="+pwd+"&randcode="+randcode+"&center_num="+center_id+"&dep_id="+dep_id + "&usertype="+usertype+ "&logintype="+logintype,"ok",
+				function (data) {
+				setCookie('dep_id',dep_id);
+				setCookie('center_num',center_id);
+				setCookie('sys',logintype);
+	          if(data=="loginok")
+	            {
+	               window.location.href='main.jsp';	            	
+	            }else if(data=="accloginok")
+	            {
+	           		 window.location.href="main.jsp";	           		 
+	            }else{
+	              	$("#errorDiv").show();
+					$(".repeat").text(data);
+	            	//chk_image();
+	            }
+	         },"json");
+			
+			
+		});
+	}
+	$("input.textinput").focus(function(){
+			$(this).addClass("hasinput")//为每个匹配的元素添加指定的类名
+	}).blur(function(){
+		if($(this).val()==""){
+			$(this).removeClass("hasinput")//从所有匹配的元素中删除全部或者指定的类
+		}
+	})
+	$("#username").autocomplete({//自动补全
+		source:function(request,response){
+		$.ajax({
+			url:"autoGetUsername.action",//获取用户名
+			dataType:"json",
+			type:'POST',
+			data:{top:10,username:request.term,center_num:$("#center_id").val()},
+			success:function(data){
+				var d = eval(data);
+				var obj = [];
+				for(var i=0;i<d.length;i++){
+					obj[i] = d[i].log_Name+'('+d[i].chi_Name+')';					
+				}
+				response($.map(obj,function(item){
+					return {label:item,value:item};
+				}));
+			},
+			select:function(event,ui){
+				
+			},
+			autoFocus:true,
+			scrollHeight:200,
+			selectFirst:true
+		});
+	}
+	});
+	 $.ajax({
+		 url:'getVersion.action',
+			success:function(data){
+				document.getElementById("version").value = data;
+				document.getElementById("version").style.cursor="pointer";
+			},
+			error:function(){
+				$.messager.alert('提示信息','获取版本号失败','error');
+			}
+		});
+		
+});
+ function changeCheckCode() {
+      	var img = document.getElementById('img_checkcode');
+      	var p = img.src.indexOf("?");
+        if(p!=-1){
+          img.src=img.src.substring(0,p);
+        }
+        img.src = img.src +"?"+ new Date().getTime();
+      }    
+      
+      /*验证码上刷新 */ 
+		function chk_image(){ 
+		    var img = document.getElementById("pic"); 
+		    img.src = "getCheckpic.action?" + Math.random(); 
+		} 
+
+      
+      function setFocus(obj){
+    	  obj.style.backgroundColor="#FFFFD8";
+      }
+      function setBlur(obj){
+        obj.style.backgroundColor="#FFFFFF";
+      }
+      
+      function userNameBlur(obj){
+    	  obj.style.backgroundColor="#FFFFFF";
+    	  var name = $(obj).val();
+    	  var username="";
+			if(name.indexOf("(")>-1){
+				username=name.substring(0,name.indexOf("("));
+			}else{
+				username = name;
+			}			 
+    	  if(name != ''){
+    		  systemchange();
+    	  }
+      }
+
+      document.onkeydown=function(event){
+          var e = event || window.event || arguments.callee.caller.arguments[0]; 
+			if(e && e.keyCode==27){ // 按 Esc                 
+			//要做的事情           
+			}           
+			if(e && e.keyCode==113){ // 按 F2                 
+			  //要做的事情               
+			}                         
+			if(e && e.keyCode==13){ // enter 键            
+			  //要做的事情
+			  if(document.activeElement.id=="username"){
+				  $("#userpwd").focus(); 
+			  }else if(document.activeElement.id=="userpwd"){
+				  $("#btn-login").click();  
+			  }else{
+				  $("#username").focus(); 
+			  }				
+			}        
+	}; 
+	
+	//获取体检中心
+	function getcentershow(){
+		$.ajax({
+			url:'getCenterOfSystem.action',//获取体检中心
+			type:'post',
+			success:function(data){
+					var str = '';
+					var obj1=eval("("+data+")");	
+					var kcenter_num = getCookie('center_num');
+					for(var i=0;i<obj1.length;i++){						
+						  if(kcenter_num==obj1[i].center_num){
+							  str += '<option selected="selected" value="'+obj1[i].center_num+'">'+obj1[i].center_name+'</option>';
+						  }else{
+							  str += '<option value="'+obj1[i].center_num+'">'+obj1[i].center_name+'</option>';
+						  }
+					}
+					$("#dep").html("");
+					$("#center_id").html(str);
+					centerchange();
+			}
+		});
+	}
+	
+	//获取体检中心改变的时候获取用户部门
+	function centerchange(){
+     //要触发的事件
+        var centernum = $("#center_id").val();
+    	  if(centernum != ''){    		  
+    		  $.ajax({
+    				url:'getCenterUserOfSystem.action',//获取体检中心和科室
+    				data:{
+    					"center_num":centernum
+    				},
+    				type:'post',
+    				success:function(data){
+	    					var str = '';
+	    					var obj1=eval("("+data+")");	 
+	    					var ksys = getCookie('sys');
+	    					for(var i=0;i<obj1.length;i++){	    
+	    						  if(ksys==obj1[i].comid){
+	    							  str += '<option selected="selected" value="'+obj1[i].comid+'">'+obj1[i].comname+'</option>';
+	    						  }else{
+	    							  str += '<option value="'+obj1[i].comid+'">'+obj1[i].comname+'</option>';
+	    						  }
+	    					}
+	    					$("#sys").html(str);
+	    					$("#dep").html("");
+    				}
+    			});
+    	  }
+	}
+	
+	//获取体检中心部门
+	function systemchange(){
+     //要触发的事件
+        var centernum = $("#center_id").val();
+    	  if(centernum != ''){
+    		  var username="";
+  			if($("#username").val().indexOf("(")>-1){
+  				username=$("#username").val().substring(0,$("#username").val().indexOf("("));
+  			}else{
+  				username = $("#username").val();
+  			}	
+    		  $.ajax({
+    				url:'getCenterUserOfDepList.action',//获取体检中心和科室
+    				data:{
+    					"logintype":$("#sys").val(),
+    					"username":username,
+    					"center_num":centernum
+    				},
+    				type:'post',
+    				success:function(data){
+	    					var str = '';
+	    					var obj1=eval("("+data+")");	    					
+	    					var dep_id = getCookie('dep_id');
+	    					for(var i=0;i<obj1.length;i++){
+	    						if(dep_id == obj1[i].dep_id){
+	    							str += '<option selected="selected" value="'+obj1[i].dep_id+'">'+obj1[i].dep_name+'</option>';
+	    						}else{
+	    							str += '<option value="'+obj1[i].dep_id+'">'+obj1[i].dep_name+'</option>';
+	    						}
+	    					}
+	    					$("#dep").html(str);
+    				}
+    			});
+    	  }
+	}
+
+	function setCookie(name,value)
+	{
+		var exp  = new Date();
+		exp.setTime(exp.getTime() + 24*60*60*1000);
+		document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()+";path=/ ";
+		//alert_all("写入")
+	}
+	function delCookie(name) 
+	{ 
+	    var exp = new Date(); 
+	    exp.setTime(exp.getTime() - 1000000); 
+	    var cval=getCookie(name); 
+	    if(cval!=null) 
+	        document.cookie= name + "="+cval+";expires="+exp.toGMTString()+";path=/ ";
+		//alert_all("删除")
+	} 
+	//读cookie
+	 function getCookie(name)
+	{
+
+	    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+	    if(arr !=null) return unescape(arr[2]); return null;
+		//alert_all("读取")
+	}
+	
+	 function showversion(){
+			newWindow = window.open("showversion.action","版本与修改记录明细","toolbar=no,location=no,fullscreen=yes,scrollbars=yes"); 
+			newWindow.focus();	
+	 }	
+</script>
+</head>
+<body>
+<!-- Header -->
+<div id="header">
+	<div class="box">
+	<div class="logo"><a title="健康体检系统"><img src="themes/default/images/login/logo.png" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系统版本：<a href="javascript:void(0)" onclick="showversion();" ><input id="version" value="" Style="border:0px;" /></a></div>
+	</div>
+</div>
+<!-- End -->
+
+<div id="content">
+
+	<div class="content-panel">
+	
+		<div id="loginbox">
+			<div class="loginform">
+			<input name="usertype" id="usertype" value="1" type="hidden"/>
+				<ul class="logintype">
+					<li class="active"><span>登录</span></li>
+				</ul>
+				<div class="box">
+					<div class="loginerror msg color-error"><s class="sprite"></s><i class="sprite"></i></div>
+					
+					<div class="shanghulogin">
+						<div class="repeat" style="color:red;"></div>						
+                        <dl class="dl-input">
+							<dd><span class="files-ico center"></span>
+							    <select id="center_id" onchange="centerchange()" style="height: 34px; width: 255px; padding-bottom: 0px;padding-left: 25px;font-size: 16px;font-family:arial;"></select>
+							</dd>
+						</dl>	
+						<dl class="dl-input">
+							<dd>
+								<span class="files-ico sys"></span>
+								<select id="sys" onchange="systemchange()" style="height: 34px; width: 255px; padding-bottom: 0px;padding-left: 25px;font-size: 16px;font-family:arial;">
+									
+								</select>
+							</dd>
+						</dl>
+						<dl class="dl-input">
+							<dd><span class="files-ico user"></span><input type="text" class="textinput username" name="username" id="username"  rel="tipslayer" value="" onfocus="setFocus(this);" onblur="userNameBlur(this);"/></dd>
+						</dl>
+						<dl class="dl-input">
+							<dd>
+								<span class="files-ico pass"></span><input type="password" class="textinput password" name="userpwd" id="userpwd"  rel="tipslayer" value="" onfocus="setFocus(this);" onblur="setBlur(this);" maxlength="10"/>
+							</dd>
+						</dl>
+						
+						<dl class="dl-input">
+							<dd>
+								<span class="files-ico dep"></span><select id="dep" style="height: 34px; width: 255px; padding-bottom: 0px;padding-left: 25px;font-size: 16px;font-family:arial;"><option>科室</option></select>
+							</dd>
+							<!-- <dd><input type="text" class="textinput codeinput" id="randcode" /></dd>
+							<dd><img id="pic"  alt="验证码" height="36" onclick="return chk_image();" src="getCheckpic.action"/>
+							<script language="javascript"> 
+						/*在文字上使验证码刷新 */ 
+						function reloadImage(url) 
+						{ 
+						   var img = document.getElementById("pic"); 
+						    img.src = url+"?" + Math.random(); 
+						 
+						} 
+						</script> 
+							</dd><dt style="width:auto;padding-top:9px;"><a href="javascript:reloadImage('getCheckpic.action');" style="color:#fff;">换一张</a></dt> -->
+						</dl>
+						<dl class="dl-input">
+							<dd><button class="button btn-login" id="btn-login"  >登 录</button></dd>
+						</dl>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--div class="login-news">
+		<h4><span>登录说明</span></h4>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div-->
+</div>
+
+</body>
+</html>

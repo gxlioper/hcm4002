@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment name="defaultClientConfig"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java"
+    xmlns:handler="http://xml.apache.org/axis/wsdd/providers/handler" xmlns="http://xml.apache.org/axis/wsdd/">
+
+      <globalConfiguration>
+            <parameter name="sendXsiTypes" value="true"/>
+            <parameter name="sendMultiRefs" value="true"/>
+            <parameter name="sendXMLDeclaration" value="true"/>
+            <parameter name="axis.sendMinimizedElements" value="true"/>
+            <requestFlow>
+                  <handler type="java:org.apache.axis.handlers.JWSHandler">
+                        <parameter name="scope" value="session"/>
+                  </handler>
+                  <handler type="java:org.apache.axis.handlers.JWSHandler">
+                        <parameter name="scope" value="request"/>
+                        <parameter name="extension" value=".jwr"/>
+                  </handler>
+            </requestFlow>
+      </globalConfiguration>
+     <!--  <handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/> -->
+      <handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+      <handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+      <!-- handler name="authen" type="java:com.hjw.wst.webService.AuthenticationHandler"/-->
+      
+
+      <!--service name="AdminService" provider="java:MSG">
+            <parameter name="allowedMethods" value="AdminService"/>
+            <parameter name="enableRemoteAdmin" value="false"/>
+            <parameter name="className" value="org.apache.axis.utils.Admin"/>
+            <namespace>http://xml.apache.org/axis/wsdd/</namespace>
+      </service>
+      
+    <service name="Version" type="" provider="java:RPC">
+        <parameter name="allowedMethods" value="getVersion"/>
+        <parameter name="className" value="org.apache.axis.Version"/>
+    </service-->
+    
+    <!-- 接受缴费结果 -->
+  <service name="acceptFeeMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptFeeMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+   <!-- 接受lis结果 -->
+  <service name="acceptLisMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptLisMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  
+   <!-- 接受lis状态 -->
+  <service name="acceptLisStatusMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptLisStatusMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  <!-- 接受pacs结果 -->
+  <service name="acceptPacsMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptPacsMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+   <!-- 接受pacs结果 -->
+  <service name="acceptPacsMessageBl" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptPacsMessageBl"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  <!-- 接受pacs状态 -->
+  <service name="acceptPacsStatusMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptPacsStatusMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  <!-- 接受pacs状态 -->
+  <service name="acceptPacsStatusMessageBl" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptPacsStatusMessageBl"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+   <!-- 临床诊疗项目字典 -->
+  <service name="acceptDiagnosisItemMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptDiagnosisItemMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  <!-- 接受科室字典结果 -->
+  <service name="acceptDeptMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptDeptMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  <!-- 接受人员字典结果 -->
+  <service name="acceptUserMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptUserMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  <!-- 接受价表字典结果 -->
+  <service name="acceptPriceMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptPriceMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  <!-- 临床诊疗项目与价表项目对照表 -->
+  <service name="acceptDiagnosisPriceMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptDiagnosisPriceMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  <!-- 数据同步 整合在一起的服务 -->
+  <service name="acceptDateMessage" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptDateMessage"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+    <!-- 辅助设备 肺功能 东北国际 -->
+  <service name="callEF" provider="java:RPC">
+     <parameter name="allowedRoles" value="syntong"/>
+     <parameter name="allowedMethods" value="*"/>
+     <parameter name="className" value="com.hjw.webService.service.AcceptEquipmentMessageEF"/>
+     <requestFlow>
+        <!-- handler type="authen"/>
+        <<handler type="logging"/> -->
+     </requestFlow>  
+  </service>
+  
+  <!-- service name="webServiceSoap_sinosoft" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://client.integrator.application.sinosoft.com"/>
+      <parameter name="wsdlServiceElement" value="WebService"/>
+      <parameter name="schemaQualified" value="http://client.integrator.application.sinosoft.com"/>
+      <parameter name="wsdlServicePort" value="WebServiceSoap"/>
+      <parameter name="className" value="com.hjw.webService.client.sinosoft.server.WebServiceSoapImpl"/>
+      <parameter name="wsdlPortType" value="WebServiceSoap"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="HIPMessageClient" qname="operNS:HIPMessageClient" xmlns:operNS="http://client.integrator.application.sinosoft.com" returnQName="retNS:return" xmlns:retNS="http://client.integrator.application.sinosoft.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="HIPMessageClient" >
+        <parameter qname="pns:message" xmlns:pns="http://client.integrator.application.sinosoft.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="HIPMessageClient"/>
+
+  </service -->
+  
+  <transport name="http">
+            <requestFlow>
+                  <handler type="URLMapper"/>
+                  <handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+            </requestFlow>
+      </transport>
+      <transport name="local">
+            <responseFlow>
+                  <handler type="LocalResponder"/>
+            </responseFlow>
+      </transport>
+</deployment>
+

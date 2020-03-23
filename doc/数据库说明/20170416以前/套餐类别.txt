@@ -1,0 +1,7 @@
+ALTER TABLE   dbo.exam_set ADD exam_set_type VARCHAR(20) NULL   --套餐类别添加字段
+
+--数据字典数据
+INSERT INTO [dbo].[data_dictionary] ([data_type], [data_code], [data_name], [remark], [isActive], [creater], [create_time], [updater], [update_time], [seq_code]) VALUES (N'套餐类别', N'TCLB', N'常规体检', null, N'Y', N'14', null, null, null, null)
+
+
+alter table set_charging_item add item_amount decimal(8, 2)  ---套餐添加细项金额字段

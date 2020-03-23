@@ -1,0 +1,1 @@
+alter  table  exam_info   alter column    is_upload  int

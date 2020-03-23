@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="cashierDailyAccJob" class="com.hjw.wst.job.CashierDailyAccJob" autowire="byName"/>
+  <bean name="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+        <ref bean="cronTrigger"/>
+      </list>
+    </property>
+  </bean>
+  <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> 
+	<property name="jobDetail" ref="jobDetail" /> 
+	<property name="cronExpression" value="0 30 22 * * ?" /> 
+	</bean>
+  <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="cashierDailyAccJob"/>
+    <property name="targetMethod" value="automaticCashierDaily"/>
+  </bean>  
+</beans>

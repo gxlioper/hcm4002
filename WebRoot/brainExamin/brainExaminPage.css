@@ -1,0 +1,30 @@
+#titleList .accordion-collapse{
+	width: 15px;
+}
+.panel-title{
+	margin-left:20%;
+}
+.ulOne{
+	margin : 5px 5px 5px 5px;
+}
+.ulOne a li{
+	height: 26px;
+	line-height: 26px;
+	padding: 5px 2px;
+	position: relative;
+	vertical-align: middle;
+	border-bottom: 1px solid #fff;
+	background-image: none;
+	text-align: center;
+	background-color: #F7F4F0;
+}
+.ulOne a{
+	color: #000;
+	text-decoration: none;
+	text-align: center;
+	font-size: 14px;
+}
+.ulOne a:hover { 
+	font-size: 15px; 
+	color:#0b90da;
+}

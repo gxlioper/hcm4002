@@ -1,0 +1,53 @@
+@import url("reset.css");
+@import url("icon.css");
+@import url("button.css");
+@import url("header.css");
+@import url("footer.css");
+
+/* Login Style Of SYS Public Style */
+body                   {background-color:#EFEFEF;}
+#content               {background:url("images/login/bg.jpg") center 0 no-repeat #efefef;min-width:1000px !important;height:100%;overflow:hidden;position:relative;}
+#header                {background-color:#fff;border-top:2px solid #0073B5;}
+#header .box           {width:1024px !important;margin:0 auto !important;height:130px !important;}
+#header .box .logo{padding:40px 0 0;}
+#footer                {background-color:transparent !important;position:absolute;width:100%;margin-top:-80px;}
+#loginbox              {width:1024px;height:359px;/*position:absolute;left:0;top:0;*/margin:0 auto;position:relative;}
+.loginform             {background:url("images/login/transparent-2.png") 0 0 repeat;padding:0 0 0 0;width:311px;height:310px;position:absolute;right:0;top:50%;z-index:4;margin:-155px 0 0;}
+.loginform .box        {padding:0 0 0 25px;border:0px solid red;}
+.dl-input              {padding:20px 0 10px;}
+.dl-input dt           {color:#fff;width:90px;text-align:right;font-size:14px;font-family:"microsoft Yahei"}
+.dl-input              {background-position:0 -71px;height:26px;margin:0 0 12px;}
+.dl-input dt           {padding:4px 8px 0 10px;}
+.dl-input dd           {padding:0;position:relative;}
+.textinput             {background-color:#f7ffff;background-repeat:no-repeat;border:1px solid #E1E1E1;color:#333;font-size:16px;font-family:"arial";width:220px;height:30px;padding:2px 3px 2px 28px;line-height:28px;}
+.textinput:focus{border:2px solid #FE7C1B;height:28px;width:218px;}
+.username{background-image:url("images/login/inpu-tipst.png");background-position:0 -10px;}
+.password{background-image:url("images/login/inpu-tipst.png");background-position:0 -70px;}
+.hasinput{background-image:none;}
+.codeinput{padding-left:8px;width:80px;}
+.codeinput:focus{width:78px;}
+.color-error           {color:#DB0000;}
+.loginform .msg .icon  {margin-right:2px;}
+#loginbox .formbutton  {padding:5px 0 0;}
+.showvideo             {position:absolute;left:3px;top:97px;z-index:1;overflow:hidden;height:312px;}
+.showvideo .media      {}
+.loginerror            {position:absolute;height:40px;left:114px;top:94px;border:1px solid red;display:none;}
+.loginerror s          {background-position:-283px -99px;position:absolute;height:40px;width:24px;left:0;top:0;}
+.loginerror div        {background-position:0 -179px;margin:0 10px 0 24px;height:30px;padding:10px 0 0 4px;}
+.loginerror i          {background-position:-322px -99px;position:absolute;height:40px;width:10px;right:0;top:0;}
+.logo2                 {background:url(images/login/logo2.gif) 0 0 no-repeat;width:100px;height:50px;position:absolute;right:40px;top:14px;}
+.logintitle            {/*background:url(images/login/login-title.png) 0 0 no-repeat;text-indent:-9999em;*/color:#145183;height:68px;width:602px;margin:0 0 0 130px;font-size:35px;font-family:"simHei";text-align:center;padding:0;line-height:68px;}
+.logintype{height:42px;border-bottom:2px solid #fff;margin:0 20px;}
+.logintype>li{font-size:16px;color:#fff;font-weight:bold;float:left;width:50%;}
+*+html .logintype>li{width:49.9%;}
+
+.logintype>li>span{cursor:pointer;display:block;line-height:42px;height:42px;text-align:center;}
+.logintype>li.active{background:#fff;}
+.logintype>li.active>span{color:#483f3f;}
+.login-news{width:1024px;margin:0 auto;}
+.login-news h4{color:#0073b5;font-size:16px;padding:10px 0;}
+.login-news h4 span{border-bottom:1px solid #ef4239;padding:0 2px;}
+.login-news ul{padding:0 10px 0 20px;}
+.login-news li{padding:5px 0;list-style:decimal;}
+.cookie-ck{padding:2px 0 0;color:#fff;font-size:14px;}
+.cookie-ck>.checkbox{position:relative;top:2px;}

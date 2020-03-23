@@ -1,0 +1,1 @@
+ insert into[center_configuration] values('XXXXXXXXX体检中心','IS_DJT_EDIT_ARCHINFO','N','Y','登记台是否可以修改姓名性别等档案信息')

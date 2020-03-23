@@ -1,0 +1,11 @@
+/* Reset Of SYS Public Style */
+*      {margin: 0;}
+body   {font: 14px/18px arial,"Microsoft Yahei";}
+dt,dd  {float:left;}
+li     {list-style: none outside none;}
+a      {color:#1676A7;cursor: pointer;  outline: medium none; text-decoration: none;}
+a:hover{text-decoration:underline;}
+
+ul,img {margin:0;padding:0;border: none;}
+fieldset{border: 1px solid #B5B8C8;padding:0 10px 10px;}
+legend {padding: 0 3px;}

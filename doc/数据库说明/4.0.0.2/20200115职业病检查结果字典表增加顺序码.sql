@@ -1,0 +1,1 @@
+alter table zyb_examinationresult add seq_code int

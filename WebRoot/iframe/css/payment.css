@@ -1,0 +1,62 @@
+#item_list ul {
+    height: 100%;
+    overflow: hidden;
+}
+#item_list li {
+    float: left;
+    height: 100px;
+    position: relative;
+    width: 90px;
+}
+#item_list li div {
+    height: 100px;
+    margin: auto;
+    width: 64px;
+}
+#item_list li div {
+    background-image: url("images/item_index.jpg");
+    background-repeat: no-repeat;
+}
+#item_list li a {
+    height: 100px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    width: 91px;
+    z-index: 2;
+}
+#item_list li a:hover {
+    background-color: #FFFFFF; opacity: 0.3;filter:alpha(opacity=30);
+}
+#item_list h3 {
+    bottom: 4px;
+    color: #000000;
+    font-size: 100%;
+    font-weight: normal;
+    margin: 0;
+    padding: 8px 0 4px;
+    position: absolute;
+    text-align: center;
+    width: 91px;
+    z-index: 1;
+}
+#item_list li .ico_1 {
+    background-position: -838px 0;
+}
+#item_list li .ico_2 {
+    background-position: -65px 0;
+    width: 64px;
+}
+#item_list li .ico_3 {
+    background-position: 0 0;
+}
+#item_list li .ico_4 {
+    background-position: -194px 0;
+}
+#item_list li .ico_5 {
+    background-position: -258px 0;
+}
+#item_list li .ico_6 {
+    background-position: -322px 0;
+}

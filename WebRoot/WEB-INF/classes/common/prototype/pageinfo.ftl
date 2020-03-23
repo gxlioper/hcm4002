@@ -1,0 +1,5 @@
+<table border="0" cellpadding="0" width="100%" class="barbg">
+<tr>
+<td align="right">每页显示 <input name="pagesize" type="text" class="textfield" value="${pagesize?default(10)}" size="3" onblur="return checkPageSize();">条<input type="button" class="button" name="btnPageSize" value="确定" onclick="goPage();">&nbsp;共<font color="#993333"><span id="pagetotal">${pagetotal?default(1)}</span></font>页<font color="#993333">${rectotal?default(0)}</font>条记录&nbsp;<#if pageno?default(1)!=1><a onclick="javascript:locatePage(1)" style="cursor:hand"/>首页</a>&nbsp;<a onclick="javascript:locatePage(2)" style="cursor:hand"/>上页</a>&nbsp;<#else>首页&nbsp;上页&nbsp;</#if><#if pageno?default(1)!=pagetotal?default(1)><a onclick="javascript:locatePage(3)" style="cursor:hand"/>下页</a>&nbsp;<a onclick="javascript:locatePage(4)" style="cursor:hand"/>末页</a>&nbsp;<#else>下页&nbsp;末页&nbsp;</#if>到第<input name="pageno" type="text" class="textfield" value="${pageno?default(1)}" size="2" onchange="return checkPageNo();" onblur="return checkPageNo();">页<input type="button" class="button" name="btnGoPage" value="跳转" onclick="goPage();"></td>
+</tr>
+</table>

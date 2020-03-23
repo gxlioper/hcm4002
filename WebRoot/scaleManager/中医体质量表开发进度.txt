@@ -1,0 +1,25 @@
+http://localhost:8080/scale_answer.action?scale_code=QS10&exam_num=201807270001
+
+http://localhost:8080/quest_show.action?quest_code=Q03&exam_num=201807270001
+
+
+  select * from Quest_Dict_rec
+  
+  select * from Quest_Dict_List
+  
+  select * from Quest_Dict_List_ext
+  
+  select * from scale_dict_option
+  
+   select * from scale_dict_question
+   
+   select * from scale_question_option
+   
+ --delete from scale_dict_option where id <= 177
+ 
+ select * from scale_dict_appraise
+ 
+ 
+ select * from scale_result_list
+ 
+ select * from quest_exam_record where peId = '201807270001'

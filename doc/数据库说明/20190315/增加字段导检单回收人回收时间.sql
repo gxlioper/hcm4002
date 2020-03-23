@@ -1,0 +1,1 @@
+alter table exam_info add is_guide_date datetime,is_guide_user int  -- 导检单回收人、回收时间 

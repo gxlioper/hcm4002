@@ -1,0 +1,4 @@
+
+INSERT [dbo].[center_configuration] ([config_key], [config_value], [is_active], [common], [center_name]) VALUES (N'CARD_INFO_PREFIX', N'1', N'Y', N'会员卡号前缀生成规则 1表示无前缀、2表示数据字典卡类型remark配置前缀加年月日', N'体检中心')
+INSERT [dbo].[center_configuration] ([config_key], [config_value], [is_active], [common], [center_name]) VALUES (N'IS_EXAM_RESULT_CITEM', N'N', N'Y', N'查询检验科结果是否关联收费项目ID', N'体检中心')
+INSERT [dbo].[center_configuration] ([config_key], [config_value], [is_active], [common], [center_name]) VALUES (N'IS_EXAM_RESULT_CANFINAL', N'N', N'Y', N'180总检模式获取总检 N表示只获取整单上传的人员，Y表示可以获取整单上传的人以及全部检查项目已检查的人员', N'体检中心')

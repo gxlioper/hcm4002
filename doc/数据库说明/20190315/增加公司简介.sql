@@ -1,0 +1,1 @@
+alter table company_info add com_jianjie varchar(200); --¹«Ë¾¼ò½é

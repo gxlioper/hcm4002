@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  -->
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+    <meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    
+    <title>客户端登陆</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="../themes/default/jquery-ui.css" type="text/css" rel="stylesheet" />
+    <script src="./js/jquery-1.11.3.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../scripts/jquery.min.js"></script>
+    <script src="../scripts/jquery-ui.js" type="text/javascript"></script>
+    <style>
+        #from
+        {
+            background-color: '';
+        }
+        .mycenter
+        {
+            margin-top: 0%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 420px;
+            width: 500px;
+            padding: 1%;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+        .mycenter mysign
+        {
+        	margin-top: 10px;
+         /*   width: 440px;*/
+        }
+        .mycenter input, checkbox, button
+        {
+            margin-top: 1%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        .btn-success {
+    
+  		  width: 100%!important;
+		}
+    </style>
+<script type="text/javascript">
+	
+	function userNameBlur(obj){
+    	 alert($("#username").val());
+      }
+	function userKeyup(){
+				$("#username").autocomplete({//自动补全
+				source:function(request,response){
+					$.ajax({
+						url:"autoGetUsername.action",//获取用户名
+						dataType:"json",
+						type:'POST',
+						data:{top:10,username:request.term},
+						success:function(data){
+							var d = eval(data);
+							var obj = [];
+							for(var i=0;i<d.length;i++){
+								obj[i] = d[i].log_Name+'('+d[i].chi_Name+')';					
+							}
+							response($.map(obj,function(item){
+								return {label:item,value:item};
+							}));
+						},
+						select:function(event,ui){
+							
+						},
+						autoFocus:true,
+						scrollHeight:200,
+						selectFirst:true
+					});
+			}
+		});
+	}
+	
+	function login(){
+			var yhm=$("#username").val();
+			var pwd=$("#password").val();
+		
+			if(yhm==''){
+				$("#errorDiv").show();
+				$(".repeat").text('用户名称不能为空');
+				return;
+			}
+			if(pwd==''){
+				$("#errorDiv").show();
+				$(".repeat").text('登录密码不能为空');
+				return;
+			}
+			
+			var username="";
+			if($("#username").val().indexOf("(")>-1){
+				username=$("#username").val().substring(0,$("#username").val().indexOf("("));
+			}else{
+				username = $("#username").val();
+			}			  
+	     	var randcode = 123456;
+	     	var usertype = $("#usertype").val();//1超级管理员 2普通用户
+	      	//var logintype = 1;//1 体检系统  2职业病系统 3crm
+	      	var logintype= 1;
+	      	var center_id = $("#center").val();
+					var dep_num = '000';
+	      	$("#errorDiv").hide();
+				$.post("login.action?username="+username+"&userpwd="+pwd+"&logintype="+logintype+"&dep_num="+dep_num,"ok",
+				function (data) {
+			//setCookie('dep_id',dep_id);
+	          if(data=="loginok")
+	            {
+	               window.location.href='../padLogin/ipad/registerDesk_dbgj.html';
+	            	
+	            }else if(data=="accloginok")
+	            {
+	            	 window.location.href='../padLogin/ipad/registerDesk_dbgj.html';
+	           		 
+	            }else{
+	              	$("#errorDiv").show();
+									$(".repeat").text(data);
+	            }
+	         },"json");
+			
+			
+		}
+		
+	function clean(){
+			$("#errorDiv").hide();
+			$(".repeat").text('');
+	}
+	
+</script>
+  </head>
+  <body >
+  	<div style="border:0px solid red;margin-top: 20px; margin-left: 200px;height: 100px;width: 200px;background-image: url(./img/logo.png);background-repeat:no-repeat;background-size:100%;">
+  		
+  	</div>
+ 	<form id="from" style="background-image: url(./img/timg_bj.jpg);background-repeat:no-repeat;background-size:100%;" >
+	    <div class="mycenter">
+	        <div class="mysign">
+	            <div class="col-sm-12 text-center text-info"  >
+	                <h1>
+	                        <font color="red">请登录</font> 
+	                </h1>
+	            </div>
+	            <div class="col-sm-10" style="margin-top: 10px;">
+	                <input   onkeyup="userKeyup()"; type="text" class="form-control" id="username" name="username" placeholder="请输入账户名"  />
+	            </div>
+	            <div  class="col-sm-10">
+	            </div>
+	            <div class="col-sm-10" style="margin-top: 60px;">
+	                <input type="password" class="form-control" onfocus="clean()" id = "password" name="password" placeholder="请输入密码"  />
+	            </div>
+	            <div class="col-sm-10">
+	            </div>
+	            <div class="col-sm-10" style="margin-top: 60px;">
+	                <button onclick="login()" type="button" style="width=:40%" class="btn btn-success col-sm-12">
+	                    	登录
+	                </button>
+	                 <div class="col-sm-12 center" style="margin-top: 15px;">
+	                 	 <div class="repeat" style="color:red;font-size: 20px;"></div>
+	                </div>
+	               
+	            </div>
+	        </div>
+	    </div>
+    </form>
+  </body>
+</html>

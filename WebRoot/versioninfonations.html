@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>版本与修改记录明细</title>
+<link href="themes/default/jquery-ui.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script src="scripts/jquery-ui.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(document).ready(function (){
+	getversion();
+});
+
+	function getversion(){
+		$.ajax({
+			  url:'getVersionInfos.action',
+			  success:function(data){
+				  var obj = eval('('+data+')');
+				  var str = '';
+				  for(i=0;i<obj.length;i++){
+						str += '<dl>'
+		    	   		+'<dd><strong>版本号：'+obj[i].version+'---'+obj[i].createtime+'</strong></dd>'
+		    	   	  for(j=0;j<obj[i].versionlist.length;j++){
+		    	   		  var vlist=obj[i].versionlist[j];
+							str += '<dl>'
+			    	   		+'<dd>'+vlist.createtime+'---'+vlist.notices+'</dd>'
+			    	        +'</dl>';
+						}
+		    	        +'</dl>';
+					}
+				 $("#content").html(str);
+			  },
+			  error:function(data){
+				  alert('加载失败');
+			  }
+		  });
+	}	 
+</script>
+<style>
+#shengming{
+	text-align:center;
+	height:25px;
+	line-height:25px; 
+	color:red;
+	background:#D5E6FA;
+	
+}
+#content{
+	background:#D5E6FA;
+}
+</style>
+</head>
+<body>
+	<div id="shengming" >声明：本记录针对版本修改过程的简单记载，不能作为验收的依据，功能依实际版本为准！</div>
+	<div id="content"></div>
+</body>
+</html>

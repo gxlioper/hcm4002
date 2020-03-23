@@ -1,0 +1,741 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="zyb-action" extends="struts-default">
+		<interceptors>
+			<interceptor name="upload"
+				class="org.apache.struts2.interceptor.FileUploadInterceptor" />
+			<interceptor-stack name="uploadStack">
+				<interceptor-ref name="upload" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp
+			</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp
+			</result>
+			<result name="commerror">/common/erroradmin.jsp</result>
+		</global-results>
+		
+		<!--Excel下载-->  
+        <action name="exportExcel" class="com.hjw.wst.ExcelExportAction" method="exportExcel">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/vnd.ms-excel</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">excelStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${excelFileName}  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>
+        <!--下载日志文件 747-->  
+        <action name="exportSyslogFile" class="com.hjw.wst.action.SyslogAction" method="exportSyslogFile">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/zip</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">fileInputStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${fileName}  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>  
+		<!-- *************************************************struts应用 action 控制************************************************ -->
+
+		<!-- 职业病单位管理 zyb1 -->
+		<action name="zybdeptmanager" class="com.hjw.zyb.action.ZybCompanyManagerAction"
+			method="zybdeptmanager">
+			<result name="success">/zyb/companyManager/zybdeptmanager.jsp</result>
+		</action>
+		
+		<!-- 体检单位新增和删除-zyb2 -->
+		<action name="zybcompanyedit" class="com.hjw.zyb.action.ZybCompanyManagerAction"
+			method="zybcompanyedit">
+			<result name="success">/zyb/companyManager/zybcompanyedit.jsp</result>
+		</action>
+		<!-- 经济类型管理-zyb200 -->
+		<action name="ecnomicclassManger" class="com.hjw.zyb.action.ZybEconomicclassAction" method="ecnomicclassManger">
+			<result name="success">/zyb/economicclass/economicclassManager.jsp</result>
+		</action>
+		<!-- 经济行业管理-zyb203 -->
+		<action name="industryManger" class="com.hjw.zyb.action.ZybOccuAction" method="industryManger">
+			<result name="success">/zyb/economicindustry/economicindustryManager.jsp</result>
+		</action>
+		<!-- 经济行业修改-zyb206 -->
+		<action name="updateIndustry" class="com.hjw.zyb.action.ZybOccuAction" method="updateIndustry">
+			<result name="success">/zyb/economicindustry/ economicindustryedit.jsp</result>
+		</action>
+		<!-- 经济行业新增子级zyb207 -->
+		<action name="addIndustry" class="com.hjw.zyb.action.ZybOccuAction" method="addIndustry">
+			<result name="success">/zyb/economicindustry/economicindustryInsert.jsp</result>
+		</action>
+		<!-- 经济行业新增同级zyb208 -->
+		<action name="addIndustry_f" class="com.hjw.zyb.action.ZybOccuAction" method="addIndustry_f">
+			<result name="success">/zyb/economicindustry/economicindustryadd.jsp</result>
+		</action>
+		<!--工种新增zyb214 -->
+		<action name="addtow" class="com.hjw.zyb.action.ZybOccuAction" method="addtow">
+			<result name="success">/zyb/typeofwork/typeofworkedit.jsp</result>
+		</action>
+		<!--工种编辑zyb215 -->
+		<action name="updatetypeOfWork" class="com.hjw.zyb.action.ZybOccuAction" method="updatetypeOfWork">
+			<result name="success">/zyb/typeofwork/typeofworkedit.jsp</result>
+		</action>
+		<!--工种管理zyb212 -->
+		<action name="typeofworkManger" class="com.hjw.zyb.action.ZybOccuAction" method="typeofworkManger">
+			<result name="success">/zyb/typeofwork/typeofworkManager.jsp</result>
+		</action>
+		
+		<!--体检类别管理zyb218 -->
+		<action name="physicalexaminationclassManage" class="com.hjw.zyb.action.ZybOccuAction" 
+		method="physicalexaminationclassManage">
+			<result name="success">/zyb/physicalexaminationclass/phyexaclassManager.jsp</result>
+		</action>
+		
+		<!--体检类别新增zyb220 -->
+		<action name="addPhyclass" class="com.hjw.zyb.action.ZybOccuAction" method="addPhyclass">
+			<result name="success">/zyb/physicalexaminationclass/Phyexaclassdit.jsp</result>
+		</action>
+		
+		<!--体检类别编辑zyb221 -->
+		<action name="updatePhyclass" class="com.hjw.zyb.action.ZybOccuAction" method="updatePhyclass">
+			<result name="success">/zyb/physicalexaminationclass/Phyexaclassdit.jsp</result>
+		</action>
+		
+		<!--从业行业管理zyb225 -->
+		<action name="ZybOccuindustryManger" class="com.hjw.zyb.action.ZybOccuindustryAction" method="ZybOccuindustryManger">
+			<result name="success">/zyb/occuindustryManager/occuindustryManager.jsp</result>
+		</action>
+		
+		<!--从业行业新增zyb227 -->
+		<action name="addOccuIndustry" class="com.hjw.zyb.action.ZybOccuindustryAction" method="addOccuIndustry">
+			<result name="success">/zyb/occuindustryManager/occundustryedit.jsp</result>
+		</action>
+		
+		<!--从业行业编辑zyb228 -->
+		<action name="updateOccuIndustry" class="com.hjw.zyb.action.ZybOccuindustryAction" method="updateOccuIndustry">
+			<result name="success">/zyb/occuindustryManager/occundustryedit.jsp</result>
+		</action>
+		
+		<!--从业工种管理zyb232 -->
+		<action name="occutypeofworkManager" class="com.hjw.zyb.action.ZybOccuindustryAction" method="occutypeofworkManager">
+			<result name="success">/zyb/zybOccutypeofwork/occutypeofworkManager.jsp</result>
+		</action>
+		
+		<!--从业工种新增zyb233 -->
+		<action name="addOccutypeofwork" class="com.hjw.zyb.action.ZybOccuindustryAction" method="addOccutypeofwork">
+			<result name="success">/zyb/zybOccutypeofwork/occutypeofworkedit.jsp</result>
+		</action>
+		
+		<!--从业工种编辑zyb234 -->
+		<action name="updateOccutypeofwork" class="com.hjw.zyb.action.ZybOccuindustryAction" method="updateOccutypeofwork">
+			<result name="success">/zyb/zybOccutypeofwork/occutypeofworkedit.jsp</result>
+		</action>
+		
+		<!--检查依据管理zyb239 -->
+		<action name="criterionManager" class="com.hjw.zyb.action.ZybOccuindustryAction" method="criterionManager">
+			<result name="success">/zyb/checkcriterionManager/checkcriterion.jsp</result>
+		</action>
+		
+		<!--检查依据新增zyb240 -->
+		<action name="addChecriterion" class="com.hjw.zyb.action.ZybOccuindustryAction" method="addChecriterion">
+			<result name="success">/zyb/checkcriterionManager/checkcriterionedit.jsp</result>
+		</action>
+		
+		<!--检查依据编辑zyb241 -->
+		<action name="updateChecriterion" class="com.hjw.zyb.action.ZybOccuindustryAction" method="updateChecriterion">
+			<result name="success">/zyb/checkcriterionManager/checkcriterionedit.jsp</result>
+		</action>
+		
+		<!--职业危害相关信息管理zyb245 -->
+		<action name="OccuhazardrelatorsinfoManager" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="OccuhazardrelatorsinfoManager">
+			<result name="success">/zyb/occuhazardrelatorsinfo/occuhazardrelatorsinfoManager.jsp</result>
+		</action>
+		
+		<!--职业危害相关信息新增zyb248 -->
+		<action name="addOccuhazardrelatorsinfo" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="addOccuhazardrelatorsinfo">
+			<result name="success">/zyb/occuhazardrelatorsinfo/occuhazardrelatorsinfoedit.jsp</result>
+		</action>
+		
+		<!--职业危害相关信息编辑zyb249 -->
+		<action name="updateOccuhazardrelatorsinfo" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="updateOccuhazardrelatorsinfo">
+			<result name="success">/zyb/occuhazardrelatorsinfo/occuhazardrelatorsinfoedit.jsp</result>
+		</action>
+		
+		<!--职业危害相关信息查看-zyb255-->	
+		<action name="lookOccuhazardrelatorsinfo" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="lookOccuhazardrelatorsinfo" >		
+        	<result name="success">/zyb/occuhazardrelatorsinfo/occuhazardrelatorsinfolook.jsp</result>
+        </action>
+        
+        <!--照射源分类管理-zyb257-->	
+		<action name="sourceclassManager" class="com.hjw.zyb.action.ZybSourcecareerclassAction" method="sourceclassManager" >		
+        	<result name="success">/zyb/zybSourcecareerclass/zybSourcecareerclassManager.jsp</result>
+        </action>
+        
+        <!--照射源分类新增-zyb259-->	
+		<action name="addSourcecareerclass" class="com.hjw.zyb.action.ZybSourcecareerclassAction" method="addSourcecareerclass" >		
+        	<result name="success">/zyb/zybSourcecareerclass/zybSourcecareerclassedit.jsp</result>
+        </action>
+        
+        <!--照射源分类编辑-zyb260-->	
+		<action name="updateSourcecareerclass" class="com.hjw.zyb.action.ZybSourcecareerclassAction" method="updateSourcecareerclass" >		
+        	<result name="success">/zyb/zybSourcecareerclass/zybSourcecareerclassedit.jsp</result>
+        </action>
+        
+        <!--粉尘胸片参数管理-zyb265-->	
+		<action name="ZybDustitemoptionManger" class="com.hjw.zyb.action.ZybDustitemoptionAction" method="ZybDustitemoptionManger" >		
+        	<result name="success">/zyb/zybdustitemoption/dustitemoptionManager.jsp</result>
+        </action>
+        
+        <!--粉尘胸片参数新增-zyb268-->	
+		<action name="addDustitemoption" class="com.hjw.zyb.action.ZybDustitemoptionAction" method="addDustitemoption" >		
+        	<result name="success">/zyb/zybdustitemoption/zybdustitemoptiondit.jsp</result>
+        </action>
+        
+        <!--粉尘胸片参数修改-zyb269-->	
+		<action name="updDustitemoption" class="com.hjw.zyb.action.ZybDustitemoptionAction" method="updDustitemoption" >		
+        	<result name="success">/zyb/zybdustitemoption/zybdustitemoptiondit.jsp</result>
+        </action>
+        
+        <!--体检结论管理-zyb273-->	
+		<action name="ZybExamresultManager" class="com.hjw.zyb.action.ZybexamresultAction" method="ZybExamresultManager" >		
+        	<result name="success">/zyb/examresultManager/examresult.jsp</result>
+        </action>
+        
+        <!--体检结论新增zyb275-->	
+		<action name="addZybExamresult" class="com.hjw.zyb.action.ZybexamresultAction" method="addZybExamresult" >		
+        	<result name="success">/zyb/examresultManager/examresultedit.jsp</result>
+        </action>
+        
+        <!--体检结论编辑zyb276-->	
+		<action name="updateZybExamresult" class="com.hjw.zyb.action.ZybexamresultAction" method="updateZybExamresult" >		
+        	<result name="success">/zyb/examresultManager/examresultedit.jsp</result>
+        </action>
+        
+        <!--经济类型父级新增zyb280-->	
+		<action name="f_addEcoclass" class="com.hjw.zyb.action.ZybEconomicclassAction" method="f_addEcoclass" >		
+        	<result name="success">/zyb/economicclass/economicclassf_add.jsp</result>
+        </action>
+        
+        <!--经济类型编辑zyb281-->	
+		<action name="updateEcoclass" class="com.hjw.zyb.action.ZybEconomicclassAction" method="updateEcoclass" >		
+        	<result name="success">/zyb/economicclass/economicclassedit.jsp</result>
+        </action>
+        
+        <!--经济类型子级新增zyb283-->	
+		<action name="addEcoclass" class="com.hjw.zyb.action.ZybEconomicclassAction" method="addEcoclass" >		
+        	<result name="success">/zyb/economicclass/economicclassinsert.jsp</result>
+        </action>
+        
+        
+		<!-- 方案管理 zyb4 -->
+		<action name="zybbatchManager" class="com.hjw.zyb.action.ZybBatchAction" method="zybbatchManager">
+			<result name="success">/zyb/batchManager/zybbatchManager.jsp</result>
+		</action>
+		
+		<!-- 方案显示 zyb5 -->
+		<action name="zybbatchshow" class="com.hjw.zyb.action.ZybBatchAction" method="zybbatchshow">
+			<result name="success">/zyb/batchManager/zybbatchshow.jsp</result>
+		</action>
+
+       <!-- zyb6 编辑方案 -->
+		<action name="zybbatchedit" class="com.hjw.zyb.action.ZybBatchAction"
+			method="zybbatchedit">
+			<result name="success">/zyb/batchManager/zybbatchedit.jsp</result>
+		</action>
+
+		 <!-- 职业病单位人员管理  zyb9-->
+        <action name="zybbatchUserManager" class="com.hjw.zyb.action.ZybBatchAction" method="zybbatchUserManager">
+            <result name="success">/zyb/customerManager/zybbatchUserManager.jsp</result>
+        </action>
+
+        <!-- zyb10 职业病团体人员显示 -->
+		<action name="zybusergroupmanager" class="com.hjw.zyb.action.ZybCustomerInfoAction"
+			method="zybusergroupmanager">
+			<result name="success">/zyb/customerManager/zybusergroupmanager.jsp</result>
+		</action>
+		
+		<!-- zyb12 导入临时表操作界面 -->
+        <action name="zybimpusershow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybimpusershow">
+            <result name="success">/zyb/customerManager/zybimpusershow.jsp</result>
+        </action>
+		
+		<!-- zyb508 导入临时表操作界面(关联自选套餐) -->
+        <action name="zybimpusershow_set" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybimpusershow_set">
+            <result name="success">/zyb/customerManager/zybimpusershow_set.jsp</result>
+        </action>
+
+        <!-- zyb14 职业病文件上传界面 -->
+        <action name="zybimpuserfile" class="com.hjw.wst.action.BatchAction" method="zybimpuserfile">
+            <result name="success">/zyb/customerManager/zybimpuserfile.jsp</result>
+        </action>
+		
+		<!--zyb501 职业病团报模板管理-->
+		<action name="occtemplateManager" class="com.hjw.zyb.action.ZybOcctemplateAction" method="occtemplateManager">
+			<result name="success">/zyb/zybOcctemplate/occtemplateManager.jsp</result>
+		</action>
+		
+		<!--zyb502 职业病团报模板新增-->
+		<action name="addOcctemplate" class="com.hjw.zyb.action.ZybOcctemplateAction" method="addOcctemplate">
+			<result name="success">/zyb/zybOcctemplate/occtemplateEdit.jsp</result>
+		</action>
+		
+		<!--zyb503 职业病团报模板编辑-->
+		<action name="updateOcctemplate" class="com.hjw.zyb.action.ZybOcctemplateAction" method="updateOcctemplate">
+			<result name="success">/zyb/zybOcctemplate/occtemplateEdit.jsp</result>
+		</action>
+		
+		<!-- zyb512 导入临时表操作界面（放射性职业病） -->
+        <action name="fsxzybimpusershow" class="com.hjw.zyb.action.FsxzybCustomerInfoAction" method="fsxzybimpusershow">
+            <result name="success">/zyb/customerManager/fsxzybimpusershow.jsp</result>
+        </action>
+
+        <!-- zyb514 文件上传界面（放射性职业病） -->
+        <action name="fsxzybimpuserfile" class="com.hjw.wst.action.BatchAction" method="zybimpuserfile">
+            <result name="success">/zyb/customerManager/fsxzybimpuserfile.jsp</result>
+        </action>
+
+        <!-- zyb301 职业体检类别管理页面-->
+        <action name="getZYB_OccuphyexaPage" class="com.hjw.zyb.action.ZybOccuphyexaClassAction" method="getZYB_OccuphyexaPage">
+            <result name="success">/zyb/zyboccuphyexaClass/zyboccuphyexaClass.jsp</result>
+        </action>
+        
+        <!-- zyb306 职业体检类别新增页面-->
+        <action name="addZYB_OccuphyexaPage" class="com.hjw.zyb.action.ZybOccuphyexaClassAction" method="addZYB_OccuphyexaPage">
+            <result name="success">/zyb/zyboccuphyexaClass/addzyboccuphyexaClass.jsp</result>
+        </action>
+        
+        <!-- zyb307 职业体检类别修改页面-->
+        <action name="updateZYB_OccuphyexaPage" class="com.hjw.zyb.action.ZybOccuphyexaClassAction" method="updateZYB_OccuphyexaPage">
+            <result name="success">/zyb/zyboccuphyexaClass/addzyboccuphyexaClass.jsp</result>
+        </action>
+          
+        
+        <!-- zyb308 职业危害类别管理页面-->
+        <action name="getZYB_OccuhazardClassPage" class="com.hjw.zyb.action.ZybOccuhazardClassAction" method="getZYB_OccuhazardClassPage">
+            <result name="success">/zyb/zyboccuhazardClass/zyboccuhazardClass.jsp</result>
+        </action>
+        
+        <!-- zyb311 职业危害类别添加页面-->
+        <action name="addZYB_OccuhazardClassPage" class="com.hjw.zyb.action.ZybOccuhazardClassAction" method="addZYB_OccuhazardClassPage">
+            <result name="success">/zyb/zyboccuhazardClass/addzyboccuhazardClass.jsp</result>
+        </action>
+        
+        <!-- zyb313 职业危害类别添加页面-->
+        <action name="updateZYB_OccuhazardClassPage" class="com.hjw.zyb.action.ZybOccuhazardClassAction" method="updateZYB_OccuhazardClassPage">
+            <result name="success">/zyb/zyboccuhazardClass/addzyboccuhazardClass.jsp</result>
+        </action>
+        
+        <!-- zyb315 职业因素管理页面-->
+        <action name="getOccuhazardfactorsPage" class="com.hjw.zyb.action.ZybOccuhazardfactorsAction" method="getOccuhazardfactorsPage">
+            <result name="success">/zyb/zybOccuhazardfactors/zybOccuhazardfactors.jsp</result>
+        </action>
+        
+        <!-- zyb319 职业危害因素添加页面-->
+        <action name="addOccuHazardFactorsPage" class="com.hjw.zyb.action.ZybOccuhazardfactorsAction" method="addOccuHazardFactorsPage">
+            <result name="success">/zyb/zybOccuhazardfactors/addzybOccuhazardfactors.jsp</result>
+        </action>
+        
+        <!-- zyb322 职业危害因素修改页面-->
+        <action name="updateOccuHazardFactorsPage" class="com.hjw.zyb.action.ZybOccuhazardfactorsAction" method="updateOccuHazardFactorsPage">
+            <result name="success">/zyb/zybOccuhazardfactors/addzybOccuhazardfactors.jsp</result>
+        </action>
+		 
+		 <!--职业病问诊项目管理页面zyb323 -->
+		 <action name="getZybCareerInquisitionItemPage" class="com.hjw.zyb.action.ZybCareerInquisitionItemAction" method="getZybCareerInquisitionItemPage">
+			 <result name="success">/zyb/careerInquisitionItem/careerInquisitionItem.jsp</result>
+       	 </action>
+		 
+		 <!--职业病问诊项目添加页面zyb325 -->
+		 <action name="addZybCareerInquisitionItemPage" class="com.hjw.zyb.action.ZybCareerInquisitionItemAction" method="addZybCareerInquisitionItemPage">
+			 <result name="success">/zyb/careerInquisitionItem/addcareerInquisitionItem.jsp</result>
+       	 </action>
+       	 
+		 <!--职业病问诊项目修改页面zyb326 -->
+		 <action name="getUpdateZybCareerInquisitionItemPage" class="com.hjw.zyb.action.ZybCareerInquisitionItemAction" method="getUpdateZybCareerInquisitionItemPage">
+			 <result name="success">/zyb/careerInquisitionItem/addcareerInquisitionItem.jsp</result>
+       	 </action>
+       	 
+		 <!--职业病管理页面zyb330 -->
+		 <action name="getZyboccudiseasePage" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getZyboccudiseasePage">
+			 <result name="success">/zyb/occudisease/occudisease.jsp</result>
+       	 </action>
+       	 
+		 <!--职业病新增页面zyb334 -->
+		 <action name="addZyboccudiseasePage" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="addZyboccudiseasePage">
+			 <result name="success">/zyb/occudisease/addoccudisease.jsp</result>
+       	 </action>
+       	 
+		 <!--职业病修改页面zyb335 -->
+		 <action name="updateZyboccudiseasePage" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="updateZyboccudiseasePage">
+			 <result name="success">/zyb/occudisease/addoccudisease.jsp</result>
+       	 </action>
+      
+       	 
+		 <!--禁忌症管理页面zyb337 -->
+		 <action name="getOccucontraindication" class="com.hjw.zyb.action.ZyboccucontraindicationAction" method="getOccucontraindication">
+			 <result name="success">/zyb/occucontraindication/occucontraindication.jsp</result>
+       	 </action>
+      
+       	 
+		 <!--禁忌症新增页面页面zyb340 -->
+		 <action name="addOccucontraindicationList" class="com.hjw.zyb.action.ZyboccucontraindicationAction" method="addOccucontraindicationList">
+			 <result name="success">/zyb/occucontraindication/addoccucontraindication.jsp</result>
+       	 </action>
+       	 
+		 <!--禁忌症修改页面zyb341 -->
+		 <action name="updateOccucontraindicationList" class="com.hjw.zyb.action.ZyboccucontraindicationAction" method="updateOccucontraindicationList">
+			 <result name="success">/zyb/occucontraindication/addoccucontraindication.jsp</result>
+       	 </action>
+       	 
+		 <!--疾病分类对应结论管理页面zyb343 -->
+		 <action name="getZybdiseaseclassresultPage" class="com.hjw.zyb.action.ZybexaminationresultAction" method="getZybdiseaseclassresultPage">
+			 <result name="success">/zyb/examinationresult/examinationresult.jsp</result>
+       	 </action>
+       	 
+		 <!--疾病分类对应结论新增页面zyb346 -->
+		 <action name="addZybdiseaseclassresultPage" class="com.hjw.zyb.action.ZybexaminationresultAction" method="addZybdiseaseclassresultPage">
+			 <result name="success">/zyb/examinationresult/addexaminationresult.jsp</result>
+       	 </action>
+       	 
+		 <!--疾病分类对应结论修改页面zyb347 -->
+		 <action name="updateZybdiseaseclassresult" class="com.hjw.zyb.action.ZybexaminationresultAction" method="updateZybdiseaseclassresult">
+			 <result name="success">/zyb/examinationresult/addexaminationresult.jsp</result>
+       	 </action>
+       	 
+		 <!--复查项目及要求管理管理zyb356 -->
+		 <action name="getCheckItemPage" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="getCheckItemPage">
+			 <result name="success">/zyb/RecheckExclDiseaseItem/RechekeItem.jsp</result>
+       	 </action>
+       	 
+		 <!--复查项目及要求修改页面zyb353 -->
+		 <action name="updateCheckItemPage" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="updateCheckItemPage">
+			 <result name="success">/zyb/RecheckExclDiseaseItem/addRechekeItem.jsp</result>
+       	 </action>
+       	 
+		 <!--复查项目及要求新增页面zyb354 -->
+		 <action name="addCheckItemPage" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="addCheckItemPage">
+			 <result name="success">/zyb/RecheckExclDiseaseItem/addRechekeItem.jsp</result>
+       	 </action>
+       	 
+		 <!--复查项目排除目标疾病管理zyb357 -->
+		 <action name="getRecheckExclDiseasePage" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="getRecheckExclDiseasePage">
+			 <result name="success">/zyb/RecheckExclDiseaseItem/echeckExclDisease.jsp</result>
+       	 </action>
+       	 
+		 <!--复查项目排除目标疾病修改页面zyb360 -->
+		 <action name="updateRecheckExclDiseasePage" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="updateRecheckExclDiseasePage">
+			 <result name="success">/zyb/RecheckExclDiseaseItem/addecheckExclDisease.jsp</result>
+       	 </action>
+       	 
+		 <!--复查项目排除目标疾病新增页面zyb361 -->
+		 <action name="addRecheckExclDiseasePage" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="addRecheckExclDiseasePage">
+			 <result name="success">/zyb/RecheckExclDiseaseItem/addecheckExclDisease.jsp</result>
+       	 </action>
+      
+      
+          <!-- zyb18 职业病团体新增人员 -->
+        <action name="zybaddcustomer" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybaddcustomer">
+            <result name="success">/zyb/customerManager/zybaddcustomer.jsp</result>
+        </action>
+
+          <!-- zyb24 职业病维护职业病史页面 -->
+        <action name="zybocchisadd" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybocchisadd">
+            <result name="success">/zyb/customerManager/zybocchisadd.jsp</result>
+        </action>
+
+          <!-- zyb363 职业建议词管理-->
+        <action name="getZybProposetemplatePage" class="com.hjw.zyb.action.ZybProposetemplateAction" method="getZybProposetemplatePage">
+            <result name="success">/zyb/Proposetemplate/Proposetemplate.jsp</result>
+        </action>
+
+          <!-- zyb367 职业建议词新增页面-->
+        <action name="addZybProposetemplatePage" class="com.hjw.zyb.action.ZybProposetemplateAction" method="addZybProposetemplatePage">
+            <result name="success">/zyb/Proposetemplate/addProposetemplate.jsp</result>
+        </action>
+
+          <!-- zyb368职业建议词修改页面-->
+        <action name="updateZybProposetemplatePage" class="com.hjw.zyb.action.ZybProposetemplateAction" method="updateZybProposetemplatePage">
+            <result name="success">/zyb/Proposetemplate/addProposetemplate.jsp</result>
+        </action> 
+        
+        <!-- zyb400 zyb普通科室检查页面-->
+        <action name="zybInspectshow" class="com.hjw.zyb.action.ZybDepInspectAction" method="zybInspectshow">
+            <result name="success">/zyb/inspectionDepartment/zybdepartInspect.jsp</result>
+        </action>  
+        
+        <!-- zyb401 zyb与健康体检普通科室检查综合页面-->
+        <action name="inspectshowAll" class="com.hjw.zyb.action.ZybDepInspectAction" method="inspectshowAll">
+            <result name="success">/zyb/inspectionDepartment/departInspectAll.jsp</result>
+        </action> 
+        
+        <!-- zyb402 zyb检验科室结果录入页面-->
+        <action name="getZybExamResultDetail" class="com.hjw.zyb.action.ZybExamResultDetailAction" method="getZybExamResultDetail">
+            <result name="success">/zyb/inspectionDepartment/zybexam_result_detail.jsp</result>
+        </action>
+        
+        <!-- zyb403 zyb与健康体检检验科室检查综合页面-->
+        <action name="getExamResultDetailAllPage" class="com.hjw.zyb.action.ZybExamResultDetailAction" method="getExamResultDetailAllPage">
+            <result name="success">/zyb/inspectionDepartment/exam_result_detail_all.jsp</result>
+        </action>
+        
+        <!-- zyb404 zyb影像科室结果录入页面-->
+        <action name="getZybViewExamPage" class="com.hjw.zyb.action.ZybViewExamAction" method="getZybViewExamPage">
+            <result name="success">/zyb/inspectionDepartment/zybview_exam_detail.jsp</result>
+        </action>
+        
+        <!-- zyb405 zyb与健康体检影像科室检查综合页面-->
+        <action name="getViewExamAllPage" class="com.hjw.zyb.action.ZybViewExamAction" method="getViewExamAllPage">
+            <result name="success">/zyb/inspectionDepartment/view_exam_detail_all.jsp</result>
+        </action>
+        
+        <!-- zyb406  获取职业病总检页面-->
+        <action name="getZybExamSummaryPage" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getZybExamSummaryPage">
+            <result name="success">/zyb/inspectionDepartment/zyb_exam_summary.jsp</result>
+        </action>  
+        
+        <!-- zyb407 获取总检室健康体检和职业病体检综合页面-->
+        <action name="getExamSummaryPageAll" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getExamSummaryPageAll">
+            <result name="success">/zyb/inspectionDepartment/exam_summary_all.jsp</result>
+        </action>  
+        
+        <!-- zyb410 获取职业病总检室新增阳性页面-->
+        <action name="showNewZybExamDisease" class="com.hjw.zyb.action.ZybExamSummaryAction" method="showNewZybExamDisease">
+            <result name="success">/zyb/inspectionDepartment/zyb_new_exam_disease.jsp</result>
+        </action>
+        
+        <!-- zyb413 问诊项目维护管理页面-->
+        <action name="getZybAskDiagnosisSamplePage" class="com.hjw.zyb.action.ZybAskDiagnosisSampleAction" method="getZybAskDiagnosisSamplePage">
+            <result name="success">/zyb/askDiagnosisSample/askDiagnosisSample.jsp</result>
+        </action>
+        
+        <!-- zyb415 问诊项目编辑页面-->
+        <action name="getZybAskDiagnosisSampleEditPage" class="com.hjw.zyb.action.ZybAskDiagnosisSampleAction" method="getZybAskDiagnosisSampleEditPage">
+            <result name="success">/zyb/askDiagnosisSample/askDiagnosisSampleEdit.jsp</result>
+        </action>
+        
+        <!-- zyb418 获取问诊功能首页-->
+        <action name="zybInquisitionIndexpage" class="com.hjw.zyb.action.ZybInquisitionResultAction" method="zybInquisitionIndexpage">
+            <result name="success">/zyb/inspectionDepartment/zybinquisitionindex.jsp</result>
+        </action>
+        
+        <!-- zyb423 总检室获取选择检查结果页面-->
+        <action name="getExamSummaryExaminationResultPage" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getExamSummaryExaminationResultPage">
+            <result name="success">/zyb/inspectionDepartment/zybexaminationResult.jsp</result>
+        </action>
+        
+        <!-- zyb420 获取问诊项目录入页面-->
+        <action name="zybInquisitionPage" class="com.hjw.zyb.action.ZybInquisitionResultAction" method="zybInquisitionPage">
+            <result name="success">/zyb/inspectionDepartment/zybinquisitionresult.jsp</result>
+        </action>
+        
+        <!-- zyb28 增加体检职业病危害因素与套餐 -->
+        <action name="zyboccwhystcadd" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zyboccwhystcadd">
+            <result name="success">/zyb/customerManager/zyboccwhystcadd.jsp</result>
+        </action>
+        
+        <!-- 登记台 增加体检职业病危害因素与套餐 -->
+        <action name="zybdjtoccwhystcadd" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zyboccwhystcadd">
+            <result name="success">/zyb/registerDesk/zybdjtoccwhystcadd.jsp</result>
+        </action>
+        
+         <!-- 职业病增加体检项目 zyb37 -->
+        <action name="zybcustomeritemaddshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybcustomeritemaddshow">
+			<result name="success">/zyb/customerManager/zybcustomeritemaddshow.jsp</result>
+		</action> 
+		
+		<!-- 职业病团体个人加项zyb47 -->
+		<action name="zybTGcustomeritemaddshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybTGcustomeritemaddshow" >
+			<result name="success">/zyb/customerManager/zybTGcustomeritemaddshow.jsp</result>
+		</action>
+		
+		
+		 <!-- 职业病团体个人加项 zyb48 -->
+		<action name="zybTTcustomeritemaddshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybTTcustomeritemaddshow" >
+			<result name="success">/zyb/customerManager/zybTTcustomeritemaddshow.jsp</result>
+		</action>
+		
+		<!--职业病团体批量加项  zyb39 -->
+        <action name="zybcustomerAllitemaddshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybcustomerAllitemaddshow" >
+			<result name="success">/zyb/customerManager/zybcustomerAllitemaddshow.jsp</result>
+		</action>
+		
+		<!-- 职业病减项界面 zyb52 -->
+        <action name="zybcustomerallitemdelshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybcustomerallitemdelshow" >
+			<result name="success">/zyb/customerManager/zybcustomerallitemdelshow.jsp</result>
+		</action>
+		
+		<!--职业病登记台 zyb55-->
+		<action name="zybregisterDesk" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="zybregisterDesk">
+			<result name="success">/zyb/registerDesk/zybregisterDesk.jsp</result>
+		</action>
+		
+		<!-- 职业病体检个人登记 zyb57 -->
+		<action name="getZybDjtRegisterGList" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="getDjtRegisterGList">
+			<result name="success">/zyb/registerDesk/getZybDjtRegisterGList.jsp</result>
+		</action>
+
+		<!-- 职业病体检团体登记 zyb58 -->
+		<action name="getZybDjtRegisterTList" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="getDjtRegisterTList">
+			<result name="success">/zyb/registerDesk/getZybDjtRegisterTList.jsp</result>
+		</action>
+		
+		<!-- 职业病体检团体复检登记  -->
+		<action name="getZybDjtRegisterTListRecheck" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="getZybDjtRegisterTListRecheck">
+			<result name="success">/zyb/registerDesk/getZybDjtRegisterTEditRecheck.jsp</result>
+		</action>
+
+       <!-- 职业病个人管理页面 zyb59 -->
+		<action name="getZybDjtRegisterGEdit" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="getDjtRegisterGEdit">
+			<result name="success">/zyb/registerDesk/getZybDjtRegisterGEdit.jsp</result>
+			<result name="success_jiuzhenka">/zyb/registerDesk/getZybDjtRegisterGEdit_jiuzhenka.jsp</result>
+		</action>
+
+		<!-- 职业病团体管理页面 zyb60 -->
+		<action name="getZybDjtRegisterTEdit" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="getDjtRegisterTEdit">
+			<result name="success">/zyb/registerDesk/getZybDjtRegisterTEdit.jsp</result>
+			<result name="success_jiuzhenka">/zyb/registerDesk/getZybDjtRegisterTEdit_jiuzhenka.jsp</result>
+		</action>
+
+		<!-- 职业病扩展信息管理页面 zyb64 -->
+		<action name="getZybDjtRegisterExtEdit" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="getZybDjtRegisterExtEdit">
+			<result name="success">/zyb/registerDesk/getZybDjtRegisterExtEdit.jsp</result>
+		</action>
+
+        <!-- 登记台增加职业病 zyb66 -->
+		<action name="zybdjtcustomerGitemaddshow" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="zybdjtcustomerGitemaddshow">
+			<result name="success">/zyb/registerDesk/zybdjtcustomerGitemaddshow.jsp</result>
+		</action>
+		
+		<!-- 登记台增加团检项目 zyb67 -->
+		<action name="zybdjtTTcustomeritemaddshow" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="zybdjtTTcustomeritemaddshow">
+			<result name="success">/zyb/registerDesk/zybdjtTTcustomeritemaddshow.jsp</result>
+		</action>
+		
+		<!-- 登记台增加个检项目 zyb68 -->
+		<action name="zybdjtTGcustomeritemaddshow" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="zybdjtTGcustomeritemaddshow">
+			<result name="success">/zyb/registerDesk/zybdjtTGcustomeritemaddshow.jsp</result>
+		</action>
+		
+		 <!-- 个人增加职业病项目页面 zyb69 -->
+		<action name="zybdjtcustomeritemaddshow" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="zybdjtcustomeritemaddshow">
+			<result name="success">/zyb/registerDesk/zybdjtcustomeritemaddshow.jsp</result>
+		</action>
+		 <!-- 职业病团体登记台折扣率设置 -->
+		<action name="zybdjtTdiscountadd" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="zybdjtTdiscountadd">
+			<result name="success">/zyb/registerDesk/zybdjtTdiscountaddshow.jsp</result>
+		</action>
+		
+		 <!-- 职业史导入上传页面 zyb372 -->
+		<action name="getOccuhisUploadPage" class="com.hjw.zyb.action.ZybOccuhisAction"	method="getOccuhisUploadPage">
+			<result name="success">/zyb/registerDesk/zybimpuserfile.jsp</result>
+		</action>
+		 <!-- 职业病套餐管理页面 zyb373 -->
+		<action name="getZybExamSetPage" class="com.hjw.wst.action.ExamSetAction"	method="getZybExamSetPage">
+			<result name="success">/examSet/zybexamSet.jsp</result>
+		</action>
+		 <!-- 因素+体检类别+禁忌证关系维护 zyb376 -->
+		<action name="getLbOccucontraindicationPage" class="com.hjw.zyb.action.ZyboccucontraindicationAction"	method="getLbOccucontraindicationPage">
+			<result name="success">/zyb/occucontraindication/lb_occucontraindication.jsp</result>
+		</action>
+		 <!-- 因素+体检类别+禁忌证关系添加页面 zyb377 -->
+		<action name="getLbAddOccucontraindicationPage" class="com.hjw.zyb.action.ZyboccucontraindicationAction"	method="getLbAddOccucontraindicationPage">
+			<result name="success">/zyb/occucontraindication/lb_addoccucontraindication.jsp</result>
+		</action>
+		 <!-- 因素+体检类别+禁忌证关系修改页面 zyb379 -->
+		<action name="getLbupdateOccucontraindicationPage" class="com.hjw.zyb.action.ZyboccucontraindicationAction"	method="getLbupdateOccucontraindicationPage">
+			<result name="success">/zyb/occucontraindication/lb_addoccucontraindication.jsp</result>
+		</action>
+		
+		 <!-- 因素检查依据管理 zyb380 -->
+		<action name="getLbcriterionManager" class="com.hjw.zyb.action.ZybOccuindustryAction"	method="getLbcriterionManager">
+			<result name="success">/zyb/checkcriterionManager/lb_checkcriterion.jsp</result>
+		</action>
+		 <!-- 因素检查依据添加页面 zyb381 -->
+		<action name="getLbcriterionManagerupdatePage" class="com.hjw.zyb.action.ZybOccuindustryAction"	method="getLbcriterionManagerupdatePage">
+			<result name="success">/zyb/checkcriterionManager/lb_checkcriterionedit.jsp</result>
+		</action>
+		 <!-- 因素检查依据修改页面 zyb386 -->
+		<action name="updateLbcriterionManagerPage" class="com.hjw.zyb.action.ZybOccuindustryAction"	method="updateLbcriterionManagerPage">
+			<result name="success">/zyb/checkcriterionManager/lb_checkcriterionedit.jsp</result>
+		</action>
+		 <!-- 因素禁忌症修改页面zyb388 -->
+		<action name="getupdateLbOccucontraindicationPage" class="com.hjw.zyb.action.ZyboccucontraindicationAction"	method="getupdateLbOccucontraindicationPage">
+			<result name="success">/zyb/occucontraindication/lb_addoccucontraindication.jsp</result>
+		</action>
+		
+		<!-- 登记台职业病放射历史导入页面 zyb390 -->
+		<action name="getZybFsDjtRegisterExtEdit" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="getZybFsDjtRegisterExtEdit">
+			<result name="success">/zyb/registerDesk/getZybFsDjtRegisterExtEdit.jsp</result>
+		</action>
+		<!-- 登记台既往史 zyb391-->
+		<action name="getZybJWSDjtRegisterExtEdit" class="com.hjw.zyb.action.ZybRegisterDeskAction"	method="getZybJWSDjtRegisterExtEdit">
+			<result name="success">/zyb/registerDesk/getZybFsDjtRegisterExtEdit.jsp</result>
+		</action>
+		<!-- 登记台放射史新增页面 zyb392-->
+		<action name="zybFsocchisadd" class="com.hjw.zyb.action.ZybCustomerInfoAction"	method="zybFsocchisadd">
+			<result name="success">/zyb/customerManager/zybFsocchisadd.jsp</result>
+		</action>	
+		<!-- 登记台既往史新增页面 zyb394-->
+		<action name="zybDiseaseHistory" class="com.hjw.zyb.action.ZybCustomerInfoAction"	method="zybDiseaseHistory">
+			<result name="success">/zyb/customerManager/zybjiwangshiadd.jsp</result>
+		</action>
+		 <!--因素职业病关系管理zyb397 -->
+		 <action name="getZyboccudiseaseYinsuPage" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getZyboccudiseaseYinsuPage">
+			 <result name="success">/zyb/occuhazardfactors_occudisease/occuhazardfactors_occudisease.jsp</result>
+       	 </action>
+       	 <!-- -因素职业病关系新增页面zyb601 -->
+		 <action name="getAddZyboccudiseaseYinsuPage" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getAddZyboccudiseaseYinsuPage">
+			 <result name="success">/zyb/occuhazardfactors_occudisease/occuhazardfactors_occudisease_add.jsp</result>
+       	 </action>
+       	 <!--  因素职业病关系修改页面zyb602-->
+		 <action name="getupdateZyboccudiseaseYinsuPage" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getupdateZyboccudiseaseYinsuPage">
+			 <result name="success">/zyb/occuhazardfactors_occudisease/occuhazardfactors_occudisease_add.jsp</result>
+       	 </action>
+       	 
+       	  <!--zyb604问诊===职业史页面-->
+		 <action name="getzhiyeshiPage" class="com.hjw.zyb.action.ZybInquisitionResultAction" method="getzhiyeshiPage" >
+		 	 <result name="success">/zyb/inspectionDepartment/zybinquisitionresultZYS.jsp</result>
+       	 </action>
+       	    <!-- zyb605 职业病修改页面 -->
+        <action name="zybocchisaupdate" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybocchisaupdate">
+            <result name="success">/zyb/customerManager/zybocchisadd.jsp</result>
+        </action>
+        	<!-- zyb606放射史修改页面 zyb606-->
+		<action name="zybFsocchisupdate" class="com.hjw.zyb.action.ZybCustomerInfoAction"	method="zybFsocchisupdate">
+			<result name="success">/zyb/customerManager/zybFsocchisadd.jsp</result>
+		</action>
+		
+        	<!-- 杭州下沙健桥-职业病上传数据主界面zyb607 -->
+		<action name="zybUploadData" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybUploadData">
+			<result name="success_jq">/zyb/zybUploadData/zybUploadData_jq.jsp</result>
+			<result name="success_ww">/zyb/zybUploadData/zybUploadData_ww.jsp</result>
+		</action>
+		<!-- 职业病人员登记危害因素维护2542 -->
+		<action name="zybCustomerHazard" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybCustomerHazard">
+			<result name="success">/zyb/registerDesk/djtcustomer_hazard.jsp</result>
+		</action>
+		<!-- 职业病自选套餐因素关系维护页面2543 -->
+		<action name="zybExamSetHazardPage" class="com.hjw.wst.action.ExamSetAction" method="zybExamSetHazardPage">
+			<result name="success">/examSet/examSet_hazard.jsp</result>
+		</action>
+		<!-- 职业病新增自选套餐维护因素2546 -->
+		<action name="zybAddExamSetZXPage" class="com.hjw.wst.action.ExamSetAction" method="zybAddExamSetZXPage">
+			<result name="success">/examSet/zybaddEaxmSet.jsp</result>
+		</action>
+
+	</package>
+</struts>

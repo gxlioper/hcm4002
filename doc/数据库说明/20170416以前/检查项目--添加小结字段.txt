@@ -1,0 +1,4 @@
+
+
+ALTER TABLE examination_item ADD brief_mark  VARCHAR(4)    --小结标示是否异常  （1.是     0.否）
+ALTER TABLE examination_item ADD brief VARCHAR(4)    --记入小结    （1.疾病逻辑     0.参考值）

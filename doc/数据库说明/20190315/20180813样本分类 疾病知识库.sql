@@ -1,0 +1,9 @@
+alter table sample_demo add demo_type int  NOT NULL  default(0); --样本分类/大类
+
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1570', N'depExaminationItem.action', N'科室类别检查项目管理页面', N'1', null, N'1570', N'2', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1571', N'shezhileibiePage.action', N'检查项目设置类别页面', N'1', null, N'1571', N'2', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1572', N'shezhileibie.action', N'检查项目设置类别', N'2', null, N'1571', N'1', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1573', N'saveItemClass.action', N'保存类别和项目关系', N'2', null, N'1570', N'1', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1574', N'deleteItemclass.action', N'删除类别', N'2', null, N'1570', N'1', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1575', N'getdepExaminationItemList.action', N'获取树数据', N'2', null, N'1570', N'2', N'1', N'1');
+INSERT INTO [dbo].[WEB_XTGNB] ([ID], [URL], [NAME], [TYPE], [REMARK], [FATHERACTION], [ACTIONTYPE], [ADMINTYPE], [apptype]) VALUES (N'1576', N'saveItemClassc.action', N'保存类别', N'2', null, N'1570', N'1', N'1', N'1');

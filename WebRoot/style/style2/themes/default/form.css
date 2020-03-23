@@ -1,0 +1,81 @@
+﻿/* Form Filed Style */
+input             {margin: 0;padding: 0;font-family:arial;}
+select            {padding: 6px 2px 5px;}
+*html select      {position: relative;top: 2px;}
+*+html select     {position: relative;top: 2px;}
+
+/* Radio/Checkbox */
+.checkbox         {vertical-align:middle;margin:-3px 4px 0 0;position:relative;}
+* html .checkbox  {margin-top:-5px}
+.radio            {vertical-align:middle;margin:-3px 4px 0 0;}
+* html .radio     {margin-top:-5px;position:;}
+*+ html .radio    {margin-top:-2px;}
+/* Input Text */
+.textinput,
+.textinput_s      {background-color:#fff;border: 1px solid #C5C5C5;outline:0 none;overflow:hidden;vertical-align:baseline;}
+.textinput:focus,
+.textinput_s:focus{background-color:#FFFFE1;border: 1px solid #517A14;}
+.textinput        {padding: 6px 2px 6px;}
+.textinput_s      {height: 16px;padding: 1px 2px 1px;}
+
+/* Selecte */
+.selecte          {display: inline-block; cursor: default;position:relative;}
+.selecte s        {background-position:-256px -98px;position:absolute;right:0;top:0;height:24px;width:17px;}
+.selecte .text    {background-color: #fff;border-width:1px 0 1px 1px;border-style:solid;border-color:#C5C5C5 transparent #E3E9EF #C5C5C5;height: 22px;line-height: 22px;margin-right: 17px;padding-left:4px;display: inline-block;overflow: hidden;}
+.selecte-hover .text{background-color:#FFFFE1;border-color:#517A14 transparent #517A14 #517A14;}
+.selecte-hover s  {background-position:-278px -98px;}
+.asterisk         {font-family:'simsun';color:#f00;padding-left:4px;}
+
+.turnback,.edit{
+	background-image: url(images/icon.gif);background-repeat:no-repeat;
+}
+.turnback{
+	background-position:0 2px;padding-left:16px;
+}
+.edit{background-position:0 -27px;color:#fff;padding-left:14px;margin-left:20px;}
+
+
+.moreLinkbtn,.moreLinkbtn span{
+	display: inline-block;
+}
+.moreLinkbtn{background-position:0 -291px;padding-left:37px;}
+.moreLinkbtn span{background-position:right -291px;height:21px;padding:8px 20px 0 0;}
+
+
+.searchmore{background-position:0 -87px;cursor:pointer;}
+
+/* Checkbox */
+.checkbox,.changebox{display: inline; font-size: 16px; line-height: 16px; cursor: pointer; cursor: hand;}
+.changebox{visibility: hidden;}
+.checkbox .mark ,.changebox .mark{display: inline;}
+
+.checkbox img ,
+.changebox img                          {vertical-align: middle; width: 16px; height: 16px;}
+.checkbox img,                          
+.changebox img                          {background: transparent url(images/form.png) no-repeat;}
+.checkbox img                           {background-position: -1px -91px;}
+.checkbox-hover img                     {background-position: -28px -91px;}
+.checkbox-checked img                   {background-position: -1px -112px;}
+.checkbox-checked .checkbox-hover img   {background-position: -28px -112px;}
+.checkbox-disabled img                  {background-position: -1px -132px;}
+.checkbox-checked .checkbox-disabled img{background-position: -1px -154px;}
+
+.changebox-checked                       {visibility: inherit ;}
+.changebox img                           {background-position: -18px -185px;}
+.changebox-hover img                     {background-position: -18px -185px;}
+.changebox-checked img                   {background-position: -1px -185px;}
+.changebox-checked .checkbox-hover img   {background-position: -1px -185px;}
+.changebox-disabled img                  {background-position: -18px -185px;}
+.changebox-checked .checkbox-disabled img{background-position: -1px -185px;}
+
+/* Radio */
+.radio                            {display: inline; font-size: 16px; line-height: 16px; cursor: pointer; cursor: pointer;}
+.radio .mark                      {display: inline;}
+.radio img                        {vertical-align: middle; width: 40px; height: 40px;}
+.radio img                        {background: transparent url(images/form.png) no-repeat;}
+.radio img                        {background-position: 0 0;}
+.radio-hover img                  {background-position: -42px 0;}
+.radio-checked img                {background-position: 0 -40px;}
+.radio-checked .radio-hover img   {background-position: -42px -40px;}
+.radio-disabled img               {background-position: -1px -42px;}
+.radio-checked .radio-disabled img{background-position: -1px -67px;}

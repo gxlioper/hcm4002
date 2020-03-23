@@ -1,0 +1,1 @@
+INSERT [dbo].[center_configuration] ([config_key], [config_value], [is_active], [common], [center_name]) VALUES (N'IS_BAOBIAO_TREE', N'N', N'Y', N'报表功能是否采用树形菜单', N'xxxxx')

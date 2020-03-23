@@ -1,0 +1,54 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="jiankz-action" extends="struts-default">
+		<interceptors>
+			<interceptor name="upload"
+				class="org.apache.struts2.interceptor.FileUploadInterceptor" />
+			<interceptor-stack name="uploadStack">
+				<interceptor-ref name="upload" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp
+			</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp
+			</result>
+			<result name="commerror">/common/erroradmin.jsp</result>
+		</global-results>
+		
+		<!-- *************************************************struts应用 action 控制************************************************ -->
+		
+		<!-- 887获取健康证详细页面-->
+		<action name="getJianKangZhengDetailPage" class="com.hjw.crm.action.JianKzAction"
+			method="getJianKangZhengDetailPage">
+			<result name="success">/jiankz/jiankangzhengdetail.jsp</result>
+		</action>
+		<!-- 872获取健康证列表页面 -->
+		<action name="getJianKangZhengListPage" class="com.hjw.crm.action.JianKzAction"
+			method="getJianKangZhengListPage">
+			<result name="success">/jiankz/jiankangzhenglist.jsp</result>
+		</action>
+		<!-- 873获取对照项目列表页面 -->
+		<action name="getHuoVsHopListPage" class="com.hjw.crm.action.HuoVsHopAction"
+			method="getHuoVsHopListPage">  
+			<result name="success">/jiankz/huovshoplist.jsp</result>
+		</action>
+		<!-- 885获得对照项目添加页面 -->
+		<action name="getAddHuoVsHosPage" class="com.hjw.crm.action.HuoVsHopAction"
+			method="getAddHuoVsHosPage">  
+			<result name="success">/jiankz/addhuovshop.jsp</result>
+		</action>
+		<!-- 886获取对照项目更新页面 -->
+		<action name="getUpdateHuoVsHosPage" class="com.hjw.crm.action.HuoVsHopAction"
+			method="getUpdateHuoVsHosPage">  
+			<result name="success">/jiankz/addhuovshop.jsp</result>
+		</action>
+	</package>
+</struts>

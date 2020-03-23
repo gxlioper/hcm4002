@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="persistenceManager" class="com.synjones.framework.persistence.hibernate.HibernatePersistenceManagerImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+
+	<bean id="jdbcPersistenceManager" class="com.synjones.framework.persistence.jdbc.JdbcPersistenceManagerImpl">
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+
+	<bean id="queryManager" class="com.synjones.framework.persistence.hibernate.HibernateQueryManagerImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+
+	<bean id="jdbcQueryManager" class="com.synjones.framework.persistence.jdbc.JdbcQueryManagerImpl">
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+</beans>

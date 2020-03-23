@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PrivilegeManager xmlVersion="20141222" releaseVersion="7.1.1"
+	fsSystemManagerPassSet="true" male="false">
+	<rootManagerName>
+<![CDATA[Vani]]></rootManagerName>
+	<rootManagerPassword>
+<![CDATA[___0065002f00640066]]></rootManagerPassword>
+	<AP class="com.fr.privilege.providers.NoAuthenticationProvider" />
+	<ForwardUrl>
+<![CDATA[${servletURL}?op=fr_platform]]></ForwardUrl>
+</PrivilegeManager>

@@ -1,0 +1,12 @@
+.listLine ul{
+	padding-top:10px;
+}
+.listLine ul li{
+	background-image:url(images/home-1_03.gif);background-repeat:no-repeat;background-position:4px 2px;padding:5px 0 5px 24px;
+}
+.listLine ul li a{
+	color:#877A7A;
+}
+.listLine ul li a:hover{
+	color:#86B505;
+}

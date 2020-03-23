@@ -1,0 +1,1 @@
+alter table view_common_words add is_default int

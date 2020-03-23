@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20141222" releaseVersion="7.1.1">
+<TableDataMap>
+<TableData name="ds1" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="exam_num"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="startdate"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="name"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="enddate"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[peis]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select distinct
+(case when E.item_name is null then C.amount else E.amount end) TTM_amount,C.user_name,C.sex,
+C.age,C.phone,C.exam_num,C.join_date,C.set_name,C.amount,C.amount1,C.total,C.cash_date,
+'网络预约' customer_type
+from 
+(select A.*,F.total,B.amount1,B.cash_date,B.amount from 
+	(select c.user_name,c.sex,e.age,e.phone,e.exam_num,e.id e_id,e.customer_type,e.exam_type,e.join_date,
+eci.item_amount/*项目历史原价*/,eci.amount eci_amount/*付费金额*/,ci.id ci_id,ci.item_name,
+eci.is_new_added,s.set_name,eci.exam_indicator
+from exam_info e
+inner join examinfo_charging_item eci on eci.examinfo_id=e.id
+inner join customer_info c on c.id=e.customer_id
+inner join charging_item ci on ci.id=eci.charge_item_id
+left join examinfo_set es on es.examinfo_id=e.id and es.isActive='Y'
+left join exam_set s on s.id=es.exam_set_id and s.is_Active='Y'
+where c.is_Active='Y' and e.is_Active='Y' and eci.isActive='Y' and e.customer_type=215
+and (eci.is_new_added=0 or (eci.is_new_added!=0 and eci.charge_item_id=1169)) and eci.pay_status!='M') A
+left join 
+	(select e.id,sum(amount) total
+	from exam_info e,examinfo_charging_item eci
+	where e.id=eci.examinfo_id and e.is_Active='Y' and eci.isActive='Y'
+	group by e.id) F on F.id=A.e_id
+left join 
+	(select css.exam_id,css.amount1/*同一单价格*/,css.cash_date,cds.amount/*单个项目收费价格*/,
+cds.charging_item_id,ci.item_name
+from charging_summary_single css,charging_detail_single cds,charging_item ci
+where css.id=cds.summary_id and css.is_active='Y' and css.charging_status='Y'
+and cds.charging_item_id=ci.id and cds.charging_item_id=1169) B on A.e_id=B.exam_id
+and A.ci_id=B.charging_item_id 
+) C
+left join examinfo_charging_item D on c.e_id=D.examinfo_id and D.isActive='Y' 
+		and D.charge_item_id=1169 and D.charge_item_id=C.ci_id
+left join charging_item E on E.id=D.charge_item_id
+where 1=1 and (E.item_name is not null or C.amount is not null)
+${if(len(startdate)==0, "", " and join_date>='" + startdate + " 00:00:00.000'")}
+${if(len(enddate)==0, "", " and join_date<='" + enddate + " 23:59:59.999'")}
+${if(len(name)==0, "", " and user_name like'%" + name + "%'")}
+${if(len(exam_num)==0, "", " and C.exam_num ='" + exam_num + "'")}
+
+union all
+select distinct
+(case when E.item_name is null then C.amount else E.amount end) TTM_amount,C.user_name,C.sex,
+C.age,C.phone,C.exam_num,C.join_date,C.set_name,C.amount,C.amount1,C.total,C.cash_date,
+'网络预约' customer_type
+from 
+(select A.*,F.total,B.amount1,B.cash_date,B.amount from 
+	(select c.user_name,c.sex,e.age,e.phone,e.exam_num,e.id e_id,e.customer_type,e.exam_type,e.join_date,
+eci.item_amount/*项目历史原价*/,eci.amount eci_amount/*付费金额*/,ci.id ci_id,ci.item_name,
+eci.is_new_added,s.set_name,eci.exam_indicator
+from exam_info e
+inner join examinfo_charging_item eci on eci.examinfo_id=e.id
+inner join customer_info c on c.id=e.customer_id
+inner join charging_item ci on ci.id=eci.charge_item_id
+left join examinfo_set es on es.examinfo_id=e.id and es.isActive='Y'
+left join exam_set s on s.id=es.exam_set_id and s.is_Active='Y'
+where c.is_Active='Y' and e.is_Active='Y' and eci.isActive='Y' and e.customer_type=215
+and (eci.is_new_added=0 or (eci.is_new_added!=0 and eci.charge_item_id=1169)) and eci.pay_status!='M') A
+left join 
+	(select e.id,sum(amount) total
+	from exam_info e,examinfo_charging_item eci
+	where e.id=eci.examinfo_id and e.is_Active='Y' and eci.isActive='Y' and eci.is_new_added=0
+	group by e.id) F on F.id=A.e_id
+left join 
+	(select css.exam_id,css.amount1/*同一单价格*/,css.cash_date,cds.amount/*单个项目收费价格*/,
+cds.charging_item_id,ci.item_name
+from charging_summary_single css,charging_detail_single cds,charging_item ci
+where css.id=cds.summary_id and css.is_active='Y' and css.charging_status='Y'
+and cds.charging_item_id=ci.id and cds.charging_item_id=1169) B on A.e_id=B.exam_id
+and A.ci_id=B.charging_item_id 
+) C
+left join examinfo_charging_item D on c.e_id=D.examinfo_id and D.isActive='Y' 
+		and D.charge_item_id=1169 and D.charge_item_id=C.ci_id
+left join charging_item E on E.id=D.charge_item_id
+where 1=1 and (E.item_name is null and C.amount is null)
+and C.exam_num not in (
+select distinct C.exam_num
+from 
+(select A.*,F.total,B.amount1,B.cash_date,B.amount from 
+	(select c.user_name,c.sex,e.age,e.phone,e.exam_num,e.id e_id,e.customer_type,e.exam_type,e.join_date,
+eci.item_amount/*项目历史原价*/,eci.amount eci_amount/*付费金额*/,ci.id ci_id,ci.item_name,
+eci.is_new_added,s.set_name,eci.exam_indicator
+from exam_info e
+inner join examinfo_charging_item eci on eci.examinfo_id=e.id
+inner join customer_info c on c.id=e.customer_id
+inner join charging_item ci on ci.id=eci.charge_item_id
+left join examinfo_set es on es.examinfo_id=e.id and es.isActive='Y'
+left join exam_set s on s.id=es.exam_set_id and s.is_Active='Y'
+where c.is_Active='Y' and e.is_Active='Y' and eci.isActive='Y' and e.customer_type=215
+and (eci.is_new_added=0 or (eci.is_new_added!=0 and eci.charge_item_id=1169)) and eci.pay_status!='M') A
+left join 
+	(select e.id,sum(amount) total
+	from exam_info e,examinfo_charging_item eci
+	where e.id=eci.examinfo_id and e.is_Active='Y' and eci.isActive='Y'
+	group by e.id) F on F.id=A.e_id
+left join 
+	(select css.exam_id,css.amount1/*同一单价格*/,css.cash_date,cds.amount/*单个项目收费价格*/,
+cds.charging_item_id,ci.item_name
+from charging_summary_single css,charging_detail_single cds,charging_item ci
+where css.id=cds.summary_id and css.is_active='Y' and css.charging_status='Y'
+and cds.charging_item_id=ci.id and cds.charging_item_id=1169) B on A.e_id=B.exam_id
+and A.ci_id=B.charging_item_id 
+) C
+left join examinfo_charging_item D on c.e_id=D.examinfo_id and D.isActive='Y' 
+		and D.charge_item_id=1169 and D.charge_item_id=C.ci_id
+left join charging_item E on E.id=D.charge_item_id
+where 1=1 and (E.item_name is not null or C.amount is not null)
+${if(len(startdate)==0, "", " and join_date>='" + startdate + " 00:00:00.000'")}
+${if(len(enddate)==0, "", " and join_date<='" + enddate + " 23:59:59.999'")}
+${if(len(name)==0, "", " and user_name like'%" + name + "%'")}
+${if(len(exam_num)==0, "", " and C.exam_num ='" + exam_num + "'")})
+${if(len(startdate)==0, "", " and join_date>='" + startdate + " 00:00:00.000'")}
+${if(len(enddate)==0, "", " and join_date<='" + enddate + " 23:59:59.999'")}
+${if(len(name)==0, "", " and user_name like'%" + name + "%'")}
+${if(len(exam_num)==0, "", " and C.exam_num ='" + exam_num + "'")}
+
+union all
+select distinct 
+A.amount TTM_amount,A.user_name,A.sex,A.age,A.phone,A.exam_num,A.join_date,A.set_name,
+B.amount,B.amount1,
+(case when B.amount1 is null then F.total else B.amount1 end) total,
+--B.amount1 total,
+B.cash_date,'其他' customer_type from 
+(select c.user_name,c.sex,e.age,e.phone,e.exam_num,e.id e_id,e.customer_type,e.exam_type,e.join_date,ci.id ci_id,ci.item_name,eci.is_new_added,
+eci.item_amount/*项目历史原价*/,(eci.personal_pay+eci.team_pay) amount/*付费金额*/,eci.exam_indicator,s.set_name
+from exam_info e
+inner join examinfo_charging_item eci on eci.examinfo_id=e.id
+inner join customer_info c on c.id=e.customer_id
+inner join charging_item ci on ci.id=eci.charge_item_id
+left join examinfo_set es on es.examinfo_id=e.id and es.isActive='Y'
+left join exam_set s on s.id=es.exam_set_id and s.is_Active='Y'
+where c.is_Active='Y' and e.is_Active='Y' and eci.isActive='Y' and e.customer_type!=215 and e.status!='Y'
+and eci.pay_status!='M') A
+left join 
+(select css.exam_id,css.amount1/*同一单价格*/,css.cash_date,cds.amount/*单个项目收费价格*/,
+cds.charging_item_id,ci.item_name
+from charging_summary_single css,charging_detail_single cds,charging_item ci
+where css.id=cds.summary_id and css.is_active='Y' and css.charging_status='Y'
+and cds.charging_item_id=ci.id) B on A.e_id=B.exam_id and A.ci_id=B.charging_item_id
+left join
+	(select e.id,sum(amount) total
+	from exam_info e,examinfo_charging_item eci
+	where e.id=eci.examinfo_id and e.is_Active='Y' and eci.isActive='Y'
+	group by e.id) F on F.id=A.e_id
+where A.ci_id=1169 and ((A.exam_type='G' and B.cash_date is not null) or A.exam_type='T')
+${if(len(startdate)==0, "", " and join_date>='" + startdate + " 00:00:00.000'")}
+${if(len(enddate)==0, "", " and join_date<='" + enddate + " 23:59:59.999'")}
+${if(len(name)==0, "", " and user_name like'%" + name + "%'")}
+${if(len(exam_num)==0, "", " and A.exam_num ='" + exam_num + "'")}
+order by exam_num]]></Query>
+</TableData>
+<TableData name="ds2" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="exam_num"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="startdate"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="name"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="enddate"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[peis]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select distinct C.exam_num
+from 
+(select A.*,F.total,B.amount1,B.cash_date,B.amount from 
+	(select c.user_name,c.sex,e.age,e.phone,e.exam_num,e.id e_id,e.customer_type,e.exam_type,e.join_date,
+eci.item_amount/*项目历史原价*/,eci.amount eci_amount/*付费金额*/,ci.id ci_id,ci.item_name,
+eci.is_new_added,s.set_name,eci.exam_indicator
+from exam_info e
+inner join examinfo_charging_item eci on eci.examinfo_id=e.id
+inner join customer_info c on c.id=e.customer_id
+inner join charging_item ci on ci.id=eci.charge_item_id
+left join examinfo_set es on es.examinfo_id=e.id and es.isActive='Y'
+left join exam_set s on s.id=es.exam_set_id and s.is_Active='Y'
+where c.is_Active='Y' and e.is_Active='Y' and eci.isActive='Y' and e.customer_type=215
+and (eci.is_new_added=0 or (eci.is_new_added!=0 and eci.charge_item_id=1169)) and eci.pay_status!='M') A
+left join 
+	(select e.id,sum(amount) total
+	from exam_info e,examinfo_charging_item eci
+	where e.id=eci.examinfo_id and e.is_Active='Y' and eci.isActive='Y'
+	group by e.id) F on F.id=A.e_id
+left join 
+	(select css.exam_id,css.amount1/*同一单价格*/,css.cash_date,cds.amount/*单个项目收费价格*/,
+cds.charging_item_id,ci.item_name
+from charging_summary_single css,charging_detail_single cds,charging_item ci
+where css.id=cds.summary_id and css.is_active='Y' and css.charging_status='Y'
+and cds.charging_item_id=ci.id and cds.charging_item_id=1169) B on A.e_id=B.exam_id
+and A.ci_id=B.charging_item_id 
+) C
+left join examinfo_charging_item D on c.e_id=D.examinfo_id and D.isActive='Y' 
+		and D.charge_item_id=1169 and D.charge_item_id=C.ci_id
+left join charging_item E on E.id=D.charge_item_id
+where 1=1 and (E.item_name is not null or C.amount is not null)
+${if(len(startdate)==0, "", " and join_date>='" + startdate + " 00:00:00.000'")}
+${if(len(enddate)==0, "", " and join_date<='" + enddate + " 23:59:59.999'")}
+${if(len(name)==0, "", " and user_name like'%" + name + "%'")}
+${if(len(exam_num)==0, "", " and C.exam_num ='" + exam_num + "'")}
+
+union all
+select distinct C.exam_num
+from 
+(select A.*,F.total,B.amount1,B.cash_date,B.amount from 
+	(select c.user_name,c.sex,e.age,e.phone,e.exam_num,e.id e_id,e.customer_type,e.exam_type,e.join_date,
+eci.item_amount/*项目历史原价*/,eci.amount eci_amount/*付费金额*/,ci.id ci_id,ci.item_name,
+eci.is_new_added,s.set_name,eci.exam_indicator
+from exam_info e
+inner join examinfo_charging_item eci on eci.examinfo_id=e.id
+inner join customer_info c on c.id=e.customer_id
+inner join charging_item ci on ci.id=eci.charge_item_id
+left join examinfo_set es on es.examinfo_id=e.id and es.isActive='Y'
+left join exam_set s on s.id=es.exam_set_id and s.is_Active='Y'
+where c.is_Active='Y' and e.is_Active='Y' and eci.isActive='Y' and e.customer_type=215
+and (eci.is_new_added=0 or (eci.is_new_added!=0 and eci.charge_item_id=1169)) and eci.pay_status!='M') A
+left join 
+	(select e.id,sum(amount) total
+	from exam_info e,examinfo_charging_item eci
+	where e.id=eci.examinfo_id and e.is_Active='Y' and eci.isActive='Y' and eci.is_new_added=0
+	group by e.id) F on F.id=A.e_id
+left join 
+	(select css.exam_id,css.amount1/*同一单价格*/,css.cash_date,cds.amount/*单个项目收费价格*/,
+cds.charging_item_id,ci.item_name
+from charging_summary_single css,charging_detail_single cds,charging_item ci
+where css.id=cds.summary_id and css.is_active='Y' and css.charging_status='Y'
+and cds.charging_item_id=ci.id and cds.charging_item_id=1169) B on A.e_id=B.exam_id
+and A.ci_id=B.charging_item_id 
+) C
+left join examinfo_charging_item D on c.e_id=D.examinfo_id and D.isActive='Y' 
+		and D.charge_item_id=1169 and D.charge_item_id=C.ci_id
+left join charging_item E on E.id=D.charge_item_id
+where 1=1 and (E.item_name is null and C.amount is null)
+and C.exam_num not in (
+select distinct C.exam_num
+from 
+(select A.*,F.total,B.amount1,B.cash_date,B.amount from 
+	(select c.user_name,c.sex,e.age,e.phone,e.exam_num,e.id e_id,e.customer_type,e.exam_type,e.join_date,
+eci.item_amount/*项目历史原价*/,eci.amount eci_amount/*付费金额*/,ci.id ci_id,ci.item_name,
+eci.is_new_added,s.set_name,eci.exam_indicator
+from exam_info e
+inner join examinfo_charging_item eci on eci.examinfo_id=e.id
+inner join customer_info c on c.id=e.customer_id
+inner join charging_item ci on ci.id=eci.charge_item_id
+left join examinfo_set es on es.examinfo_id=e.id and es.isActive='Y'
+left join exam_set s on s.id=es.exam_set_id and s.is_Active='Y'
+where c.is_Active='Y' and e.is_Active='Y' and eci.isActive='Y' and e.customer_type=215
+and (eci.is_new_added=0 or (eci.is_new_added!=0 and eci.charge_item_id=1169)) and eci.pay_status!='M') A
+left join 
+	(select e.id,sum(amount) total
+	from exam_info e,examinfo_charging_item eci
+	where e.id=eci.examinfo_id and e.is_Active='Y' and eci.isActive='Y'
+	group by e.id) F on F.id=A.e_id
+left join 
+	(select css.exam_id,css.amount1/*同一单价格*/,css.cash_date,cds.amount/*单个项目收费价格*/,
+cds.charging_item_id,ci.item_name
+from charging_summary_single css,charging_detail_single cds,charging_item ci
+where css.id=cds.summary_id and css.is_active='Y' and css.charging_status='Y'
+and cds.charging_item_id=ci.id and cds.charging_item_id=1169) B on A.e_id=B.exam_id
+and A.ci_id=B.charging_item_id 
+) C
+left join examinfo_charging_item D on c.e_id=D.examinfo_id and D.isActive='Y' 
+		and D.charge_item_id=1169 and D.charge_item_id=C.ci_id
+left join charging_item E on E.id=D.charge_item_id
+where 1=1 and (E.item_name is not null or C.amount is not null)
+${if(len(startdate)==0, "", " and join_date>='" + startdate + " 00:00:00.000'")}
+${if(len(enddate)==0, "", " and join_date<='" + enddate + " 23:59:59.999'")}
+${if(len(name)==0, "", " and user_name like'%" + name + "%'")}
+${if(len(exam_num)==0, "", " and C.exam_num ='" + exam_num + "'")})
+${if(len(startdate)==0, "", " and join_date>='" + startdate + " 00:00:00.000'")}
+${if(len(enddate)==0, "", " and join_date<='" + enddate + " 23:59:59.999'")}
+${if(len(name)==0, "", " and user_name like'%" + name + "%'")}
+${if(len(exam_num)==0, "", " and C.exam_num ='" + exam_num + "'")}
+
+union all
+select distinct A.exam_num
+from 
+(select c.user_name,c.sex,e.age,e.phone,e.exam_num,e.id e_id,e.customer_type,e.exam_type,e.join_date,ci.id ci_id,ci.item_name,eci.is_new_added,
+eci.item_amount/*项目历史原价*/,(eci.personal_pay+eci.team_pay) amount/*付费金额*/,eci.exam_indicator,s.set_name
+from exam_info e
+inner join examinfo_charging_item eci on eci.examinfo_id=e.id
+inner join customer_info c on c.id=e.customer_id
+inner join charging_item ci on ci.id=eci.charge_item_id
+left join examinfo_set es on es.examinfo_id=e.id and es.isActive='Y'
+left join exam_set s on s.id=es.exam_set_id and s.is_Active='Y'
+where c.is_Active='Y' and e.is_Active='Y' and eci.isActive='Y' and e.customer_type!=215 and e.status!='Y'
+and eci.pay_status!='M') A
+left join 
+(select css.exam_id,css.amount1/*同一单价格*/,css.cash_date,cds.amount/*单个项目收费价格*/,
+cds.charging_item_id,ci.item_name
+from charging_summary_single css,charging_detail_single cds,charging_item ci
+where css.id=cds.summary_id and css.is_active='Y' and css.charging_status='Y'
+and cds.charging_item_id=ci.id) B on A.e_id=B.exam_id and A.ci_id=B.charging_item_id
+left join
+	(select e.id,sum(amount) total
+	from exam_info e,examinfo_charging_item eci
+	where e.id=eci.examinfo_id and e.is_Active='Y' and eci.isActive='Y'
+	group by e.id) F on F.id=A.e_id
+where A.ci_id=1169 and ((A.exam_type='G' and B.cash_date is not null) or A.exam_type='T')
+${if(len(startdate)==0, "", " and join_date>='" + startdate + " 00:00:00.000'")}
+${if(len(enddate)==0, "", " and join_date<='" + enddate + " 23:59:59.999'")}
+${if(len(name)==0, "", " and user_name like'%" + name + "%'")}
+${if(len(exam_num)==0, "", " and A.exam_num ='" + exam_num + "'")}
+order by exam_num]]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[1524000,723900,1028700,1143000,1066800,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[3168000,1440000,1440000,3657600,3581400,3600000,3600000,3024000,3024000,3024000,2933700,8229600,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="12" s="0">
+<O>
+<![CDATA[TTM检查统计]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="1" cs="12" s="1">
+<O>
+<![CDATA[包含TTM客户,预约客户]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="2" s="2">
+<O>
+<![CDATA[人数：]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="2" cs="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds2" columnName="exam_num"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.SummaryGrouper">
+<FN>
+<![CDATA[com.fr.data.util.function.CountFunction]]></FN>
+</RG>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="3" s="4">
+<O>
+<![CDATA[姓名]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="3" s="4">
+<O>
+<![CDATA[性别]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="3" s="4">
+<O>
+<![CDATA[年龄]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="3" s="4">
+<O>
+<![CDATA[手机号]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="3" s="4">
+<O>
+<![CDATA[体检号]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="5" r="3" s="4">
+<O>
+<![CDATA[体检日期]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="6" r="3" s="4">
+<O>
+<![CDATA[缴费日期]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="7" r="3" s="4">
+<O>
+<![CDATA[TTM费用]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="8" r="3" s="4">
+<O>
+<![CDATA[普通检查费用]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="9" r="3" s="4">
+<O>
+<![CDATA[体检总费用]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="10" r="3" s="4">
+<O>
+<![CDATA[体检类型]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="11" r="3" s="4">
+<O>
+<![CDATA[体检套餐]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="0" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="user_name"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="1" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="sex"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="2" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="age"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="3" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="phone"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="4" r="4" s="5">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="exam_num"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="5" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="join_date"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="6" r="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="cash_date"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="7" r="4" s="7">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="TTM_amount"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="4" s="7">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=J5 - H5]]></Attributes>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="9" r="4" s="7">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="total"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="10" r="4" s="7">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="customer_type"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="11" r="4" s="8">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="set_name"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<PaperSize width="57600000" height="42768000"/>
+<Margin top="986400" left="2743200" bottom="986400" right="2743200"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<ParameterUI class="com.fr.form.main.parameter.FormParameterUI">
+<Layout class="com.fr.form.ui.container.WParameterLayout">
+<WidgetName name="para"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Margin top="1" left="1" bottom="1" right="1"/>
+<Border>
+<border style="0" color="-723724" type="0" borderStyle="0"/>
+<WidgetTitle>
+<O>
+<![CDATA[新建标题]]></O>
+<FRFont name="SimSun" style="0" size="72"/>
+<Position pos="0"/>
+</WidgetTitle>
+<Alpha alpha="1.0"/>
+</Border>
+<Background name="ColorBackground" color="-1118482"/>
+<LCAttr vgap="0" hgap="0" compInterval="0"/>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.DateEditor">
+<WidgetName name="startdate"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<EMSG>
+<![CDATA[请选择起始日期]]></EMSG>
+<DateAttr/>
+<widgetValue>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=TODAY()]]></Attributes>
+</O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="80" y="10" width="144" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="label0"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[起始日期]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="20" y="10" width="60" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="label0_c"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[结束日期]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="264" y="10" width="60" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.DateEditor">
+<WidgetName name="enddate"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<EMSG>
+<![CDATA[请选择结束日期]]></EMSG>
+<DateAttr/>
+<widgetValue>
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=TODAY()]]></Attributes>
+</O>
+</widgetValue>
+</InnerWidget>
+<BoundsAttr x="324" y="10" width="144" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.parameter.FormSubmitButton">
+<WidgetName name="formSubmit0"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<Text>
+<![CDATA[查询]]></Text>
+<Hotkeys>
+<![CDATA[enter]]></Hotkeys>
+</InnerWidget>
+<BoundsAttr x="499" y="21" width="80" height="27"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="exam_num"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="80" y="37" width="111" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="label1"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[体检号]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="20" y="37" width="60" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.Label">
+<WidgetName name="label1_c"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<widgetValue>
+<O>
+<![CDATA[姓名]]></O>
+</widgetValue>
+<LabelAttr verticalcenter="true" textalign="0" autoline="true"/>
+<FRFont name="SimSun" style="0" size="72"/>
+<border style="0" color="-723724"/>
+</InnerWidget>
+<BoundsAttr x="264" y="37" width="60" height="21"/>
+</Widget>
+<Widget class="com.fr.form.ui.container.WAbsoluteLayout$BoundsWidget">
+<InnerWidget class="com.fr.form.ui.TextEditor">
+<WidgetName name="name"/>
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<widgetValue/>
+</InnerWidget>
+<BoundsAttr x="324" y="37" width="111" height="21"/>
+</Widget>
+<Sorted sorted="false"/>
+<Display display="true"/>
+<DelayDisplayContent delay="true"/>
+<Position position="0"/>
+<Design_Width design_width="1225"/>
+<MobileWidgetList>
+<Widget widgetName="startdate"/>
+<Widget widgetName="enddate"/>
+<Widget widgetName="exam_num"/>
+<Widget widgetName="name"/>
+</MobileWidgetList>
+<WidgetNameTagMap>
+<NameTag name="exam_num" tag="体检号"/>
+<NameTag name="startdate" tag="起始日期"/>
+<NameTag name="name" tag="姓名"/>
+<NameTag name="enddate" tag="结束日期"/>
+</WidgetNameTagMap>
+</Layout>
+<DesignAttr width="1225" height="69"/>
+</ParameterUI>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72" foreground="-8355712"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="0" size="80" foreground="-65536"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="80" foreground="-65536"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="java.text.SimpleDateFormat">
+<![CDATA[yyyy-MM-dd]]></Format>
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#0.00]]></Format>
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HBB"/>
+<PreviewType PreviewType="0"/>
+</WorkBook>

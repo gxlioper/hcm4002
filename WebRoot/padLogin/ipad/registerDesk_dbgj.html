@@ -1,0 +1,387 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <title>体检人员列表</title>
+<meta charset="utf-8">
+<!--支持 浏览器内核 webkit、ie-comp IE兼容、ie-stand IE标准 -->
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<!--开启IE兼容模式  -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<!--移动设备支持， width=device-width 自适应宽度,initial-scale=1.0 初始缩放比例为1:1,user-scalable 用户是否可以手动缩放-->
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+<link rel='stylesheet' type='text/css'
+	href='../../html5/css/bootstrap.min.css'>
+<link rel='stylesheet' type='text/css' href='../../html5/plus/table/bootstrap-table.min.css'>
+<link rel='stylesheet' type='text/css' href='../../html5/plus/datatime/bootstrap-datetimepicker.css'>
+     <script type="text/javascript" src="../../html5/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="../../html5/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../html5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-table.js"></script>
+
+<!--      <script type="text/javascript" src="../html5/plus/table/bootstrap-table-zh-CN.js"></script> -->
+<!--      <script type="text/javascript" src="../html5/plus/table/bootstrap-table-edit.js"></script> -->
+     <script type="text/javascript" src="../../html5/plus/datatime/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../../html5/plus/bootstrap-select.js"></script>
+<script src="../js/laydate.js"></script>
+<style type="text/css">
+.myPageStyle {
+    background-color: #fff;
+    border: 1px solid #cabbbb;
+    padding: 3px 10px;
+}
+/* //修改bootstrap的page-link默认样式 */
+.page-link {
+    color: #666 !important;
+}
+.active .page-link {
+    color: #fff !important;
+}
+.btn-info {
+    background-color: #359bcc!important;
+    }
+    .btn-primary {
+     color: #fff;
+     background-color: #359bcc; 
+     border-color: #359bcc; 
+}
+body{padding: 20px;}
+
+  .demo-input{padding-left: 10px; height: 38px; min-width: 262px; line-height: 38px; border: 1px solid #e6e6e6;  background-color: #fff;  border-radius: 2px;}
+  .demo-footer{padding: 50px 0; color: #999; font-size: 14px;}
+  .demo-footer a{padding: 0 5px; color: #01AAED;}
+  .btn{display: inline!important;}
+</style>
+
+<script type="text/javascript">
+var  exam_num = "";
+var  id_num = "";
+var  user_name="";
+var  user_name="";
+var  start_date="";
+var  end_date="";
+var  data_source="003";
+    	$(function(){
+    		getgroupuserGrid();	
+    		
+    	});
+    	
+    	function getgroupuserGrid() { 
+    		$('#reportTable').bootstrapTable({  
+				  method: 'get',  
+				  url: 'getIpadExamInfoUserList.action',  
+				  dataType: "json",  
+				  striped: true,     //使表格带有条纹  
+				  pagination: true, //在表格底部显示分页工具栏  
+				  pageSize: 10,  
+				  pageNumber: 1,  
+				  pageList: [10, 20, 50],  
+				  idField: "exam_num",  //标识哪个字段为id主键  
+				  showToggle: false,   //名片格式  
+				  cardView: false,//设置为True时显示名片（card）布局  
+				  showColumns: true, //显示隐藏列    
+				  showRefresh: true,  //显示刷新按钮  
+				  singleSelect: true,//复选框只能选择一条记录  
+				  search: false,//是否显示右上角的搜索框  
+				  queryParams: function queryParams(params){
+			            var param = {    
+			            		limit : params.limit, // 每页显示数量
+			        			offset : params.offset, // SQL语句起始索引
+			                    page: params.pageNumber,   
+			                    page : (params.offset / params.limit) + 1, //当前页码 
+
+// 			                    pageSize: params.pageSize,
+// 			                    sortName: params.sortName,
+// 			                    sortOrder: params.sortOrder,
+								data_source:data_source,
+			                    exam_num:exam_num,
+			                    id_num:id_num,
+			                    user_name:user_name
+			                };   
+			                return param;    
+			           }, //参数 
+				  clickToSelect: true,//点击行即可选中单选/复选框  
+				  sidePagination: "server",//表格分页的位置  
+				  queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
+				  toolbar: "#toolbar", //设置工具栏的Id或者class  
+				  columns: [{
+	 					field: "ck",
+						checkbox:true,
+					},{
+	 					field: 'exam_num',
+						title: '体检号',
+						switchable: true
+					}, 
+					{
+	 					field: 'exam_types',
+						title: '体检类型',
+						switchable: true
+					}, 
+				    {
+						field: 'id_num',
+						title: '身份证号',
+						switchable: true
+					}, {
+						field: 'user_name',
+						title: '姓名',
+						switchable: true
+					}, {
+						field: 'age',
+						title: '年龄',
+						switchable: true
+					}, {
+						field: 'join_date',
+						align:'center',
+						title: '体检日期',
+						switchable: true
+					}, {
+						field: 'statusall',
+						title: '体检状态',
+						switchable: true,
+						formatter:f_showstatus
+					}, {
+						align:'center',field:'team_pay',title:'团费'
+					}, {
+						align:'center',field:'personal_pay',title:'个费'
+					},{
+						field: 'chi_name',
+						title: '创建者',
+						switchable: true
+					}, {
+						field: 'final_doctor',
+						title: '总检医生',
+						switchable: true
+					}, {
+						field: 'check_doctor',
+						title: '审核医生',
+						switchable: true
+					},
+					{
+						title : '&nbsp;&nbsp;&nbsp; 操作  &nbsp;&nbsp;&nbsp;               ',
+						field : 'id',
+						width  :80,
+						align : 'center',
+						formatter : function(value, row, index) {
+							var html = "";
+							var e ="";
+							var d ="";
+							if(row.exam_type=='G'){
+								e= '<a href="getIpadRegisterGEdit.action?exam_num='+row.exam_num+'"  target="_blank" type= "button" class="btn btn-primary btn-sm">修改</a>';
+								d='&nbsp;<a href="medical.html?exam_num='+row.exam_num+'"  target="_blank" type= "button" class="btn btn-primary btn-sm">项目</a>';
+							}else if(row.exam_type=='T'){
+								var scustsex = encodeURI(encodeURI(row.sex));
+								e= '<a href="getIpadRegisterTList.action?exam_num='+row.exam_num+'"  target="_blank"  class="btn btn-primary btn-sm">修改</a>';
+								d='&nbsp;<a href="medicalGroup.html?exam_num='+row.exam_num+'&sex='+scustsex+'&exam_indicator='+row.exam_indicator+'"  target="_blank" type= "button" class="btn btn-primary btn-sm">项目</a>';
+							}
+							return e+d;
+						}
+					}, 
+]
+// 				  silent: true,  //刷新事件必须设置  
+// 				  formatLoadingMessage: function () {  
+// 				    return "请稍等，正在加载中...";  
+// 				  },  
+// 				  formatNoMatches: function () {  //没有匹配的结果  
+// 				    return '无符合条件的记录';  
+// 				  },  
+				}); 
+    	}
+    	function operateFormatter(value, row, index) {
+            return ['<button type="button" class="RoleOfedita btn btn-primary" style="margin-right:15px;" onclick = "djtdeletetc(\''+row.set_num+'\');">删除</button>'
+                   
+            ].join('')
+    }
+    	 function f_showstatus(value, row, index){
+    		  if(row.status=='Y'){
+    			  return '<font color="red">'+row.statuss+'</font>';
+    		  }else if(row.status=='D'){
+    			  return '<font color="blue">'+row.statuss+'</font>';
+    		  }else if(row.status=='J'){
+    			  return '<font color="green">'+row.statuss+'</font>';
+    		  }else{
+    			  return row.statuss;
+    		  }
+    	  }
+    	 function reset(){
+    		 exam_num=$("#exam_num").val("");
+     		id_num=$("#id_num").val("");
+     		user_name=$("#user_name").val("");
+     		start_date=$("#start_date").val("");
+     		end_date=$("#end_date").val("");
+     		data_source=$('#data_source').val("003");
+    	 }
+    	function reload(){
+    		exam_num=$("#exam_num").val();
+    		id_num=$("#id_num").val();
+    		user_name=$("#user_name").val();
+    		start_date=$("#start_date").val();
+    		end_date=$("#end_date").val();
+    		data_source=$('#data_source option:selected').val();
+			var opt = {
+		        url: "getIpadExamInfoUserList.action?format=json",
+		        silent: false,
+		        query:{
+		        	id_num:id_num,exam_num:exam_num,custname:user_name,time1:start_date,time2:end_date,data_source:data_source
+		        }
+		    };
+    //带参数 刷新
+    		$("#reportTable").bootstrapTable('refresh', opt);
+
+//     		$('#reportTable').bootstrapTable('refresh');	
+		}
+    	$("#blrz-entry-date-start").datetimepicker({//选择年月日
+    	　　　　　　format: 'yyyy-mm-dd',
+    	　　　　　　language: 'zh-CN',
+    	　　　　　　weekStart: 1,
+    	　　　　　　todayBtn: 1,//显示‘今日’按钮
+    	　　　　　　autoclose: 1,
+    	　　　　　　todayHighlight: 1,
+    	　　　　　　startView: 2,
+    	　　　　　　minView: 2,  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+
+    	　　　　　　clearBtn:true,//清除按钮
+
+    	　　　　　　forceParse: 0
+    	　　　　});
+
+    $(function(){
+    	$.ajax({
+    		url:'getUserAndUserDep.action',
+    		type:'post',
+    		success:function(data){
+    			var md = '';
+    			if(data!="no"){
+    				var list=eval("("+data+")");
+//     				$("#yonghu").html(list.chi_name);
+    				$("#time").html(list.current_date);
+    				$("#user_uuid").val(list.user_uuid);
+    				verify_user();
+    			}
+    		},
+    		error:function(){
+    			
+    		}
+    	});
+    	
+            var columns  = document.getElementsByClassName("columns ");//获取到的是一个类数组
+            for(var i=0;i<columns .length;i++){
+             columns [i].style.display = "none";
+          }
+      })
+      
+      function showcolumns (){
+         var columns  = document.getElementsByClassName("columns ");//获取到的是一个类数组
+         for(var i=0;i<columns .length;i++){
+                   columns [i].style.display = "none";        //隐藏
+         }
+      }
+    function group(){
+    	window.open('getIpadRegisterTList.action?exam_id=0');
+    }
+//      function personal(){
+// //     	 getDjtRegisterGList.action?exam_id=0
+//     	  window.parent.addPanel_other("体检个人登记","getDjtRegisterGList.action?exam_id=0","","1");
+//     target="_blank"  }
+     function personal() {
+    	 window.open('getIpadRegisterGEdit.action?exam_id=0');
+     }
+    function f_examoneshow(userid,examtype){
+ 	   if(examtype=='G'){					
+ 		   window.parent.addPanel_other("体检个人登记","getIpadRegisterGEdit.action?exam_id="+userid+"","","1");
+ 	   }else if(examtype=='T'){
+ 		   window.parent.addPanel_other("体检团体登记","getIpadRegisterTList.action?exam_id="+userid+"","","1");
+ 	   }
+    }
+  //验证session的UUID 是否 相同
+    function verify_user(){
+    	$.ajax({
+            url:'verifyUser.action',  
+            data:{"user_uuid":$("#user_uuid").val()},          
+            type: "post",//数据发送方式   
+            success: function(data){
+            	if(data == 'ok'){
+            		setTimeout(function(){verify_user();},5*1000);
+            	}else{
+            		window.location.href='index.html';
+            	}
+            },
+            error:function(){
+            	//$.messager.alert('提示信息', "操作失败！",function(){});
+            	window.location.href='index.html';
+            }  
+        });
+    }
+    </script>
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" style="background-color: #359bcc" id="mainNav">
+    <div class="container">
+<!--       <a class="navbar-brand js-scroll-trigger" href="#page-top">火箭蛙  &nbsp; &nbsp; <span id="time" style="text-align:left;font-size:16px;"></span></a> -->
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div style="border:0px solid red;margin-top: 20px; float: left;margin-left: 0px;height: 50px;width: 200px;background-image: url(../img/logo.png);background-repeat:no-repeat;background-size:60%;">
+  		
+  	  </div>
+        <div style="width: 20%; float: right; margin-top: 3%;"><a class="nav-link js-scroll-trigger" style="color: #000;;" href="padLogin.action">退出</a></div>
+      </div>
+    </div>
+  </nav>
+<input type="hidden" id="user_uuid"/>  
+		<!--可编辑表格-->
+<!-- 		<input class="easyui-textbox" type="text" id="exam_num" value="" -->
+<!-- 			style="height: 26px; width: 15%;" /> -->
+<!-- 		</dd> -->
+<!-- 		<input class="easyui-datebox" type=text id="start_date"></input> <input -->
+<!-- 			class="easyui-datebox" type=text id="end_date"> -->
+<!-- 		</dd> -->
+
+
+<!-- 		<input class="easyui-textbox" type="text" id="id_num" value="" -->
+<!-- 			style="height: 26px; width: 15%;" /> -->
+<!-- 		<div id="myTabContent" class="tab-content"> -->
+<!-- 　<input  name="entryDate" placeholder="请选择入职日期" id="blrz-entry-date-start" type="text" > -->
+
+		<div id="myTabContent" class="tab-content">
+			<div class="input-group col-md-3" style="float:left;margin-top: 10px;margin-left: 10px;width:70% ">
+				<input type="text" class="form-control" style=" width: 28%;margin-left: 5px;ime-mode: disabled;" id="exam_num" name="exam_num" placeholder="体检编号" /> 
+				<input type="text" class="form-control" style=" width: 42%;margin-left: 5px;" id="id_num" name="id_num" placeholder="身份证号" />
+				<input type="text" class="form-control" style=" width: 24%;margin-left: 5px;" id="user_name" name="user_name" placeholder="姓名" />
+				<input type="text" class="form-control" style=" width: 30%;margin-left: 5px;" id="start_date" readonly="readonly" name="start_date" placeholder="开始体检日期" />
+				<input type="text" class="form-control" style=" width: 30%;margin-left: 5px;" id="end_date" readonly="readonly" name="end_date" placeholder="结束体检日期" />
+				<select class="form-control " id="data_source" name="data_source"  style=" width: 34%;margin-left: 5px;">
+					<option value="003">ipad录入</option>
+					<option value="001">pc录入</option>
+					<option value="002">微信录入</option>
+					<option value="">全部</option>
+                </select>
+				<span class="input-group-btn">
+					<button class="btn btn-info btn-search"  id="btn-search1" onclick="reload();">查找</button>
+					<button type="reset" class="btn btn-default" onclick="reset()"  id="btnRegister">重置</button>
+				</span>
+			</div>
+			<div style="margin-top: 10px;float:right;width:26% ">
+			  <button type="button"  style="width:46%;background-color: #359bcc; " class="btn btn-default" id="personal" onclick="personal()">个人登记</button>
+			  <button type="button" style="width:46%;background-color: #359bcc;" class="btn btn-default" id="group" onclick="group()">团体登记</button>
+			</div>
+			<div class="tab-pane fade in active" style="margin-top: 10px;margin-left: 10px " id="tab2">
+				<table class="table table-striped table-hover text-nowrap" id="reportTable"></table>
+			</div>
+
+		</div>
+		
+</body>
+<script type="text/javascript">
+//执行一个laydate实例
+laydate.render({
+  elem: '#start_date' //指定元素
+});
+laydate.render({
+  elem: '#end_date' //指定元素
+});
+</script>
+
+</html>

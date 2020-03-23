@@ -1,0 +1,1 @@
+alter table item_result_lib add exam_conclusion varchar(500) NOT NULL default('')  --新增结论描述字段

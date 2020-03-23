@@ -1,0 +1,2 @@
+INSERT [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common]) VALUES (N'体检中心', N'IS_FEES_MX_POINT_CHECKED', N'N', N'Y', N'收费处打印收费明细单复选框收费选中，N不选中，Y选中')
+INSERT [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common]) VALUES (N'体检中心', N'FEES_MX_POINT', N'1', N'Y', N'收费处打印收费明细单，1表示传体检号，2表示传结算单号')

@@ -1,0 +1,113 @@
+1、修改了东北国际 读取医保卡的bug
+2、新增了东北国际医保卡定时对账功能
+3、增加了批量人员 按照收费项目结算功能
+4、调整了结帐时候发票的打印功能
+
+注意事项：
+    1、东北国际如果要替换此版本，需要将no-appCtx-jobDetail.xml修改为appCtx-jobDetail.xml名称
+	2、charging_invoice_single表如果在本地存在时候，如果里面有记录，则按照如下sql语句修改表结构，否则可以删除以后重新创建
+
+sql语句：
+
+USE [peis]
+GO
+
+/****** Object:  Table [dbo].[charging_invoice_single]    Script Date: 03/14/2017 19:26:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[charging_invoice_single](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[title_info] [varchar](45) NULL,
+	[invoice_type] [varchar](45) NULL,
+	[invoice_num] [varchar](45) NULL,
+	[invoice_amount] [decimal](8, 2) NULL,
+	[invoice_status] [varchar](45) NOT NULL,
+	[invoice_maker] [int] NULL,
+	[invoice_time] [datetime] NULL,
+	[canceller] [int] NULL,
+	[cancel_time] [datetime] NULL,
+	[creater] [int] NULL,
+	[create_time] [datetime] NULL,
+	[updater] [int] NULL,
+	[update_time] [datetime] NULL,
+	[account_num] [varchar](20) NOT NULL,
+	[exam_type] [varchar](10) NULL,
+	[barchid] [int] NULL,
+	[center_num] [varchar](50) NULL,
+ CONSTRAINT [PK_CHARGING_INVOICE_SINGLE] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+USE [peis]
+GO
+
+/****** Object:  Table [dbo].[team_invoice_account]    Script Date: 03/14/2017 19:25:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[team_invoice_account](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[account_num] [varchar](20) NOT NULL,
+	[acc_num] [varchar](16) NOT NULL,
+	[auditor] [varchar](50) NOT NULL,
+	[audit_date] [datetime] NOT NULL,
+	[center_num] [varchar](50) NOT NULL,
+	[batchid] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'对应发票表结算单号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'team_invoice_account', @level2type=N'COLUMN',@level2name=N'account_num'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'团体结算对应结算单号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'team_invoice_account', @level2type=N'COLUMN',@level2name=N'acc_num'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'操作员' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'team_invoice_account', @level2type=N'COLUMN',@level2name=N'auditor'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'操作日期' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'team_invoice_account', @level2type=N'COLUMN',@level2name=N'audit_date'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'体检中心' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'team_invoice_account', @level2type=N'COLUMN',@level2name=N'center_num'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'对应批次任务' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'team_invoice_account', @level2type=N'COLUMN',@level2name=N'batchid'
+GO
+
+

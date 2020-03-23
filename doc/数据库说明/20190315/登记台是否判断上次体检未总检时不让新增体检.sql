@@ -1,0 +1,1 @@
+INSERT [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common]) VALUES (N'XXXXX', N'IS_DJT_EXAMINFO_NO_SUMMARY', N'Y', N'Y', N'登记台是否判断上次体检未总检时不让新增体检')

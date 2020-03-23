@@ -1,0 +1,610 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="zyb-json" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp</result>
+			
+		</global-results>
+		<!-- global-exception-mappings> <exception-mapping exception="java.lang.Exception" 
+			result="systemerror" /> <exception-mapping exception="javax.servlet.ServletException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NullPointerException" 
+			result="systemerror" /> <exception-mapping exception="java.sql.SQLException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.StringIndexOutOfBoundsException" 
+			result="systemerror" /> <exception-mapping exception="org.apache.jasper.JasperException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.IllegalStateException" 
+			result="systemerror" /> <exception-mapping exception="java.net.SocketException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.NumberFormatException" 
+			result="systemerror" /> <exception-mapping exception="java.net.ProtocolException" 
+			result="systemerror" /> <exception-mapping exception="java.lang.VerifyError" 
+			result="systemerror" /> </global-exception-mappings -->
+		<!-- *************************************************json应用************************************************* -->
+
+	<!-- 单位信息维护 zyb3-->
+		<action name="zybeditcompany" class="com.hjw.zyb.action.ZybCompanyManagerAction" method="zybeditcompany" />
+			
+		<!-- zyb7 保存方案 -->
+		<action name="zybbatcheditdo" class="com.hjw.zyb.action.ZybBatchAction" method="zybbatcheditdo" />
+		
+		<!-- zyb8 删除方案 -->
+		<action name="zybbatchdelete" class="com.hjw.zyb.action.ZybBatchAction" method="zybbatchdelete" />
+		
+		<!-- zyb11 职业病团体查询列表 -->
+		<action name="zybgetExamInfoUserList" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybgetExamInfoUserList" />
+
+		<!-- 经济类型数据加载 -zyb201-->	
+		<action name="geteconomicclassList" class="com.hjw.zyb.action.ZybEconomicclassAction" method="geteconomicclassList" />
+		
+		<!-- 经济类型父级新增保存 -zyb202-->	
+		<action name="saveEcoclass_f" class="com.hjw.zyb.action.ZybEconomicclassAction" method="saveEcoclass_f" />		
+       
+        <!-- 经济行业数据加载 -zyb204-->	
+		<action name="getIndustrytreegrid" class="com.hjw.zyb.action.ZybOccuAction" method="getIndustrytreegrid" />		
+       
+        <!-- 行业删除 -zyb205-->	
+		<action name="deleteIndustry" class="com.hjw.zyb.action.ZybOccuAction" method="deleteIndustry" />		
+       
+        <!-- 行业同级保存 -zyb209-->	
+		<action name="saveIndustry_f" class="com.hjw.zyb.action.ZybOccuAction" method="saveIndustry_f" />		
+        
+        <!-- 行业父级查询 -zyb210-->	
+		<action name="getAllIndustry" class="com.hjw.zyb.action.ZybOccuAction" method="getAllIndustry" />		
+        
+        <!-- 行业子级保存 -zyb211-->	
+		<action name="saveIndustry" class="com.hjw.zyb.action.ZybOccuAction" method="saveIndustry" />		
+        
+        <!-- 工种list -zyb213-->	
+		<action name="gettypeOfWorkList" class="com.hjw.zyb.action.ZybOccuAction" method="gettypeOfWorkList" />		
+       
+        <!-- 工种删除 -zyb216-->	
+		<action name="deletetypeOfWork" class="com.hjw.zyb.action.ZybOccuAction" method="deletetypeOfWork" />		
+        
+        <!-- 工种保存 -zyb217-->	
+		<action name="saveTypeOfWork" class="com.hjw.zyb.action.ZybOccuAction" method="saveTypeOfWork" />		
+        
+        <!-- 体检类别List -zyb219-->	
+		<action name="getPhyclassList" class="com.hjw.zyb.action.ZybOccuAction" method="getPhyclassList" />		
+        
+        <!-- 体检类别保存 -zyb222-->	
+		<action name="savePhyExaCla" class="com.hjw.zyb.action.ZybOccuAction" method="savePhyExaCla" />		
+        
+        <!-- 体检类别删除 -zyb223-->	
+		<action name="deletePhyclass" class="com.hjw.zyb.action.ZybOccuAction" method="deletePhyclass" />		
+        
+        <!-- 经济行业父级名称查询 -zyb224-->	
+		<action name="getPname" class="com.hjw.zyb.action.ZybOccuAction" method="getPname" />		
+        
+        <!-- 经济行业编码验证 -->	
+		<action name="getIndustrycode" class="com.hjw.zyb.action.ZybOccuAction" method="getIndustrycode" />		
+        
+        <!--从业行业List-zyb226-->	
+		<action name="occuindustryList" class="com.hjw.zyb.action.ZybOccuindustryAction" method="occuindustryList" />		
+        
+        <!--从业行业get套餐名称-zyb229-->	
+		<action name="geTExam_set" class="com.hjw.zyb.action.ZybOccuindustryAction" method="geTExam_set" />		
+        
+        <!--从业行业保存-zyb230-->	
+		<action name="saveOccuindustry" class="com.hjw.zyb.action.ZybOccuindustryAction" method="saveOccuindustry" />		
+        
+        <!--从业行业删除-zyb231-->	
+		<action name="deleteOccuindustry" class="com.hjw.zyb.action.ZybOccuindustryAction" method="deleteOccuindustry" />		
+        
+        <!--从业工种getList-zyb235-->	
+		<action name="getOccutypeofworkList" class="com.hjw.zyb.action.ZybOccuindustryAction" method="getOccutypeofworkList" />		
+        
+        <!--从业工种删除-zyb236-->	
+		<action name="deleteOccutypeofwork" class="com.hjw.zyb.action.ZybOccuindustryAction" method="deleteOccutypeofwork" />		
+        
+        <!--从业工种保存-zyb237-->	
+		<action name="saveOccutypeofwork" class="com.hjw.zyb.action.ZybOccuindustryAction" method="saveOccutypeofwork" />		
+        
+        <!--从业工种编码验证-zyb238-->	
+		<action name="isUnique_O" class="com.hjw.zyb.action.ZybOccuindustryAction" method="isUnique_O" />		
+        
+        <!--检查依据List-zyb242-->	
+		<action name="getChecriterionList" class="com.hjw.zyb.action.ZybOccuindustryAction" method="getChecriterionList" />		
+        
+        <!--检查依据删除-zyb243-->	
+		<action name="deleteChecriterion" class="com.hjw.zyb.action.ZybOccuindustryAction" method="deleteChecriterion" />		
+        
+        <!--检查依据保存-zyb244-->	
+		<action name="saveCheckcriterion" class="com.hjw.zyb.action.ZybOccuindustryAction" method="saveCheckcriterion" />		
+        
+        <!--职业危害相关信息List-zyb246-->	
+		<action name="getOccuhazardrelatorsinfoList" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="getOccuhazardrelatorsinfoList" />		
+        
+        <!--职业危害类别tree-zyb247-->	
+		<action name="getOccuhazardclasstree" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="getOccuhazardclasstree" />		
+        
+        <!--职业危害类别List-zyb250-->	
+		<action name="getOccuhazardclass" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="getOccuhazardclass" />		
+        
+        <!--职业危害因素List-zyb251-->	
+		<action name="getgetOccuhazardfactor" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="getgetOccuhazardfactor" />		
+        
+        <!--职业体检类别List-zyb252-->	
+		<action name="getOccuphyclass" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="getOccuphyclass" />		
+        
+        <!--职业危害相关信息保存-zyb253-->	
+		<action name="saveOccuhazardrelatorsinfo" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="saveOccuhazardrelatorsinfo" />		
+        
+        <!--职业危害相关信息删除-zyb254-->	
+		<action name="deleteOccuhazardrelatorsinfo" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="deleteOccuhazardrelatorsinfo" />		
+        
+        <!--职业危害相关信息批量删除-zyb256-->	
+		<action name="delete_s" class="com.hjw.zyb.action.ZybOccuhazardrelatorsinfoAction" method="delete_s" />		
+        
+        <!--照射源分类list-zyb258-->	
+		<action name="getSourcecareerclassList" class="com.hjw.zyb.action.ZybSourcecareerclassAction" method="getSourcecareerclassList" />		
+        
+        <!--照射源分类删除-zyb261-->	
+		<action name="deleteSourcecareerclass" class="com.hjw.zyb.action.ZybSourcecareerclassAction" method="deleteSourcecareerclass" />		
+        
+        <!--照射源get-zyb262-->	
+		<action name="getSourcecareerclass" class="com.hjw.zyb.action.ZybSourcecareerclassAction" method="getSourcecareerclass" />		
+        
+        <!--照射源分类保存-zyb263-->	
+		<action name="saveSourcecareerclass" class="com.hjw.zyb.action.ZybSourcecareerclassAction" method="saveSourcecareerclass" />		
+        
+        <!--照射源分类编码验证-zyb264-->	
+		<action name="volidate" class="com.hjw.zyb.action.ZybSourcecareerclassAction" method="volidate" />		
+        
+        <!--粉尘胸片参数数据加载-zyb266-->	
+		<action name="getdustitemoptionList" class="com.hjw.zyb.action.ZybDustitemoptionAction" method="getdustitemoptionList" />		
+        
+        <!--粉尘胸片类别加载-zyb267-->	
+		<action name="getdustitemList" class="com.hjw.zyb.action.ZybDustitemoptionAction" method="getdustitemList" />		
+        
+        <!--粉尘胸片参数删除-zyb270-->	
+		<action name="deletedustitemoption" class="com.hjw.zyb.action.ZybDustitemoptionAction" method="deletedustitemoption" />		
+        
+        <!--粉尘胸片参数保存-zyb271-->	
+		<action name="saveDustitemoption" class="com.hjw.zyb.action.ZybDustitemoptionAction" method="saveDustitemoption" />		
+        
+        <!--粉尘胸片参数批量删除-zyb272-->	
+		<action name="deletesDustitemoption" class="com.hjw.zyb.action.ZybDustitemoptionAction" method="deletesDustitemoption" />		
+        
+        <!--体检结论数据加载-zyb274-->	
+		<action name="getZybexamresultList" class="com.hjw.zyb.action.ZybexamresultAction" method="getZybexamresultList" />		
+        
+        <!--体检结论删除-zyb277-->	
+		<action name="deleteExamresultone" class="com.hjw.zyb.action.ZybexamresultAction" method="deleteExamresultone" />		
+        
+        <!--体检结论批量删除-zyb278-->	
+		<action name="deleteZybExamresult" class="com.hjw.zyb.action.ZybexamresultAction" method="deleteZybExamresult" />		
+        
+        <!--体检结论保存-zyb279-->	
+		<action name="saveZybExamresult" class="com.hjw.zyb.action.ZybexamresultAction" method="saveZybExamresult" />		
+        
+        <!--经济类型查询全部-zyb282-->	
+		<action name="getAll" class="com.hjw.zyb.action.ZybEconomicclassAction" method="getAll" />		
+        
+        <!--经济类型编码验证-zyb284-->	
+		<action name="getBycode" class="com.hjw.zyb.action.ZybEconomicclassAction" method="getBycode" />		
+        
+        <!--经济类型删除-zyb285-->	
+		<action name="deleteEcoclass" class="com.hjw.zyb.action.ZybEconomicclassAction" method="deleteEcoclass" />		
+        
+        <!--工种管理批量删除-zyb286-->	
+		<action name="deletetypeofworks" class="com.hjw.zyb.action.ZybOccuAction" method="deletetypeofworks" />		
+        
+        <!--工种管理编码验证-zyb287-->	
+		<action name="validatecode" class="com.hjw.zyb.action.ZybOccuAction" method="validatecode" />		
+        
+        <!--体检类别编码验证-zyb288-->	
+		<action name="isvalidatephyexa" class="com.hjw.zyb.action.ZybOccuAction" method="isvalidatephyexa" />		
+        
+        <!--从业行业编码验证-zyb289-->	
+		<action name="isvalidateOcuindustry" class="com.hjw.zyb.action.ZybOccuindustryAction" method="isvalidateOcuindustry" />		
+        
+        <!--检查依据批量删除-zyb290-->	
+		<action name="jcyjdeletes" class="com.hjw.zyb.action.ZybOccuindustryAction" method="jcyjdeletes" />		
+        
+        
+        
+        <!-- zyb13 职业病导入表查询列表 -->
+		<action name="zybimpusershowlist" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybimpusershowlist" />
+
+		<!-- zyb15 职业病单条数据修改 -->
+		<action name="zybsaveCustomerTmplist" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybsaveCustomerTmplist" />
+
+		<!-- zyb16 职业病部分进入正式库 -->
+		<action name="zybimpuserToExaminfodo" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybimpuserToExaminfodo" />
+
+		<!-- zyb17 职业病删除临时表信息 -->
+		<action name="zybdelCustomerTmplist" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybdelCustomerTmplist" />
+       
+       <!--职业病团报模板getList-zyb504-->	
+		<action name="getOcctemplateList" class="com.hjw.zyb.action.ZybOcctemplateAction" method="getOcctemplateList" />		
+        
+        <!--职业病团报模板保存-zyb505-->
+		<action name="saveOcctemplate" class="com.hjw.zyb.action.ZybOcctemplateAction" method="saveOcctemplate" />		
+        
+        <!--职业病团报模板删除-zyb506-->	
+		<action name="deleteOcctemplate" class="com.hjw.zyb.action.ZybOcctemplateAction" method="deleteOcctemplate" />	
+		
+		<!--职业病团报模板类别验证-zyb507-->	
+		<action name="validateOcctemplate" class="com.hjw.zyb.action.ZybOcctemplateAction" method="validateOcctemplate" />		
+        
+        <!-- zyb513 放射性职业病导入表查询列表 -->
+		<action name="fsxzybimpusershowlist" class="com.hjw.zyb.action.FsxzybCustomerInfoAction" method="fsxzybimpusershowlist" />
+
+		<!-- zyb515 放射性职业病单条数据修改 -->
+		<action name="fsxzybsaveCustomerTmplist" class="com.hjw.zyb.action.FsxzybCustomerInfoAction" method="fsxzybsaveCustomerTmplist" />
+
+		<!-- zyb516 放射性职业病部分进入正式库 -->
+		<action name="fsxzybimpuserToExaminfodo" class="com.hjw.zyb.action.FsxzybCustomerInfoAction" method="fsxzybimpuserToExaminfodo" />
+	
+		<!-- zyb302 职业体检列表 -->
+		<action name="getZYB_OccuphyexaList" class="com.hjw.zyb.action.ZybOccuphyexaClassAction" method="getZYB_OccuphyexaList" />
+	
+		<!-- zyb305 删除职业体检类别 -->
+		<action name="deleteZYB_Occuphyexa" class="com.hjw.zyb.action.ZybOccuphyexaClassAction" method="deleteZYB_Occuphyexa" />
+	
+		<!-- zyb303 新增职业体检类别 -->
+		<action name="addZYB_Occuphyexa" class="com.hjw.zyb.action.ZybOccuphyexaClassAction" method="addZYB_Occuphyexa" />
+	
+		 <!-- zyb309 职业危害类别列表 -->
+		 <action name="getZYB_OccuhazardClassList" class="com.hjw.zyb.action.ZybOccuhazardClassAction" method="getZYB_OccuhazardClassList"/>
+		 
+		 <!-- zyb310职业危害类别删除 -->
+		 <action name="deleteZYB_OccuhazardClass" class="com.hjw.zyb.action.ZybOccuhazardClassAction" method="deleteZYB_OccuhazardClass"/>
+		 
+		 <!-- zyb212职业危害类别保存 -->
+		 <action name="saveZYB_OccuhazardClass" class="com.hjw.zyb.action.ZybOccuhazardClassAction" method="saveZYB_OccuhazardClass"/>
+		 
+		 <!-- zyb314职业危害类别验证编码唯一 -->
+		 <action name="getVerificationHazardclassCode" class="com.hjw.zyb.action.ZybOccuhazardClassAction" method="getVerificationHazardclassCode"/>
+		 
+		 <!-- zyb316职业危害因素获取类别树形菜单 -->
+		 <action name="getOccuhazardfactorsList" class="com.hjw.zyb.action.ZybOccuhazardfactorsAction" method="getOccuhazardfactorsList"/>
+		 
+		 <!-- zyb317职业危害因列表 -->
+		 <action name="getOccuHazardFactorsList" class="com.hjw.zyb.action.ZybOccuhazardfactorsAction" method="getOccuHazardFactorsList"/>
+		 
+		 <!-- zyb318删除职业因素 -->
+		 <action name="deledtOccuHazardFactors" class="com.hjw.zyb.action.ZybOccuhazardfactorsAction" method="deledtOccuHazardFactors"/>
+		 
+		 <!--职业因素验证编码唯一zyb320 -->
+		 <action name="getHazardFactorsCode" class="com.hjw.zyb.action.ZybOccuhazardfactorsAction" method="getHazardFactorsCode"/>
+		 
+		 
+		 <!--职业因素保存修改zyb321 -->
+		 <action name="saveHazardFactors" class="com.hjw.zyb.action.ZybOccuhazardfactorsAction" method="saveHazardFactors"/>
+		 
+		 <!--职业病诊疗项目列表zyb323 -->
+		 <action name="getZybCareerInquisitionItemList" class="com.hjw.zyb.action.ZybCareerInquisitionItemAction" method="getZybCareerInquisitionItemList"/>
+		 
+		 <!--职业病问诊项目删除zyb325-->
+		 <action name="deleteZybCareerInquisitionItem" class="com.hjw.zyb.action.ZybCareerInquisitionItemAction" method="deleteZybCareerInquisitionItem"/>
+		 
+		 
+		 <!--职业病问诊项目删除zyb325-->
+		 <action name="getZybCareerInquisitionItemCode" class="com.hjw.zyb.action.ZybCareerInquisitionItemAction" method="getZybCareerInquisitionItemCode"/>
+		 
+		 <!--职业病保存问诊项目zyb325-->
+		 <action name="saveZybCareerInquisitionItemCode" class="com.hjw.zyb.action.ZybCareerInquisitionItemAction" method="saveZybCareerInquisitionItemCode"/>
+		 
+		 
+		 <!--职业病获取类别树zyb331-->
+		 <action name="getZyboccudiseaseClassList" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getZyboccudiseaseClassList"/>
+		 
+		 
+		 <!--职业病列表zyb332-->
+		 <action name="getZyboccudiseaseList" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getZyboccudiseaseList"/>
+		 
+		 
+		 
+		 <!--职业病删除zyb333-->
+		 <action name="deleteZyboccudisease" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="deleteZyboccudisease"/>
+		 
+		 
+		 <!--保存职业病zyb336-->
+		 <action name="saveZyboccudisease" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="saveZyboccudisease"/>
+		 
+		 
+		 <!--职业禁忌症zyb338-->
+		 <action name="queryOccucontraindicationList" class="com.hjw.zyb.action.ZyboccucontraindicationAction" method="queryOccucontraindicationList"/>
+		 
+		 <!--删除职业禁忌症zyb339-->
+		 <action name="deleteOccucontraindicationList" class="com.hjw.zyb.action.ZyboccucontraindicationAction" method="deleteOccucontraindicationList"/>
+		 
+		 
+		 <!--保存职业禁忌症zyb342-->
+		 <action name="saveOccucontraindicationList" class="com.hjw.zyb.action.ZyboccucontraindicationAction" method="saveOccucontraindicationList"/>
+		 
+		 
+		 <!--疾病分类对应结论列表zyb344-->
+		 <action name="getZybdiseaseclassresultList" class="com.hjw.zyb.action.ZybexaminationresultAction" method="getZybdiseaseclassresultList"/>
+		 
+		 
+		 <!--疾病分类对应结论列表zyb345-->
+		 <action name="deleteZybdiseaseclassresult" class="com.hjw.zyb.action.ZybexaminationresultAction" method="deleteZybdiseaseclassresult"/>
+		 
+		 
+		 <!--疾病分类下拉框列表zyb349-->
+		 <action name="getDiseaseclassSelect" class="com.hjw.zyb.action.ZybexaminationresultAction" method="getDiseaseclassSelect"/>
+		 
+		 
+		 <!--结论分类下拉框列表zyb350-->
+		 <action name="getExaminationresultSelect" class="com.hjw.zyb.action.ZybexaminationresultAction" method="getExaminationresultSelect"/>
+		 
+		 
+		 <!--疾病分类对应结论保存zyb348-->
+		 <action name="saveZybdiseaseclassresult" class="com.hjw.zyb.action.ZybexaminationresultAction" method="saveZybdiseaseclassresult"/>
+		 
+		 
+		 <!--复查项目及要求LIST....zyb351-->
+		 <action name="queryCheckItem" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="queryCheckItem"/>
+		 
+		 
+		 <!--复查项目及要求delete....zyb352-->
+		 <action name="deleteCheckItem" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="deleteCheckItem"/>
+		 
+		 
+		 <!--复查项目及要求delete....zyb355-->
+		 <action name="saveCheckItem" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="saveCheckItem"/>
+		 
+		 <!--复查项目排除目标疾病List....zyb358-->
+		 <action name="getRecheckExclDiseaseList" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="getRecheckExclDiseaseList"/>
+		 
+		 
+		 <!--复查项目排除目标疾病deledt....zyb359-->
+		 <action name="deleteRecheckExclDiseaseList" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="deleteRecheckExclDiseaseList"/>
+		 
+		 
+		 <!--复查项目排除目标疾病save....zyb362-->
+		 <action name="saveRecheckExclDisease" class="com.hjw.zyb.action.ZybRecheckExclDiseaseItemAction" method="saveRecheckExclDisease"/>
+		 
+		 <!--zyb408 获取生成职业病的阳性发现列表-->
+		 <action name="getZybExamDiseaseList" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getZybExamDiseaseList"/>
+		 
+		 <!--zyb409 获取总检体检结论字典列表-->
+		 <action name="getZybExaminationResultList" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getZybExaminationResultList"/>
+		 
+		 <!--zyb411查询体检者本科室项目的体检类型 -->
+		 <action name="getExamItemAppType" class="com.hjw.zyb.action.ZybDepInspectAction" method="getExamItemAppType" />
+		 
+		 <!--zyb412查询体检者体检类型-->
+		 <action name="getExamInfoAppType" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getExamInfoAppType" />
+		 
+		 <!--zyb414 获取问诊项目列表-->
+		 <action name="getZybAskDiagnosisSampleList" class="com.hjw.zyb.action.ZybAskDiagnosisSampleAction" method="getZybAskDiagnosisSampleList" />
+		 
+		 <!--zyb416 保存问诊项目信息-->
+		 <action name="saveZybAskDiagnosisSample" class="com.hjw.zyb.action.ZybAskDiagnosisSampleAction" method="saveZybAskDiagnosisSample" />
+		 
+		 <!--zyb417 删除问诊项目信息-->
+		 <action name="deleteZybAskDiagnosisSample" class="com.hjw.zyb.action.ZybAskDiagnosisSampleAction" method="deleteZybAskDiagnosisSample" />
+		 
+		 <!--zyb419 获取问诊人员列表-->
+		 <action name="zybInquisitionIndexList" class="com.hjw.zyb.action.ZybInquisitionResultAction" method="zybInquisitionIndexList" />
+		 
+		 <!--zyb421 获取问诊项目列表-->
+		 <action name="zybInquisitionList" class="com.hjw.zyb.action.ZybInquisitionResultAction" method="zybInquisitionList" />
+		 
+		 <!--zyb422 保存问诊项目结果-->
+		 <action name="saveZybInquisitionList" class="com.hjw.zyb.action.ZybInquisitionResultAction" method="saveZybInquisitionList" />
+		 
+		 <!--zyb424 根据职业危害因素查询职业禁忌症列表-->
+		 <action name="getExamSummaryOccucontraindicationList" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getExamSummaryOccucontraindicationList" />
+		 
+		 <!--zyb425 根据职业危害因素查询职业病信息列表-->
+		 <action name="getExamSummaryOccudiseaseList" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getExamSummaryOccudiseaseList" />
+		 
+		 <!--zyb426 根据职业危害因素查询检查依据信息-->
+		 <action name="getExamSummaryCheckcriterionList" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getExamSummaryCheckcriterionList" />
+		 
+		 <!--zyb427 总检保存职业病检查结果-->
+		 <action name="saveZybExamSummaryResult" class="com.hjw.zyb.action.ZybExamSummaryAction" method="saveZybExamSummaryResult" />
+		 
+		 <!--zyb428  获取总检保存的职业病检查结果信息-->
+		 <action name="getZybExamSummaryResult" class="com.hjw.zyb.action.ZybExamSummaryAction" method="getZybExamSummaryResult" />
+		 
+		 <!--zyb429 保存职业病总检信息-->
+		 <action name="saveZybExamSummary" class="com.hjw.zyb.action.ZybExamSummaryAction" method="saveZybExamSummary" />
+		 
+		 <!--zyb430 职业病取消总检-->
+		 <action name="cancelZybExamSummary" class="com.hjw.zyb.action.ZybExamSummaryAction" method="cancelZybExamSummary" />
+		 
+		 <!--zyb431 职业病审核与取消审核-->
+		 <action name="approveZybExamSummary" class="com.hjw.zyb.action.ZybExamSummaryAction" method="approveZybExamSummary" />
+		 
+		 <!--职业病 获取从业工种数据字典zyb19-->
+		 <action name="getzybCygzList" class="com.hjw.zyb.action.ZybCommonAction" method="getzybCygzList"/>
+		 
+		  <!--职业病 获取从业行业数据字典zyb20-->
+		 <action name="getzybCyhyList" class="com.hjw.zyb.action.ZybCommonAction" method="getzybCyhyList"/>		 
+		 
+		  <!--职业病 职业病单位人员管理获取职业病历史zyb21-->
+		 <action name="zybCustomerHislist" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybCustomerHislist"/>
+		 
+		  <!--职业病保存团体人员信息zyb22-->
+		 <action name="zybaddcustomerdo" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybaddcustomerdo"/>
+
+		  <!--职业病查询体检编号对应信息zyb23-->
+		 <action name="getzybDjtExamOneShow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="getzybDjtExamOneShow"/>
+
+		 <!--职业病职业病史保存操作zyb25-->
+		 <action name="zybocchisadddo" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybocchisadddo"/>
+		 		 
+		 <!--职业病删除职业史zyb26-->
+		 <action name="zybocchisdeldo" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybocchisdeldo"/>
+		 
+		 		 
+		 <!--获取结论Listzyb364-->
+		 <action name="getExaminationresult" class="com.hjw.zyb.action.ZybProposetemplateAction" method="getExaminationresult"/>
+		 
+		 		 
+		 <!--获取建议词List zyb365-->
+		 <action name="queryZybProposetemplatePage" class="com.hjw.zyb.action.ZybProposetemplateAction" method="queryZybProposetemplatePage"/>
+		 
+		 		 
+		 <!--删除建议词 zyb366-->
+		 <action name="deleteZybProposetemplatePage" class="com.hjw.zyb.action.ZybProposetemplateAction" method="deleteZybProposetemplatePage"/>
+		 
+		 		 
+		 <!--保存建议词  zyb369-->
+		 <action name="saveZybProposetemplatePage" class="com.hjw.zyb.action.ZybProposetemplateAction" method="saveZybProposetemplatePage"/>
+		 
+		 		 
+		 <!--职业建议词修改列表复选框状态  zyb371-->
+		 <action name="updateProposetemplateListchebox" class="com.hjw.zyb.action.ZybProposetemplateAction" method="updateProposetemplateListchebox"/>
+		 
+		 
+		  <!--职业危害因素与套餐列表zyb27-->
+		 <action name="examoccuhazardfactorslist" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="examoccuhazardfactorslist"/>
+		 
+		  <!--获取职业危害类别列表zyb29-->
+		 <action name="getzywhlbshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="getzywhlbshow"/>
+		 
+		  <!--获取职业危害因素类别zyb30-->
+		 <action name="getzywhyslbshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="getzywhyslbshow"/>
+		 
+		 <!-- zyb31 职业病显示所有有效套餐 -->
+		<action name="zybsatlistshow" class="com.hjw.wst.action.BatchAction" method="zybsatlistshow" />
+		 
+		 <!-- zyb32 职业病保存危害类别 -->
+		<action name="zyboccwhyslbadddo" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zyboccwhyslbadddo" />
+		
+		 <!-- zyb33 获取职业体检类别 -->
+		<action name="getzytjlbshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="getzytjlbshow" />
+		
+		<!-- zyb34删除职业危害因素类型 -->
+		<action name="zywhyslbdeldo" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zywhyslbdeldo" />
+
+        <!-- 职业病获取体检人员体检项目 zyb35 -->
+		<action name="zybAllcustchangitemlist" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybAllcustchangitemlist" />
+		
+		 <!-- 职业病套餐列表 zyb36 -->
+      <action name="zybexamtclistshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybexamtclistshow"/>
+      
+       <!-- 职业病人员套餐信息 296 -->
+      <action name="zybexam_tclistshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybexam_tclistshow"/>
+      
+      <!-- zyb38 id对应的套餐 -->
+		<action name="getZybExamOneShow" class="com.hjw.wst.action.BatchAction" method="getExamOneShow" />
+		
+			<!-- zyb40 职业病通过套餐获取收费项目 -->
+		<action name="setzybforchangitemlist" class="com.hjw.wst.action.BatchAction"  method="setforchangitemlist" />
+		
+		 <!-- 职业病团体保存体检项目 zyb41 -->
+      <action name="zybcustGSaveItemSet" class="com.hjw.zyb.action.ZybCustomerInfoAction"  method="zybcustGSaveItemSet" />
+      
+      <!-- zyb42 获取收费项目 -->
+		<action name="zybchangitemlist" class="com.hjw.wst.action.BatchAction" 	method="changitemlist" />
+		
+		<!--职业病显示体检人收费项目 zyb43 -->
+		<action name="zybcustchangitemlist" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybcustchangitemlist" />
+		
+		<!-- 职业病统计项目金额  zyb44 -->
+        <action name="zybGItemCount" class="com.hjw.wst.action.RegisterDeskAction" method="djtGItemCount" />
+        
+         <!-- 职业病减项 zyb45 -->
+        <action name="zybcustomeritemdelshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybcustomeritemdelshow"/>
+        
+        <!-- 职业病删除套餐 zyb46 -->
+      <action name="zybcustomersetdelshow" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybcustomersetdelshow"/>
+      
+      <!-- 职业病团体个人加项保存  zyb49 -->
+        <action name="zybTGcustSaveItemSet" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybTGcustSaveItemSet" />
+        
+        <!--职业病团体团体加项保存  zyb50 -->
+        <action name="zybTTcustSaveItemSet" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybTTcustSaveItemSet" />
+
+         <!-- 执行人员加项目 zyb51 -->
+		<action name="zybcustomeritemadddo" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybcustomeritemadddo" />
+		
+		<!--执行减项操作 zyb53 -->
+		<action name="zybdeletechargitemOnedo" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybdeletechargitemOnedo" />
+		
+		<!--职业病获取单人的体检扩展信息 zyb54 -->
+		<action name="getoneExamExtinfo" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="getoneExamExtinfo" />
+		
+		<!-- 职业病登记台查询人员界面 zyb56 -->
+		<action name="getZybDjtExamInfoUserList" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="getZybDjtExamInfoUserList" />
+
+		<!-- 职业病团体保存 zyb62 -->
+        <action name="djtzybeditTcustomerdo" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="djteditTcustomerdo" />
+
+		<!-- 复检登记添加总检室添加的项目  -->
+		<action name="addZYBRecheckChargeItem" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="addZYBRecheckChargeItem" />
+
+         <!-- 职业病个人保存 zyb61 -->
+		<action name="djtzybeditcustomerdo" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="djteditcustomerdo" />
+
+		<!-- 职业病登记台获取收费项目列表 zyb63 -->
+		<action name="zybdjtcustchangitemlist" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="zybdjtcustchangitemlist" />
+
+		<!-- 职业病保存扩展信息 zyb65 -->
+		<action name="zybdjtaddcustomerdo" class="com.hjw.zyb.action.ZybRegisterDeskAction" method="zybdjtaddcustomerdo" />
+		
+		 <!-- 职业病团体保存体检项目 zyb70 -->
+      <action name="zybcustSaveItemSet" class="com.hjw.zyb.action.ZybRegisterDeskAction"  method="zybcustSaveItemSet" />
+      
+		
+		 <!-- 职业危害因素树 zyb374 -->
+      <action name="getZybExamSetTree" class="com.hjw.wst.action.ExamSetAction"  method="getZybExamSetTree" />
+      
+		
+		 <!-- 职业病套餐列表zyb375-->
+      <action name="getZybExamSetList" class="com.hjw.wst.action.ExamSetAction"  method="getZybExamSetList" />
+		 <!-- 因素体检类别禁忌证关系管理列表zyb378-->
+      <action name="getLbOccucontraindicationList" class="com.hjw.zyb.action.ZyboccucontraindicationAction"  method="getLbOccucontraindicationList" />
+      
+		 <!-- 因素体检类别禁忌证关系保存zyb379-->
+      <action name="saveLbOccucontraindication" class="com.hjw.zyb.action.ZyboccucontraindicationAction"  method="saveLbOccucontraindication" />
+      
+       <!-- 因素检查依据检查依据内容 zyb382 -->
+		<action name="getLbcriterionManagerComxobox" class="com.hjw.zyb.action.ZybOccuindustryAction"	method="getLbcriterionManagerComxobox"/>
+       <!-- 保存因素检查依据检查依据 zyb383 -->
+		<action name="saveLbcriterionManager" class="com.hjw.zyb.action.ZybOccuindustryAction"	method="saveLbcriterionManager"/>
+       <!-- 删除因素检查依据检查依据 zyb384 -->
+		<action name="deleteLbcriterionManager" class="com.hjw.zyb.action.ZybOccuindustryAction"	method="deleteLbcriterionManager"/>
+       <!-- 因素检查依据列表 zyb385 -->
+		<action name="queryLbcriterionManager" class="com.hjw.zyb.action.ZybOccuindustryAction"	method="queryLbcriterionManager"/>
+       <!-- 因素禁忌症获取禁忌症列表 zyb387 -->
+		<action name="getLbcriterionManagerList" class="com.hjw.zyb.action.ZyboccucontraindicationAction"	method="getLbcriterionManagerList"/>
+       <!-- 因素禁忌症删除 zyb389 -->
+		<action name="deleteOccuhazardfactorsOccucontraindication" class="com.hjw.zyb.action.ZyboccucontraindicationAction"	method="deleteOccuhazardfactorsOccucontraindication"/>
+       
+       <!-- 既往史列表zyb393 -->
+		<action name="getDiseaseHistoryTable" class="com.hjw.zyb.action.ZybCustomerInfoAction"	method="getDiseaseHistoryTable"/>
+       <!--新增既往史zyb395 -->
+		<action name="savezybDiseaseHistory" class="com.hjw.zyb.action.ZybCustomerInfoAction"	method="savezybDiseaseHistory"/>
+       <!--删除既往史zyb396 -->
+		<action name="deletezybDiseaseHistory" class="com.hjw.zyb.action.ZybCustomerInfoAction"	method="deletezybDiseaseHistory"/>
+		<!-- 因素职业病关系列表zyb398 -->
+		 <action name="getZyboccudiseaseYinsuTable" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getZyboccudiseaseYinsuTable"/>
+		<!-- 因素职业病关系删除zyb399 -->
+		 <action name="getDeleteZyboccudiseaseYinsu" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getDeleteZyboccudiseaseYinsu"/>
+		<!-- 因素职业病关系保存zyb600-->
+		 <action name="getSaveZyboccudiseaseYinsu" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getSaveZyboccudiseaseYinsu"/>
+		<!-- 因素列表zyb603-->
+		 <action name="getYinsuList" class="com.hjw.zyb.action.ZyboccudiseaseAction" method="getYinsuList"/>
+		<!-- 宝马岗前体检危害因素zyb 1540-->
+		 <action name="zybHazardBMW" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="zybHazardBMW"/>
+		 
+		 <!-- 杭州下沙健桥职业病数据上传-人员列表zyb608 -->
+		<action name="getZybUserList" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="getZybUserList" />
+		 <!-- 杭州下沙健桥职业病数据上传-批量上传zyb609 -->
+		<action name="uploadZybData" class="com.hjw.zyb.action.ZybCustomerInfoAction" method="uploadZybData" />
+		<!-- 职业病自选套餐因素关列表2544 -->
+		<action name="getExamSetHazardList" class="com.hjw.wst.action.ExamSetAction" method="getExamSetHazardList"/>
+	    <!-- 保存自选套餐因素关2545 -->
+		<action name="saveExamSetHazard" class="com.hjw.wst.action.ExamSetAction" method="saveExamSetHazard"/>
+		
+		
+		<!-- 显示不带部门的所有单位 -->
+		<action name="zybcompanychangshow" class="com.hjw.wst.action.TreeAction"
+			method="zybcompanychangshow" />
+	</package>
+</struts>

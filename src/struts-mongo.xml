@@ -1,0 +1,41 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="struts-mongo" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp</result>
+			
+		</global-results>
+		<!--1950 获取科研数据页面-->
+		<action name="showesearchDataMongo" class="com.hjw.mongo.action.DataMongoAction" method="showesearchDataMongo">
+			<result name="success">/mongo/researchmongo.jsp</result>
+		</action>
+		
+		<!--1951 根据查询条件查询科研数据-->
+		<action name="mongoDataList" class="com.hjw.mongo.action.DataMongoAction" method="mongoDataList"/>
+		<!-- 1955导出全部 -->
+		<action name="expmongoDataListall" class="com.hjw.mongo.action.DataMongoAction" method="expmongoDataListall"/>
+		<!--1952 查询收费项目列表-->
+		<action name="mongoChargingItemListByq" class="com.hjw.mongo.action.DataMongoAction" method="mongoChargingItemListByq"/>
+		<!--1953 查询检查项目列表-->
+		<action name="mongoExaminationItemListByq" class="com.hjw.mongo.action.DataMongoAction" method="mongoExaminationItemListByq"/>
+		<!-- 1954 mongo查询单位 -->
+		<action name="mongocompanychangshow" class="com.hjw.mongo.action.DataMongoAction" method="mongocompanychangshow"/>
+		<!-- 1956保存查询条件 -->
+		<action name="expmongoDatasave" class="com.hjw.mongo.action.DataMongoAction" method="expmongoDatasave"/>
+		<!-- 1957读取查询条件列表 -->
+		<action name="researchDataconditions" class="com.hjw.mongo.action.DataMongoAction" method="researchDataconditions"/>
+		<!-- 1958删除查询条件 -->
+		<action name="expmongoDatadel" class="com.hjw.mongo.action.DataMongoAction" method="expmongoDatadel"/>
+		<!-- 1959获取一条查询条件 -->
+		<action name="getResearchDataconditionsId" class="com.hjw.mongo.action.DataMongoAction" method="getResearchDataconditionsId"/>
+	</package>
+</struts>

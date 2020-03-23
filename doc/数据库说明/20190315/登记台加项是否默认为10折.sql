@@ -1,0 +1,1 @@
+INSERT INTO [dbo].[center_configuration] ([config_key], [config_value], [is_active], [common], [center_name]) VALUES (N'IS_DEFAULT_TEN', N'N', N'Y', N'登记台加项是否默认为10折 默认10折：Y，自动计算折扣：N', N'XXXXX');

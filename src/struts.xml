@@ -1,0 +1,33 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<include file="struts-default.xml"></include>
+	<package name="default" extends="struts-default"></package>
+   <!-- 普通体检 -->
+	<include file="struts-json.xml" />
+	<include file="struts-action.xml" />
+	
+	<!-- 职业病体检 -->
+	<include file="struts-zyb-json.xml" />
+	<include file="struts-zyb-action.xml" />
+	
+	<!-- crm -->
+	<include file="struts-crm-json.xml" />
+	<include file="struts-crm-action.xml" />
+	
+	<include file="struts-jiankz-json.xml" />
+	<include file="struts-jiankz-action.xml" />
+	
+	<!-- charge -->
+	<include file="struts-charge-json.xml" />
+	<include file="struts-charge-action.xml" />
+	
+	<!-- echarts 统计 -->
+	<include file="struts-echarts.xml"/>
+	
+	<!-- mongo查询 -->
+	<include file="struts-mongo.xml"/>
+	
+
+</struts>

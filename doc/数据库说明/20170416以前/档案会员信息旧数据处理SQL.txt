@@ -1,0 +1,9 @@
+注：先执行 档案会员信息表.sql 创建表，再执行数据处理sql。
+
+
+-- 将旧会员信息表数据写入新会员信息表中
+insert into customer_member_info (id,arch_num,level,integral) select m.id,c.arch_num,m.member_level,m.points from customer_info c,card_member m where c.id = m.customer_id 
+
+
+--将会员卡绑定的会员信息ID更新为绑定档案号
+update card_info set member_id = c.arch_num from card_member m,customer_info c where c.id = m.customer_id and card_info.member_id = m.id

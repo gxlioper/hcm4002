@@ -1,0 +1,47 @@
+
+alter table sample_exam_detail add is_binding int default(0) -- 是否绑定试管
+
+alter table sample_exam_detail add check_id int --采样医生ID
+
+alter table sample_exam_detail add check_doctor varchar(20) --采样医生姓名
+
+alter table sample_exam_detail add check_date datetime --采样时间
+
+
+alter table exam_summary add acceptance_check int default(0) -- 核收状态 0未核收，1已核收
+alter table exam_summary add acceptance_doctor int -- 核收医生
+
+alter table exam_summary add acceptance_date datetime  -- 核收时间
+
+
+alter table disease_knowloedge_lib add disease_classification int -- 疾病分类（数据字典维护，保存数据字典表ID）
+
+alter table disease_suggestion_lib add is_active varchar(10)  -- 是否启用标记（需做启用，作废的功能）
+
+
+
+insert into center_configuration values('中国人民解放军第117医院健管理中心','IS_ACCEPTANCECHECK','Y','Y','是否启用核收功能')  --增加核收功能配置
+
+USE [PEIS]
+GO
+
+/****** Object:  Table [dbo].[exam_info_recycling_guid]    Script Date: 10/16/2016 22:12:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[exam_info_recycling_guid](
+	[id] [int] IDENTITY(1,1) NOT NULL,  -- 主键id
+	[exam_info_id] [int] NOT NULL,  --体检信息ID
+	[creater] [int] NULL,           --回收人
+	[create_time] [datetime] NULL,  --回收时间
+ CONSTRAINT [PK__exam_inf__3213E83F2A8B4280] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+

@@ -1,0 +1,4 @@
+alter table exam_info add is_need_guide varchar(10) default('N'),is_need_barcode varchar(10) default('N') 
+
+
+注：旧数据需要手工处理。

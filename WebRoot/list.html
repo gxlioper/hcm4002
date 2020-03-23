@@ -1,0 +1,20 @@
+<script type="text/javascript">
+	$(function() {
+		$.post("usermenu.action", "ok", function(data) {
+			if (data != "") {
+				document.getElementById("tree").innerHTML = data;
+			}
+		}, "");
+		$(".toggle").live("click", function() {
+			if ($(this).next(".box").css("display") == "none") {
+				$(this).next(".box").slideDown("slow");
+			} else {
+				$(this).next(".box").slideUp("slow");
+			}
+		})
+
+	})
+</script>
+<div class="tree_1 toggle">≤Àµ•π‹¿Ì</div>
+<div id="tree" class="box toggle" style="display: block;"></div>
+<div class="tree_1_bottom"></div>

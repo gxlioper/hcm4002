@@ -1,0 +1,1 @@
+alter table view_exam_detail add exam_num varchar(16)

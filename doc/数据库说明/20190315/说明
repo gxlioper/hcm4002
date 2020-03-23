@@ -1,0 +1,1 @@
+1、collectFeesService.getCustomerInfo方法很慢 ，所以去掉了 or 档案号 的sql语句

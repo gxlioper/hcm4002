@@ -1,0 +1,212 @@
+﻿/* Icon style of System */
+.icon,.icon-m     {background-image: url("images/icon.png");background-repeat:no-repeat;width:16px;height:16px;vertical-align:middle;margin-right:4px;}
+.ico-arrow-1      {background-position:-40px -8px;margin-top:-2px;}
+.ico-arrow-2      {background-position:-56px -8px;}
+.ico-clock        {background-position:-40px -40px;width:20px;height:20px;margin:-2px 5px 0 0;}
+.ico-print        {background-position:-40px -160px;}
+.ico-info         {background-position:-64px -160px;}
+.ico-del-s        {background-position:-88px -8px;cursor:pointer;}
+.ico-edit         {background-position:-88px -160px;}
+.ico-import       {background-position:-112px -160px;}
+.ico-export       {background-position:-6px -192px;}
+.ico-pending      {background-position:-64px -320px;width:64px;height:64px;}
+.ico-chart        {background-position:-72px -64px;}
+.ico-histogram    {background-position:-72px -40px;}
+.ico-add          {background-position:-72px -88px;cursor:pointer;}
+.ico-add:hover    {background-position:-72px -104px;cursor:pointer;}
+.ico-del          {background-position:-88px -88px;cursor:pointer;}
+.ico-del:hover    {background-position:-88px -104px;cursor:pointer;}
+.ico-query        {background-position:-136px -156px;height:22px;}
+.ico-h            {background-position:-448px -64px;height:20px;width:20px;}
+.ico-einfo        {background-position:-296px -80px;}
+.ico-eraser       {background-position:-256px -160px;}
+.ico-logoff       {background-position:-280px -160px;}
+.ico-readcard     {background-position:-328px -160px;}
+.ico-loss         {background-position:-352px -160px;}
+.ico-unloss       {background-position:-376px -160px;}
+.ico-frost        {background-position:-400px -160px;}
+.ico-unfrost      {background-position:-424px -160px;}
+.ico-replace      {background-position:-448px -160px;}
+.ico-person       {background-position:-472px -160px;}
+.ico-modify       {background-position:-496px -160px;}
+.ico-level        {background-position:-520px -160px;}
+.ico-verify       {background-position:-544px -160px;}
+.ico-device       {background-position:-568px -160px;}
+.ico-clear        {background-position:-40px -184px;}
+.ico-row-d        {background-position:-104px -88px;cursor:pointer;position:relative;top:-2px;}
+.ico-row-d:hover  {background-position:-120px -88px;}
+.ico-row-u        {background-position:-104px -104px;cursor:pointer;position:relative;top:-2px;}
+.ico-row-u:hover  {background-position:-120px -104px;}
+.ico-return       {background-position:-64px -184px;}
+.ico-undo         {background-position:-88px -184px;}
+.ico-equally      {background-position:-112px -184px;}
+.ico-right        {background-position:-134px -184px;}
+.ico-left         {background-position:-134px -200px;}
+.ico-up           {background-position:-134px -216px;}
+.ico-down         {background-position:-134px -232px;}
+.ico-delete       {background-position:-160px -183px;}
+.ico-create       {background-position:-184px -183px;}
+.ico-refresh      {background-position:-208px -184px;}
+.ico-addbatch     {background-position:-232px -184px;}
+.ico-purview      {background-position:-256px -184px;}
+.ico-copy         {background-position:-280px -184px;}
+.ico-paste        {background-position:-304px -184px;}
+.ico-undo-white   {background-position:-328px -184px;}
+.ico-card-white   {background-position:-352px -184px;}
+.ico-remove       {background-position:-64px -208px;}
+.ico-help         {background-position:-376px -184px;}
+.ico-moveright    {background-position:-64px -144px;}
+.ico-moveleft     {background-position:-80px -144px;}
+.ico-ok           {background-position: -256px -112px; }
+.ico-yes          {background-position: -272px -112px; }
+.ico-error        {background-position: -288px -112px; }
+.ico-addpic       {background-position: -128px -320px;width: 64px;height: 64px;}
+a:hover .ico-moveright,
+a:hover .ico-moveleft{background-color:#F9F9F9;border-radius:3px;}
+
+.ico-chongzhi-light-32{background-position: -384px -320px;width: 32px;height: 32px;}
+.ico-quxian-light-32{background-position: -416px -320px;width: 32px;height: 32px;}
+.ico-deka-light-32{background-position: -448px -320px;width: 42px;height: 32px;}
+
+/* Header Icon */
+.ico-user-24      {background-position:-192px -256px;width:24px;height:24px;}
+.ico-tool-24      {background-position:-216px -256px;width:24px;height:24px;}
+.ico-sys-24       {background-position:-240px -256px;width:24px;height:24px;}
+.ico-help-24      {background-position:-264px -256px;width:24px;height:24px;}
+.ico-logout-24    {background-position:-288px -256px;width:24px;height:24px;}
+li:hover .ico-user-24      {background-position:-192px -280px;}
+li:hover .ico-tool-24      {background-position:-216px -280px;}
+li:hover .ico-sys-24       {background-position:-240px -280px;}
+li:hover .ico-help-24      {background-position:-264px -280px;}
+li:hover .ico-logout-24    {background-position:-288px -280px;}
+.ico-light-remove-24{background-position:-312px -280px;width:24px;height:24px;}
+
+
+.icon-m           {width:32px;height:32px;margin-right:10px}
+.ico-m-error      {background-position:-64px -256px;}
+
+/* Icon 24x24 */
+.icon-24          {background-image: url("images/icon24.png");background-position:0 0;vertical-align:middle;margin-right:4px;height:24px !important;width:24px !important;}
+.ico-1-24         {background-position:-24px 0;}
+.ico-2-24         {background-position:-48px 0;}
+.ico-3-24         {background-position:-72px 0;}
+.ico-4-24         {background-position:-96px 0;}
+.ico-5-24         {background-position:-120px 0;}
+.ico-6-24         {background-position:-144px 0;}
+.ico-7-24         {background-position:-168px 0;}
+
+/* Icon 64x64 */
+.icon-64          {background-image: url("images/icon64.png");background-repeat:no-repeat;vertical-align:middle;margin-right:4px;width:64px;height:64px;}
+.ico-1-64         {background-position:-64px 0;}
+.ico-2-64         {background-position:-128px 0;}
+.ico-3-64         {background-position:-256px -512px;}
+.ico-4-64         {background-position:-192px -512px;}
+.ico-5-64         {background-position:-128px -512px;}
+.ico-6-64         {background-position:-64px -512px;}
+.ico-7-64         {background-position:-448px -448px;}
+.ico-8-64         {background-position:-384px -448px;}
+.ico-9-64         {background-position:-256px -896px;}
+.ico-11-64        {background-position:-320px -448px;}
+.ico-12-64        {background-position:-256px -448px;}
+.ico-13-64        {background-position:-192px -448px;}
+.ico-15-64        {background-position:-128px -448px;}
+.ico-17-64        {background-position:-64px -448px;}
+.ico-18-64        {background-position:-448px -384px;}
+.ico-19-64        {background-position:-384px -384px;}
+.ico-20-64        {background-position:-320px -384px;}
+.ico-21-64        {background-position:-256px -384px;}
+.ico-22-64        {background-position:-192px -384px;}
+.ico-23-64        {background-position:-128px -384px;}
+.ico-26-64        {background-position:-192px -448px;}
+.ico-27-64        {background-position:-64px -384px;}
+.ico-28-64        {background-position:-448px -320px;}
+.ico-29-64        {background-position:-384px -320px;}
+.ico-30-64        {background-position:-320px -320px;}
+.ico-31-64        {background-position:-256px -320px;}
+.ico-33-64        {background-position:-192px -320px;}
+.ico-34-64        {background-position:-128px -320px;}
+.ico-35-64        {background-position:-64px -320px;}
+.ico-38-64        {background-position:-384px -256px;}
+.ico-39-64        {background-position:-320px -256px;}
+.ico-40-64        {background-position:-256px -256px;}
+.ico-41-64        {background-position:-192px -256px;}
+.ico-42-64        {background-position:-128px -256px;}
+.ico-43-64        {background-position:-64px -256px;}
+.ico-44-64        {background-position:-448px -192px;}
+.ico-45-64        {background-position:-384px -192px;}
+.ico-46-64        {background-position:-320px -192px;}
+.ico-47-64        {background-position:-256px -192px;}
+.ico-48-64        {background-position:-192px -192px;}
+.ico-50-64        {background-position:-128px -192px;}
+.ico-51-64        {background-position:-64px -192px;}
+.ico-52-64        {background-position:-448px -128px;}
+.ico-53-64        {background-position:-384px -128px;}
+.ico-54-64        {background-position:-320px -128px;}
+.ico-55-64        {background-position:-256px -128px;}
+.ico-56-64        {background-position:-192px -128px;}
+.ico-57-64        {background-position:-128px -128px;}
+.ico-58-64        {background-position:-64px -128px;}
+.ico-59-64        {background-position:-448px -256px;}
+.ico-60-64        {background-position:-448px -640px;}
+.ico-61-64        {background-position:-384px -640px;}
+.ico-62-64        {background-position:-320px -640px;}
+.ico-63-64        {background-position:-256px -640px;}
+.ico-64-64        {background-position:-192px -640px;}
+.ico-65-64        {background-position:-128px -640px;}
+.ico-66-64        {background-position:-64px -640px;}
+.ico-67-64        {background-position:-448px -576px;}
+.ico-68-64        {background-position:-384px -576px;}
+.ico-69-64        {background-position:-320px -576px;}
+.ico-70-64        {background-position:-256px -576px;}
+.ico-71-64        {background-position:-192px -576px;}
+.ico-73-64        {background-position:-128px -576px;}
+.ico-74-64        {background-position:-64px -576px;}
+.ico-77-64        {background-position:-448px -512px;}
+.ico-79-64        {background-position:-384px -512px;}
+.ico-81-64        {background-position:-64px -896px;}
+.ico-82-64        {background-position:-384px -896px;}
+.ico-201-64       {background-position:-256px -832px;}
+.ico-202-64       {background-position:-192px -832px;}
+.ico-203-64       {background-position:-128px -832px;}
+.ico-204-64       {background-position:-64px -832px;}
+.ico-205-64       {background-position:-448px -768px;}
+.ico-206-64       {background-position:-384px -768px;}
+.ico-207-64       {background-position:-320px -768px;}
+.ico-208-64       {background-position:-256px -768px;}
+.ico-209-64       {background-position:-320px -896px;}
+.ico-251-64       {background-position:-256px -832px;}
+.ico-252-64       {background-position:-192px -768px;}
+.ico-253-64       {background-position:-128px -768px;}
+.ico-254-64       {background-position:-64px -768px;}
+.ico-255-64       {background-position:-448px -704px;}
+.ico-256-64       {background-position:-384px -704px;}
+.ico-257-64       {background-position:-320px -704px;}
+.ico-258-64       {background-position:-256px -704px;}
+.ico-259-64       {background-position:-192px -704px;}
+.ico-260-64       {background-position:-128px -704px;}
+.ico-261-64       {background-position:-64px -704px;}
+.ico-262-64       {background-position:-448px -832px;}
+.ico-263-64       {background-position:-384px -832px;}
+.ico-264-64       {background-position:-320px -832px;}
+.ico-265-64       {background-position:-128px -896px;}
+.ico-266-64       {background-position:-192px -896px;}
+.ico-add-64       {background-position:-384px 0;}
+dl:hover .ico-add-64{background-position:-448px 0;}
+
+.ico-userreg      {background-position:-160px -160px;float:left;}
+.ico-linshi       {background-position:-232px -160px;float:left;}
+.ico-open         {background-position:-184px -160px;float:left;}
+.ico-save         {background-position:-208px -160px;float:left;}
+.ui-datepicker-trigger{background-image: url("images/icon.gif");background-repeat:no-repeat;background-position:-40px -208px;cursor:pointer;height:16px;width:16px;position:relative;left:-18px;bottom:-3px;}
+
+.files-ico{position:absolute;width:16px;height:16px;line-height:0;overflow:hidden;}
+.files-ico.user{background-image:url("images/login/user.png");background-position:0 0;left:8px;top:9px;}
+.files-ico.pass{background-image:url("images/login/key.png");background-position:0 0;left:8px;top:10px;}
+.icon-font     {background-image:url("images/font.png");border:1px solid transparent;cursor:pointer;float:left;width:20px;height:20px;}
+.icon-font:hover,
+.icon-font.ico-font-active{background-color:#FFF5D4;border:1px solid #DCAC6C;}
+.ico-font-bold {background-position:0 0;}
+.ico-font-italic {background-position:-60px 0;}
+.ico-font-u{background-position:-140px 0;}
+.ico-font-color{background-position:-720px 0;width:32px;position:relative;}
+.ico-font-color .color-line{background-color:red;width:18px;height:3px;overflow:hidden;position:absolute;bottom:1px;left:2px;}

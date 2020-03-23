@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="hjw_contract_manager3.0" basedir="." default="usage">
+    <property name="name" value="hjw_contract_manager3.0"/>
+    <property name="war.dir" value="WebRoot"/>
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="${war.dir}/WEB-INF/classes"/>
+    <property name="weblib.dir" value="${war.dir}/WEB-INF/lib"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="db.dir" value="db"/>
+    <property name="spring.root" value="../.."/>
+    <property file="build.properties"/>
+    <path id="master-classpath">
+        <fileset dir="${war.dir}/WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tomcat.home}/lib">
+            <include name="servlet*.jar"/>
+        </fileset>
+        <pathelement path="${build.dir}"/>
+    </path>
+    <target name="usage">
+        <echo message=""/>
+        <echo message="xuegong build file"/>
+        <echo message="------------------------------------------------------"/>
+        <echo message=""/>
+        <echo message="Available targets are:"/>
+        <echo message=""/>
+        <echo message="clean    --&gt; Clean output dirs"/>
+        <echo message="build    --&gt; Compile main Java sources and copy libraries"/>
+        <echo message="deploy   --&gt; Deploy the whole project"/>
+        <echo message="backup    --&gt; Backup the Total Project"/>
+        <echo message="install   --&gt; Install application in Tomcat"/>
+        <echo message="reload    --&gt; Reload application in Tomcat"/>
+        <echo message="start     --&gt; Start Tomcat application"/>
+        <echo message="stop      --&gt; Stop Tomcat application"/>
+        <echo message="list      --&gt; List Tomcat applications"/>
+        <echo message="undeploy  --&gt; Undeploy the Total Project"/>
+        <echo message="junit     --&gt; Execute Junit Test"/>
+        <echo message="warfile     --&gt; Build the web application archive"/>
+        <echo message=""/>
+    </target>
+    <target name="clean" description="Clean output dirs (build, docs, testbuild, testreports, weblib, dist)">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+    <target name="build" description="Compile main source tree java files into class files, generate jar files" depends="clean">
+        <mkdir dir="${build.dir}"/>
+        <javac destdir="${build.dir}" Encoding="UTF-8" includeantruntime="false" target="1.8" debug="true" deprecation="false" optimize="false" failonerror="true">
+            <src path="${src.dir}"/>
+            <classpath refid="master-classpath"/>
+        	<compilerarg value="-Xlint:unchecked"/> 
+        </javac>
+        <copy todir="${build.dir}" preservelastmodified="true">
+            <fileset dir="${src.dir}">
+                <include name="**/*.xml"/>
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="deploy" depends="build" description="Deploy application">
+        <copy todir="${tomcat.home}/webapps/${name}" preservelastmodified="true">
+            <fileset dir="${war.dir}">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="jar" depends="build" description="Generate jar file">
+        <copy todir="${classes.dir}/com/synjones/wst/domain">
+            <fileset dir="${src.home}/com/synjones/wst/domain">
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+        <copy todir="${classes.dir}/com/synjones/wst/web">
+            <fileset dir="${src.home}/com/synjones/wst/web">
+                <include name="ApplicationResources_zh_CN.properties"/>
+            </fileset>
+        </copy>
+        <jar jarfile="${lib.home}/syn-wst.jar" basedir="${classes.dir}">
+            <include name="*.properties"/>
+            <include name="*.xml"/>
+            <include name="com/synjones/filter/**/*.class"/>
+            <include name="com/synjones/wst/**/*.class"/>
+            <include name="com/synjones/wst/**/*.xml"/>
+            <include name="com/synjones/wst/**/.properties"/>
+            <include name="com/synjones/wst/domain/**/*.class"/>
+            <exclude name="com/synjones/wst/domain/**/*.xml"/>
+        </jar>
+    </target>
+    <target name="warfile" depends="jar" description="Build the web application archive">
+        <mkdir dir="${dist.dir}"/>
+        <war warfile="${dist.dir}/${name}.war" basedir="${war.dir}" webxml="${webapp.home}/WEB-INF/web.xml">
+            <include name="*"/>
+            <include name="WEB-INF/config/appCtx*"/>
+            <include name="WEB-INF/config/*.properties"/>
+            <include name="WEB-INF/*"/>
+            <include name="WEB-INF/classes/*.xml"/>
+            <include name="WEB-INF/classes/**/*.xml"/>
+            <include name="WEB-INF/classes/*.properties"/>
+            <include name="WEB-INF/lib/**"/>
+            <exclude name="WEB-INF/lib/servlet.jar"/>
+            <exclude name="WEB-INF/lib/syn-op.jar"/>
+            <include name="application/**"/>
+            <include name="css/**"/>
+            <include name="images/**"/>
+            <include name="imagesschool/**"/>
+            <include name="js/**"/>
+            <include name="noticespic/**"/>
+            <include name="pages/**"/>
+            <exclude name="**/.*"/>
+        </war>
+    </target>
+    <target name="backup" description="Backup application">
+        <copy todir="${backup.path}/${name}" preservelastmodified="true">
+            <fileset dir=".">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="undeploy" description="Clean output dirs (build, docs, testbuild, testreports, weblib, dist)">
+        <delete dir="${deploy.path}/${name}"/>
+    </target>
+    <target name="junit" depends="build" description="Run JUnit Tests">
+        <junit printsummary="on" fork="false" haltonfailure="false" failureproperty="tests.failed" showoutput="true">
+            <classpath refid="master-classpath"/>
+            <formatter type="brief" usefile="false"/>
+            <batchtest>
+                <fileset dir="${build.dir}">
+                    <include name="**/Test*.*"/>
+                </fileset>
+            </batchtest>
+        </junit>
+        <fail if="tests.failed">
+        ***********************************************************
+        ***********************************************************
+        ****  One or more tests failed!  Check the output ...  ****
+        ***********************************************************
+        ***********************************************************
+        </fail>
+    </target>
+    <!-- ============================================================== -->
+    <!-- Tomcat tasks - remove these if you don't have Tomcat installed -->
+    <!-- ============================================================== -->
+    <target name="install" description="Install application in Tomcat">
+        <install url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}" path="/${name}" war="${name}"/>
+    </target>
+    <!--
+	<taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask">
+		<classpath>
+			<path location="${tomcat.home}/server/lib/catalina-ant.jar" />
+		</classpath>
+	</taskdef>
+-->
+    <target name="reload" depends="deploy" description="Reload application in Tomcat">
+        <reload url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}" path="/${name}"/>
+    </target>
+    <target name="start" description="Start Tomcat application">
+        <start url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}" path="/${name}"/>
+    </target>
+    <target name="stop" description="Stop Tomcat application">
+        <stop url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}" path="/${name}"/>
+    </target>
+    <target name="list" description="List Tomcat applications">
+        <list url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}"/>
+    </target>
+    <!-- End Tomcat tasks -->
+</project>

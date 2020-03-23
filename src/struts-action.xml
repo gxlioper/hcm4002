@@ -1,0 +1,2746 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="action" extends="struts-default">
+		<interceptors>
+			<interceptor name="upload"
+				class="org.apache.struts2.interceptor.FileUploadInterceptor" />
+			<interceptor-stack name="uploadStack">
+				<interceptor-ref name="upload" />
+				<interceptor-ref name="defaultStack" />
+				
+			</interceptor-stack>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp
+			</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp
+			</result>
+			<result name="commerror">/common/erroradmin.jsp</result>
+		</global-results>
+		
+		<!--团体人员管理 Excel下载-->  
+        <action name="teamUserExportExcel" class="com.hjw.wst.action.CustomerInfoAction" method="teamUserExportExcel">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/vnd.ms-excel</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">excelStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${excelFileName}  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>
+		
+		<!--登记台 人员 Excel下载-->  
+        <action name="djdUserExportExcel" class="com.hjw.wst.action.RegisterDeskAction" method="djdUserExportExcel">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/vnd.ms-excel</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">excelStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${excelFileName}  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>
+		
+		<!--Excel下载-->  
+        <action name="exportExcel" class="com.hjw.wst.ExcelExportAction" method="exportExcel">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/vnd.ms-excel</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">excelStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${excelFileName}  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>
+        <!--列表Excel下载-->  
+        <action name="datagridExportExcel" class="com.hjw.wst.ExcelExportAction" method="datagridExportExcel">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/vnd.ms-excel</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">excelStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${excelFileName}  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>
+        <!--列表Excel下载-->  
+        <action name="datagridExportExcelNew" class="com.hjw.wst.ExcelExportAction" method="datagridExportExcelNew">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/vnd.ms-excel;charset=utf-8</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">excelStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${excelFileName}.xls  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>
+        <!--下载日志文件 747-->  
+        <action name="exportSyslogFile" class="com.hjw.wst.action.SyslogAction" method="exportSyslogFile">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/zip</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">fileInputStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${fileName}  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>
+        
+        <!--下载pdf报告 -->  
+        <action name="exportPDF" class="com.hjw.wst.DownLoadAction" method="exportPDF">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/zip</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">fileInputStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${fileName}  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>
+        
+        <!--危急值Excel导出-->  
+        <action name="criticalUserExportExcel" class="com.hjw.wst.action.CriticalAction" method="criticalUserExportExcel">  
+            <result name="success" type="stream">  
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->  
+                <param name="contentType">application/vnd.ms-excel</param>  
+                <!-- 返回流 excelStream为action中的流变量名称 -->  
+                <param name="inputName">excelStream</param>  
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。  
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->  
+                <param name="contentDisposition">  
+                    attachment;filename=${excelFileName}  
+                </param>  
+                <param name="bufferSize">1024</param>  
+            </result>  
+        </action>
+        
+        <!-- 导出数据库文件 -->
+        <action name="exportDataMigrationDb" class="com.hjw.wst.action.DataMigrationAction" method="exportDataMigrationDb">
+            <!--stream类型:直接向页面输出二进制数据 -->
+            <result name="success" type="stream">
+                <!-- 给stream结果视图注入参数:Content-Type -->
+                <param name="contentType">application/octet-stream</param>
+                <!-- 告知浏览器一什么方式打开 ${@java.net.URLEncoder@encode(filename,"UTF-8")}-->
+                <param name="contentDisposition">attachment;filename=${fileName}</param>
+                <!-- 注入字节流，取值要写动作类中的set方法名称，首字母改成小写 -->
+                <param name="inputName">inputStream</param>
+            </result>
+        </action>
+
+        <!--每日体检者构成明细Excel导出-->
+        <action name="dailyExamInfoExportExcel" class="com.hjw.wst.action.DirectorDecisionAction" method="dailyExamInfoExportExcel">
+            <result name="success" type="stream">
+                <!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->
+                <param name="contentType">application/vnd.ms-excel</param>
+                <!-- 返回流 excelStream为action中的流变量名称 -->
+                <param name="inputName">excelStream</param>
+                <!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。
+                fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量-->
+                <param name="contentDisposition">
+                    attachment;filename=${excelFileName}
+                </param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+		<!-- *************************************************struts应用 action 控制************************************************ -->
+
+		<!-- 用户管理 -->
+		<action name="usermanager" class="com.hjw.wst.action.CommonAction"
+			method="usermanager">
+			<result name="success">/manager/usermanager.jsp</result>
+		</action>
+
+		<!--和老系统单点登录 -->
+		<action name="singlePEISLogin" class="com.hjw.wst.action.AccountAction"
+			method="singlePEISLogin">
+			<result name="loginok">/main.jsp</result>
+		</action>
+
+		<!--登录 -->
+		<action name="login" class="com.hjw.wst.action.AccountAction"
+			method="login">
+			<result name="loginok">/main.jsp</result>
+		</action>
+		<action name="loginnorand" class="com.hjw.wst.action.AccountAction"
+			method="loginnorand">
+			<result name="loginok">/main.jsp</result>
+		</action>
+		<action name="loginout" class="com.hjw.wst.action.AccountAction"
+			method="loginout">
+			<result name="loginout">/index.html</result>
+		</action>
+		<action name="padLogin" class="com.hjw.ipad.action.CustomerInfoIpadAction" method="padLogin">
+			<result name="padLogin">/padLogin/main.html</result>
+		</action>
+		<action name="getMoreUserSystemInformsPage" class="com.hjw.wst.action.AccountAction"
+			method="getMoreUserSystemInformsPage">
+			<result name="success">/more_system_informs.jsp</result>
+		</action>
+
+
+		<!-- 个人修改个人信息 -->
+		<action name="updatePerson" class="com.hjw.wst.action.UserManagerAction"
+			method="updatePerson">
+			<result name="success">/updatePerson.jsp</result>
+		</action>
+
+		<!-- 个人修改密码信息 -->
+		<action name="updatePasswd" class="com.hjw.wst.action.UserManagerAction"
+			method="updatePasswd">
+			<result name="success">/updatePasswd.jsp</result>
+		</action>
+
+		<action name="getCheckpic" class="com.hjw.wst.action.GetBar3PicAction"
+			method="getRandomValidateCode">
+		</action>
+
+
+		<!-- 生成菜单功能 已添加功能控制 -->
+		<action name="createMenu" class="com.hjw.wst.action.CommonAction"
+			method="createMenu">
+			<result name="createMenu">/manager/createMenu.jsp</result>
+		</action>
+		
+		<!-- 生成菜单功能 已添加功能控制 -->
+		<action name="itempriceshow" class="com.hjw.wst.action.CommonAction"
+			method="itempriceshow">
+			<result name="success">/itempriceshow.jsp</result>
+		</action>
+		
+
+		<!-- 角色管理 已添加功能控制 -->
+		<action name="rolemain" class="com.hjw.wst.action.CommonAction"
+			method="rolemain">
+			<result name="rolemain">/manager/rolemain.jsp</result>
+		</action>
+
+		<!-- 用户信息修改 -->
+		<action name="oneuseredit" class="com.hjw.wst.action.UserManagerAction"
+			method="oneuseredit">
+			<result name="success">/manager/oneuseredit.jsp</result>
+			<result name="error">/common/errormessage.jsp</result>
+		</action>
+
+		<!-- 用户信息显示 -->
+		<action name="oneusershow" class="com.hjw.wst.action.UserManagerAction"
+			method="oneusershow">
+			<result name="success">/manager/oneusershow.jsp</result>
+		</action>
+
+		<!-- 添加用户 -->
+		<action name="useredit" class="com.hjw.wst.action.UserManagerAction"
+			method="useredit">
+			<result name="success">/manager/useradd.jsp</result>
+			<result name="error">/common/erroradmin.jsp</result>
+		</action>
+		<!-- 编辑用户620 -->
+		<action name="usereditupdate" class="com.hjw.wst.action.UserManagerAction"
+			method="usereditupdate">
+			<result name="success">/manager/userupdate.jsp</result>
+			<result name="error">/common/erroradmin.jsp</result>
+		</action>
+		<!-- 修改用户密码621 -->
+		 <action name="updateuserpwd" class="com.hjw.wst.action.UserManagerAction"
+			method="updateuserpwd">
+			<result name="success">/manager/editPWD.jsp</result>
+		</action> 
+		
+		<!-- 删除用户 -->
+		<action name="deluser" class="com.hjw.wst.action.UserManagerAction"
+			method="deluser">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">2</param>
+			</interceptor-ref>
+			<result name="success" type="redirect">/usermanager.action</result>
+			<result name="error">/common/erroradmin.jsp</result>
+		</action>
+
+		<!-- 锁定用户 -->
+		<action name="lockuser" class="com.hjw.wst.action.UserManagerAction"
+			method="lockuser">
+			<result name="success" type="redirect">/usermanager.action</result>
+		</action>
+
+		<!-- 用户权限授权 -->
+		<action name="userrole" class="com.hjw.wst.action.RoleAction"
+			method="userrole">
+			<result name="success">/manager/userrole.jsp</result>
+		</action>
+
+		<!-- 显示一个角色的功能 -->
+		<action name="showrolegnone" class="com.hjw.wst.action.TreeAction"
+			method="showrolegnone">
+			<result name="success">/manager/showrolegnone.jsp</result>
+		</action>
+
+		<!-- 得到角色功能 -->
+		<action name="rolegn" class="com.hjw.wst.action.TreeAction"
+			method="rolegn">
+			<result name="success">/manager/rolegn.jsp</result>
+		</action>
+
+		<!--根据用户得到菜单 -->
+		<action name="usermenu" class="com.hjw.wst.action.TreeAction"
+			method="usermenu">
+			<result name="login">/index.html</result>
+		</action>
+
+		<!-- 编辑角色 -->
+		<action name="roleedit" class="com.hjw.wst.action.RoleAction"
+			method="roleedit">
+			<result name="success">/manager/roleadd.jsp</result>
+		</action>
+
+
+		<!-- 删除角色 -->
+		<action name="delrole" class="com.hjw.wst.action.RoleAction"
+			method="delrole">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">2</param>
+			</interceptor-ref>
+			<result name="success" type="redirect">
+				rolemain.action
+			</result>
+		</action>
+
+		<!-- 用户信息修改 -->
+		<action name="oneusereditdo" class="com.hjw.wst.action.UserManagerAction"
+			method="oneusereditdo">
+			<result name="success">/manager/oneuseredit.jsp</result>
+		</action>
+
+		<!-- webConfig相关 -->
+		<action name="webConfigtermConfigmainshow" class="com.hjw.wst.action.WebConfigAction"
+			method="termConfigmainshow">
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">4</param>
+			</interceptor-ref>
+		</action>
+		<!-- webConfig相关 -->
+		<action name="webConfigtoInfoConfig" class="com.hjw.wst.action.WebConfigAction"
+			method="toInfoConfig">
+			<result name="toInfoConfig">/webconfig/ConfigList.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="logInterceptor">
+				<param name="bizType">1</param>
+				<param name="operType">4</param>
+			</interceptor-ref>
+		</action>
+
+
+		<!-- 单位管理 200 -->
+		<action name="managercomdept" class="com.hjw.wst.action.CommonAction"
+			method="managercomdept">
+			<result name="success">/manager/deptmanager.jsp</result>
+		</action>
+
+		<!-- 单位部门管理 -202 -->
+		<action name="comdeptListTab" class="com.hjw.wst.action.CommonAction"
+			method="comdeptListTab">
+			<result name="success">/manager/comdeptListTab.jsp</result>
+		</action>
+
+		<!-- 体检单位新增和删除-203 -->
+		<action name="companyedit" class="com.hjw.wst.action.CommonAction"
+			method="companyedit">
+			<result name="success">/manager/companyedit.jsp</result>
+		</action>
+
+
+		<!-- 体检单位新增和删除-205 -->
+		<action name="companydwmanager" class="com.hjw.wst.action.CommonAction"
+			method="companydwmanager">
+			<result name="success">/manager/companydwmanager.jsp</result>
+		</action>
+
+		<!-- 单位编辑 -->
+		<action name="danweiedit" class="com.hjw.wst.action.CommonAction"
+			method="danweiedit">
+			<result name="success">/manager/danweiedit.jsp</result>
+		</action>
+
+		<!-- 改变单位层级关系 210 -->
+		<action name="companychange" class="com.hjw.wst.action.CommonAction"
+			method="companychange">
+			<result name="success">/manager/companychange.jsp</result>
+		</action>
+
+		<!-- 会员列表 300 -->
+		<action name="getCardUserManagerPage" class="com.hjw.wst.action.CardManageAction"
+			method="cardManage">
+			<result name="cardManage">/manager/cardManage.jsp</result>
+		</action>
+
+		<!-- 会员编辑 302 -->
+		<action name="cardMemberEdit" class="com.hjw.wst.action.CardManageAction"
+			method="cardMemberEdit">
+			<result name="cardMemberEdit">/manager/cardmeradd.jsp</result>
+		</action>
+
+		<!-- 单个会员信息 305 -->
+		<action name="getCardMemberOne" class="com.hjw.wst.action.CardManageAction"
+			method="getCardMemberOne">
+			<result name="success">/manager/cardmeradd.jsp</result>
+		</action>
+
+		<!-- 个人的卡信息 306 -->
+		<action name="cardmerkxx" class="com.hjw.wst.action.CardManageAction"
+			method="cardmerkxx">
+			<result name="success">/manager/cardmerkxx.jsp</result>
+		</action>
+
+		<!-- 会员页面新增卡信息页面 308 -->
+		<action name="cardInfoadd" class="com.hjw.wst.action.CardInfoAction"
+			method="cardInfoadd">
+			<result name="success">/manager/cardinfoadd.jsp</result>
+		</action>
+
+		<!-- 卡信息管理 312 -->
+		<action name="cardinfomanage" class="com.hjw.wst.action.CardInfoAction"
+			method="cardinfomanage">
+			<result name="success">/manager/cardInfomanage.jsp</result>
+		</action>
+
+		<!--卡信息管理页面 增加卡信息 314 -->
+		<action name="cardinfosave" class="com.hjw.wst.action.CardInfoAction"
+			method="cardinfosave">
+			<result name="success">/manager/cardinfoaddbu.jsp</result>
+		</action>
+
+		<!--延期页面 316 -->
+		<action name="cardinfoyanqi" class="com.hjw.wst.action.CardInfoAction"
+			method="cardinfoyanqi">
+			<result name="success">/manager/cardinfoyanqi.jsp</result>
+		</action>
+
+		<!--卡充值页面 318 -->
+		<action name="cardPerpaid" class="com.hjw.wst.action.CardInfoAction"
+			method="cardPerpaid">
+			<result name="success">/manager/cardPrepaid.jsp</result>
+		</action>
+
+		<!--批量制卡页面 321 -->
+		<action name="cardBatch" class="com.hjw.wst.action.CardInfoAction"
+			method="cardBatch">
+			<result name="success">/manager/cardBatch.jsp</result>
+			<result name="cardBatch">/manager/cardBatch_bak.jsp</result>
+		</action>
+
+		<!-- 交易记录查询页面 323 -->
+		<action name="getCardDeal" class="com.hjw.wst.action.CardDealAction"
+			method="getCardDeal">
+			<result name="success">/manager/carddeal.jsp</result>
+		</action>
+
+		<!-- 收费页面 325 -->
+		<action name="getCollectFees" class="com.hjw.wst.action.CollectFeesAction"
+			method="getCollectFees">
+			<result name="success">/registerManager/collectFees.jsp</result>
+			<result name="success_charge">/charge/collectFees.jsp</result>
+		</action>
+
+		<!-- 收费会员卡显示页面 330 -->
+		<action name="showCardInfo" class="com.hjw.wst.action.CollectFeesAction"
+			method="showCardInfo">
+			<result name="success">/registerManager/cardinfo.jsp</result>
+		</action>
+
+		<!-- 336 显示收费明细页面 -->
+		<action name="showDetailCollectFees" class="com.hjw.wst.action.CollectFeesAction"
+			method="showDetailCollectFees">
+			<result name="success">/registerManager/chargingDetail.jsp</result>
+		</action>
+
+		<!-- 337 显示退费页面 -->
+		<action name="showCollectFeesRefuncd" class="com.hjw.wst.action.CollectFeesAction"
+			method="showCollectFeesRefuncd">
+			<result name="success">/registerManager/refund.jsp</result>
+		</action>
+
+		<!-- 个人绑定卡信息 344 -->
+		<action name="getboundCard" class="com.hjw.wst.action.CardInfoAction"
+			method="getboundCard">
+			<result name="success">/manager/boundCard.jsp</result>
+		</action>
+
+		<!-- 卡信息管理 读卡 345 -->
+		<action name="getReaderCard" class="com.hjw.wst.action.CardInfoAction"
+			method="getReaderCard">
+			<result name="success">/manager/readerCard.jsp</result>
+		</action>
+
+		<!-- 检后报告管理 346 -->
+		<action name="reportManager" class="com.hjw.wst.action.ReportManagerAction"
+			method="reportManager">
+			<result name="success">/afterInspectionManager/reportmanager.jsp
+			</result>
+		</action>
+
+		<!-- 检后报告管理 报告邮寄页面 349 -->
+		<action name="getReportMail" class="com.hjw.wst.action.ReportManagerAction"
+			method="getReportMail">
+			<result name="success">/afterInspectionManager/report_mail.jsp</result>
+		</action>
+
+		<!-- 检后报告管理 报告自取页面 351 -->
+		<action name="getReportThems" class="com.hjw.wst.action.ReportManagerAction"
+			method="getReportThems">
+			<result name="success">/afterInspectionManager/report_themselves.jsp
+			</result>
+		</action>
+
+		<!-- 检后报告管理 显示报告邮寄信息 352 -->
+		<action name="showReportMail" class="com.hjw.wst.action.ReportManagerAction"
+			method="showReportMail">
+			<result name="success">/afterInspectionManager/show_report_mail.jsp
+			</result>
+		</action>
+
+		<!-- 检后报告管理 显示报告自己取信息 353 -->
+		<action name="showReportThems" class="com.hjw.wst.action.ReportManagerAction"
+			method="showReportThems">
+			<result name="success">/afterInspectionManager/show_report_thems.jsp
+			</result>
+		</action>
+		
+		<!-- 弹出补打发票页面  357 -->
+		<action name="chargingSingleInvoickShow" class="com.hjw.wst.action.CollectFeesAction"
+			method="chargingSingleInvoickShow">
+			<result name="success">/registerManager/singleInvoickShow.jsp
+			</result>
+		</action>
+		
+		<!--  退费页面 361 -->
+		<action name="refundFees" class="com.hjw.wst.action.CollectFeesAction"
+			method="refundFees">
+			<result name="success">/registerManager/refundFees.jsp</result>
+			<result name="success_charge">/charge/refundFees.jsp</result>
+		</action>
+		
+		<!--  划价页面 991 -->
+		<action name="getPricing" class="com.hjw.wst.action.CollectFeesAction"
+			method="getPricing">
+			<result name="success">/registerManager/pricing.jsp
+			</result>
+		</action>
+		
+		<!--  团体预付费页面 998 -->
+		<action name="getTeamPrepayment" class="com.hjw.wst.action.CollectFeesAction"
+			method="getTeamPrepayment">
+			<result name="success">/customerManager/teamPrepayment.jsp
+			</result>
+		</action>
+		
+		<!--  采样室页面  364  -->
+		<action name="getSamplingPage" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="getSamplingPage">
+			<result name="success">/inspectionDepartment/samplingDepartment.jsp
+			</result>
+		</action>
+		
+		<!--  体检花名册页面  369  -->
+		<action name="getAcceptanceCheck" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getAcceptanceCheck">
+			<result name="success">/inspectionDepartment/acceptanceChekc.jsp
+			</result>
+		</action>
+		
+		<!--  根据体检号查询检查结果页面 371  -->
+		<action name="getExamItemResultByExamNum" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getExamItemResultByExamNum">
+			<result name="success">/inspectionDepartment/examitemResilt.jsp
+			</result>
+		</action>
+		
+		<!--  图片显示页面 379  -->
+		<action name="showViewExamImage" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="showViewExamImage">
+			<result name="success">/inspectionDepartment/display_images.jsp
+			</result>
+		</action>
+		
+		<!--  影像科室常用词页面 383  -->
+		<action name="getViewCommonWords" class="com.hjw.wst.action.ViewCommonWordsAction"
+			method="getViewCommonWords">
+			<result name="success">/itemResultLib/viewCommonWords.jsp
+			</result>
+		</action>
+		
+		<!--  显示新增修改常用词页面 387  -->
+		<action name="editViewCommonWords" class="com.hjw.wst.action.ViewCommonWordsAction"
+			method="editViewCommonWords">
+			<result name="success">/itemResultLib/editViewCommonWords.jsp
+			</result>
+		</action>
+		
+		<!--  核收页面  390  -->
+		<action name="getAcceptanceItem" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getAcceptanceItem">
+			<result name="success">/inspectionDepartment/acceptanceItem.jsp
+			</result>
+		</action>
+		
+		<!--  核收页面  2103  -->
+		<action name="getExamSuggestionEditPage" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getExamSuggestionEditPage">
+			<result name="success">/inspectionDepartment/examSuggestionEdit.jsp
+			</result>
+		</action>
+		
+		<!--  核收页面报告驳回  2105  -->
+		<action name="getReportRejectEditPage" class="com.hjw.wst.action.AcceptanceCheckAction"
+			method="getReportRejectEditPage">
+			<result name="success">/inspectionDepartment/reportRejectEdit.jsp
+			</result>
+		</action>
+		
+		<!--  总检页面    -->
+		<action name="getExamSummaryPage" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getExamSummaryPage">
+			<result name="success">/inspectionDepartment/exam_summary.jsp</result>
+			<result name="success_180">/inspectionDepartment/exam_summary180.jsp</result>
+			<result name="success_new">/inspectionDepartment/exam_summary_new.jsp</result>
+		</action>
+		
+		<!--  总检显示建议列表 700 -->
+		<action name="showExamDiseaseSugList" class="com.hjw.wst.action.ExamSummaryAction"
+			method="showExamDiseaseSugList">
+			<result name="success">/inspectionDepartment/exam_disease.jsp
+			</result>
+		</action>
+		
+		<!--  总检显示新增阳性发现 701 -->
+		<action name="showNewExamDisease" class="com.hjw.wst.action.ExamSummaryAction"
+			method="showNewExamDisease">
+			<result name="success">/inspectionDepartment/new_exam_disease.jsp
+			</result>
+		</action>
+		
+		<!--  总检室首页  705 -->
+		<action name="getExamSummaryIndex" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getExamSummaryIndex">
+			<result name="success">/inspectionDepartment/exam_summary_index.jsp</result>
+			<result name="success_180">/inspectionDepartment/exam_summary_index180.jsp</result>
+			<result name="success_zyb">/zyb/inspectionDepartment/exam_summary_index_zyb.jsp</result>
+		</action>
+		
+		<!-- 1146 获取审核首页 -->
+		<action name="getExamSummaryApprovePage" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getExamSummaryApprovePage">
+			<result name="success">/inspectionDepartment/exam_summary_approve0.jsp</result>
+			<result name="success_180">/inspectionDepartment/exam_summary_approve.jsp</result>
+			<result name="success_eryuan">/inspectionDepartment/exam_summary_approve2.jsp</result>
+			<result name="success_zyb">/zyb/inspectionDepartment/exam_summary_index_zyb.jsp</result>
+		</action>
+		
+		<!-- 1194获取复审首页-->
+		<action name="getExamSummaryCensoringPage" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getExamSummaryCensoringPage">
+			<result name="success">/inspectionDepartment/exam_summary_censoring.jsp</result>
+		</action>
+		
+		<!-- 1191获取驳回填写驳回原因页面-->
+		<action name="getExamSummaryRehectPage" class="com.hjw.wst.action.ExamSummaryAction"
+			method="getExamSummaryRehectPage">
+			<result name="success">/inspectionDepartment/examSummaryRejectPage.jsp
+			</result>
+		</action>
+		
+		<!--  获取历史结果对比页面  712 -->
+		<action name="resultsHistoryListPage" class="com.hjw.wst.action.ExamSummaryAction"
+			method="resultsHistoryListPage">
+			<result name="success">/inspectionDepartment/ResultsOfHistory.jsp
+			</result>
+		</action>
+		
+		<!--  影像科室检查结果录入页面  713 -->
+		<action name="getViewExamPage" class="com.hjw.wst.action.ViewExamAction"
+			method="getViewExamPage">
+			<result name="success">/inspectionDepartment/view_exam_detail.jsp
+			</result>
+		</action>
+		
+		<!--  影像科室首页  715-->
+		<action name="getViewExamIndex" class="com.hjw.wst.action.ViewExamAction"
+			method="getViewExamIndex">
+			<result name="success">/inspectionDepartment/view_exam_index.jsp
+			</result>
+		</action>
+		
+		<!--  影像科室获取常用词页面 719-->
+		<action name="getViewExamWordsPage" class="com.hjw.wst.action.ViewExamAction"
+			method="getViewExamWordsPage">
+			<result name="success">/inspectionDepartment/view_exam_words.jsp
+			</result>
+		</action>
+		
+		<!--  检验科室首页 721-->
+		<action name="getExamResultDetailIndex" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getExamResultDetailIndex">
+			<result name="success">/inspectionDepartment/exam_result_detail_index.jsp
+			</result>
+		</action>
+		
+		<!--  检验科室结果录入页面 723-->
+		<action name="getExamResultDetail" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getExamResultDetail">
+			<result name="success">/inspectionDepartment/exam_result_detail.jsp
+			</result>
+		</action>
+		
+		<!-- 早餐科室首页  728-->
+		<action name="getBreakFastIndex" class="com.hjw.wst.action.BreakfastAction"
+			method="getBreakFastIndex">
+			<result name="success">/breakfast/breakfaset_index.jsp
+			</result>
+		</action>
+		
+		<!-- 清除结果功能页面 730-->
+		<action name="getRemoveResultPage" class="com.hjw.wst.action.RemoveResultAction"
+			method="getRemoveResultPage">
+			<result name="success">/inspectionDepartment/remove_result.jsp
+			</result>
+		</action>
+		
+		<!-- 查询删除的卡信息页面 738-->
+		<action name="getDeleteCardPage" class="com.hjw.wst.action.CardInfoAction"
+			method="getDeleteCardPage">
+			<result name="success">/manager/close_card.jsp
+			</result>
+		</action>
+		
+		<!-- 健康卡收费页面 739-->
+		<action name="getHealthCardChargePage" class="com.hjw.wst.action.CollectFeesAction"
+			method="getHealthCardChargePage">
+			<result name="success">/registerManager/health_card_charge.jsp
+			</result>
+		</action>
+		
+		<!-- 系统日志查询页面 740-->
+		<action name="getSysLogPage" class="com.hjw.wst.action.SyslogAction"
+			method="getSysLogPage">
+			<result name="success">/manager/syslog.jsp
+			</result>
+		</action>
+		
+		<!-- 系统日志备份文件页面 744-->
+		<action name="getSyslogFilePage" class="com.hjw.wst.action.SyslogAction"
+			method="getSyslogFilePage">
+			<result name="success">/manager/syslogfile.jsp
+			</result>
+		</action>
+		
+		<!-- 1702 检查结果、总检结果审计页面 -->
+		<action name="getExamInfoAuditPageLog" class="com.hjw.wst.action.SyslogAction"
+			method="getExamInfoAuditPageLog">
+			<result name="success">/syslog/examinfoauditpagelog.jsp
+			</result>
+		</action>
+		
+		<!-- 1704 审计查看普通科室日志页面 -->
+		<action name="getExamDepResultPageLog" class="com.hjw.wst.action.SyslogAction"
+			method="getExamDepResultPageLog">
+			<result name="success">/syslog/examdepresultpagelog.jsp
+			</result>
+		</action>
+		
+		<!-- 1707 审计查询总检审核复审日志页面 -->
+		<action name="getExamSummaryPageLog" class="com.hjw.wst.action.SyslogAction"
+			method="getExamSummaryPageLog">
+			<result name="success">/syslog/examsummarypagelog.jsp
+			</result>
+		</action>
+		
+		<!-- 体检信息查询页面 749-->
+		<action name="getDirectorExamInfoPage" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDirectorExamInfoPage">
+			<result name="success">/inspectionDepartment/directorExaminfo.jsp
+			</result>
+		</action>
+		
+		<!-- 项目检查结果页面 752-->
+		<action name="getDirectorItemResult" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDirectorItemResult">
+			<result name="success">/inspectionDepartment/directorItemResult.jsp
+			</result>
+		</action>
+		
+		<!-- 项目完成情况查询页面 753-->
+		<action name="getDirectorExamItemPage" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDirectorExamItemPage">
+			<result name="success">/inspectionDepartment/directorItem.jsp
+			</result>
+		</action>
+		
+		<!-- 每日体检者构成页面  758-->
+		<action name="getDailyExamInfoPage" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getDailyExamInfoPage">
+			<result name="success">/inspectionDepartment/dailyExaminfo.jsp
+			</result>
+		</action>
+		
+		<!-- 1174 获取体检信息综合查询页面 -->
+		<action name="getExamComprehenPage" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getExamComprehenPage">
+			<result name="success">/inspectionDepartment/directorExamInfoComprehen.jsp
+			</result>
+		</action>
+		
+		<!-- 1177 获取查看pacs检查结果页面 -->
+		<action name="getHisExamResultPage" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getHisExamResultPage">
+			<result name="success">/inspectionDepartment/getHisExamResultPage.jsp
+			</result>
+		</action>
+		<!-- 1178 获取查看lis采样结果页面 -->
+		<action name="getPatLabSamplePage" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="getPatLabSamplePage">
+			<result name="success">/inspectionDepartment/getPatLabSamplePage.jsp
+			</result>
+		</action>
+		<!-- 用户发票号段功能页面 760-->
+		<action name="getUserInvoicePage" class="com.hjw.wst.action.CollectFeesAction"
+			method="getUserInvoicePage">
+			<result name="success">/registerManager/userinvoice.jsp
+			</result>
+		</action>
+		
+		<!-- 团体打印单个条码 768-->
+		<action name="getAllorintItemPage" class="com.hjw.wst.action.CustomerInfoAction"
+			method="getAllorintItemPage">
+			<result name="success">/customerManager/print_item_page.jsp
+			</result>
+		</action>
+		
+		<!-- 779 体检综述（健康指导建议）管理页面-->
+		<action name="getExamSummaryGuidanceLibPage" class="com.hjw.wst.action.ExamSummaryGuidanceLibAction"
+			method="getExamSummaryGuidanceLibPage">
+			<result name="success">/itemResultLib/examSummaryGuidanceLib.jsp
+			</result>
+		</action>
+		
+		<!-- 781获取体检综述（健康指导建议）编辑页面-->
+		<action name="getEditExamSummaryGuidanceLib" class="com.hjw.wst.action.ExamSummaryGuidanceLibAction"
+			method="getEditExamSummaryGuidanceLib">
+			<result name="success">/itemResultLib/editExamSummaryGuidanceLib.jsp
+			</result>
+		</action>
+		
+		<!-- 784 读取LIS检验结果首页-->
+		<action name="getExamResultDetailIndexReader" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getExamResultDetailIndexReader">
+			<result name="success">/inspectionDepartment/exam_result_detail_index_reader.jsp
+			</result>
+		</action>
+		
+		<!-- 785 读取LIS检验结果明细页-->
+		<action name="getExamResultDetailReaderPage" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getExamResultDetailReaderPage">
+			<result name="success">/inspectionDepartment/exam_result_detail_reader.jsp
+			</result>
+		</action>
+		
+		<!-- 787 获取敏感词管理页面-->
+		<action name="getSensitiveWordsLibPage" class="com.hjw.wst.action.SensitiveWordsLibAction"
+			method="getSensitiveWordsLibPage">
+			<result name="success">/itemResultLib/sensitiveWordsLib.jsp
+			</result>
+		</action>
+		
+		<!-- 789 获取敏感词编辑页面-->
+		<action name="getEditSensitiveWordsLibPage" class="com.hjw.wst.action.SensitiveWordsLibAction"
+			method="getEditSensitiveWordsLibPage">
+			<result name="success">/itemResultLib/editSensitiveWordsLib.jsp
+			</result>
+		</action>
+		
+		<!-- 团体人员结算综合统计 794-->
+		<action name="teamSettlementStatisticsPage" class="com.hjw.wst.action.DirectorDecisionAction"
+			method="teamSettlementStatisticsPage">
+			<result name="success">/statements/teamSettlementStatistics.jsp
+			</result>
+		</action>
+		
+		<!-- 获取可验证用户打印资源的登录页面 799-->
+		<action name="getPrintLoginPage" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="getPrintLoginPage">
+			<result name="success">/inspectionDepartment/print_login.jsp
+			</result>
+		</action>
+		
+		<!-- 获取团体附加费用维护页面 1101-->
+		<action name="getteamaccountaddpage" class="com.hjw.wst.action.StatementsAction"
+			method="getteamaccountaddpage">
+			<result name="success">/statements/teamaccountadditional.jsp
+			</result>
+		</action>
+		
+		<!-- 1103 发票号段维护页面-->
+		<action name="getUserInvoiceManagePage" class="com.hjw.wst.action.UserInvoiceAction"
+			method="getUserInvoiceManagePage">
+			<result name="success">/registerManager/userInvoiceManagePage.jsp
+			</result>
+		</action>
+		
+		<!-- 1105 获取发票号段编辑页面-->
+		<action name="getUserInvoiceEditPage" class="com.hjw.wst.action.UserInvoiceAction"
+			method="getUserInvoiceEditPage">
+			<result name="success">/registerManager/userInvoiceEditPage.jsp
+			</result>
+		</action>
+		
+		<!-- 1111 收费员日结功能页面-->
+		<action name="getCashierDailyPage" class="com.hjw.wst.action.CashierDailyAccAction"
+			method="getCashierDailyPage">
+			<result name="success">/cashierDaily/cashierdailyacc.jsp
+			</result>
+		</action>
+		
+		<!-- 1129 收费信息记录实时查询页面-->
+		<action name="getCharingSummaryPage" class="com.hjw.wst.action.FinanceDepAccAction"
+			method="getCharingSummaryPage">
+			<result name="success">/cashierDaily/charingsummarypage.jsp
+			</result>
+		</action>
+		
+		<!-- 1121 财务部门日结功能页-->
+		<action name="getFinanceDepAccPage" class="com.hjw.wst.action.FinanceDepAccAction"
+			method="getFinanceDepAccPage">
+			<result name="success">/cashierDaily/financefepacc.jsp
+			</result>
+		</action>
+		
+		<!-- 1135团体批量合并样本页面-->
+		<action name="getTeamSampleListPage" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="getTeamSampleListPage">
+			<result name="success">/customerManager/teamsampleitem.jsp
+			</result>
+		</action>
+		
+		<!-- 1138 财务月结页面-->
+		<action name="getMonthlyStatementPage" class="com.hjw.wst.action.FinanceDepAccAction"
+			method="getMonthlyStatementPage">
+			<result name="success">/cashierDaily/monthlystatement.jsp
+			</result>
+		</action>
+		
+		<!-- 1140 获取科室采样打条码页面-->
+		<action name="getDepPrintSamplePage" class="com.hjw.wst.action.SamplingDepartmentAction"
+			method="getDepPrintSamplePage">
+			<result name="success">/inspectionDepartment/depprintsample.jsp
+			</result>
+		</action>
+		
+		<!-- 1197 合并收费功能页（浙医2）-->
+		<action name="getMergeChargeZy2" class="com.hjw.wst.action.CollectFeesAction"
+			method="getMergeChargeZy2">
+			<result name="success">/registerManager/getmergechargezy2.jsp
+			</result>
+		</action>
+		<!-- 1729 单项疾病逻辑维护页面-->
+		<action name="getDiseaseLogicSinglePage" class="com.hjw.wst.action.NewDiseaseLogicAction"
+			method="getDiseaseLogicSinglePage">
+			<result name="success">/diseaseLogic/disease_logic_single.jsp
+			</result>
+		</action>
+		
+		<!-- 1731 编辑单项阳性逻辑页面-->
+		<action name="getDiseaseLogicSingleEditPage" class="com.hjw.wst.action.NewDiseaseLogicAction"
+			method="getDiseaseLogicSingleEditPage">
+			<result name="success">/diseaseLogic/disease_logic_single_add.jsp</result>
+			<result name="success_c">/diseaseLogic/disease_logic_single_add_c.jsp</result>
+		</action>
+		
+		<!-- 1736 获取复合逻辑维护页面-->
+		<action name="getDiseaseLogicCompositePage" class="com.hjw.wst.action.NewDiseaseLogicAction"
+			method="getDiseaseLogicCompositePage">
+			<result name="success">/diseaseLogic/disease_logic_composite.jsp
+			</result>
+		</action>
+		
+		<!-- 1738 获取复合逻辑编辑页面-->
+		<action name="getDiseaseLogicCompositeEditPage" class="com.hjw.wst.action.NewDiseaseLogicAction"
+			method="getDiseaseLogicCompositeEditPage">
+			<result name="success">/diseaseLogic/disease_logic_composite_add.jsp
+			</result>
+		</action>
+		
+		<!-- 1743 单项阳性科室结论逻辑维护页面-->
+		<action name="getDiseaseLogicSingleDepPage" class="com.hjw.wst.action.NewDiseaseLogicAction"
+			method="getDiseaseLogicSingleDepPage">
+			<result name="success">/diseaseLogic/disease_logic_single_dep.jsp
+			</result>
+		</action>
+		
+		<!-- 1744  编辑单项阳性科室结论逻辑页面-->
+		<action name="getDiseaseLogicSingleDepEditPage" class="com.hjw.wst.action.NewDiseaseLogicAction"
+			method="getDiseaseLogicSingleDepEditPage">
+			<result name="success">/diseaseLogic/disease_logic_single_dep_add.jsp
+			</result>
+		</action>
+		
+		<!-- 1746卡销售主页面-->
+		<action name="cardSaleManagePage" class="com.hjw.wst.action.CardSaleAction"
+			method="cardSaleManagePage">
+			<result name="success">/cardSaleManage/cardSale.jsp
+			</result>
+		</action>
+		
+		<!-- 1757  总检获取模式主动分配页面-->
+		<action name="getExamSummaryDistributionPage" class="com.hjw.wst.action.ExamSummaryAction" method="getExamSummaryDistributionPage">
+			<result name="success">/inspectionDepartment/examsummary_distribution.jsp</result>
+		</action>
+		
+		<!-- 1762 获取数据导入导出页面-->
+		<action name="getDataMigrationPage" class="com.hjw.wst.action.DataMigrationAction" method="getDataMigrationPage">
+			<result name="success_con">/datamigration/databasemigration_con.jsp</result>
+			<result name="success_file">/datamigration/databasemigration_file.jsp</result>
+		</action>
+		
+		<!-- 1765 获取数据库/ftp 配置页面-->
+		<action name="getDataBaseConfigPage" class="com.hjw.wst.action.DataMigrationAction" method="getDataBaseConfigPage">
+			<result name="success">/datamigration/databaseconfig.jsp</result>
+		</action>
+		
+		<!-- 1767 获取数据库/ftp配置编辑页面-->
+		<action name="getDataBaseConfigEditPage" class="com.hjw.wst.action.DataMigrationAction" method="getDataBaseConfigEditPage">
+			<result name="success">/datamigration/databaseconfigedit.jsp</result>
+		</action>
+		
+		<!--1754 获取科研数据页面-->
+		<action name="getResearchDataPage" class="com.hjw.wst.action.DataAnalysisAction"
+			method="getResearchDataPage">
+			<result name="success">/dataAnalysis/researchData.jsp
+			</result>
+		</action>
+
+		<!-- 方案管理 212 -->
+		<action name="batchManager" class="com.hjw.wst.action.BatchAction"
+			method="batchManager">
+			<result name="success">/batchManager/batchManager.jsp</result>
+		</action>
+
+		<!-- 方案显示 216 -->
+		<action name="batchshow" class="com.hjw.wst.action.BatchAction"
+			method="batchshow">
+			<result name="success">/batchManager/batchshow.jsp</result>
+		</action>
+
+		<!-- 218 编辑方案 -->
+		<action name="batchedit" class="com.hjw.wst.action.BatchAction"
+			method="batchedit">
+			<result name="success">/batchManager/batchedit.jsp</result>
+		</action>
+
+		<!-- 221 显示方案 -->
+		<action name="batchoneshow" class="com.hjw.wst.action.BatchAction"
+			method="batchoneshow">
+			<result name="success">/batchManager/batchoneshow.jsp</result>
+		</action>
+
+		<!-- 223 显示分组 -->
+		<action name="groupmanager" class="com.hjw.wst.action.BatchAction"
+			method="groupmanager">
+			<result name="success">/batchManager/groupmanager.jsp</result>
+		</action>
+
+		<!-- 224分组信息维护 -->
+		<action name="groupedit" class="com.hjw.wst.action.BatchAction"
+			method="groupedit">
+			<result name="success">/batchManager/groupedit.jsp</result>
+			<result name="success2">/batchManager/groupedit2.jsp</result>
+		</action>
+
+		<!-- 227分组信息查询 -->
+		<action name="groupOneshow" class="com.hjw.wst.action.BatchAction"
+			method="groupOneshow">
+			<result name="success">/batchManager/groupOneshow.jsp</result>
+		</action>
+
+		<!-- 234分组信息查询 -->
+		<action name="batchproShow" class="com.hjw.wst.action.BatchAction"
+			method="batchproShow">
+			<result name="success">/batchManager/batchproShow.jsp</result>
+		</action>
+
+		<!-- 236分组信息查询 -->
+		<action name="batchproplanedit" class="com.hjw.wst.action.BatchAction"
+			method="batchproplanedit">
+			<result name="success">/batchManager/batchproplanedit.jsp</result>
+		</action>
+
+
+		<!-- 213 方案审核显示 -->
+		<action name="batchCheckManager" class="com.hjw.wst.action.BatchAction"
+			method="batchCheckManager">
+			<result name="success">/batchManager/batchCheckManager.jsp</result>
+		</action>
+
+		<!-- 238 方案单独查询和审核 -->
+		<action name="batchonecheckshow" class="com.hjw.wst.action.BatchAction"
+			method="batchonecheckshow">
+			<result name="success">/batchManager/batchonecheckshow.jsp</result>
+		</action>
+
+		<!-- 239 方案审核页面 -->
+		<action name="batcheckedit" class="com.hjw.wst.action.BatchAction"
+			method="batcheckedit">
+			<result name="success">/batchManager/batcheckedit.jsp</result>
+		</action>
+
+        <!-- 242 导入临表操作界面 -->
+        <action name="impusershow" class="com.hjw.wst.action.CustomerInfoAction" method="impusershow">
+            <result name="success">/customerManager/impusershow.jsp</result>
+        </action>
+        
+        <!-- 245 选择上传文件 -->
+        <action name="impuserfile" class="com.hjw.wst.action.BatchAction" method="impuserfile">
+            <result name="success">/customerManager/impuserfile.jsp</result>
+        </action>
+        
+        <!-- 248 姓名定位人员列表-->		
+		<action name="impuserusernamedw" class="com.hjw.wst.action.CustomerInfoAction"  method="impuserusernamedw">
+             <result name="success">/customerManager/impuserusernamedw.jsp</result>
+        </action>  
+        
+         <!-- 214 方案人员管理 -->
+        <action name="batchUserManager" class="com.hjw.wst.action.BatchAction" method="batchUserManager">
+            <result name="success">/customerManager/batchUserManager.jsp</result>
+        </action>
+        
+         <!-- 253 人员分组管理 -->
+        <action name="usergroupmanager" class="com.hjw.wst.action.CustomerInfoAction" method="usergroupmanager">
+            <result name="success_jiuzhenka">/customerManager/usergroupmanager_jiuzhenka.jsp</result>
+            <result name="success">/customerManager/usergroupmanager.jsp</result>
+            <result name="success_dbgj">/customerManager/usergroupmanager_dbgj.jsp</result>
+        </action>
+        
+        <!-- 新增体检人员信息 261 -->
+         <action name="addcustomer" class="com.hjw.wst.action.CustomerInfoAction" method="addcustomer">
+            <result name="success">/customerManager/addcustomer.jsp</result>            
+        </action>    
+        
+        <!-- 修改体检人员信息410 -->
+         <action name="editcustomer" class="com.hjw.wst.action.CustomerInfoAction" method="editcustomer">
+            <result name="success">/customerManager/editcustomer.jsp</result>            
+            <result name="success_jiuzhenka">/customerManager/editcustomer_jiuzhenka.jsp</result>           
+        </action>     
+         
+        <!-- 强制分组选择分组信息 263 -->
+         <action name="doUserGrouplistshow" class="com.hjw.wst.action.CustomerInfoAction" method="doUserGrouplistshow">
+            <result name="success">/customerManager/doUserGrouplistshow.jsp</result>
+        </action>
+        
+        <!-- 翰思打印导检单 266 暂时不用-->
+         <action name="djdprintdo" class="com.hjw.wst.action.CustomerInfoAction" method="djdprintdo">
+            <result name="success">/applets/djdprintdo.jsp</result>
+        </action>
+        
+        
+         <!-- 体检人员预约管理主界面 267-->
+         <action name="custappointmentshow" class="com.hjw.wst.action.CustomerInfoAction" method="custappointmentshow">
+            <result name="success">/customerManager/custappointmentshow.jsp</result>
+        </action>
+        
+         <!-- 设置体检时间 268-->
+         <action name="setcusttime" class="com.hjw.wst.action.CustomerInfoAction" method="setcusttime">
+            <result name="success">/customerManager/setcusttime.jsp</result>
+        </action>        
+        
+        <!-- 合同审核界面 273-->
+         <action name="contractcheckedit" class="com.hjw.wst.action.BatchAction" method="contractcheckedit">
+            <result name="success">/batchManager/contractcheckedit.jsp</result>
+        </action>        
+        <!-- 人员加项目 276 -->
+        <action name="customeritemaddshow" class="com.hjw.wst.action.CustomerInfoAction" method="customeritemaddshow">
+            <result name="success">/customerManager/customeritemaddshow.jsp</result>
+        </action>  
+        
+        <!-- 人员单独查询 278-->
+       <action name="customeroneshow" class="com.hjw.wst.action.CustomerInfoAction" method="customeroneshow">
+            <result name="success">/customerManager/customeroneshow.jsp</result>
+        </action>         
+       
+        <!-- 执行人员加减项 280-->
+       <action name="customeritemdelshow" class="com.hjw.wst.action.CustomerInfoAction" method="customeritemdelshow">
+            <result name="success">/customerManager/customeritemdelshow.jsp</result>
+        </action> 
+        
+          <!-- 排班管理 100-->
+       <action name="scheduling" class="com.hjw.wst.action.SchedulingAction" method="scheduling">
+            <result name="success">/scheduling/scheduling.jsp</result>
+        </action>
+         <!-- 排班实现 110-->
+       <action name="schdeulingAchieve" class="com.hjw.wst.action.SchedulingAction" method="schdeulingAchieve">
+            <result name="success">/scheduling/calendar.jsp</result>
+        </action>
+        <!-- 批量排班 111-->
+       <action name="schedulingBatch" class="com.hjw.wst.action.SchedulingAction" method="schedulingBatch">
+            <result name="success">/scheduling/calendar.jsp</result>
+        </action>
+        <!-- 科室管理 101-->
+       <action name="department" class="com.hjw.wst.action.DepartmentAction" method="department">
+            <result name="success">/department/Department.jsp</result>
+        </action> 
+        <!--添加科室105-->
+         <action name="departadd" class="com.hjw.wst.action.DepartmentAction" method="departadd">
+            <result name="success">/department/departadd.jsp</result>
+        </action> 
+         <!--修改科室107-->
+         <action name="depupdater" class="com.hjw.wst.action.DepartmentAction" method="depupdater">
+            <result name="success">/department/departadd.jsp</result>
+        </action>
+        
+         <!-- 体检中心管理 114-->
+       <action name="Examinatioin_center" class="com.hjw.wst.action.Examinatioin_centerAction" method="Examinatioin_center">
+            <result name="success">/Examinatioin_center/Examinatioin_center.jsp</result>
+        </action>
+        <!-- 体检中心——增加 117-->
+       <action name="addExam" class="com.hjw.wst.action.Examinatioin_centerAction" method="addExam">
+            <result name="success">/Examinatioin_center/ExaminatioinEdit.jsp</result>
+        </action>
+        <!--修改体检中心信息119-->
+         <action name="updaterExam" class="com.hjw.wst.action.Examinatioin_centerAction" method="updaterExam">
+            <result name="success">/Examinatioin_center/ExaminatioinEdit.jsp</result>
+        </action>
+        
+        <!--导简单结束回收133-->
+         <action name="examInfo" class="com.hjw.wst.action.ExamInfoAction" method="examInfo">
+            <result name="success">/endRecovery/EndRecovery.jsp</result>
+        </action>
+        
+        <!--报告样本管理150-->
+        <action name="SampleReportDemo" class="com.hjw.wst.action.SampleReportDemoAction" method="SampleReportMenu">
+            <result name="success">/sample/SampleReportDemo.jsp</result>
+        </action> 
+        
+        <!-- 新增报告样本153-->
+         <action name="addSampleReportDelet" class="com.hjw.wst.action.SampleReportDemoAction" method="addSampleReportDelet">
+            <result name="success">/sample/addSampleReportDemo.jsp</result>
+        </action>
+        
+        <!--修改报告样本页面157  -->
+         <action name="updataSampleReportDemoPage" class="com.hjw.wst.action.SampleReportDemoAction" method="updataSampleReportDemoPage">
+            <result name="success">/sample/addSampleReportDemo.jsp</result>
+        </action>
+		<!-- 215 合同主界面页面 -->
+		<action name="contractManager" class="com.hjw.wst.action.BatchAction"
+			method="contractManager">
+			<result name="success">/batchManager/contractManager.jsp</result>
+		</action>
+
+
+		<!-- 272 单独合同显示界面 -->
+		<action name="contractonecheckshow" class="com.hjw.wst.action.BatchAction"
+			method="contractonecheckshow">
+			<result name="success">/batchManager/contractonecheckshow.jsp</result>
+		</action>
+
+      <!-- 登记台预约改期页面  402 -->
+      <action name="editregisterdateshow" class="com.hjw.wst.action.RegisterDeskAction" method="editregisterdateshow">
+            <result name="success">/registerManager/editregisterdateshow.jsp</result>
+       </action>
+
+		<!-- 242 导入临表操作界面 -->
+		<action name="impusershow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="impusershow">
+			<result name="success">/customerManager/impusershow.jsp</result>
+		</action>
+
+		<!-- 245 选择上传文件 -->
+		<action name="impuserfile" class="com.hjw.wst.action.BatchAction"
+			method="impuserfile">
+			<result name="success">/customerManager/impuserfile.jsp</result>
+		</action>
+
+		<!-- 248 姓名定位人员列表 -->
+		<action name="impuserusernamedw" class="com.hjw.wst.action.CustomerInfoAction"
+			method="impuserusernamedw">
+			<result name="success">/customerManager/impuserusernamedw.jsp</result>
+		</action>
+
+		<!-- 214 方案人员管理 -->
+		<action name="batchUserManager" class="com.hjw.wst.action.BatchAction"
+			method="batchUserManager">
+			<result name="success">/customerManager/batchUserManager.jsp</result>
+		</action>
+
+		<!-- 新增体检人员信息 261 -->
+		<action name="addcustomer" class="com.hjw.wst.action.CustomerInfoAction"
+			method="addcustomer">
+			<result name="success">/customerManager/addcustomer.jsp</result>
+            <result name="success_jiuzhenka">/customerManager/addcustomer_jiuzhenka.jsp</result> 
+		</action>
+
+		<!-- 强制分组选择分组信息 263 -->
+		<action name="doUserGrouplistshow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="doUserGrouplistshow">
+			<result name="success">/customerManager/doUserGrouplistshow.jsp</result>
+		</action>
+
+		<!-- 翰思打印导检单 266 暂时不用 -->
+		<action name="djdprintdo" class="com.hjw.wst.action.CustomerInfoAction"
+			method="djdprintdo">
+			<result name="success">/applets/djdprintdo.jsp</result>
+		</action>
+
+
+		<!-- 体检人员预约管理主界面 267 -->
+		<action name="custappointmentshow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="custappointmentshow">
+			<result name="success">/customerManager/custappointmentshow.jsp</result>
+		</action>
+
+		<!-- 设置体检时间 268 -->
+		<action name="setcusttime" class="com.hjw.wst.action.CustomerInfoAction"
+			method="setcusttime">
+			<result name="success">/customerManager/setcusttime.jsp</result>
+		</action>
+		<!-- 导检单图片 269-->
+         <action name="createDJDImage" class="com.hjw.wst.action.CustomerInfoAction" method="createDJDImage">
+            <result name="success">/endRecovery/createDJDImage.jsp</result>
+        </action>
+        <action name="showDJDImage" class="com.hjw.wst.action.ExamInfoAction" method="showDJDImage">
+			<result name="success">/inspectionDepartment/showDJDImage.jsp</result>
+		</action>    
+
+		<!-- 合同审核界面 273 -->
+		<action name="contractcheckedit" class="com.hjw.wst.action.BatchAction"
+			method="contractcheckedit">
+			<result name="success">/batchManager/contractcheckedit.jsp</result>
+		</action>
+		<!-- 人员加项目 276 -->
+		<action name="customeritemaddshow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="customeritemaddshow">
+			<result name="success">/customerManager/customeritemaddshow.jsp</result>
+		</action>
+
+		<!-- 人员单独查询 278 -->
+		<action name="customeroneshow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="customeroneshow">
+			<result name="success">/customerManager/customeroneshow.jsp</result>
+		</action>
+
+		<!-- 执行人员加减项 280 -->
+		<action name="customeritemdelshow" class="com.hjw.wst.action.CustomerInfoAction"
+			method="customeritemdelshow">
+			<result name="success">/customerManager/customeritemdelshow.jsp</result>
+		</action>
+
+		<!-- 排班管理 100 -->
+		<action name="scheduling" class="com.hjw.wst.action.SchedulingAction"
+			method="scheduling">
+			<result name="success">/scheduling/scheduling.jsp</result>
+		</action>
+		<!-- 排班实现 110 -->
+		<action name="schdeulingAchieve" class="com.hjw.wst.action.SchedulingAction"
+			method="schdeulingAchieve">
+			<result name="success">/scheduling/calendar.jsp</result>
+		</action>
+		<!-- 批量排班 111 -->
+		<action name="schedulingBatch" class="com.hjw.wst.action.SchedulingAction"
+			method="schedulingBatch">
+			<result name="success">/scheduling/calendar.jsp</result>
+		</action>
+		<!-- 查看排班637  -->
+		<action name="lookscheduledetails" class="com.hjw.wst.action.SchedulingAction"
+			method="lookscheduledetails">
+			<result name="success">/scheduling/lookcalendar.jsp</result>
+		</action>
+
+		<!-- 数据字典管理 120-->
+       <action name="datadictionary" class="com.hjw.wst.action.DataDictionaryAction" method="datadictionary">
+            <result name="success">/datadictionarys/DataDictionary.jsp</result>
+        </action>
+		<!--添加数据123 -->
+		<action name="addDaDt" class="com.hjw.wst.action.DataDictionaryAction" method="addDaDt">
+			<result name="success">/datadictionarys/DataDictionaryEdit.jsp</result>
+		</action>
+		<!--修改数据124 -->
+		<action name="updaterDaDt" class="com.hjw.wst.action.DataDictionaryAction" method="updaterDaDt">
+			<result name="success">/datadictionarys/DataDictionaryEdit.jsp</result>
+		</action>
+		
+		
+		
+		<!-- 人员类型管理 127-->
+       <action name="customer_type" class="com.hjw.wst.action.Customer_TypeAction" method="customer_type">
+            <result name="success">/customer_type/Customer_Type.jsp</result>
+        </action>
+        <!--  增加人员类型 129-->
+       <action name="addCustomer" class="com.hjw.wst.action.Customer_TypeAction" method="addCustomer">
+            <result name="success">/customer_type/Customer_TypeEdit.jsp</result>
+        </action>
+	   <!--  修改人员类型 131-->
+       <action name="updaterCustomer" class="com.hjw.wst.action.Customer_TypeAction" method="updaterCustomer">
+            <result name="success">/customer_type/Customer_TypeEdit.jsp</result>
+        </action>
+        
+        
+		<!--报告样本管理150 -->
+		<action name="SampleReportDemo" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="SampleReportMenu">
+			<result name="success">/sample/SampleReportDemo.jsp</result>
+		</action>
+
+		<!-- 新增报告样本153 -->
+		<action name="addSampleReportDelet" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="addSampleReportDelet">
+			<result name="success">/sample/addSampleReportDemo.jsp</result>
+		</action>
+
+		<!--修改报告样本页面157 -->
+		<action name="updataSampleReportDemoPage" class="com.hjw.wst.action.SampleReportDemoAction"
+			method="updataSampleReportDemoPage">
+			<result name="success">/sample/addSampleReportDemo.jsp</result>
+		</action>
+
+		<!--登记台 2 -->
+		<action name="registerDesk" class="com.hjw.wst.action.RegisterDeskAction" method="registerDesk">
+			<result name="success">/registerManager/registerDesk.jsp</result>
+			<result name="success_dbgj">/registerManager/registerDesk_dbgj.jsp</result>
+			<result name="zyb_style1">/zyb/registerDesk/zybregisterDesk.jsp</result>
+			<result name="zyb_style2">/registerManager/registerDesk_zyb.jsp</result>
+		</action>
+
+		<!-- 体检个人登记 3 -->
+		<action name="getDjtRegisterGList" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getDjtRegisterGList">
+			<result name="success">/registerManager/getDjtRegisterGList.jsp</result>
+		</action>
+		<action name="getIpadRegisterGEdit" class="com.hjw.ipad.action.RegisterIpadAction"
+			method="getIpadRegisterGEdit">
+			<result name="success">/padLogin/ipad/getDjtRegisterGList.jsp</result>
+		</action>
+
+		<!-- 体检团体登记 4 -->
+		<action name="getDjtRegisterTList" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getDjtRegisterTList">
+			<result name="success">/registerManager/getDjtRegisterTList.jsp</result>
+		</action>
+		<action name="getIpadRegisterTList" class="com.hjw.ipad.action.RegisterIpadAction"
+			method="getIpadRegisterTList">
+			<result name="success">/padLogin/ipad/group.jsp</result>
+		</action>
+		
+		<!-- 体检个人登记813 -->
+		<action name="regetDjtRegisterGEdit" class="com.hjw.wst.action.RegisterDeskAction"
+			method="regetDjtRegisterGEdit">
+			<result name="success">/registerManager/regetDjtRegisterGEdit.jsp</result>
+		</action>
+
+		<!-- 体检团体登记 814 -->
+		<action name="regetDjtRegisterTEdit" class="com.hjw.wst.action.RegisterDeskAction"
+			method="regetDjtRegisterTEdit">			
+			<result name="success">/registerManager/regetDjtRegisterTEdit.jsp</result>
+		</action>
+
+
+		<!-- 体检个人维护 287 -->
+		<action name="getDjtRegisterGEdit" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getDjtRegisterGEdit">
+			<result name="success_dbgj">/registerManager/getDjtRegisterGEdit_dbgj.jsp</result>
+			<result name="success_comm">/registerManager/getDjtRegisterGEdit_comm.jsp</result>
+			<result name="success_zjty">/registerManager/getDjtRegisterGEdit_zjty.jsp</result>
+			<result name="success_jiuzhenka">/registerManager/getDjtRegisterGEdit_jiuzhenka.jsp</result>
+		</action>
+
+		<!-- 体检团体维护 288 -->
+		<action name="getDjtRegisterTEdit" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getDjtRegisterTEdit">
+			<result name="success_dbgj">/registerManager/getDjtRegisterTEdit_dbgj.jsp</result>
+			<result name="success_comm">/registerManager/getDjtRegisterTEdit_comm.jsp</result>
+			<result name="success_zjty">/registerManager/getDjtRegisterTEdit_zjty.jsp</result>
+			<result name="success_jiuzhenka">/registerManager/getDjtRegisterTEdit_jiuzhenka.jsp</result>
+			<result name="success_117">/registerManager/getDjtRegisterTEdit_117.jsp</result>
+			<result name="success_shebaoka">/registerManager/getDjtRegisterTEdit_shebaoka.jsp</result>
+		</action>
+
+		<!-- 人员条件定位 289 -->
+		<action name="findcustOneDingwei" class="com.hjw.wst.action.RegisterDeskAction"
+			method="findcustOneDingwei">
+			<result name="success">/registerManager/findcustOneDingwei.jsp</result>
+		</action>
+
+		<!-- 登记台个人加项页面 295 -->
+		<action name="djtcustomeritemaddshow" class="com.hjw.wst.action.RegisterDeskAction"
+			method="djtcustomeritemaddshow">
+			<result name="success">/registerManager/djtcustomeritemaddshow.jsp</result>
+			<result name="success1">/registerManager/djtcustomeritemaddshow1.jsp</result>
+			<result name="success2">/registerManager/djtcustomeritemaddshow2.jsp</result>
+			<result name="success3">/registerManager/djtcustomeritemaddshow3.jsp</result>
+		</action>
+
+		
+		<!-- 登记台设置折扣  2106-->
+		<action name="djtdiscountadd" class="com.hjw.wst.action.RegisterDeskAction"
+			method="djtdiscountadd">
+			<result name="success">/registerManager/djtdiscountaddshow.jsp</result>
+		</action>
+		
+		<!-- 团体登记台设置折扣  2110-->
+		<action name="djtTdiscountadd" class="com.hjw.wst.action.RegisterDeskAction"
+			method="djtTdiscountadd">
+			<result name="success">/registerManager/djtTdiscountaddshow.jsp</result>
+		</action>
+		
+		<!-- 登记台加卡套餐项目 -->
+		<action name="djtaddcardtaocan"  class="com.hjw.wst.action.RegisterDeskAction"
+			method="djtaddcardtaocan">
+			<result name="success">/registerManager/cardtaocan.jsp</result>
+		</action>
+
+
+		<!-- 登记台个人加项页面 295 -->
+		<action name="ipadcustomeritemaddshow"  class="com.hjw.ipad.action.RegisterIpadDeskAction"
+			method="ipadcustomeritemaddshow">
+			<result name="success">/padLogin/ipad/ipadcustomeritemaddshow.jsp</result>
+		</action>
+
+		<!--检验样本页面160 -->
+		<action name="SampleDemo" class="com.hjw.wst.action.SampleDemoAction"
+			method="SampleDemo">
+			<result name="success">/SampleDemo/SampleDemo.jsp</result>
+		</action>
+
+		<!--新增检验样本页面163 -->
+		<action name="addSampleDemo" class="com.hjw.wst.action.SampleDemoAction"
+			method="addSampleDemo">
+			<result name="success">/SampleDemo/addSampleDemo.jsp</result>
+		</action>
+
+		<!--修改检验样本页面166 -->
+		<action name="updateSampleDemo" class="com.hjw.wst.action.SampleDemoAction"
+			method="updateSampleDemo">
+			<result name="success">/SampleDemo/addSampleDemo.jsp</result>
+		</action>
+		<!-- 增加项目类别 1580-->
+		<action name="addDemoTypePage" class="com.hjw.wst.action.SampleDemoAction" method="addDemoTypePage" >
+			<result name="success">/SampleDemo/addDemoTypePage.jsp</result>
+		</action>
+
+		<!--检查项目管理167 -->
+		<action name="examinationItem" class="com.hjw.wst.action.ExaminationItemAction"
+			method="examinationItem">
+			<result name="success">/ExaminationItem/ExaminationItem.jsp</result>
+		</action>
+
+		<!--检查项目列表168 -->
+		<action name="queryExaminationItem" class="com.hjw.wst.action.ExaminationItemAction"
+			method="queryExaminationItem">
+			<result name="success">/ExaminationItem/ExaminationItem.jsp</result>
+		</action>
+
+		<!--新增检查项目170 -->
+		<action name="addExaminationItemPage" class="com.hjw.wst.action.ExaminationItemAction"
+			method="addExaminationItemPage">
+			<result name="success">/ExaminationItem/addExaminationItem.jsp</result>
+		</action>
+		
+		<!--检查项目修改页面175 -->
+		<action name="updateExaminationItemPage" class="com.hjw.wst.action.ExaminationItemAction"
+			method="updateExaminationItemPage">
+			<result name="success">/ExaminationItem/addExaminationItem.jsp</result>
+		</action>
+		
+		<!-- 科室收费项目细项查看 1544 -->
+		<action name="viewExaminationItem" class="com.hjw.wst.action.ExaminationItemAction" method="updateExaminationItemPage">
+			<result name="success">/diseaseLogic/dep_item_view.jsp</result>
+		</action>
+		
+		<!--收费项目管理页面178 -->
+		<action name="queryChargingItemPage" class="com.hjw.wst.action.ChargingItemAction"
+			method="queryChargingItemPage">
+			<result name="success">/ChargingItem/ChargingItem.jsp</result>
+		</action>
+		
+		
+		<!--修改收费项目管理页面188 -->
+		<action name="updateChargingItemPage" class="com.hjw.wst.action.ChargingItemAction"
+			method="updateChargingItemPage">
+			<result name="success">/ChargingItem/addChargingItem.jsp</result>
+		</action>
+		
+		<!--添加收费界面  -->
+		<action name="addChargingItePage" class="com.hjw.wst.action.ChargingItemAction"
+			method="addChargingItePage">
+			<result name="success">/ChargingItem/addChargingItem.jsp</result>
+		</action>
+		
+		<!--项目排期日历插件页面947 -->
+		<action name="getItemschdeulChajian" class="com.hjw.wst.action.ChargingItemAction"
+			method="getItemschdeulChajian">
+			<result name="success">/chargingItemSchedule/calendar.jsp</result>
+		</action>
+
+ 		<!-- 登记台打印个人条码 405 -->
+       <!-- 登记台打印个人条码 405 -->
+		<action name="djtGprintbarshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtGprintbarshow" >
+			<result name="success">/registerManager/djtGprintbarshow.jsp</result>
+		</action>
+		
+		 <!-- 登记台历史对比 413 -->
+		<action name="getDjtRegisterHistrjn" class="com.hjw.wst.action.RegisterDeskAction" method="getDjtRegisterHistrjn" >
+			<result name="success">/registerManager/getDjtRegisterHistrjn.jsp</result>
+		</action>
+
+        <!-- 登记台个人加项 415 -->
+		<action name="djtTTcustomeritemaddshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtTTcustomeritemaddshow" >
+			<result name="success">/registerManager/djtTTcustomeritemaddshow.jsp</result>
+			<result name="success1">/registerManager/djtTTcustomeritemaddshow1.jsp</result>
+			<result name="success2">/registerManager/djtTTcustomeritemaddshow2.jsp</result>
+			<result name="success3">/registerManager/djtTTcustomeritemaddshow3.jsp</result>
+		</action>		
+		        <!-- ipad登记台个人加项 415 -->
+		<action name="ipadTTcustomeritemaddshow" class="com.hjw.ipad.action.RegisterIpadDeskAction"   method="ipadTTcustomeritemaddshow" >
+			<result name="success">/padLogin/ipad/ipadTTcustomeritemaddshow.jsp</result>
+<!-- 			<result name="success">/registerManager/djtTTcustomeritemaddshow.jsp</result> -->
+<!-- 			<result name="success1">/registerManager/djtTTcustomeritemaddshow1.jsp</result> -->
+<!-- 			<result name="success2">/registerManager/djtTTcustomeritemaddshow2.jsp</result> -->
+<!-- 			<result name="success3">/registerManager/djtTTcustomeritemaddshow3.jsp</result> -->
+		</action>	
+		
+		<!-- 登记台团体个人加项 417 -->
+		<action name="djtTGcustomeritemaddshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtTGcustomeritemaddshow" >
+			<result name="success">/registerManager/djtTGcustomeritemaddshow.jsp</result>
+			<result name="success1">/registerManager/djtTGcustomeritemaddshow1.jsp</result>
+			<result name="success2">/registerManager/djtcustomeritemaddshow2.jsp</result>
+			<result name="success3">/registerManager/djtTGcustomeritemaddshow3.jsp</result>
+		</action>	
+		<!-- ipad登记台团体个人加项 417 -->
+		<action name="ipadTGcustomeritemaddshow" class="com.hjw.ipad.action.RegisterIpadDeskAction"   method="ipadTGcustomeritemaddshow" >
+			<result name="success">/padLogin/ipad/ipadTGcustomeritemaddshow.jsp</result>
+<!-- 			<result name="success">/registerManager/djtTGcustomeritemaddshow.jsp</result> -->
+<!-- 			<result name="success1">/registerManager/djtTGcustomeritemaddshow1.jsp</result> -->
+<!-- 			<result name="success2">/registerManager/djtcustomeritemaddshow2.jsp</result> -->
+<!-- 			<result name="success3">/registerManager/djtTGcustomeritemaddshow3.jsp</result> -->
+		</action>		
+		
+		<!-- 登记台团体换项 419 -->
+		<action name="djtTTcustomeritemchargeshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtTTcustomeritemchargeshow" >
+			<result name="success">/registerManager/djtTTcustomeritemchargeshow.jsp</result>
+		</action>
+		
+		<!--体检套餐管理页面190  -->
+		<action name="examSetPage" class="com.hjw.wst.action.ExamSetAction" method="examSetPage">
+			<result name="success">/examSet/examSet.jsp</result>
+		</action>
+		
+		<!--体检套餐添加页面193  -->
+		<action name="addExamSet" class="com.hjw.wst.action.ExamSetAction" method="addExamSet">
+			<result name="success">/examSet/addEaxmSet.jsp</result>
+		</action>
+		
+		<!--修改体检套餐页面195  -->
+		<action name="updateExamSetPage" class="com.hjw.wst.action.ExamSetAction" method="updateExamSetPage">
+			<result name="success">/examSet/addEaxmSet.jsp</result>
+		</action>
+		
+		<!--导引单延期页面502  -->
+		<action name="getyanqi" class="com.hjw.wst.action.ExamInfoAction" method="getyanqi">
+			<result name="success">/endRecovery/datedailog.jsp</result>
+		</action>
+		
+		
+	    
+	    <!--单独人员设置预约日期  427  -->
+		<action name="getdjtregisterdataShow" class="com.hjw.wst.action.RegisterDeskAction" method="getdjtregisterdataShow">
+			<result name="success">/registerManager/getdjtregisterdataShow.jsp</result>
+		</action>
+		
+		 <!--疾病知识库管理界面134  -->
+		<action name="diseaseKnowloedgeShow" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="diseaseKnowloedgeShow">
+			<result name="success">/DiseaseKnowloedgeManage/DiseaseKnowloedge.jsp</result>
+		</action>
+		<!--疾病知识库界面 149-->
+		<action name="diseaseKnowloedge" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="diseaseKnowloedge">
+			<result name="success">/DiseaseKnowloedgeManage/DiseaseKnowloedge_look.jsp</result>
+		</action>
+		
+		<!-- 添加修改人员页面503 -->
+		<action name="examInfoPage" class="com.hjw.wst.action.ExamInfoAction" method="examInfoPage">
+			<result name="success">/examInfo/examInfo.jsp</result>
+		</action>
+	
+	     <!--疾病知识库添加136  -->
+		<action name="addDKLdge" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="addDKLdge">
+			<result name="success">/DiseaseKnowloedgeManage/disdepwh.jsp</result>
+		</action>
+		<!--疾病知识库修改137  -->
+		<action name="updateDKLdge" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="updateDKLdge">
+			<result name="success">/DiseaseKnowloedgeManage/disdepwh.jsp</result>
+		</action>
+		 <!--专家意见查询 140-->
+        <action name="lookDKLdgelibshow" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="lookDKLdgelibshow">
+        	<result name="success">/DiseaseKnowloedgeManage/lookDiseaseKnowloedge.jsp</result>
+        </action>
+         <!--建议表新增 142-->
+        <action name="addSuggestion" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="addSuggestion">
+        	<result name="success">/DiseaseKnowloedgeManage/addSuggestion.jsp</result>
+        </action>
+         <!--建议表更新 143-->
+        <action name="updateSuggestion" class="com.hjw.wst.action.DiseaseKnowloedgeAction" method="updateSuggestion">
+        	<result name="success">/DiseaseKnowloedgeManage/addSuggestion.jsp</result>
+        </action>
+     	
+		<!--项目结果知识库页面506  -->
+		<action name="itemResultLib" class="com.hjw.wst.action.ItemResultLibAction" method="itemResultLib">
+			<result name="success">/itemResultLib/itemResultLib.jsp</result>
+		</action>
+		
+		<!--科室检查首页600  -->
+		<action name="departInspec" class="com.hjw.wst.action.DepInspectAction" method="departInspec">
+			<result name="success">/departInspect/inderDep.jsp</result>
+		</action>
+		<!--科室检查首页-电测听科室600  -->
+		<action name="departInspec_BSR" class="com.hjw.wst.action.DepInspectAction" method="departInspec">
+			<result name="success">/departInspect/inderDep_BSR.jsp</result>
+		</action>
+		<!--科室检查登记页面602  -->
+		<action name="inspectshow" class="com.hjw.wst.action.DepInspectAction" method="inspectshow">
+			<result name="success">/departInspect/departInspect.jsp</result>
+			<result name="success_all">/departInspect/departInspect_all.jsp</result>
+		</action>
+		<!--科室检查登记页面-电测听科室602  -->
+		<action name="inspectshow_BSR" class="com.hjw.wst.action.DepInspectAction" method="inspectshow_BSR">
+			<result name="success">/departInspect/departInspect_BSR.jsp</result>
+		</action>
+        	
+		<!--项目结果知识添加页面509  -->
+		<action name="addItemResultLib" class="com.hjw.wst.action.ItemResultLibAction" method="addItemResultLib">
+			<result name="success">/itemResultLib/additemResultLib.jsp</result>
+		</action>
+		
+		<!--项目结果知识库修改页面511  -->
+		<action name="updateItemResultLibPage" class="com.hjw.wst.action.ItemResultLibAction" method="updateItemResultLibPage">
+			<result name="success">/itemResultLib/additemResultLib.jsp</result>
+		</action>
+		
+		
+		<!--身份证查询多条体检信息报到 425  -->
+		<action name="djtexambaodaoshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtexambaodaoshow">
+			<result name="success">/registerManager/djtexambaodaoshow.jsp</result>
+		</action>
+		
+		<!--专家建议 514 -->
+		<action name="queryExpertSuggestionLib" class="com.hjw.wst.action.ExpertSuggestionLibAction" method="queryExpertSuggestionLib">
+			<result name="success">/expertSuggestionLib/expertSuggestionLib.jsp</result>
+		</action>
+		
+		<!--专家建议新增页面 517 -->
+		<action name="addExpertSuggestionLibPage" class="com.hjw.wst.action.ExpertSuggestionLibAction" method="addExpertSuggestionLibPage">
+			<result name="success">/expertSuggestionLib/addexpertSuggestionLib.jsp</result>
+		</action>
+		
+		<!--专家建议修改页面 519 -->
+		<action name="updateExpertSuggestionLibPage" class="com.hjw.wst.action.ExpertSuggestionLibAction" method="updateExpertSuggestionLibPage">
+			<result name="success">/expertSuggestionLib/addexpertSuggestionLib.jsp</result>
+		</action>
+		
+		<!--HIS价表弹窗页面520 -->
+		<action name="getHisClinicItemVPricelistPage" class="com.hjw.wst.action.ChargingItemAction" method="getHisClinicItemVPricelistPage">
+			<result name="success_comm">/ChargingItem/HisClinicItemVPricelist.jsp</result>
+			<result name="success_unrelated">/ChargingItem/HisClinicItemVPricelist_Unrelated.jsp</result>
+		</action>
+		
+		
+		<!-- 导检单核收流程 5 -->
+		<!-- 导检单个人查询统计 7 -->
+		<action name="examflowManager" class="com.hjw.wst.action.ExamflowManagerAction" method="examflowManager">
+			<result name="success">/examflow/examflowManager.jsp</result>
+		</action>
+
+		<!-- 分发导检单 5 -->
+		<action name="djdexamflowin" class="com.hjw.wst.action.ExamflowManagerAction" method="djdexamflowin">
+			<result name="success">/examflow/djdexamflowin.jsp</result>
+		</action>
+		
+		<!-- 接收导检单 6 -->
+		<action name="djdexamflowout" class="com.hjw.wst.action.ExamflowManagerAction" method="djdexamflowout">
+			<result name="success">/examflow/djdexamflowout.jsp</result>
+		</action>
+		
+		<!-- 导检单查询 434 -->
+		<action name="djdexamflowshow" class="com.hjw.wst.action.ExamflowManagerAction" method="djdexamflowshow">
+			<result name="success">/examflow/djdexamflowshow.jsp</result>
+		</action>
+		
+		<!-- 导检单个人统计 435 -->
+		<action name="djdexamflowtotalshow" class="com.hjw.wst.action.ExamflowManagerAction" method="djdexamflowtotalshow">
+			<result name="success">/examflow/djdexamflowtotalshow.jsp</result>
+		</action>
+
+		<!-- 导检单多人查询统计 8 -->
+		<action name="examflowManagerall" class="com.hjw.wst.action.ExamflowManagerAction" method="examflowManagerall">
+			<result name="success">/examflow/examflowManagerall.jsp</result>
+		</action>
+		
+		<!-- 导检单多人查询 442 -->
+		<action name="djdexamflowshowall" class="com.hjw.wst.action.ExamflowManagerAction" method="djdexamflowshowall">
+			<result name="success">/examflow/djdexamflowshowall.jsp</result>
+		</action>
+		
+		<!-- 导检单多人统计 443 -->
+		<action name="djdexamflowtotalshowall" class="com.hjw.wst.action.ExamflowManagerAction" method="djdexamflowtotalshowall">
+			<result name="success">/examflow/djdexamflowtotalshowall.jsp</result>
+		</action>
+		
+		<!-- 流程-导检单核收  -->
+		<action name="flowEndRecovery" class="com.hjw.wst.action.ExamflowManagerAction"
+			method="flowEndRecovery">
+			<result name="success">/examflow/flowEndRecovery.jsp</result>
+		</action>
+		<!-- 整单室-接收导检单 -->
+		<action name="flow_s_show" class="com.hjw.wst.action.ExamflowManagerAction"
+			method="flow_s_show">
+			<result name="success">/examflow/flow_s_show.jsp</result>
+			<result name="success1">/examflow/flow_s_show1.jsp</result>
+		</action>
+		
+		
+		<!-- 流程-总检主页面 1230 -->
+		<action name="flow_z_show" class="com.hjw.wst.action.ExamflowManagerAction" method="flow_z_show">
+			<result name="success">/examflow/flow_z_show.jsp</result>
+			<result name="success_dbgj">/examflow/flow_z_show_dbgj.jsp</result>
+		</action>
+		
+		<!-- 流程-打印室核收导检单主页面 1218 -->
+		<action name="flow_p_show" class="com.hjw.wst.action.ExamflowManagerAction" method="flow_p_show">
+			<result name="success">/examflow/flow_p_show.jsp</result>
+		</action>
+		
+		<!-- 批量发送审核页面 1326 -->
+		<action name="batch_sendchk" class="com.hjw.wst.action.ExamflowManagerAction" method="batch_sendchk">
+			<result name="success">/examflow/batch_sendchk.jsp</result>
+		</action>
+		
+		<!-- 流程-发送室核收导检单主页面 1224 -->
+		<action name="flow_e_show" class="com.hjw.wst.action.ExamflowManagerAction"
+			method="flow_e_show">
+			<result name="success">/examflow/flow_e_show.jsp</result>
+		</action>
+		
+		<!-- 短信模板管理页面1400 -->
+		<action name="getCrmSmsBaseTemplatePage" class="com.hjw.wst.action.CrmSmsBaseTemplateAction"
+			method="getCrmSmsBaseTemplatePage">
+			<result name="success">/CrmSmsBaseTemplate/CrmSmsBaseTemplate.jsp
+			</result>
+		</action>
+		
+		<!-- 短信模板修改页面1404 -->
+		<action name="updateCrmSmsBaseTemplatePage" class="com.hjw.wst.action.CrmSmsBaseTemplateAction"
+			method="updateCrmSmsBaseTemplatePage">
+			<result name="success">/CrmSmsBaseTemplate/addCrmSmsBaseTemplate.jsp
+			</result>
+		</action>
+		<!-- 短信模板新增页面1405 -->
+		<action name="addCrmSmsBaseTemplatePage" class="com.hjw.wst.action.CrmSmsBaseTemplateAction"
+			method="addCrmSmsBaseTemplatePage">
+			<result name="success">/CrmSmsBaseTemplate/addCrmSmsBaseTemplate.jsp  
+			</result>
+		</action>
+		<!-- 发送短信管理1406 -->
+		<action name="getCrmSmsSendPage" class="com.hjw.wst.action.CrmSmsBaseTemplateAction"
+			method="getCrmSmsSendPage">
+			<result name="success">/CrmSmsBaseTemplate/CrmSmsSend.jsp</result>
+		</action>
+		<!-- 发送短信1408 -->
+		<action name="addCrmSmsSend" class="com.hjw.wst.action.CrmSmsBaseTemplateAction"
+			method="addCrmSmsSend">
+			<result name="success">/CrmSmsBaseTemplate/addCrmSmsSend.jsp</result>
+		</action>		
+		
+		<!-- 站内通知编辑页面 -->
+		<action name="getZDSmessageShow" class="com.hjw.wst.action.ExamflowManagerAction" method="getZDSmessageShow">
+			<result name="success">/examflow/zmessageShow.jsp</result>
+		</action>
+		<!-- 批量转移页面 1322 -->
+		<action name="batch_transfer" class="com.hjw.wst.action.ExamflowManagerAction"
+			method="batch_transfer">
+			<result name="success">/examflow/batch_transfer.jsp</result>
+		</action>
+		
+		<!-- 流程备注查询页面 1441 -->
+		<action name="remakPage" class="com.hjw.wst.action.FlowRemakAction"
+			method="remakPage">
+			<result name="success">/examflow/flowRemake.jsp</result>
+		</action>
+		
+		<!-- 检查科室常用词页面 529 -->
+		<action name="getItemResultLibPage" class="com.hjw.wst.action.DepInspectAction" method="getItemResultLibPage">
+			<result name="success">/departInspect/resultVocabulary.jsp</result>
+		</action>
+		
+		<!-- 检查科室位置危机 534 -->
+		<action name="getriskPage" class="com.hjw.wst.action.DepInspectAction" method="getriskPage">
+			<result name="success">/departInspect/risk.jsp</result>
+		</action>
+		
+		
+		<!-- 报表管理 9 -->
+		<action name="cptmanager" class="com.hjw.wst.action.CptmanagerAction" method="cptmanager">
+			<result name="success">/cptmanager/cptmanager.jsp</result>
+		</action>
+		
+		
+		<!-- 新增报表模板 447 -->
+		<action name="reportmanageradd" class="com.hjw.wst.action.CptmanagerAction" method="reportmanageradd">
+			<result name="success">/cptmanager/reportmanageradd.jsp</result>
+		</action>
+		
+		<!-- 修改报表模板 450 -->
+		<action name="reportmanageredit" class="com.hjw.wst.action.CptmanagerAction" method="reportmanageredit">
+			<result name="success">/cptmanager/reportmanageredit.jsp</result>
+		</action>
+		<!-- 档案管理607 -->
+		<action name="customerManage" class="com.hjw.wst.action.CustomInfoManageAction" method="customerManage">
+			<result name="success">/archivesManage/ArchivesManage.jsp</result>
+		</action>
+		<!-- 档案管理_新增609 -->
+		<action name="customadd" class="com.hjw.wst.action.CustomInfoManageAction" method="customadd">
+			<result name="success">/archivesManage/ArchivesEdit.jsp</result>
+		</action>
+		<!-- 档案管理_修改610 -->
+		<action name="upCustom" class="com.hjw.wst.action.CustomInfoManageAction" method="upCustom">
+			<result name="success">/archivesManage/ArchivesEdit.jsp</result>
+		</action>
+		<!-- 人员绑定页面 -->
+		<action name="bindPerson" class="com.hjw.wst.action.CustomInfoManageAction" method="bindPerson">
+			<result name="success">/archivesManage/bindPerson.jsp</result>
+		</action>
+		<!-- 早餐科室页面613 -->
+		<action name="breakfast" class="com.hjw.wst.action.BreakfastAction" method="breakfast">
+			<result name="success">/breakfast/BreakfastDep.jsp</result>
+		</action>
+		<!--危急值页面616 -->
+		<action name="critical" class="com.hjw.wst.action.CriticalAction" method="critical">
+			<result name="success">/critical/Critical.jsp</result>
+		</action>
+		<!--危急值编辑618 -->
+		<action name="updateCri" class="com.hjw.wst.action.CriticalAction" method="updateCri">
+			<result name="success">/critical/CriticalNote.jsp</result>
+			<result name="batch">/critical/CriticalNoteBatch.jsp</result>
+		</action>
+		
+		
+		<!--DBGJ危急值添加首页 2000 -->
+		<action name="getCriticalDBGJPage" class="com.hjw.wst.action.CriticalAction" method="getCriticalDBGJPage">
+			<result name="success">/critical/critical_dbgj.jsp</result>
+		</action>
+		
+		<!--DBGJ危急值添加首页 2005 -->
+		<action name="getCriticalHandlePage" class="com.hjw.wst.action.CriticalAction" method="getCriticalHandlePage">
+			<result name="success">/critical/CriticalHandle.jsp</result>
+		</action>
+		
+		<!-- 疾病逻辑管理页面536 -->
+		<action name="getDiseaseLogicPage" class="com.hjw.wst.action.DiseaseLogicAction" method="getDiseaseLogicPage">
+			<result name="success">/diseaseLogic/disease_logic.jsp</result>
+		</action>
+		
+		<!-- 疾病逻辑新增页面539 -->
+		<action name="addDiseaseLogicPage" class="com.hjw.wst.action.DiseaseLogicAction" method="addDiseaseLogicPage">
+			<result name="success">/diseaseLogic/adddisease_logic.jsp</result>
+		</action>
+		
+		<!--站内通知页面623 -->
+		<action name="systeminformshow" class="com.hjw.wst.action.SystemInformsAction" method="systeminformshow">
+			<result name="success">/system_informs/SystemInforms.jsp</result>
+		</action>
+		<!--站内通知添加624 -->
+		<action name="addSysInfo" class="com.hjw.wst.action.SystemInformsAction" method="addSysInfo">
+			<result name="success">/system_informs/SystemInformsEdit.jsp</result>
+		</action>
+		<!--站内通知修改628 -->
+		<action name="updateSysInform" class="com.hjw.wst.action.SystemInformsAction" method="updateSysInform">
+			<result name="success">/system_informs/SystemInformsEdit.jsp</result>
+		</action>
+		<!--站内通知授权页629 -->
+		<action name="empowerInforms" class="com.hjw.wst.action.SystemInformsAction" method="empowerInforms">
+			<result name="success">/system_informs/EmpowerInforms.jsp</result>
+		</action>
+		<!--新增备忘录634 -->
+		<action name="newNotes" class="com.hjw.wst.action.SchedulingAction" method="newNotes">
+			<result name="success">/newNotedata.jsp</result>
+		</action>
+		<!--备忘录编辑636 -->
+		<action name="updaterNotes" class="com.hjw.wst.action.SchedulingAction" method="updaterNotes">
+			<result name="success">/newNotedata.jsp</result>
+		</action>
+		<!-- 疾病逻辑修改页面539 -->
+		<action name="updateDiseaseLogicPage" class="com.hjw.wst.action.DiseaseLogicAction" method="updateDiseaseLogicPage">
+			<result name="success">/diseaseLogic/adddisease_logic.jsp</result>
+		</action>
+		
+		<!-- 团体结算主页面 10 -->
+		<action name="statementsMain" class="com.hjw.wst.action.StatementsAction" method="statementsMain">
+			<result name="success">/statements/statementsMain.jsp</result>
+		</action>
+		
+		<!-- 团体结算主页面 11 -->
+		<action name="statementswayMain" class="com.hjw.wst.action.StatementsAction" method="statementswayMain">
+			<result name="success">/statements/statementswayMain.jsp</result>
+			<result name="hissuccess">/statements/statementswayMain_his.jsp</result>
+		</action> 
+		
+		<!-- 团体结算主页面 457 -->
+		<action name="termaccountListshow" class="com.hjw.wst.action.StatementsAction" method="termaccountListshow">
+			<result name="success">/statements/termaccountListshow.jsp</result>
+		</action>
+		
+		<!-- 显示人员查询列表页面 459 -->
+		<action name="termaccountusershow" class="com.hjw.wst.action.StatementsAction" method="termaccountusershow">
+			<result name="success">/statements/termaccountusershow.jsp</result>
+			
+		</action>
+		
+		<!-- 团体结算获取体检人收费项目信息页面 460  -->
+	  <action name="termexamchargingitem" class="com.hjw.wst.action.StatementsAction" method="termexamchargingitem" >
+			<result name="success">/statements/termexamchargingitem.jsp</result>
+		</action>
+		
+		<!-- 科室逻辑管理页面546 -->
+		<action name="getDepLogicPage" class="com.hjw.wst.action.DepLogicAction" method="getDepLogicPage">
+			<result name="success">/depLogic/depLogic.jsp</result>
+		</action>
+		
+		<!-- 科室逻辑修改页面 549 -->
+		<action name="updateDepLogicPage" class="com.hjw.wst.action.DepLogicAction" method="updateDepLogicPage">
+			<result name="success">/depLogic/addDepLogic.jsp</result>
+		</action>
+		
+		<!-- 科室逻辑新增页面 550 -->
+		<action name="addDepLogicPage" class="com.hjw.wst.action.DepLogicAction" method="addDepLogicPage">
+			<result name="success">/depLogic/addDepLogic.jsp</result>
+		</action>
+		
+	     <!--资源管理页面555 -->
+		<action name="getwebResourceZYGL" class="com.hjw.wst.action.webResourceAction" method="getwebResourceZYGL">
+			<result name="success">/manager/web_resource.jsp</result>
+		</action>
+		
+	     <!--新增资源页面559 -->
+		<action name="addWebResourcePage" class="com.hjw.wst.action.webResourceAction" method="addWebResourcePage">
+			<result name="success">/manager/add_web_resource.jsp</result>
+		</action>
+		
+	     <!--修改资源页面560 -->
+		<action name="updateWebResourcePage" class="com.hjw.wst.action.webResourceAction" method="updateWebResourcePage">
+			<result name="success">/manager/add_web_resource.jsp</result>
+		</action>
+		
+		<!-- 团体结算人员结算细项明细页面 472 -->
+		<action name="termexamitemlistshow" class="com.hjw.wst.action.StatementsAction" method="termexamitemlistshow">
+			<result name="success">/statements/termexamitemlistshow.jsp</result>
+		</action>
+
+		<!-- 团体结算减免操作页面 475 -->
+		<action name="termdecchargesshow" class="com.hjw.wst.action.StatementsAction" method="termdecchargesshow">
+			<result name="success">/statements/termdecchargesshow.jsp</result>
+		</action>		
+		
+		<!-- 结算单查询 481 -->
+		<action name="termaccountListshowshow" class="com.hjw.wst.action.StatementsAction" method="termaccountListshowshow">
+			<result name="success">/statements/termaccountListshowshow.jsp</result>
+		</action>
+
+		<!-- 结算单发票维护 482 -->
+		<action name="termaccountListwayshow" class="com.hjw.wst.action.StatementsAction" method="termaccountListwayshow">
+			<result name="success">/statements/termaccountListwayshow.jsp</result>
+		</action>
+		
+		<!-- 团体结算支付方式增加 484 -->
+		<action name="teamaccountwayadd" class="com.hjw.wst.action.StatementsAction" method="teamaccountwayadd">
+			<result name="success">/statements/teamaccountwayadd.jsp</result>
+		</action>		
+		
+		<!-- 团体结算的查询 488 -->
+		<action name="termaccountoneshow" class="com.hjw.wst.action.StatementsAction" method="termaccountoneshow">
+			<result name="success">/statements/termaccountoneshow.jsp</result>
+		</action>
+		
+		<!-- 未检查人员查询页面 489 -->
+		<action name="teamnoexamshow" class="com.hjw.wst.action.StatementsAction" method="teamnoexamshow">
+			<result name="success">/statements/teamnoexamshow.jsp</result>
+		</action>
+
+		<!-- 报表统计主页面 13-->
+		<action name="reportServermain" class="com.hjw.wst.action.ReportAction" method="reportServermain">
+			<result name="success">/manager/reportServermain.jsp</result>
+		</action>
+		<!-- 报表统计二级菜单 499-->
+		<action name="reportonemain" class="com.hjw.wst.action.ReportAction" method="reportonemain">
+			<result name="success">/manager/reportServermain.jsp</result>
+		</action>
+		
+		<!--问卷管理页面565 -->
+		<action name="getSysSurveyPage" class="com.hjw.wst.action.SysSurveyAction" method="getSysSurveyPage">
+			<result name="success">/SysSurvey/SysSurvey.jsp</result>
+		</action>
+		
+		<!--问卷新增页面567 -->
+		<action name="addSysSurveyPage" class="com.hjw.wst.action.SysSurveyAction" method="addSysSurveyPage">
+			<result name="success">/SysSurvey/addSysSurvey.jsp</result>
+		</action>
+		
+		
+		<!--问卷添加收费项目568 -->
+		<action name="addSysSurveyChargItem" class="com.hjw.wst.action.SysSurveyAction" method="addSysSurveyChargItem">
+			<result name="success">/SysSurvey/addcharg_item.jsp</result>
+		</action>
+		
+		<!--添加子题目页面570 -->
+		<action name="getziTiMuPage" class="com.hjw.wst.action.SysSurveyAction" method="getziTiMuPage">
+			<result name="success">/SysSurvey/addzitimu.jsp</result>
+		</action>
+		
+		<!--添加子题目页面571 -->
+		<action name="getzi_chagr_item" class="com.hjw.wst.action.SysSurveyAction" method="getzi_chagr_item">
+			<result name="success">/SysSurvey/addzi_charg_item.jsp</result>
+		</action>
+		
+		<!--问题修改页面572 -->
+		<action name="getSysSurveyQuestionDTO" class="com.hjw.wst.action.SysSurveyAction" method="getSysSurveyQuestionDTO">
+			<result name="success">/SysSurvey/addSysSurvey.jsp</result>
+		</action>
+		
+		<!--问卷体检号验证576 -->
+		<action name="getQuestionnaireSurveyPage" class="com.hjw.wst.action.SysSurveyAction" method="getQuestionnaireSurveyPage">
+			<result name="success">/SysSurvey/QuestionnaireSurvey.jsp</result>
+		</action>
+		
+		<!--问卷问题显示页面576 -->
+		<action name="getQuestionnaireSurveyPageYM" class="com.hjw.wst.action.SysSurveyAction" method="getQuestionnaireSurveyPageYM">
+			<result name="success">/SysSurvey/QuestionnaireSurveyShou.jsp</result>
+			<result name="successother">/brainExamin/brainShowPageTwo.jsp</result>
+		</action>
+		
+		 <!-- 登记个个人报告领取方式583 -->
+		<action name="getIndividualReportReceive" class="com.hjw.wst.action.RegisterDeskAction" method="getIndividualReportReceive" >
+			<result name="success">/registerManager/individualReportReceive.jsp</result>
+		</action>
+		
+		 <!--一般科室检查显示问卷页面586 -->
+		<action name="getSurverPage" class="com.hjw.wst.action.DepInspectAction" method="getSurverPage" >
+			<result name="success">/departInspect/sysSurveyShou.jsp</result>
+		</action>		
+		
+		 <!--登记台显示挂号页面 800-->
+		<action name="getdjtregisterghShow" class="com.hjw.wst.action.RegisterDeskAction" method="getdjtregisterghShow" >
+			<result name="success">/registerManager/getdjtregisterghShow.jsp</result>
+		</action>		
+		
+		<!--团体结算打印发票主页面 802-->
+		<action name="statemengprintfa" class="com.hjw.wst.action.StatementsAction" method="statemengprintfa" >
+			<result name="success">/statements/statemengprintfa.jsp</result>
+		</action>
+		
+		
+		<!--团体结算打印发票主页面 805-->
+		<action name="termaccountusertsshow" class="com.hjw.wst.action.StatementsAction" method="termaccountusertsshow" >
+			<result name="success">/statements/termaccountusertsshow.jsp</result>
+		</action>
+		
+		<!--选择结算单 809 -->	
+		<action name="statementjsdlist" class="com.hjw.wst.action.StatementsAction"  method="statementjsdlist" >
+		    <result name="success">/statements/statementjsdlist.jsp</result>
+		</action>
+		
+		<!-- 817 分组套餐复制 -->
+		<action name="copygroupmanager" class="com.hjw.wst.action.BatchAction"
+			method="copygroupmanager">
+			<result name="success">/batchManager/copygroupmanager.jsp</result>
+		</action>
+
+        <!-- 用户签名页面 822 -->
+		<action name="managersignshow" class="com.hjw.wst.action.UserManagerAction" method="managersignshow">
+			<result name="success">/sign/managersignshow.jsp</result>
+		</action>
+
+		 <!-- 体检用户签名页面 825 -->
+		<action name="examinfosignshow" class="com.hjw.wst.action.RegisterDeskAction" method="examinfosignshow">
+			<result name="success">/sign/examinfosignshow.jsp</result>
+		</action>
+		
+		 <!-- 团体手工日结 828 -->
+		<action name="trjnUserManager" class="com.hjw.wst.action.StatementsAction" method="trjnUserManager">
+			<result name="success">/statements/trjnUserManager.jsp</result>
+		</action>
+		
+		 <!--团体手工日结操作页面 829 -->
+		<action name="trjnusergroupmanager" class="com.hjw.wst.action.StatementsAction" method="trjnusergroupmanager">
+			<result name="success">/statements/trjnusergroupmanager.jsp</result>
+		</action>
+		
+		 <!-- 团体手工日结查询 830 -->
+		<action name="trjnteamlistshow" class="com.hjw.wst.action.StatementsAction" method="trjnteamlistshow">
+			<result name="success">/statements/trjnteamlistshow.jsp</result>
+		</action>
+		
+		 <!-- 合并疾病管理586 -->
+		<action name="diseaseMergePage" class="com.hjw.wst.action.DiseaseMergeAction" method="diseaseMergePage">
+			<result name="success">/Diseasemerge/diseasemerge.jsp</result>
+		</action>
+		
+		 <!-- 合并疾病新增页面589 -->
+		<action name="addMergePage" class="com.hjw.wst.action.DiseaseMergeAction" method="addMergePage">
+			<result name="success">/Diseasemerge/adddiseasemerge.jsp</result>
+		</action>
+		
+		 <!-- 合并疾病修改增页面590 -->
+		<action name="updateMergePage" class="com.hjw.wst.action.DiseaseMergeAction" method="updateMergePage">
+			<result name="success">/Diseasemerge/adddiseasemerge.jsp</result>
+		</action>
+
+		 <!-- 团体手工日结 828 -->
+		<action name="trjnUserManager" class="com.hjw.wst.action.StatementsAction" method="trjnUserManager">
+			<result name="success">/statements/trjnUserManager.jsp</result>
+		</action>
+		
+		 <!--团体手工日结操作页面 829 -->
+		<action name="trjnusergroupmanager" class="com.hjw.wst.action.StatementsAction" method="trjnusergroupmanager">
+			<result name="success">/statements/trjnusergroupmanager.jsp</result>
+		</action>
+		
+		 <!-- 团体手工日结查询 830 -->
+		<action name="trjnteamlistshow" class="com.hjw.wst.action.StatementsAction" method="trjnteamlistshow">
+			<result name="success">/statements/trjnteamlistshow.jsp</result>
+		</action>
+		
+			
+		 <!-- 科室疾病逻辑管理594 -->
+		<action name="getdiseaseDepPage" class="com.hjw.wst.action.DiseaseLogicAction" method="getdiseaseDepPage">
+			<result name="success">/diseaseLogic/dep_disease_logic.jsp</result>
+		</action>
+		
+		 <!-- 科室疾病逻辑新增页面597 -->
+		<action name="getDepDiseaseLogic" class="com.hjw.wst.action.DiseaseLogicAction" method="getDepDiseaseLogic">
+			<result name="success">/diseaseLogic/dep_adddisease_logic.jsp</result>
+		</action>
+		
+		 <!-- 科室疾病逻辑修改页面598 -->
+		<action name="updateDepDiseaseLogicPage" class="com.hjw.wst.action.DiseaseLogicAction" method="updateDepDiseaseLogicPage">
+			<result name="success">/diseaseLogic/dep_adddisease_logic.jsp</result>
+		</action>
+		
+		<!-- 科室 项目 项目明细 总页面  1540 -->
+		<action name="getDepItemDetail" class="com.hjw.wst.action.DiseaseLogicAction" method="getDepItemDetail">
+			<result name="success">/diseaseLogic/dep_item_detail.jsp</result>
+		</action>
+		
+		<!-- 科室收费项目关联 1541 -->
+		<action name="getDepItemCharging" class="com.hjw.wst.action.DiseaseLogicAction" method="getDepItemCharging">
+			<result name="success">/diseaseLogic/dep_item_charging.jsp</result>
+		</action>
+		
+		<!-- 科室收费项目细项 1542 -->
+		<action name="getDepItemChargingDetail" class="com.hjw.wst.action.DiseaseLogicAction" method="getDepItemChargingDetail">
+			<result name="success">/diseaseLogic/dep_item_charging_datail.jsp</result>
+		</action>
+		
+				<!-- 体检信息冻结主界面 837 -->
+		<action name="freezeUserManager" class="com.hjw.wst.action.CustomerInfoAction" method="freezeUserManager">
+			<result name="success">/customerManager/freezeUserManager.jsp</result>
+		</action>
+		
+		 <!--体检信息冻结操作界面 838 -->
+		<action name="freezeusergroupmanager" class="com.hjw.wst.action.CustomerInfoAction" method="freezeusergroupmanager">
+			<result name="success">/customerManager/freezeusergroupmanager.jsp</result>
+		</action>
+		
+		 <!-- 体检信息解冻操作界面 839 -->
+		<action name="freezeteamlistshow" class="com.hjw.wst.action.CustomerInfoAction" method="freezeteamlistshow">
+			<result name="success">/customerManager/freezeteamlistshow.jsp</result>
+		</action>
+		
+		
+		      
+		 <!--登记状态改成未检状态页面599-->
+		<action name="updateExamStatrsNPage" class="com.hjw.wst.action.UpdateExamstatusNAction" method="updateExamStatrsNPage">
+			<result name="success">/updateExamstatusN/updateExamstatusN.jsp</result>
+		</action>
+		<!-- 新增部门 770-->
+		 <action name="addExamDept" class="com.hjw.wst.action.Examinatioin_centerAction" method="addExamDept">
+            <result name="success">/Examinatioin_center/ExaminatioinEditDept.jsp</result>
+        </action>
+        <!-- 更新部门771 -->
+		 <action name="updaterExamDept" class="com.hjw.wst.action.Examinatioin_centerAction" method="updaterExamDept">
+            <result name="success">/Examinatioin_center/ExaminatioinEditDept.jsp</result>
+        </action>
+          <!-- 排期页面902 -->
+		 <action name="getSchedulePage" class="com.hjw.wst.action.GroupSchedulingAction" method="getSchedulePage">
+            <result name="success">/schedule2/schedule.jsp</result>
+        </action>
+           
+        <!-- lis 检验项目页面910 -->
+		 <action name="getThridLis" class="com.hjw.wst.action.ChargingItemAction" method="getThridLis">
+            <result name="success">/ChargingItem/thridListClass.jsp</result>
+        </action>
+         <!-- lis 检验项目明细页面913 -->
+		 <action name="getThridLisItemPage" class="com.hjw.wst.action.ExaminationItemAction" method="getThridLisItemPage">
+            <result name="success">/ExaminationItem/thridLisItem.jsp</result>
+        </action>
+        
+        <!--床位分配1002-->
+		<action name="bunkAllocation" class="com.hjw.wst.action.RegisterDeskAction" method="bunkAllocation">
+			<result name="success">/chaXunYeMian/bunkAllocation.jsp</result>
+		</action>
+		
+		<!--床位分配维护页面1003 -->
+		<action name="bunkweihu" class="com.hjw.wst.action.RegisterDeskAction" method="bunkweihu">
+			<result name="success">/chaXunYeMian/bunkedit.jsp</result>
+		</action>
+		
+		<!--档案合并1007 -->
+		<action name="combineArch" class="com.hjw.wst.action.AcceptanceCheckAction" method="combineArch">
+			<result name="success">/inspectionDepartment/archcombine.jsp</result>
+		</action>
+		
+		<!-- 版本信息页面1013 -->
+		<action name="showversion" class="com.hjw.wst.action.AccountAction" method="showversion">
+			<result name="success">/versioninfonations.html</result>
+		</action>
+		
+		<!-- 科室打印1015-->
+		<action name="printdepshow" class="com.hjw.wst.action.RoleAction"
+			method="printdepshow">
+			<result name="success">/manager/userprintdep.jsp</result>
+		</action>
+		
+		<!-- 1018科室条码打印功能页 -->
+		<action name="printfunctionPage" class="com.hjw.wst.action.UserManagerAction"
+			method="printfunctionPage">
+			<result name="success">/manager/printfunctionpage.jsp</result>
+		</action>
+
+		 <!--  影像科室检查结果查看页面  1020 -->
+		<action name="positiveResultsPage" class="com.hjw.wst.action.ViewExamAction"
+			method="positiveResultsPage">
+			<result name="success">/inspectionDepartment/imagingresults.jsp</result>
+		</action>
+
+		   	<!--  检验科室结设置检查审核医生页面919-->
+		<action name="getSetdoctor" class="com.hjw.wst.action.ExamResultDetailAction"
+			method="getSetdoctor">
+			<result name="success">/inspectionDepartment/shezhiyisheng.jsp
+			</result>
+		</action>
+
+		<!--  影像科室检查结果查  1022 -->
+		<action name="imagingResultsDetail" class="com.hjw.wst.action.ViewExamAction"
+			method="imagingResultsDetail">
+			<result name="success">/inspectionDepartment/imagingResultsDetail.jsp</result>
+		</action>
+		    <!-- 卡信息管理修改页面 926 -->
+		<action name="updateCardPage" class="com.hjw.wst.action.CardInfoAction"
+			method="updateCardPage">
+			<result name="success">/manager/updatecardinfoaddbu.jsp</result>
+		</action>
+		
+		<!--  卡信息管理批量修改页面 -->
+		<action name="updCardExamSet" class="com.hjw.wst.action.CardInfoAction"
+			method="updCardExamSet">
+			<result name="success">/manager/updCardExamSet.jsp</result>
+		</action>
+		
+		<!-- 查询预约信息 887 -->
+		<action name="yuyueShowList" class="com.hjw.wst.action.RegisterDeskAction"
+			method="yuyueShowList">
+			<result name="success">/registerManager/yuyueShowList.jsp</result>
+		</action>
+		<!-- 个人加项复制项目页面 937-->
+		<action name="getcopaitemPage" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getcopaitemPage">
+			<result name="success">/registerManager/getcopaitemPage.jsp</result>
+		</action>
+		
+			<!-- 类别添加页面940-->
+		<action name="saveSetTypePage" class="com.hjw.wst.action.ExamSetTypeAction"
+			method="saveSetTypePage">
+			<result name="success">/examSet/addexamsettype.jsp</result>
+		</action>
+		<!-- 套餐类别管理页面942-->
+		<action name="examSetTypePage" class="com.hjw.wst.action.ExamSetTypeAction"
+			method="examSetTypePage">
+			<result name="success">/examSet/examsettype.jsp</result>
+		</action>
+		
+		<!-- 就诊卡维护930 -->
+		<action name="getjiuzhenkapage" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getjiuzhenkapage">
+			<result name="success">/registerManager/customer_visit_card.jsp</result>
+		</action>
+		<!-- j就诊卡新增页面934 -->
+		<action name="getaddjiuzhenkapage" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getaddjiuzhenkapage">
+			<result name="success">/registerManager/customer_visit_card_add.jsp</result>
+		</action>
+		<!-- 个人加项复制项目页面 937-->
+		<action name="getcopaitemPage" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getcopaitemPage">
+			<result name="success">/registerManager/getcopaitemPage.jsp</result>
+		</action>
+		
+			<!--样本项目维护页面952-->
+		<action name="getSampleDemoChargingItemPage" class="com.hjw.wst.action.SampleDemoAction"
+			method="getSampleDemoChargingItemPage">
+			<result name="success">/SampleDemo/charging_SampleDemo.jsp</result>
+		</action>
+			<!--收费项目管理查询和样本关系页面957-->
+		<action name="getItemSampleDemoPage" class="com.hjw.wst.action.SampleDemoAction"
+			method="getItemSampleDemoPage">
+			<result name="success">/ChargingItem/charging_SampleDemo.jsp</result>
+		</action>
+		
+		 <!-- 流程-解读室主页面 1234 -->
+		<action name="flow_m_show" class="com.hjw.wst.action.ExamflowManagerAction"
+			method="flow_m_show">
+			<result name="success">/examflow/flow_m_show.jsp</result>
+		</action>
+		
+		<!-- 数据字典管理 1300-->
+       <action name="datadictionaryManage" class="com.hjw.wst.action.DataDictionaryAction" method="datadictionaryManage">
+            <result name="success">/datadictionaryManage/datadictionaryManage.jsp</result>
+        </action>
+		<!--添加字典类型1301 -->
+		<action name="dataTypeAndItemAdd" class="com.hjw.wst.action.DataDictionaryAction" method="dataTypeAndItemAdd">
+			<result name="success">/datadictionaryManage/dataTypeAndItemAdd.jsp</result>
+		</action>
+		<!--添加字典数值1302 -->
+		<action name="dataItemAdd" class="com.hjw.wst.action.DataDictionaryAction" method="dataItemAdd">
+			<result name="success">/datadictionaryManage/dataItemEdit.jsp</result>
+		</action>
+		<!--修改字典数值1303 -->
+		<action name="dataUpdate" class="com.hjw.wst.action.DataDictionaryAction" method="updaterDaDt">
+			<result name="success">/datadictionaryManage/dataItemEdit.jsp</result>
+		</action>
+		
+		<!--量表管理答题界面1341 -->
+		<action name="scale_answer" class="com.hjw.wst.action.ScaleAction" method="scale_answer">
+			<result name="success">/scaleManager/scale_answer.jsp</result>
+		</action>
+		<!--问卷管理展示界面1343 -->
+		<action name="quest_show" class="com.hjw.wst.action.ScaleAction" method="quest_show">
+			<result name="success">/scaleManager/quest_show.jsp</result>
+		</action>
+		<!--量表管理结果展示界面1345 -->
+		<action name="scale_show" class="com.hjw.wst.action.ScaleAction" method="scale_show">
+			<result name="success">/scaleManager/scale_show.jsp</result>
+		</action>
+							
+		<!-- 团体报告管理 1238 -->
+		<action name="termreportManager" class="com.hjw.wst.action.ReportManagerAction" method="termreportManager">
+			<result name="success">/reportManager/termreportMain.jsp</result>
+		</action>
+		
+		<!-- 脑健康体检 1501-->
+		<action name="brainExaminMsg" class="com.hjw.wst.action.QuestDictAction"
+			method="brainExaminMsg">
+			<result name="success">/brainExamin/brainExaminPage.jsp</result>
+		</action>
+		<!-- 脑健康title标题修改/新增 跳转页面 1502 -->
+		<action name="titleAddEdit" class="com.hjw.wst.action.QuestDictAction"
+			method="titleAddEdit">
+			<result name="success">/brainExamin/brainTitleAddEdit.jsp</result>
+		</action>
+		
+		<!-- 脑健康project项目修改/新增 跳转页面  1503-->
+		<action name="projectAddEdit" class="com.hjw.wst.action.QuestDictAction"
+			method="projectAddEdit">
+			<result name="success">/brainExamin/brainProjectAddEdit.jsp</result>
+		</action>
+
+		<!-- 脑健康前台展示页面1513-->
+		<action name="brainShowPage" class="com.hjw.wst.action.QuestExamAction"
+			method="brainShowPage">
+			<result name="success">/brainExamin/brainShowPage.jsp</result>
+		</action>
+		
+		<!-- 设置普通体检报告类型1536  -->
+		<action name="comonReportType" class="com.hjw.wst.action.CustomerInfoAction"
+			method="comonReportType">
+			<result name="success">/comonReportType/comonReportType.jsp</result>
+		</action>
+		
+		<!-- 团体控制台页面 1545 -->
+		<action name="djtTpanel" class="com.hjw.wst.action.CustomerInfoAction"
+			method="djtTpanel">
+			<result name="success">/customerManager/djtTpanel.jsp</result>
+		</action>
+		
+		<!--新增体检任务 1551-->
+		<action name="cusbatchedit" class="com.hjw.wst.action.BatchAction" method="cusbatchedit">
+			<result name="success">/customerManager/cusbatchedit.jsp</result>
+		</action>
+		
+		<!-- 替检登记 -->
+		<action name="getDjdReplaceUserExam" class="com.hjw.wst.action.RegisterDeskAction" method="getDjdReplaceUserExam" >
+			<result name="success">/registerManager/getDjdReplaceUserExam.jsp</result>
+		</action>
+		
+		<!-- 第三方接口日志 页面 1560-->
+		<action name="thirdInterLogView" class="com.hjw.wst.action.ThridInterfaceLogAction" method="thirdInterLogView">
+			<result name="success">/ThridInterfaceLog/ThridIntLog.jsp</result>
+		</action>
+		
+		<!-- 第三方日志查看详情  1563-->
+		<action name="viewLogDetailPage" class="com.hjw.wst.action.ThridInterfaceLogAction" method="viewLogDetailPage">
+			<result name="success">/ThridInterfaceLog/ViewLogDetail.jsp</result>
+		</action>
+		
+		<!-- 第三方日志明细查看详情 1565-->
+		<action name="viewDetailLogQuery" class="com.hjw.wst.action.ThridInterfaceLogAction" method="viewDetailLogQuery" >
+			<result name="success">/ThridInterfaceLog/ViewDetailLogPage.jsp</result>
+		</action>
+		
+		
+		
+		<!-- 系统配置管理 -->
+       <action name="getcenterconfig" class="com.hjw.wst.action.DataDictionaryAction" method="getcenterconfig">
+            <result name="success">/centerconfig/Centerconfig.jsp</result>
+        </action>
+		<!--系统配置添加数据 -->
+		<action name="addcenterconfig" class="com.hjw.wst.action.DataDictionaryAction" method="addcenterconfig">
+			<result name="success">/centerconfig/CenterconfigAdd.jsp</result>
+		</action>
+		<!--系统配置修改数据 -->
+		<action name="updatecenterconfig" class="com.hjw.wst.action.DataDictionaryAction" method="updatecenterconfig">
+			<result name="success">/centerconfig/CenterconfigEdit.jsp</result>
+		</action>
+		
+		<!-- 批次封装现实时间1292 -->
+		<action name="doaccountbatchtoshow" class="com.hjw.wst.action.BatchAction" method="doaccountbatchtoshow">
+			<result name="success">/customerManager/doaccountbatchtoshow.jsp</result>
+		</action>
+		
+		<!-- 流程-总检主页面获取主检查体检信息 1943 -->
+		<action name="getAcceptanceItemDbgj" class="com.hjw.wst.action.ExamflowManagerAction" method="getAcceptanceItemDbgj" >
+		    <result name="success">/examflow/getAcceptanceItemDbgj.jsp
+			</result>
+		</action>	
+		
+		<!-- 单点登录  湖北宜昌 东软对接 cas-->
+		<action name="get_CAS_NeuSoft" class="com.hjw.wst.action.CASClientAction" method="get_CAS_NeuSoft" >
+		    <result name="success">/main.jsp</result>
+		</action>
+			
+		<!-- 弹出重打发票页面  -->
+		  <action name="repeatInvoice" class="com.hjw.wst.action.CollectFeesAction"
+		   method="repeatInvoice">
+		   <result name="success">/registerManager/repeatInvoice.jsp
+		   </result>
+		  </action>
+		  
+		<!-- 驳回意见管理 2112-->
+       <action name="finalRejection" class="com.hjw.wst.action.FinalRejectionAction" method="finalRejection">
+            <result name="success">/finalRejection/finalRejection.jsp</result>
+        </action> 
+        
+         <!--新增驳回意见2114-->
+         <action name="rejectadd" class="com.hjw.wst.action.FinalRejectionAction" method="rejectadd">
+            <result name="success">/finalRejection/finalRejectionadd.jsp</result>
+        </action>
+        
+        <!--修改驳回意见2115-->
+         <action name="rejectudater" class="com.hjw.wst.action.FinalRejectionAction" method="rejectudater">
+            <result name="success">/finalRejection/finalRejectionadd.jsp</result>
+        </action>
+		<!-- 弹出补打发票页面  357 -->
+		<action name="settlementShow" class="com.hjw.wst.action.CollectFeesAction" method="settlementShow">
+			<result name="success">/registerManager/settlementShow.jsp </result>
+		</action>
+			<!-- 团体加项复制 项目页面 1582-->
+		<action name="getTeamCopyItemPage" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getTeamCopyItemPage">
+			<result name="success">/registerManager/getTeamCopyItemPage.jsp</result>
+		</action>
+		
+		<!--  总检及科室显示新增危急值 2302 -->
+		<action name="showNewExamCritical" class="com.hjw.wst.action.CriticalAction"
+			method="showNewExamCritical">
+			<result name="success">/inspectionDepartment/new_exam_critical.jsp</result>
+			<result name="success1">/inspectionDepartment/new_exam_critical_dep.jsp</result>
+		</action>
+		<!--  跳转选择检查项目 2306 -->
+		<action name="toSelectResult" class="com.hjw.wst.action.CriticalAction"
+			method="toSelectResult">
+			<result name="success">/inspectionDepartment/toSelectResult.jsp
+			</result>
+		</action>
+		
+		<!--  危急值处理情况统计 2309 -->
+		<action name="criticalhandle" class="com.hjw.wst.action.CriticalAction"
+			method="criticalhandle">
+			<result name="success">/statistics/criticalHandle.jsp
+			</result>
+		</action>
+		
+		<!--  科室跳转危急值页面 2312 -->
+		<action name="depCriticalPage" class="com.hjw.wst.action.CriticalAction"
+			method="depCriticalPage">
+			<result name="success">/inspectionDepartment/depCriticalPage.jsp
+			</result>
+		</action>
+
+
+		<!--疾病逻辑-危急值类别维护-2040  -->
+		<action name="examCriticalClassPage" class="com.hjw.wst.action.ExamCriticalClassAction"
+			method="examCriticalClassPage">
+			<result name="success">/diseaseLogic/examCriticalClassPage.jsp</result>
+		</action>
+		<!--疾病逻辑-危急值类别维护-新增-2046  -->
+		<action name="addexamCriticalClassPage" class="com.hjw.wst.action.ExamCriticalClassAction"
+			method="addexamCriticalClassPage">
+			<result name="success">/diseaseLogic/addCriticalClassPage.jsp</result>
+		</action>
+		<!--疾病逻辑-危急值类别维护-修改2047-->
+		<action name="editexamCriticalClassPage" class="com.hjw.wst.action.ExamCriticalClassAction"
+			method="editexamCriticalClassPage">
+			<result name="success">/diseaseLogic/addCriticalClassPage.jsp</result>
+		</action>
+		<!--危急值逻辑维护2048-->
+		<action name="examCriticalLog" class="com.hjw.wst.action.ExamCriticalClassAction"
+			method="examCriticalLog">
+			<result name="success">/diseaseLogic/examCriticalLogic.jsp</result>
+		</action>
+		<!--危急值逻辑新增2049-->
+		<action name="examCriticalLogicadd" class="com.hjw.wst.action.ExamCriticalClassAction"
+			method="examCriticalLogicadd">
+			<result name="success">/diseaseLogic/examCriticalLogicadd.jsp</result>
+		</action>
+				<!-- 登记台加套餐 1288-->
+		<action name="getExamSetTreeSelect" class="com.hjw.wst.action.ExamSetAction" method="getExamSetTreeSelect">
+			<result name="success">/examSet/examSelectSettree.jsp</result>
+		</action>
+		<!-- 获取选择打申请单页面 -->
+		<action name="getPacsItemApplicationPage" class="com.hjw.wst.action.RegisterDeskAction"
+			method="getPacsItemApplicationPage">
+			<result name="success">/registerManager/djtPacsItemApplication.jsp
+			</result>
+		</action>   
+		
+		<!-- 部门设置体检中心 1947-父功能101-->
+		<action name="detptocenter" class="com.hjw.wst.action.DepartmentAction" method="detptocenter">
+			<result name="success">/department/detptocenter.jsp</result>
+		</action>
+
+		<!-- 多体检中心-收费项目管理2500 -->    
+		<action name="centerChargingItem" class="com.hjw.wst.action.ChargingItemAction"
+			method="centerChargingItem">
+			<result name="success">/ChargingItem/center_chargingItem.jsp</result>
+		</action>   
+		<!-- 多体检中心-科室收费项目关联 2501 -->
+		<action name="centerDepItemCharging" class="com.hjw.wst.action.ChargingItemAction" method="centerDepItemCharging">
+			<result name="success">/ChargingItem/center_dep_item_charging.jsp</result>
+		</action> 
+		<!-- 多体检中心-科室收费项目细项 2502 -->
+		<action name="centerDepItemChargingDetail" class="com.hjw.wst.action.ChargingItemAction" method="centerDepItemChargingDetail">
+			<result name="success">/ChargingItem/center_dep_item_charging_datail.jsp</result>
+		</action>
+		<!-- 多体检中心-科室收费项目细项 2503 -->
+		<action name="bCenterCharging" class="com.hjw.wst.action.ChargingItemAction" method="bCenterCharging">
+			<result name="success">/ChargingItem/b_center_dep_item_charging.jsp</result>
+		</action>
+		<!--多体检中心-修改收费项目页面2507-->
+		<action name="centerupdateChargingItemPage" class="com.hjw.wst.action.ChargingItemAction"
+			method="centerupdateChargingItemPage">
+			<result name="success">/ChargingItem/center_addChargingItem.jsp</result>
+		</action>
+		<!--提取单位页面-->
+		<action name="tqdw" class="com.hjw.wst.action.CommonAction"
+			method="tqdw">
+			<result name="success">/manager/tqdw.jsp</result>
+		</action>
+		<!--科室管理-批量设置体检中心-->
+		<action name="bachDepCenter" class="com.hjw.wst.action.DepartmentAction"
+			method="bachDepCenter">
+			<result name="success">/department/detptoBachCenter.jsp</result>
+		</action>
+		
+		<!-- 多体检中心,科室管理2511 -->
+		 <action name="centerDepartmentDep" class="com.hjw.wst.action.DepartmentAction" method="centerDepartmentDep">
+            <result name="success">/department/center_Department.jsp</result>
+         </action> 
+     	 <!-- 多体检中心,修改科室页面2514 -->
+		 <action name="updateCenterDepPage" class="com.hjw.wst.action.DepartmentAction" method="updateCenterDepPage">
+            <result name="success">/department/center_departadd.jsp</result>
+         </action>
+
+		<!-- 1160 总检室复查设定按钮弹出页面 -->
+		<action name="getExamSummaryReviewAddPage" class="com.hjw.wst.action.ExamSummaryReviewAction"
+				method="getExamSummaryReviewAddPage">
+			<result name="success">/inspectionDepartment/examsummaryreview_add.jsp
+			</result>
+		</action>
+
+		<!-- 1162 复查管理页面 -->
+		<action name="getExamSummaryReviewListPage" class="com.hjw.wst.action.ExamSummaryReviewAction"
+				method="getExamSummaryReviewListPage">
+			<result name="success">/inspectionDepartment/examsummaryreviewpage.jsp
+			</result>
+		</action>
+
+		<!--录入全部科室结果首页 2030  -->
+		<action name="departInspectAllPage" class="com.hjw.wst.action.DepInspectAction" method="departInspectAllPage">
+			<result name="success">/departInspect/departInspect_all_index.jsp</result>
+		</action>
+
+        <!-- 2586 检查项目管理-单项阳性逻辑维护-->
+        <action name="itemDiseaseLogicSinglePage" class="com.hjw.wst.action.NewDiseaseLogicAction"
+                method="itemDiseaseLogicSinglePage">
+            <result name="success">/ExaminationItem/disease_logic/item_disease_logic_single.jsp</result>
+        </action>
+        <!-- 2587 检查项目管理<编辑单项阳性逻辑<新增-->
+        <action name="itemDiseaseLogicSingleEditPage" class="com.hjw.wst.action.NewDiseaseLogicAction"
+                method="itemDiseaseLogicSingleEditPage">
+            <result name="success">/ExaminationItem/disease_logic/disease_logic_single_add.jsp
+            </result>
+        </action>
+
+        <!-- 登记台团体换项 419 -->
+        <action name="djtTTcustomeritemchargeshow" class="com.hjw.wst.action.RegisterDeskAction" method="djtTTcustomeritemchargeshow" >
+            <result name="success">/registerManager/djtTTcustomeritemchargeshow.jsp</result>
+            <result name="error">/common/erroradmin.jsp</result>
+        </action>
+    </package>
+</struts>

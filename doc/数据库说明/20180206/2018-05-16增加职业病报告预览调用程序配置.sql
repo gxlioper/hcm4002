@@ -1,0 +1,1 @@
+INSERT [dbo].[center_configuration] ([center_name], [config_key], [config_value], [is_active], [common]) VALUES (N'������ʽ�����������', N'ZYB_BARCODE_PRINT_TYPE', N'5', N'Y', N'ְҵ������Ԥ����ӡ����')

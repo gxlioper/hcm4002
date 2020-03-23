@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="logincheck" class="com.hjw.config.Logincheck">
+		<!-- <property name="fixtype">
+			<value>${logincheck.typename}</value>
+		</property>-->
+		<!--  <property name="interfaceUrl">
+			<value>${logincheck.interfaceUrl}</value>
+		</property> -->
+		<property name="adminJob"><!-- 特殊岗位id-->
+			<value>${logincheck.adminJob}</value>
+		</property>
+		<property name="fixroleadmin"><!-- 特殊岗位id-->
+			<value>${logincheck.fixroleadmin}</value>
+		</property>
+		<property name="defaultrole"><!-- 特殊岗位id-->
+			<value>${logincheck.defaultrole}</value>
+		</property>
+		<property name="adminUser"><!-- 特殊人员名称-->
+			<value>${logincheck.adminUser}</value>
+		</property>
+		<property name="adminUserId"><!-- 特殊人员id-->
+			<value>${logincheck.adminUserId}</value>
+		</property>
+		<property name="jsoncontrol"><!-- josn控制-->
+			<value>${logincheck.jsoncontrol}</value>
+		</property>
+		
+		<property name="version"><!-- 版本号-->
+			<value>${system.version}</value>
+		</property>
+	</bean>
+</beans>
+

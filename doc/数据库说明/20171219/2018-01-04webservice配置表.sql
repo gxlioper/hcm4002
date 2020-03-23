@@ -1,0 +1,1 @@
+alter table webservice_configuration add config_value varchar(200) NULL;

@@ -1,0 +1,49 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="struts-echarts" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="resInterceptor" class="com.hjw.filter.ResInterceptor" />
+			<interceptor name="logInterceptor" class="com.hjw.filter.LogInterceptor" />
+		</interceptors>
+		<global-results>
+			<result name="loginerror" type="redirect">/common/errormessage.jsp</result>
+			<result name="systemerror" type="redirect">/common/errormessage_system.jsp</result>
+			
+		</global-results>
+		<!-- 当日检查情况统计 -->  
+		<action name="inspection_statistics_today" class="com.hjw.echartsSearch.action.SearchTotalAction" method="inspection_statistics_today"></action>
+		<!-- 当日体检状态统计 -->  
+		<action name="examination_status_statistics" class="com.hjw.echartsSearch.action.SearchTotalAction" method="examination_status_statistics"></action>
+		<!-- 当日体检人员组成 -->  
+		<action name="exam_info_Composition_today" class="com.hjw.echartsSearch.action.SearchTotalAction" method="exam_info_Composition_today"></action>
+        <!-- 当日体检类型组成 -->  
+		<action name="exam_info_type_today" class="com.hjw.echartsSearch.action.SearchTotalAction" method="exam_info_type_today"></action>
+        <!-- 月度营业统计 -->  
+		<action name="monthly_business_statistics" class="com.hjw.echartsSearch.action.SearchTotalAction" method="monthly_business_statistics"></action>
+        <!-- 实时流量统计 -->  
+		<action name="real_time_traffic_today" class="com.hjw.echartsSearch.action.SearchTotalAction" method="real_time_traffic_today"></action>
+        <!-- 当日流量趋势 -->  
+		<action name="flow_trend_chart" class="com.hjw.echartsSearch.action.SearchTotalAction" method="flow_trend_chart"></action>
+		<!-- 年度单位增长 -->  
+		<action name="annual_unit_growth" class="com.hjw.echartsSearch.action.SearchTotalAction" method="annual_unit_growth"></action>
+		<!-- 年度人员增长 -->  
+		<action name="annual_personnel_growth" class="com.hjw.echartsSearch.action.SearchTotalAction" method="annual_personnel_growth"></action>
+		<!-- 统计人员次数 -->
+        <action name="statistics_personnel_times" class="com.hjw.echartsSearch.action.SearchTotalAction" method="statistics_personnel_times"></action>
+		<!-- 统计总检条数 -->
+		<action name="count_number_checks" class="com.hjw.echartsSearch.action.SearchTotalAction" method="count_number_checks"></action>
+		<!-- 年龄段疾病组成 -->
+		<action name="age_group_disease" class="com.hjw.echartsSearch.action.SearchTotalAction" method="age_group_disease"></action>
+        <!-- 获取数据的实时连接数占有率 -->
+		<action name="sql_conn_count" class="com.hjw.echartsSearch.action.SearchTotalAction" method="sql_conn_count"></action>
+	    <!-- 连接数趋势图 -->
+	    <action name="flow_sql_conn_count" class="com.hjw.echartsSearch.action.SearchTotalAction" method="flow_sql_conn_count"></action>
+		<!-- 导检单回收实时统计 -->
+	    <action name="examination_gride_statistics" class="com.hjw.echartsSearch.action.SearchTotalAction" method="examination_gride_statistics"></action>
+		
+	</package>
+</struts>

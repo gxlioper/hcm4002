@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="thridInterfaceLogService"   class="com.hjw.wst.service.impl.ThridInterfaceLogServiceImpl" autowire="byName"/>
+    <bean id="configService"   class="com.hjw.service.impl.ConfigServiceImpl" autowire="byName"/>
+    <bean id="loginService"   class="com.hjw.wst.service.impl.LoginServiceImpl" autowire="byName"/>
+    <bean id="menuGnService"   class="com.hjw.wst.service.impl.MenuGnServiceImpl" autowire="byName"/>
+    <bean id="userInfoService"   class="com.hjw.wst.service.impl.UserInfoServiceImpl" autowire="byName"/>
+    <bean id="companyService"   class="com.hjw.wst.service.impl.CompanyServiceImpl" autowire="byName"/>
+    <bean id="webConfigService" class="com.hjw.wst.service.impl.WebConfigServiceImpl" autowire="byName"/>
+    <bean id="batchService" class="com.hjw.wst.service.impl.BatchServiceImpl" autowire="byName"/>
+    <bean id="cardInfoService" class="com.hjw.wst.service.impl.CardInfoServiceImpl" autowire="byName"/>
+    <bean id="cardDealService" class="com.hjw.wst.service.impl.CardDealServiceImpl" autowire="byName"/>
+    <bean id="collectFeesService" class="com.hjw.wst.service.impl.CollectFeesServiceImpl" autowire="byName"/>
+    <bean id="lisPacsApplicationService" class="com.hjw.wst.service.impl.LisPacsApplicationServiceImpl" autowire="byName"/>
+    <bean id="cardManageService" class="com.hjw.wst.service.impl.CardManageServiceImpl" autowire="byName"/>
+    <bean id="samplingDepartmentService" class="com.hjw.wst.service.impl.SamplingDepartmentServiceImpl" autowire="byName"/>
+    <bean id="acceptanceCheckService" class="com.hjw.wst.service.impl.AcceptanceCheckServiceImpl" autowire="byName"/>
+    <bean id="webserviceConfigurationService" class="com.hjw.wst.service.impl.WebserviceConfigurationServiceImpl" autowire="byName"/>
+    <bean id="viewCommonWordsService" class="com.hjw.wst.service.impl.ViewCommonWordsServiceImpl" autowire="byName"/>
+    <bean id="examSummaryService" class="com.hjw.wst.service.impl.ExamSummaryServiceImpl" autowire="byName"/>
+    <bean id="viewExamService" class="com.hjw.wst.service.impl.ViewExamServiceImpl" autowire="byName"/>
+    <bean id="examResultDetailService" class="com.hjw.wst.service.impl.ExamResultDetailServiceImpl" autowire="byName"/>
+    <bean id="removeResultService" class="com.hjw.wst.service.impl.RemoveResultServiceImpl" autowire="byName"/>
+    <bean id="reportManagerService" class="com.hjw.wst.service.impl.ReportManagerServiceImpl" autowire="byName"/>
+    <bean id="directorDecisionService" class="com.hjw.wst.service.impl.DirectorDecisionServiceImpl" autowire="byName"/>
+    <bean id="examSummaryGuidanceLibService" class="com.hjw.wst.service.impl.ExamSummaryGuidanceLibServiceImpl" autowire="byName"/>
+    <bean id="sensitiveWordsLibService" class="com.hjw.wst.service.impl.SensitiveWordsLibServiceImpl" autowire="byName"/>
+    <bean id="userInvoiceService" class="com.hjw.wst.service.impl.UserInvoiceServiceImpl" autowire="byName"/>
+    <bean id="cashierDailyAccService" class="com.hjw.wst.service.impl.CashierDailyAccServiceImpl" autowire="byName"/>
+    <bean id="financeDepAccService" class="com.hjw.wst.service.impl.FinanceDepAccServiceImpl" autowire="byName"/>
+    <bean id="newDiseaseLogicService" class="com.hjw.wst.service.impl.NewDiseaseLogicServiceImpl" autowire="byName"/>
+    <bean id="selfServiceMachineService" class="com.hjw.wst.service.impl.SelfServiceMachineServiceImpl" autowire="byName"/>
+    <bean id="cardSaleService" class="com.hjw.wst.service.impl.CardSaleServiceImpl" autowire="byName"/>
+    <bean id="dataMigrationService" class="com.hjw.wst.service.impl.DataMigrationServiceImpl" autowire="byName"/>
+    <bean id="dataAnalysisService" class="com.hjw.wst.service.impl.DataAnalysisServiceImpl" autowire="byName"/>
+    <bean id="customerInfoService" class="com.hjw.wst.service.impl.CustomerInfoServiceImpl" autowire="byName"/>
+    <bean id="departmentService" class="com.hjw.wst.service.impl.DepartmentServiceImpl" autowire="byName"/>
+    <bean id="sampleReportDemoService" class="com.hjw.wst.service.impl.SampleReportDemoImpl" autowire="byName"/>
+    <bean id="djtCustomerInfoService" class="com.hjw.wst.service.impl.DjtCustomerInfoServiceImpl" autowire="byName"/>
+    <bean id="sampleDemoService" class="com.hjw.wst.service.impl.SampleDemoImpl" autowire="byName"/>
+    <bean id="examinatioin_centerService" class="com.hjw.wst.service.impl.Examinatioin_centerImpl" autowire="byName"/>
+    <bean id="dataDictionaryService" class="com.hjw.wst.service.impl.DataDictionaryServiceImpl" autowire="byName"/>
+    <bean id="examinationItem" class="com.hjw.wst.service.impl.ExaminationItemImpl" autowire="byName"/>
+    <bean id="examItemRefandDangService" class="com.hjw.wst.service.impl.ExamItemRefandDangImpl" autowire="byName"/>
+    <bean id="chargingItemExamItemService" class="com.hjw.wst.service.impl.ChargingItemExamItemImpl" autowire="byName"/>
+    <bean id="customer_TypeService" class="com.hjw.wst.service.impl.Customer_TypeServiceImpl" autowire="byName"/>
+    <bean id="examInfoService" class="com.hjw.wst.service.impl.ExamInfoServiceImpl" autowire="byName"/>
+    <bean id="chargingItemService" class="com.hjw.wst.service.impl.ChargingItemImpl" autowire="byName"/>
+    <bean id="examSetService" class="com.hjw.wst.service.impl.ExamSetImpl" autowire="byName"/>
+    <bean id="diseaseKnowloedgeService" class="com.hjw.wst.service.impl.DiseaseKnowloedgeServiceImpl" autowire="byName"/>
+    <bean id="examInfoRecyclingGuidService" class="com.hjw.wst.service.impl.ExamInfoRecyclingGuidImpl" autowire="byName"/>
+    <bean id="depInspectService" class="com.hjw.wst.service.impl.DepInspectServiceImpl" autowire="byName"/>
+    <bean id="itemResultLibService" class="com.hjw.wst.service.impl.ItemResultLibImpl" autowire="byName"/>
+    <bean id="commService" class="com.hjw.wst.service.impl.CommServiceImpl" autowire="byName"/>
+    <bean id="expertSuggestionLibService" class="com.hjw.wst.service.impl.ExpertSuggestionLibImpl" autowire="byName"/>
+    <bean id="dataService" class="com.hjw.wst.service.impl.DataServiceImpl" autowire="byName"/>
+    <bean id="examFlowService" class="com.hjw.wst.service.impl.ExamFlowServiceImpl" autowire="byName"/>
+    <bean id="filecontrastService" class="com.hjw.wst.service.impl.FilecontrastServiceImpl" autowire="byName"/>
+    <bean id="customerInfoManageService" class="com.hjw.wst.service.impl.CustomerInfoManageServiceImpl" autowire="byName"/>
+    <bean id="reportMenuService" class="com.hjw.wst.service.impl.ReportMenuServiceImpl" autowire="byName"/>
+    <bean id="breakfastService" class="com.hjw.wst.service.impl.BreakfastServiceImpl" autowire="byName"/>
+    <bean id="criticalService" class="com.hjw.wst.service.impl.CriticalServiceImpl" autowire="byName"/>
+    <bean id="teamAccountService" class="com.hjw.wst.service.impl.TeamAccountServiceImpl" autowire="byName"/>    
+    <bean id="diseaseLogicService" class="com.hjw.wst.service.impl.DiseaseLogicServiceImpl" autowire="byName"/>
+    <bean id="systemInformsService" class="com.hjw.wst.service.impl.SystemInformsServiceImpl" autowire="byName"/>
+    <bean id="depLogicService" class="com.hjw.wst.service.impl.DepLogicServiceImpl" autowire="byName"/>
+    <bean id="WebResourceService" class="com.hjw.wst.service.impl.WebResourceServiceImpl" autowire="byName"/>
+    <bean id="sysSurveyService" class="com.hjw.wst.service.impl.SysSurveyServiceImpl" autowire="byName"/>
+    <bean id="reportReceiveService" class="com.hjw.wst.service.impl.ReportReceiveImpl" autowire="byName"/>
+    <bean id="syslogService" class="com.hjw.wst.service.impl.SyslogServiceImpl" autowire="byName"/>
+    <bean id="diseaseMergeService" class="com.hjw.wst.service.impl.DiseaseMergeSericeImpl" autowire="byName"/>
+    <bean id="diseaseDepService" class="com.hjw.wst.service.impl.DiseaseDepServiceImpl" autowire="byName"/>
+    <bean id="updateExamStatusNService" class="com.hjw.wst.service.impl.UpdateExamStatusNServiceImpl" autowire="byName"/>
+    <bean id="webSynchroService" class="com.hjw.wst.service.impl.WebSynchroServiceImpl" autowire="byName"/> 
+    <bean id="groupSchedulingService" class="com.hjw.wst.service.impl.GroupSchedulingServiceImpl" autowire="byName"/>
+    <bean id="examSetTypeService" class="com.hjw.wst.service.impl.ExamSetTypeServiceImpl" autowire="byName"/>
+    <bean id="examPrintTmpService" class="com.hjw.wst.service.impl.ExamPrintTmpServiceImpl" autowire="byName"/>
+    <bean id="healthRiskAssessmentService" class="com.hjw.wst.service.impl.HealthRiskAssessmentServiceImpl" autowire="byName"/>
+    <bean id="yxCardPdfService" class="com.hjw.wst.service.impl.YxCardPdfServiceImpl" autowire="byName"/>
+    <bean id="crmSmsBaseTemplateService" class="com.hjw.wst.service.impl.CrmSmsBaseTemplateServiceImpl" autowire="byName"/>
+    <bean id="finalRejectionService" class="com.hjw.wst.service.impl.FinalRejectionServiceImpl" autowire="byName"/>
+    <bean id="examCriticalClassService" class="com.hjw.wst.service.impl.ExamCriticalClasslServiceImpl" autowire="byName"/>
+    <bean id="examSummaryReviewService" class="com.hjw.wst.service.impl.ExamSummaryReviewServiceImpl" autowire="byName"/>
+    <!-- zyb -->
+    <bean id="zyb_occuService" class="com.hjw.zyb.service.impl.ZybOccuServiceimpl" autowire="byName"></bean>
+    <bean id="zybAskDiagnosisSampleService" class="com.hjw.zyb.service.impl.ZybAskDiagnosisSampleServiceImpl" autowire="byName"></bean>
+    <bean id="zybInquisitionResultService" class="com.hjw.zyb.service.impl.ZybInquisitionResultServiceImpl" autowire="byName"></bean>
+    <bean id="zybOccuphyexaClassService" class="com.hjw.zyb.service.impl.ZybOccuphyexaClassServiceImpl" autowire="byName"></bean>
+    <bean id="zybOccuhazardClassService" class="com.hjw.zyb.service.impl.ZybOccuhazardClassServiceImpl" autowire="byName"></bean>
+    <bean id="zybOccuhazardfactorsService" class="com.hjw.zyb.service.impl.ZybOccuhazardfactorsServiceImpl" autowire="byName"></bean>
+    <bean id="zybOccuindustryService" class="com.hjw.zyb.service.impl.ZybOccuindustryServiceImpl" autowire="byName"></bean>
+    <bean id="zybCareerInquisitionItemService" class="com.hjw.zyb.service.impl.ZybCareerInquisitionItemServiceImpl" autowire="byName"></bean>
+    <bean id="zyboccudiseaseService" class="com.hjw.zyb.service.impl.ZyboccudiseaseServiceImpl" autowire="byName"></bean>
+    <bean id="zybOccuhazardrelatorsinfoService" class="com.hjw.zyb.service.impl.ZybOccuhazardrelatorsinfoServiceImpl" autowire="byName"></bean>
+    <bean id="zyboccucontraindicationService" class="com.hjw.zyb.service.impl.ZyboccucontraindicationServiceImpl" autowire="byName"></bean>
+    <bean id="zybSourcecareerclassService" class="com.hjw.zyb.service.impl.ZybSourcecareerclassServiceImpl" autowire="byName"></bean>
+    <bean id="zybdiseaseclassresultService" class="com.hjw.zyb.service.impl.ZybdiseaseclassresultServiceImpl" autowire="byName"></bean>
+    <bean id="zybcheckItemDiseaseService" class="com.hjw.zyb.service.impl.ZybcheckItemDiseaseServiceImpl" autowire="byName"></bean>
+    <bean id="zybDustitemoptionService" class="com.hjw.zyb.service.impl.ZybDustitemoptionServiceImpl" autowire="byName"></bean>
+    <bean id="zybCustomerInfoService" class="com.hjw.zyb.service.impl.ZybCustomerInfoServiceImpl" autowire="byName"></bean>
+    <bean id="zybexaminationresultService" class="com.hjw.zyb.service.impl.ZybexaminationresultServiceImpl" autowire="byName"></bean>
+    <bean id="zybProposetemplateService" class="com.hjw.zyb.service.impl.ZybProposetemplateServiceImpl" autowire="byName"></bean>
+    <bean id="zybEconomicclassService" class="com.hjw.zyb.service.impl.ZybEconomicclassServiceImpl" autowire="byName"></bean>
+    <bean id="zybExamSummaryService" class="com.hjw.zyb.service.impl.ZybExamSummaryServiceImpl" autowire="byName"></bean>
+    <bean id="zybOccuhisService" class="com.hjw.zyb.service.impl.ZybOccuhisServiceImpl" autowire="byName"></bean>
+    <bean id="zybOcctemplateService" class="com.hjw.zyb.service.impl.ZybOcctemplateServiceImpl" autowire="byName"></bean>
+    <bean id="setOccuhazardfactorsService" class="com.hjw.zyb.service.impl.SetOccuhazardfactorsServiceImpl" autowire="byName"></bean>
+
+    <!-- crm -->
+    <bean id="crmVisitPlanService" class="com.hjw.crm.service.impl.CrmVisitPlanServiceImpl" autowire="byName"></bean>
+    <bean id="crmVisitRecordService" class="com.hjw.crm.service.impl.CrmVisitRecordServiceImpl" autowire="byName"></bean>
+    <bean id="crmMemberPrivateDoctorService" class="com.hjw.crm.service.impl.CrmMemberPrivateDoctorServiceImpl" autowire="byName"></bean>
+    <bean id="crmSignBillPlanService" class="com.hjw.crm.service.impl.CrmSignBillPlanServiceImpl" autowire="byName"></bean>
+    <bean id="crmSalesCostService" class="com.hjw.crm.service.impl.CrmSalesCostServiceImpl" autowire="byName"></bean>
+	<bean id="crmSignTrackingService" class="com.hjw.crm.service.impl.CrmSignTrackingServiceImpl" autowire="byName"></bean>
+	<bean id="crmMemberManageService" class="com.hjw.crm.service.impl.CrmMemberManageServiceImpl" autowire="byName"></bean>
+	<bean id="temporaryCustomerInfoService" class="com.hjw.crm.service.impl.TemporaryCustomerInfoServiceImpl" autowire="byName"></bean>
+	<bean id="crmSignBillPlanZhuangdanService" class="com.hjw.crm.service.impl.CrmSignBillPlanZhuangDanServiceImpl" autowire="byName"></bean>
+	<bean id="crmBatchCheckService" class="com.hjw.crm.service.impl.CrmBatchCheckServiceImpl" autowire="byName"></bean>
+	<bean id="crmVisitLostService" class="com.hjw.crm.service.impl.CrmVisitLostServiceImpl" autowire="byName"></bean>
+	<bean id="jianKzService" class="com.hjw.crm.service.impl.JianKzServiceImpl" autowire="byName"></bean>
+	<bean id="huoVsHopService" class="com.hjw.crm.service.impl.HuoVsHopServiceImpl" autowire="byName"></bean>
+	<bean id="directorCountService" class="com.hjw.wst.service.impl.DirectorCountServiceImpl" autowire="byName"></bean>
+	<bean id="queryInterfaceResultService" class="com.hjw.wst.service.impl.QueryInterfaceResultServiceImpl" autowire="byName"></bean>
+	
+	<bean id="scaleService" class="com.hjw.wst.service.impl.ScaleServiceImpl" autowire="byName"></bean>
+    <bean id="questDictService" class="com.hjw.wst.service.impl.QuestDictServiceImpl" autowire="byName"/>
+	<bean id="questExamService" class="com.hjw.wst.service.impl.QuestExamServiceImpl" autowire="byName"/>
+    <bean id="batchIpadService" class="com.hjw.ipad.service.impl.BatchIpadServiceImpl" autowire="byName"/>
+     <!--charge  -->
+    <bean id="collectFeesChargeService" class="com.hjw.charge.service.impl.CollectFeesChargeServiceImpl" autowire="byName"/>
+    <bean id="cashierDailyAccChargeService" class="com.hjw.charge.service.impl.CashierDailyAccChargeServiceImpl" autowire="byName"/>
+	<bean id="posTransListChargeService" class="com.hjw.charge.service.impl.PosTransListChargeServiceImpl" autowire="byName"/>
+    <bean id="itemBindInsuranceChargeService" class="com.hjw.charge.service.impl.ItemBindInsuranceChargeServiceImpl" autowire="byName"/>
+    <bean id="medicalChargeService" class="com.hjw.charge.service.impl.MedicalChargeServiceImpl" autowire="byName"/>
+	<bean id="userInvoiceChargeService" class="com.hjw.charge.service.impl.UserInvoiceChargeServiceImpl" autowire="byName"/>
+    <!-- echarts查询 -->    
+    <bean id="searchTotalService" class="com.hjw.echartsSearch.service.impl.SearchTotalServiceImpl" autowire="byName"/>
+    <!-- mongo查询 -->    
+    <bean id="dataMongoService" class="com.hjw.mongo.service.impl.DataMongoServiceImpl" autowire="byName"/>
+    <!-- 删除临时表 -->
+ <!--  <bean id="delTempTable" class="com.synjones.wst.DelTemp" autowire="byName"/>
+  <bean name="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+       <ref bean="delTemp"/>
+      </list>
+    </property>
+  </bean>
+  <bean id="delTemp" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+     <property name="jobDetail" ref="del_Temp"/>
+     <property name="cronExpression" value="0 01 04 * * ?"/>
+  </bean>
+   <bean id="del_Temp" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <property name="targetObject" ref="delTempTable"/>
+    <property name="targetMethod" value="del_Temp"/>
+    <property name="concurrent" value="false" />
+  </bean>	 -->
+</beans>

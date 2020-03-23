@@ -1,0 +1,1 @@
+alter table exam_info add is_report_upload int not null default(0) --是否上传报告  0 不上传 1 上传
